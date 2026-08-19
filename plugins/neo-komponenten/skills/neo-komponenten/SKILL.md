@@ -97,5 +97,8 @@ einheitliches Konzept — Dialog A sieht anders aus als Dialog B.
   Lint-Regel die Kernregel maschinell: der Wächter schlägt fehl, wenn
   eine View ein rohes Framework-Widget, eine Farbkonstante oder eine
   erfundene Maßzahl verwendet. Neue Ausnahmen brauchen eine Freigabe.
+- Jede Komponente und jede View bringt Oberflächen-Funktionstests mit:
+  jedes Bedienelement per Test auslösen und das beobachtbare Ergebnis
+  prüfen (Details: Skill `neo-grundregeln`, Abschnitt Tests).
 - Der Komponenten-Grundsatz gehört als Entscheidungsakte (ADR) und als
   Abschnitt in die Regeldatei des Projekts, mit Verweis auf den Wächter.

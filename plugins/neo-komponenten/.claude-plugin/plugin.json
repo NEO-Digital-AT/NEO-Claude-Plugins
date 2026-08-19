@@ -1,7 +1,7 @@
 {
   "name": "neo-komponenten",
   "displayName": "NEO Komponenten-Grundsatz",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Komponenten-Grundsatz der NEO Digital für alle Oberflächen: Views rufen ausschließlich Wrapper-Komponenten der Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex), nie rohe Framework-Widgets. Frameworktreue, Design-Tokens, Interaktionskonventionen, Wächter-Tests.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"
