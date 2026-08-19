@@ -1,0 +1,9 @@
+{
+  "name": "neo-doku",
+  "displayName": "NEO Dokumentation",
+  "version": "1.0.0",
+  "description": "Dokumentationsregeln der NEO Digital: trockene Sprache ohne Marketing, immer IST-Zustand, Entwickler- und Anwenderdoku getrennt, Hierarchie nach Sprache und logischer Gruppierung, /plan für Geplantes, Doku im selben Schritt wie der Code.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}

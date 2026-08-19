@@ -1,0 +1,29 @@
+{
+  "name": "neo-claude-plugins",
+  "owner": {
+    "name": "NEO Digital (Erich Nigg)"
+  },
+  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Dokumentation, Komponenten-Grundsatz, Sicherheit (EU-CRA-orientiert)",
+  "plugins": [
+    {
+      "name": "neo-grundregeln",
+      "source": "./plugins/neo-grundregeln",
+      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit, Belegpflicht statt Annahmen, Selbstkontrolle und Auswirkungsanalyse, Frameworktreue, Testpflichten. Enthält Always-on-Kernregeln (SessionStart-Hook) und den Befehl /neo-grundregeln:neo-selbstkontrolle."
+    },
+    {
+      "name": "neo-doku",
+      "source": "./plugins/neo-doku",
+      "description": "Dokumentationsregeln: trocken, IST-Zustand, Entwickler- und Anwenderdoku getrennt, Hierarchie nach Sprache und Gruppierung, /plan für Geplantes, echte Umlaute."
+    },
+    {
+      "name": "neo-komponenten",
+      "source": "./plugins/neo-komponenten",
+      "description": "Komponenten-Grundsatz für Oberflächen: Views rufen nur Wrapper-Komponenten der Produktfamilie auf (Neo*, LeoFlex*), nie rohe Framework-Widgets. Frameworktreue, Design-Tokens, Interaktionskonventionen."
+    },
+    {
+      "name": "neo-sicherheit",
+      "source": "./plugins/neo-sicherheit",
+      "description": "Sicherheitsregeln nach EU-CRA-Baseline: Security by Design, Secrets, Logging, Mandantentrennung, Lieferkette, Schatten-/Paritätsbetrieb bei riskanten Umbauten, Release-Evidenz."
+    }
+  ]
+}
