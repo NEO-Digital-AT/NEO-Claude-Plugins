@@ -1,0 +1,9 @@
+{
+  "name": "neo-sicherheit",
+  "displayName": "NEO Sicherheit",
+  "version": "1.0.0",
+  "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: Security by Design, Secrets- und Logging-Regeln, Mandantentrennung, Frontend- und Container-Härtung, Lieferkette, Schatten-/Paritätsbetrieb bei riskanten Umbauten, Release-Evidenz.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}
