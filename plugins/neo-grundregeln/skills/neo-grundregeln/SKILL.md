@@ -138,6 +138,12 @@ Bereiche, Risiken. Erst danach mit der Arbeit beginnen.
 
 - Tests sind Pflicht für neue Funktionen, Bugfixes und geänderte Logik.
   Kein Abschluss ohne Abdeckung.
+- **Oberflächen-Funktionstests (UI-Tests):** jedes Bedienelement — jeder
+  Knopf, Schalter, Menüpunkt, jede Dialogaktion — hat einen Test, der
+  die Bedienung auslöst und das beobachtbare Ergebnis prüft (Flutter:
+  Widget-/Integrationstests; Web: Component-/E2E-Tests). Ein
+  Bedienelement ohne solchen Test gilt als ungetestet, auch wenn die
+  dahinterliegende Logik getestet ist.
 - Keine fake-grünen Tests: Nur-Statuscode-Prüfungen reichen nicht —
   Struktur und Bedeutung der Antwort prüfen. Mutierende Operationen
   prüfen die beobachtbare Zustandsänderung.
