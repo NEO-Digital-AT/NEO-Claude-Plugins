@@ -2,15 +2,15 @@
 
 Die ausführlichen Fassungen liegen in den Skills `neo-grundregeln`,
 `neo-design`, `neo-komponenten`, `neo-doku`, `neo-deployment`,
-`neo-contao` und `neo-sicherheit` — bei passender Aufgabe den jeweiligen
-Skill laden.
+`neo-contao`, `neo-recht` und `neo-sicherheit` — bei passender Aufgabe
+den jeweiligen Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und
    Nachteilen vorlegen, Empfehlung abgeben — die Entscheidung fällt
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
    zusammenfassen und die Freigabe abwarten. Einzige Ausnahme: harte
-   Sicherheitslücken (Regel 15).
+   Sicherheitslücken (Regel 16).
 2. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
    Quellcode, offizielle Dokumentation, offizielle APIs. Fehlt eine
    Information: dokumentieren und nachfragen, nie raten. Bei fremden
@@ -46,34 +46,45 @@ Skill laden.
    einschließlich Hover. Kontrast wird gerechnet, nicht geschätzt. Jeder
    Zustand trägt Farbe **und** Symbol **und** Wort. Alles ist ohne Maus
    bedienbar. Horizontales Scrollen des Seitenkörpers ist ein Fehler, auf
-   jeder Breite von 320 px bis 4K.
-9. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
-   IST-Zustand und zieht im selben Schritt nach, ohne Marketingsprache.
-   Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
-   `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
-   markierten Screenshots im Repository. Geplantes liegt unter /plan.
-10. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss —
+   jeder Breite von 320 px bis 4K. Gemessen wird **mobil**: Best
+   Practices und SEO 100, agentisches Browsen 3/3, Leistung und
+   Barrierefreiheit mindestens 95 — der Lighthouse-Wert ersetzt die
+   Prüfung nicht.
+9. **Rechtliche Pflichtbausteine.** Impressum, Datenschutzerklärung und
+   Barrierefreiheitserklärung sind eigene, immer erreichbare Seiten nach
+   österreichischem Recht. Vor der Einwilligung lädt nichts von Dritten —
+   auch kein eingebettetes Video. Schriften werden immer selbst
+   ausgeliefert. Für Anwendungen und Portale gilt zusätzlich der EU
+   Cyber Resilience Act samt Dokumentenpaket und Meldeweg.
+10. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
+    IST-Zustand und zieht im selben Schritt nach, ohne Marketingsprache.
+    Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
+    `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
+    markierten Screenshots im Repository. Geplantes liegt unter /plan.
+11. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss —
     Ausnahmen nur Slugs, URLs, Code und englische Bezeichner. Keine
     Emojis in Dokumentation, Commits und Oberflächen.
-11. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
+12. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-12. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
+13. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
     pushen — beide nehmen nur Merges über Pull Requests. Arbeitszweige
     gehen von `dev` aus; `main` nimmt ausschließlich `dev`. Ausgerollt
     wird nur, was grüne Tests hat. Keine Prüfung abschalten, um einen
     Merge oder ein Deployment durchzubekommen.
-13. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
+14. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
     Erweiterungen bleiben unangetastet. Bildkompression und Imagesets nur
-    über Contao. Eigene Erweiterung erst, wenn es keine marktreife gibt.
-14. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
+    über Contao, Styles ausnahmslos in SCSS und im Layout gewählt, jede
+    Seite liefert nur, was sie braucht. Eigene Erweiterung erst, wenn es
+    keine marktreife gibt.
+15. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur: klare Modul- und
     Schichtgrenzen, eine Verantwortung pro Einheit, Benennung und Ablage
     nach den Mustern des Projekts. Bei Konflikt zwischen Geschwindigkeit
     und Korrektheit oder Sicherheit gewinnt immer Letzteres.
-15. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+16. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.

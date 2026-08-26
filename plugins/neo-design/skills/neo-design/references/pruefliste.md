@@ -71,6 +71,38 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 - [ ] `prefers-reduced-motion` wird beachtet.
 - [ ] 200 % Textvergrößerung und 400 % Zoom ohne Verlust.
 
+## Betriebsart Webseite
+
+Nur bei Webseiten, nicht bei Anwendungen und Portalen.
+
+- [ ] Die Seite könnte nicht ohne Änderung für ein anderes Unternehmen
+      stehen.
+- [ ] Keine Eyebrow-Zeile in der Standardform; entweder weg oder etwas
+      Eigenes.
+- [ ] Kein Dreikartenblock mit Symbolkreis, kein Verlaufstext, keine
+      Milchglasfläche über Verlauf, keine Graustufen-Logoleiste.
+- [ ] Die Seite bewegt sich: Erscheinen beim Scrollen, Übergänge,
+      höchstens ein tragender Bühneneffekt.
+- [ ] Bewegung nur über `transform` und `opacity`; kein Layoutsprung.
+- [ ] Burgermenü animiert **und** bedienbar: `aria-expanded`, Fokus
+      hinein, gefangen, zurück, Escape schließt.
+- [ ] Bei reduzierter Bewegung ist alles sofort da und vollständig
+      bedienbar.
+- [ ] Schriften werden selbst ausgeliefert, nicht von einem fremden
+      Dienst geladen.
+
+## Messwerte
+
+- [ ] PageSpeed Insights **mobil** für **jede** Seitenvorlage gemessen,
+      nicht nur für die Startseite.
+- [ ] Best Practices 100, SEO 100, agentisches Browsen 3/3.
+- [ ] Leistung und Barrierefreiheit mindestens 95, Ziel 100.
+- [ ] Die drei Kernwerte für Ladezeit, Reaktion und Layoutstabilität
+      berichtet.
+- [ ] `llms.txt` an der Domain-Wurzel vorhanden und gültig.
+- [ ] Klar benannt, dass der Barrierefreiheitswert ein Teilcheck ist —
+      die Prüfung oben ersetzt er nicht.
+
 ## Größe und Gerät
 
 - [ ] Kein horizontales Scrollen des Seitenkörpers auf 320, 390, 768,
@@ -90,6 +122,15 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
       zusammengesetzten Sätze.
 - [ ] Zahlen, Datum und Währung über die Formatierung der Sprache.
 - [ ] Echte Umlaute, Sie-Form, keine Emojis, keine Marketingsprache.
+
+## Recht
+
+- [ ] Impressum, Datenschutzerklärung und Barrierefreiheitserklärung
+      vorhanden, erreichbar und inhaltlich vollständig (Skill
+      `neo-recht`).
+- [ ] Vor der Einwilligung lädt nichts von Dritten — auch kein
+      eingebettetes Video.
+- [ ] Die Einwilligung lässt sich jederzeit widerrufen.
 
 ## Tests und Doku
 

@@ -3,7 +3,7 @@
   "owner": {
     "name": "NEO Digital (Erich Nigg)"
   },
-  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Design und Barrierefreiheit, Komponenten-Grundsatz, Dokumentation, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
+  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Design und Barrierefreiheit, Komponenten-Grundsatz, Dokumentation, rechtliche Pflichten, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
   "plugins": [
     {
       "name": "neo-grundregeln",
@@ -13,7 +13,7 @@
     {
       "name": "neo-design",
       "source": "./plugins/neo-design",
-      "description": "Gestaltung und Bedienung: kein Bau ohne freigegebenen Entwurf, Aufbau vor Optik, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K ohne horizontales Scrollen. Mit Kontrastrechner und dem Befehl /neo-design:neo-oberflaechenpruefung."
+      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Aufbau vor Optik, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K ohne horizontales Scrollen, Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Mit Kontrastrechner und dem Befehl /neo-design:neo-oberflaechenpruefung."
     },
     {
       "name": "neo-komponenten",
@@ -26,6 +26,11 @@
       "description": "Dokumentationsregeln: verbindliche Struktur unter docs (frontend/backend, Sprachordner, README.md je Ordner), trocken und IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots, Aufbau auch für generative Agenten, /plan für Geplantes, echte Umlaute."
     },
     {
+      "name": "neo-recht",
+      "source": "./plugins/neo-recht",
+      "description": "Rechtliche Pflichtbausteine nach österreichischem Recht: Impressum (ECG, MedienG, UGB), Datenschutzerklärung mit Cookie-Auflistung und jederzeitigem Widerruf, Barrierefreiheitserklärung. Consent-first — vor der Einwilligung lädt nichts von Dritten, auch kein eingebettetes Video. Schriften immer selbst ausliefern. Für Anwendungen zusätzlich das CRA-Dokumentenpaket samt Meldeweg."
+    },
+    {
       "name": "neo-deployment",
       "source": "./plugins/neo-deployment",
       "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."
@@ -33,7 +38,7 @@
     {
       "name": "neo-contao",
       "source": "./plugins/neo-contao",
-      "description": "Contao-Websites: vollständig in Contao verwaltbar, keine festen Texte in Templates, Insert-Tags, korrekte Feldtypen, Kern und Erweiterungen unangetastet, Fremderweiterungen vor Eigenbau, eigene Extensions als Contao-<Name>-by-NEO, Imagesets für Bilder, minifizierte Auslieferung, migrierfähige Datenbank mit idempotentem Seed, llms.txt."
+      "description": "Contao-Websites: vollständig in Contao verwaltbar, keine festen Texte in Templates, Insert-Tags, korrekte Feldtypen, Styles ausnahmslos in SCSS mit Ebenen und im Layout gewählt, Kern und Erweiterungen unangetastet, Fremderweiterungen vor Eigenbau, eigene Extensions als Contao-<Name>-by-NEO, Imagesets für Bilder, minifizierte Auslieferung, migrierfähige Datenbank mit idempotentem Seed, llms.txt."
     },
     {
       "name": "neo-sicherheit",

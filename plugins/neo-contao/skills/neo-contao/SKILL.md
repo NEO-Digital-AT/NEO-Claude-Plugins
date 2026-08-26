@@ -4,7 +4,8 @@ description: >
   NEO-Regeln für Contao. Diesen Skill laden bei jeder Arbeit an einer
   Contao-Website oder -Erweiterung: Seitenstruktur, Layouts, Themes,
   Artikel, Inhaltselemente, Module, Templates, Twig, DCA, Insert-Tags,
-  Imagesets und Bildkompression, MetaModels oder Contao Catalog,
+  Imagesets und Bildkompression, SCSS und dessen Einbindung im Layout,
+  MetaModels oder Contao Catalog,
   Backend-Rechte, Composer-Bundles, Migrationen und Seed, Deployment,
   Minifizierung von CSS und JavaScript, llms.txt. Ebenso bei der Frage,
   ob eine fremde Erweiterung eingesetzt oder eine eigene gebaut wird.
@@ -49,8 +50,12 @@ Vor jeder Zeile Code die Frage: **Wie löst Contao das nativ?**
   Bildverarbeitung, keine im Build erzeugten Varianten neben Contao.
 - Datumsformate, Sprachen, Weiterleitungen, Zugriffsschutz,
   Suchmaschinen-Einstellungen: Contao-Einstellungen, keine Eigenlösung.
-- Im Zweifel die offizielle Dokumentation abrufen, nicht raten:
-  <https://docs.contao.org/5.x/manual/de/>
+- Im Zweifel die offizielle Dokumentation abrufen, nicht raten. Zwei
+  Quellen, zwei Sichten:
+  - **Handbuch** (Redaktion, Backend, Bordmittel):
+    <https://docs.contao.org/5.x/manual/de/>
+  - **Entwicklerhandbuch** (DCA, Widgets, Insert-Tags, Bundles, Hooks,
+    Migrationen): <https://docs.contao.org/5.x/dev/>
 
 Welche Bordmittel es gibt, welcher Feldtyp wofür, und die Fallen bei
 DCA und Rechten: `references/bordmittel.md`.
@@ -67,6 +72,26 @@ sein** (Skill `neo-design`).
 - Eine Auswahl ist ein Select mit echten Optionen, keine freie Eingabe.
 - Eine Datei ist ein Datei-Picker, kein Pfad als Text.
 - Eine Seite ist ein Seiten-Picker, kein von Hand getipptes Insert-Tag.
+
+## Styles: ausnahmslos SCSS
+
+- Styles werden **nur** in SCSS geschrieben, mit Verschachtelung,
+  Variablen, Mixins, Funktionen, Schleifen und Berechnungen — kein
+  handgeschriebenes CSS, keine Stile im Template.
+- **Jeder Bereich und jede Komponente hat ihre eigene Datei.** Gebaut
+  wird in Ebenen: Tokens, Grundlage, Komponenten, Bereiche, Seiten.
+- **Achtung bei der Syntax:** Contaos eigener Renderer versteht nur die
+  alte Form — `@import`, globale `$variablen`, `@mixin` und `@include`.
+  Kein `@use`, kein `@forward`, keine Modulnamensräume. Wird dagegen im
+  Build mit Dart Sass übersetzt, ist die moderne Form erlaubt. **Vor der
+  ersten Zeile feststellen, welcher Renderer läuft**, und einen
+  Kompiliertest fahren.
+- **Stylesheets werden im Contao-Layout gewählt, genau wie JavaScript.**
+- **Jede Seite liefert nur, was sie braucht.** Kein großes Gesamt-CSS,
+  sondern ein Einstiegsbündel je Seitengattung.
+
+Ebenen, Auslagerung, Namensfallen und die Regeln im Einzelnen:
+`references/scss.md`.
 
 ## Kern und Erweiterungen sind tabu
 
@@ -151,9 +176,11 @@ wird dokumentiert, **einschließlich Bedienungsanleitung** für die
 Redaktion.
 
 - Eigenentwicklungen brauchen eine vollständige Doku über mehrere Seiten,
-  **zweisprachig Englisch und Deutsch**, wobei **Englisch die
-  Hauptsprache** ist. Das weicht bewusst von der sonstigen NEO-Leitsprache
-  ab, weil eine Contao-Erweiterung ein internationales Publikum hat.
+  **zweisprachig Deutsch und Englisch**, wobei **Deutsch die
+  Hauptsprache** ist — die Kundschaft ist nahezu durchgehend
+  deutschsprachig. Soll bei einer Erweiterung Englisch führen (etwa vor
+  einer Veröffentlichung im Contao-Store), wird das ausdrücklich
+  bekanntgegeben; ohne diese Ansage gilt Deutsch.
 - Struktur, Inhaltsverzeichnisse, Screenshots mit Markierungen und
   Agentenlesbarkeit: Skill `neo-doku`.
 - Bedienung heißt Bedienung im Backend: welches Modul, welches Feld,

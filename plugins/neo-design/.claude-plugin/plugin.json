@@ -1,8 +1,8 @@
 {
   "name": "neo-design",
   "displayName": "NEO Design und Barrierefreiheit",
-  "version": "1.0.0",
-  "description": "Gestaltungs- und Bedienregeln der NEO Digital für jede Oberfläche: kein Bau ohne freigegebenen Entwurf, Aufbau und Orientierung vor Optik, Eingaben führen statt abfragen, ein Farb- und Layoutsystem statt Seitenvarianten, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), Bedienung von 320 px bis 4K ohne horizontales Scrollen. Enthält einen Kontrastrechner und den Befehl /neo-design:neo-oberflaechenpruefung.",
+  "version": "1.1.0",
+  "description": "Gestaltungs- und Bedienregeln der NEO Digital für jede Oberfläche, in zwei Betriebsarten: Anwendung/Portal und Webseite. Kein Bau ohne freigegebenen Entwurf, Aufbau und Orientierung vor Optik, Eingaben führen statt abfragen, ein Farb- und Layoutsystem statt Seitenvarianten, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), Bedienung von 320 px bis 4K ohne horizontales Scrollen, Webseiten dynamisch und ohne KI-Einheitslook, Zielwerte aus PageSpeed Insights mobil (Best Practices und SEO 100, agentisches Browsen 3/3). Enthält einen Kontrastrechner und den Befehl /neo-design:neo-oberflaechenpruefung.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"
   }

@@ -76,8 +76,9 @@ Update weg und beim übernächsten ein Fehler, den niemand findet.
   zuordnen, Feldrechte bedenken.
 - Migrationen mitliefern, auch für das Entfernen.
 - Übersetzungen mitliefern, mindestens Englisch und Deutsch.
-- Vollständige Dokumentation über mehrere Seiten, **Englisch als
-  Hauptsprache**, Deutsch daneben (Skill `neo-doku`).
+- Vollständige Dokumentation über mehrere Seiten, **Deutsch als
+  Hauptsprache**, Englisch daneben (Skill `neo-doku`). Soll Englisch
+  führen, wird das je Erweiterung ausdrücklich bekanntgegeben.
 
 ## Vorhandene NEO-Bundles
 

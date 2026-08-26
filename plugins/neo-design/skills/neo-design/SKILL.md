@@ -8,7 +8,10 @@ description: >
   Token-Arbeit, bei Fragen zu Kontrast, Hover, Fokus, Tastaturbedienung,
   Barrierefreiheit (BaFG, WZG, EN 301 549, WCAG), bei mobiler Ansicht,
   Umbruchpunkten und großen Bildschirmen sowie bei jeder Frage, welches
-  Bedienelement für eine Eingabe richtig ist.
+  Bedienelement für eine Eingabe richtig ist. Ebenso bei Webseiten-
+  gestaltung, Animationen, Burgermenü, three.js und bei den Zielwerten
+  aus PageSpeed Insights und Lighthouse (Leistung, Barrierefreiheit,
+  Best Practices, SEO, agentisches Browsen).
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitte 1–3, ADR 0002/0018, tools/build-tokens.py), Stand 2026-08
 ---
@@ -35,6 +38,22 @@ Vier Fragen entscheiden über Fertig oder Nicht-fertig:
 4. Ist jedes Element in jedem Zustand lesbar — auch beim Überfahren?
 
 Eine Nein-Antwort ist ein Baumangel, keine Ausbaustufe.
+
+## Zwei Betriebsarten
+
+Alles in diesem Skill gilt für beide. Zwei Dinge unterscheiden sich:
+
+- **Anwendung und Portal** — dicht, ruhig, arbeitsorientiert. Bewegung
+  nur als Zustandswechsel. Muster sind gut: Wiedererkennung schafft
+  Sicherheit.
+- **Webseite** — großzügig, dynamisch, eigenständig. Bewegung ist Teil
+  der Gestaltung. Muster sind schlecht: eine Seite, die wie jede andere
+  aussieht, überzeugt niemanden. Regeln dafür, dazu die Liste der
+  Muster, an denen man KI-gebaute Seiten erkennt:
+  `references/webseiten.md`.
+
+Welche Betriebsart gilt, steht in der Regeldatei des Projekts. Fehlt der
+Eintrag: nachfragen, nicht annehmen.
 
 ## 1. Kein Bau ohne freigegebenen Entwurf
 
@@ -102,7 +121,9 @@ und Grenzfällen: `references/eingaben.md`.
   Seite muss in Graustufen und bei Rot-Grün-Schwäche verständlich
   bleiben.
 - Tiefe kommt aus Rändern, nicht aus Schatten. Keine dekorativen
-  Verläufe, keine Muster, keine Ad-hoc-Designexperimente.
+  Verläufe, keine Muster, keine Ad-hoc-Designexperimente. **Dieser Punkt
+  gilt für Anwendungen und Portale**; auf Webseiten darf die Marke
+  tragen, nach `references/webseiten.md`.
 - Hell- und Dunkelfassung sind gleichwertig. Ein Entwurf ohne geprüfte
   Dunkelfassung ist ein halber Entwurf.
 
@@ -179,7 +200,31 @@ Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.
 Formulierungen, Fehlertext-Muster, Leerzustände und Ladehinweise:
 `references/oberflaechentexte.md`.
 
-## 9. Abnahme
+## 9. Messwerte
+
+Gemessen wird **mobil**, mit PageSpeed Insights bzw. Lighthouse, für
+jede Seitenvorlage — nicht nur für die Startseite.
+
+| Kategorie | Ziel | Untergrenze |
+| --- | --- | --- |
+| Leistung | 100 | 95 |
+| Barrierefreiheit | 100 | 95 |
+| Best Practices | 100 | 100 |
+| SEO | 100 | 100 |
+| Agentisches Browsen | 3/3 | 3/3 |
+
+Agentisches Browsen prüft drei Dinge: sauberer Accessibility-Tree,
+stabiles Layout, gültige `llms.txt` an der Domain-Wurzel.
+
+**Der Wert für Barrierefreiheit ist kein Nachweis.** Er prüft
+automatisch, was sich automatisch prüfen lässt — ein Bruchteil der
+WCAG-Kriterien. 100 dort ersetzt die Prüfung aus Abschnitt 6 nicht.
+
+Berichtet werden Zahlen je Seite und Kategorie. Einzelheiten, Ursachen
+und der Unterschied zwischen Feld- und Laborwerten:
+`references/messwerte.md`.
+
+## 10. Abnahme
 
 Vor jeder Fertigmeldung die Liste in `references/pruefliste.md`
 durchgehen und das Ergebnis berichten. Nicht Geprüftes gilt als nicht

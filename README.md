@@ -9,9 +9,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Tests, Git | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Vollfassung als Skill; Befehl `/neo-grundregeln:neo-selbstkontrolle` |
-| `neo-design` | Gestaltung und Bedienung: Entwurf vor Bau, Aufbau, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K | Skill mit sechs Referenzdateien, Kontrastrechner, Befehl `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit acht Referenzdateien, Kontrastrechner, Befehl `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Größenskala, Frameworktreue | Skill mit Katalog-Referenz, lädt bei Oberflächenarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Agentenlesbarkeit | Skill mit drei Referenzdateien und der Markierungsebene für Screenshots |
+| `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
 | `neo-sicherheit` | EU-CRA-orientierte Baseline, Secrets, Härtung, Paritätsbetrieb, Release-Evidenz | Skill, lädt bei Sicherheits-, API-, Release-Arbeit |
@@ -40,7 +41,12 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Beim Zweig- und Ausrollen:** `neo-deployment` — nie direkt auf `dev`
   oder `main`, `main` nimmt nur `dev`, nur Grünes wird ausgerollt.
 - **Bei Contao:** `neo-contao` — die Seite muss wirken, als wäre sie rein
-  in Contao entstanden.
+  in Contao entstanden; Styles ausnahmslos SCSS, im Layout gewählt.
+- **Vor jeder Fertigmeldung einer Webseite:** `neo-recht` — Impressum,
+  Datenschutz, Barrierefreiheitserklärung, und im Netzwerkmitschnitt
+  kein fremder Host vor der Einwilligung.
+- **Vor der Abnahme:** mobil messen. Best Practices und SEO 100,
+  agentisches Browsen 3/3, Leistung und Barrierefreiheit mindestens 95.
 
 ## Installation
 
@@ -60,6 +66,7 @@ Danach die Plugins aktivieren — entweder über `/plugin` oder in
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
+    "neo-recht@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
     "neo-sicherheit@neo-claude-plugins": true
@@ -83,6 +90,7 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
+    "neo-recht@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
     "neo-sicherheit@neo-claude-plugins": true
@@ -92,7 +100,7 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
 
 `neo-contao` und `neo-deployment` dürfen in Projekten weggelassen werden,
 die weder Contao einsetzen noch ein Zweigmodell mit `dev` und `main`
-führen.
+führen. `neo-recht` bleibt aktiv, sobald etwas veröffentlicht wird.
 
 ## Werkzeuge in den Plugins
 
@@ -128,6 +136,17 @@ Security-/CRA-Doku, UI- und Design-System-Regeln, ADRs, Wächter-Tests,
 Standardprompt Contao). Aufbau nach dem Standardmuster für
 Claude-Code-Marketplaces: ein Repo, ein Marketplace-Manifest, je Plugin
 ein eigener Ordner.
+
+## Ausnahmen für dieses Repo
+
+Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
+festgehaltenen Ausnahme:
+
+- **Kein `dev`-Zweig** (Kernregel 13, Skill `neo-deployment`). Dieses
+  Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
+  ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
+  Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
+  Pull Requests gegen `main`.
 
 ## Pflege
 
