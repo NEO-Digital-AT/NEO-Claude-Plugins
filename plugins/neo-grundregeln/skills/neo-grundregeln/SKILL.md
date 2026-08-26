@@ -166,6 +166,10 @@ Bereiche, Risiken. Erst danach mit der Arbeit beginnen.
 - Vor jedem Commit: Tests laufen lassen, deutsche Texte auf echte Umlaute
   prüfen (kein ue/ae/oe/ss), keine Secrets, keine TODOs, keine
   temporären Dateien, keine leeren Ordner nach Refactorings.
+- **Die Commit-Nachricht selbst ist ein deutscher Text.** Sie trägt echte
+  Umlaute, keine Ersatzschreibung — ebenso Titel und Text eines Pull
+  Requests. Ein Dateiname oder ein Slug in der Nachricht bleibt
+  ASCII (`references/loeschkonzept.md`), der Fließtext daneben nicht.
 - Ein abgeschlossener, freigegebener Schritt = ein sauberes Commit-Paket.
   Querschnitts-Refactorings nie auf einem unfertigen Feature-Branch.
 - Committen und pushen nur, wenn der Projektinhaber es verlangt oder das

@@ -62,9 +62,12 @@ Skill laden.
     Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
     `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
     markierten Screenshots im Repository. Geplantes liegt unter /plan.
-11. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss —
-    Ausnahmen nur Slugs, URLs, Code und englische Bezeichner. Keine
-    Emojis in Dokumentation, Commits und Oberflächen.
+11. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
+    Das gilt für **jeden** deutschen Text, einschließlich
+    Commit-Nachrichten, Pull-Request-Titeln und -Texten, Code-Kommentaren
+    und Meldungen im Terminal. Ausnahmen nur Slugs, URLs, Dateinamen,
+    Code und englische Bezeichner. Keine Emojis in Dokumentation,
+    Commits und Oberflächen.
 12. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
