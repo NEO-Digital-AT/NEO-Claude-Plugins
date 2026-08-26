@@ -5,8 +5,9 @@ description: >
   Prozess vor jeder Änderung (analysieren, begründen, Freigabe), Technologie-
   Entscheidungen (Optionen statt Alleingang), Belegpflicht statt Annahmen,
   Umgang mit fremden APIs und MCP, Selbstkontrolle und Auswirkungsanalyse,
-  Testpflichten, Git-Hygiene. Diesen Skill laden, bevor ein Feature, ein
-  Bugfix, ein Refactoring oder eine Integration begonnen wird.
+  Testpflichten, Git-Hygiene, kein Direkt-Push auf dev oder main. Diesen
+  Skill laden, bevor ein Feature, ein Bugfix, ein Refactoring oder eine
+  Integration begonnen wird.
 metadata:
   herkunft: NEO Digital — destilliert aus NEOcash- und LeoFlex-Regelwerken, Stand 2026-08
 ---
@@ -46,6 +47,12 @@ unverzüglich melden (Abschnitt 5, Eskalationsregel).
    betroffene Handbuch-/Regelseiten (Details: Skill `neo-doku`).
 9. **Fertigmelden** — was sichtbar ist, was offen blieb, was als
    Nächstes ansteht. Ergebnisse ehrlich melden: rote Tests heißen rot.
+
+**Bei Oberflächen kommt ein Schritt davor:** kein Screen, kein Dialog,
+kein Layoutumbau ohne freigegebenen Entwurf. Mehrere Vorschläge bauen, als
+Skizze oder Screenshot vorlegen, Änderungsrunden abwarten, Freigabe
+einholen — erst dann Punkt 5. Einzelheiten im Skill `neo-design`,
+`references/entwurfsverfahren.md`.
 
 Bei großen Aufgaben zuerst einen Prüf- und Umsetzungsplan als Markdown
 schreiben: Reihenfolge, betroffene Bereiche, benötigte Dokumentationen,
@@ -163,6 +170,14 @@ Bereiche, Risiken. Erst danach mit der Arbeit beginnen.
   Querschnitts-Refactorings nie auf einem unfertigen Feature-Branch.
 - Committen und pushen nur, wenn der Projektinhaber es verlangt oder das
   Projekt es so festlegt.
+- **Nie direkt auf `dev` oder `main` pushen.** Beide Zweige nehmen
+  Änderungen ausschließlich über einen Pull Request entgegen.
+  Arbeitszweige gehen von `dev` aus, `main` nimmt ausschließlich Merges
+  aus `dev`. Zweigmodell, Schutzregeln, Pflichtprüfungen und Ausrollung:
+  Skill `neo-deployment`.
 
-Zugehörige Skills: `neo-doku` (Dokumentation), `neo-komponenten`
-(Oberflächen), `neo-sicherheit` (Sicherheit, Release, riskante Umbauten).
+Zugehörige Skills: `neo-design` (Gestaltung, Bedienung,
+Barrierefreiheit), `neo-komponenten` (Wrapper-Komponenten),
+`neo-doku` (Dokumentation), `neo-deployment` (Zweige, Auslieferung),
+`neo-contao` (Contao-Websites), `neo-sicherheit` (Sicherheit, Release,
+riskante Umbauten).

@@ -1,8 +1,8 @@
 {
   "name": "neo-grundregeln",
   "displayName": "NEO Grundregeln",
-  "version": "1.1.0",
-  "description": "Verbindliche Arbeitsregeln der NEO Digital für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, Belegpflicht statt Annahmen, Selbstkontrolle und Auswirkungsanalyse vor dem nächsten Schritt, Frameworktreue, Testpflichten, Git-Hygiene. Kernregeln werden über einen SessionStart-Hook in jede Sitzung geladen.",
+  "version": "1.2.0",
+  "description": "Verbindliche Arbeitsregeln der NEO Digital für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, Selbstkontrolle und Auswirkungsanalyse vor dem nächsten Schritt, Frameworktreue, Testpflichten, Git-Hygiene, kein Direkt-Push auf dev oder main. Kernregeln werden über einen SessionStart-Hook in jede Sitzung geladen.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"
   }

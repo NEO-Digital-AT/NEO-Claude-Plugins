@@ -1,0 +1,9 @@
+{
+  "name": "neo-deployment",
+  "displayName": "NEO Zweige und Auslieferung",
+  "version": "1.0.0",
+  "description": "Zweigmodell und Auslieferungsregeln der NEO Digital: main ist der Live-Zweig, dev bespielt die Entwicklungsumgebung, beide sind geschützt. Kein Direkt-Push, nur Merge über Pull Request. Arbeitszweige gehen von dev aus, main nimmt ausschließlich Merges aus dev. Auf beiden Zweigen laufen Tests; ausgerollt wird nur Grünes. Enthält die konkreten GitHub-Einstellungen (Rulesets, Umgebungen, Pflichtprüfungen) und Workflow-Gerüste.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}
