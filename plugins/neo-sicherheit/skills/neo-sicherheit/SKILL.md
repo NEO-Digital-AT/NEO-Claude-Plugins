@@ -118,3 +118,9 @@ Für Umbauten an tragenden, produktiven Teilen gilt das Paritätsmuster:
   Rollback-Notizen, bekannte Schwachstellen mit Risikoakzeptanz.
 - CI-Gates verbindlich: Lint, Tests, Produktions-Build, Security-Scan,
   Dependency-Check.
+- **Die Meldung nach außen ist geregelt, nicht improvisiert.** Welche
+  Dokumente der CRA verlangt und welche Fristen gelten — Meldepflicht
+  nach Artikel 14 ab 11.09.2026, Frühwarnung 24 Stunden, ausführliche
+  Meldung 72 Stunden, Abschlussbericht 14 Tage bzw. 1 Monat — steht im
+  Skill `neo-recht`, `references/cra-dokumentation.md`. Dieser Skill
+  regelt, wie gebaut wird; jener, was dokumentiert und gemeldet wird.
