@@ -9,8 +9,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Tests, Git | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Vollfassung als Skill; Befehl `/neo-grundregeln:neo-selbstkontrolle` |
+| `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit acht Referenzdateien, Kontrastrechner, Befehl `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Größenskala, Frameworktreue | Skill mit Katalog-Referenz, lädt bei Oberflächenarbeit |
+| `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb | Skill mit zwei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Agentenlesbarkeit | Skill mit drei Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
@@ -40,6 +42,11 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   Repository.
 - **Beim Zweig- und Ausrollen:** `neo-deployment` — nie direkt auf `dev`
   oder `main`, `main` nimmt nur `dev`, nur Grünes wird ausgerollt.
+- **Bevor eine Datei, Klasse oder Komponente entsteht:** `neo-code` —
+  es gilt, was der Stack offiziell vorgibt, damit ein fremder Entwickler
+  sich sofort zurechtfindet.
+- **Bevor ein Endpoint entsteht:** `neo-api` — OpenAPI ist Pflicht, eine
+  Fehlerhülle für alles, Autorisierung deny-by-default.
 - **Bei Contao:** `neo-contao` — die Seite muss wirken, als wäre sie rein
   in Contao entstanden; Styles ausnahmslos SCSS, im Layout gewählt.
 - **Vor jeder Fertigmeldung einer Webseite:** `neo-recht` — Impressum,
@@ -63,8 +70,10 @@ Danach die Plugins aktivieren — entweder über `/plugin` oder in
 {
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
+    "neo-code@neo-claude-plugins": true,
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
+    "neo-api@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
@@ -87,8 +96,10 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
   },
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
+    "neo-code@neo-claude-plugins": true,
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
+    "neo-api@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,

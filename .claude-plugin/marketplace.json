@@ -3,12 +3,17 @@
   "owner": {
     "name": "NEO Digital (Erich Nigg)"
   },
-  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Design und Barrierefreiheit, Komponenten-Grundsatz, Dokumentation, rechtliche Pflichten, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
+  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Codeaufbau, Design und Barrierefreiheit, Komponenten-Grundsatz, API, Dokumentation, rechtliche Pflichten, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
   "plugins": [
     {
       "name": "neo-grundregeln",
       "source": "./plugins/neo-grundregeln",
       "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, Selbstkontrolle und Auswirkungsanalyse, Frameworktreue, Testpflichten, Git-Hygiene. Enthält Always-on-Kernregeln (SessionStart-Hook) und den Befehl /neo-grundregeln:neo-selbstkontrolle."
+    },
+    {
+      "name": "neo-code",
+      "source": "./plugins/neo-code",
+      "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit."
     },
     {
       "name": "neo-design",
@@ -19,6 +24,11 @@
       "name": "neo-komponenten",
       "source": "./plugins/neo-komponenten",
       "description": "Komponenten-Grundsatz für Oberflächen: Views rufen nur Wrapper-Komponenten der Produktfamilie auf (Neo*, LeoFlex*) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten, Größenskala, Farbe und Übersetzung in der Komponente, Wächter-Tests."
+    },
+    {
+      "name": "neo-api",
+      "source": "./plugins/neo-api",
+      "description": "API-Regeln nach dem Muster von LeoFlex: Swagger und OpenAPI sind Pflicht, ein Dokument je Fachbereich mit stabiler und Vorschau-Fassung, Versionierung ohne Bruch, wiederverwendbare Verträge, eine einheitliche Fehlerhülle für alle Fehlerantworten, klare PUT- und PATCH-Semantik, Autorisierung deny-by-default, CORS und Cookies aus der Konfiguration, Webhooks nach dem Store-First-Modell, Rate Limiting nach authentifiziertem Aufrufer, Migrationen ohne Datenverlust, abgesicherter Statusendpunkt."
     },
     {
       "name": "neo-doku",

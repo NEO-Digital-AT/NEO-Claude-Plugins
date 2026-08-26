@@ -2,15 +2,15 @@
 
 Die ausführlichen Fassungen liegen in den Skills `neo-grundregeln`,
 `neo-design`, `neo-komponenten`, `neo-doku`, `neo-deployment`,
-`neo-contao`, `neo-recht` und `neo-sicherheit` — bei passender Aufgabe
-den jeweiligen Skill laden.
+`neo-contao`, `neo-recht`, `neo-api`, `neo-code` und `neo-sicherheit` —
+bei passender Aufgabe den jeweiligen Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und
    Nachteilen vorlegen, Empfehlung abgeben — die Entscheidung fällt
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
    zusammenfassen und die Freigabe abwarten. Einzige Ausnahme: harte
-   Sicherheitslücken (Regel 16).
+   Sicherheitslücken (Regel 17).
 2. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
    Quellcode, offizielle Dokumentation, offizielle APIs. Fehlt eine
    Information: dokumentieren und nachfragen, nie raten. Bei fremden
@@ -81,10 +81,19 @@ den jeweiligen Skill laden.
     keine marktreife gibt.
 15. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
-    vollständiges Verstehen. Saubere Codestruktur: klare Modul- und
-    Schichtgrenzen, eine Verantwortung pro Einheit, Benennung und Ablage
-    nach den Mustern des Projekts. Bei Konflikt zwischen Geschwindigkeit
-    und Korrektheit oder Sicherheit gewinnt immer Letzteres.
-16. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+    vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
+    Vorgaben des jeweiligen Stacks** (.NET, Vue 3, Flutter): klare
+    Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je
+    Einheit, englische Bezeichner bei deutschen Oberflächentexten.
+    Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
+    Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
+    gewinnt immer Letzteres.
+16. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+    OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
+    geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
+    neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
+    Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
+    Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
+17. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.
