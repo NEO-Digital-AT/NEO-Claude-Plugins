@@ -75,10 +75,10 @@ Update weg und beim übernächsten ein Fehler, den niemand findet.
 - Rechte mitliefern: Backend-Module registrieren, Tabellen den Modulen
   zuordnen, Feldrechte bedenken.
 - Migrationen mitliefern, auch für das Entfernen.
-- Übersetzungen mitliefern, mindestens Englisch und Deutsch.
-- Vollständige Dokumentation über mehrere Seiten, **Deutsch als
-  Hauptsprache**, Englisch daneben (Skill `neo-doku`). Soll Englisch
-  führen, wird das je Erweiterung ausdrücklich bekanntgegeben.
+- Vollständige Dokumentation über mehrere Seiten. **Englisch ist Pflicht
+  und Leitsprache**, Deutsch optional daneben (Skill `neo-doku`). Ohne
+  englische Doku ist die Erweiterung nicht fertig.
+- Übersetzungen der Oberfläche mindestens Englisch und Deutsch.
 
 ## Vorhandene NEO-Bundles
 

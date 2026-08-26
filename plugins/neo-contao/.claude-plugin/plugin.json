@@ -1,7 +1,7 @@
 {
   "name": "neo-contao",
   "displayName": "NEO Contao",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Regeln der NEO Digital für Contao-Websites: die Seite muss vollständig in Contao verwaltbar sein und wirken, als wäre sie rein in Contao entstanden. Keine festen Texte in Templates, alles aus der Datenbank über Felder und Insert-Tags. Kern und Erweiterungen bleiben unangetastet. Fremderweiterungen bevorzugt, Eigenentwicklung nur ohne marktreife Alternative — dann als eigene Extension im Repository Contao-<Name>-by-NEO. Korrekte Feldtypen, Styles ausnahmslos in SCSS mit Ebenen und je Bereich einer Datei, im Layout gewählt und nur ausgeliefert, was die Seite braucht, Bildkompression und Imagesets ausschließlich über Contao, minifizierte Auslieferung, migrierfähige Datenbank mit idempotentem Seed, Deployment ohne Handgriff, llms.txt auf jeder Seite.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

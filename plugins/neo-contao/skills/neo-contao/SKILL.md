@@ -175,12 +175,16 @@ Jede Änderung an Contao — Konfiguration, Erweiterung, Eigenentwicklung —
 wird dokumentiert, **einschließlich Bedienungsanleitung** für die
 Redaktion.
 
-- Eigenentwicklungen brauchen eine vollständige Doku über mehrere Seiten,
-  **zweisprachig Deutsch und Englisch**, wobei **Deutsch die
-  Hauptsprache** ist — die Kundschaft ist nahezu durchgehend
-  deutschsprachig. Soll bei einer Erweiterung Englisch führen (etwa vor
-  einer Veröffentlichung im Contao-Store), wird das ausdrücklich
-  bekanntgegeben; ohne diese Ansage gilt Deutsch.
+- Eigenentwicklungen brauchen eine vollständige Doku über mehrere Seiten.
+  **Englisch ist Pflicht und Leitsprache** (`docs/en/`), Deutsch ist
+  optional (`docs/de/`). Eine Erweiterung ohne englische Doku gilt als
+  unfertig — sie richtet sich an das Contao-Ökosystem, nicht an einen
+  einzelnen Kunden.
+- **Diese Sprachregel gilt nur für die Doku von Erweiterungen.** Die
+  Dokumentation einer Kundenwebsite bleibt deutsch, nach der Leitsprache
+  aus dem Skill `neo-doku`. Zwei verschiedene Publika, zwei verschiedene
+  Sprachen — im selben Repo möglich, wenn Erweiterung und Projekt darin
+  liegen.
 - Struktur, Inhaltsverzeichnisse, Screenshots mit Markierungen und
   Agentenlesbarkeit: Skill `neo-doku`.
 - Bedienung heißt Bedienung im Backend: welches Modul, welches Feld,
