@@ -8,18 +8,18 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Tests, Git | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Vollfassung als Skill; Befehl `/neo-grundregeln:neo-selbstkontrolle` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit sieben Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit neun Referenzdateien, drei Werkzeugen, Befehle `/neo-design:neo-oberflaechenpruefung` und `/neo-design:neo-designabgleich` |
-| `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Größenskala, Frameworktreue | Skill mit Katalog-Referenz, lädt bei Oberflächenarbeit |
+| `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb | Skill mit zwei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
-| `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Agentenlesbarkeit | Skill mit drei Referenzdateien und der Markierungsebene für Screenshots |
+| `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
-| `neo-sicherheit` | EU-CRA-orientierte Baseline, Secrets, Härtung, Paritätsbetrieb, Release-Evidenz | Skill, lädt bei Sicherheits-, API-, Release-Arbeit |
+| `neo-sicherheit` | Zehn harte Verbote, Autorisierung und Mandantentrennung, Secrets und Protokolle, hochsensible Daten, Härtung, Lieferkette, Release-Evidenz, Paritätsbetrieb | Skill mit sechs Referenzdateien, lädt bei Sicherheits-, API-, Release-Arbeit |
 
 ## Was wo geregelt ist
 
@@ -180,6 +180,27 @@ festgehaltenen Ausnahme:
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
   Pull Requests gegen `main`.
+
+## Aufbau der Plugins
+
+Alle zwölf folgen demselben Muster:
+
+- **`SKILL.md`** — Wegweiser: die Lesekonvention, die harten Regeln, eine
+  Tabelle der Bereiche. 100 bis 180 Zeilen, damit sie ganz gelesen wird.
+- **`references/*.md`** — die Tiefe, erst bei Bedarf gelesen. Je Plugin
+  zwei bis neun Dateien.
+- **`references/pruefliste.md`** — die Abnahmeliste, wo es eine gibt.
+  Abhakbar, mit dem Satz „Nicht Geprüftes gilt als nicht erfüllt".
+- **`scripts/`** — Werkzeuge, wo eine Regel messbar ist.
+- **`commands/`** — Befehle, wo eine Prüfung wiederkehrt.
+
+Die Lesekonvention ist in allen Skills dieselbe:
+
+| Wort | Bedeutung |
+| --- | --- |
+| **Nie**, **immer**, **muss** | Verbindlich. Ein Verstoß ist ein Blocker. |
+| **Ausnahme** | Nur mit dokumentierter Freigabe, mit Grund und Datum. Ohne Vermerk gibt es keine. |
+| **Sollte** | Begründet abweichbar, die Abweichung wird gemeldet. |
 
 ## Pflege
 

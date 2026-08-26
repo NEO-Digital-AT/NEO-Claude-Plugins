@@ -8,7 +8,7 @@
     {
       "name": "neo-grundregeln",
       "source": "./plugins/neo-grundregeln",
-      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, Selbstkontrolle und Auswirkungsanalyse, Frameworktreue, Testpflichten, Git-Hygiene. Enthält Always-on-Kernregeln (SessionStart-Hook) und den Befehl /neo-grundregeln:neo-selbstkontrolle."
+      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, der Prozess in neun Schritten mit abgewarteter Freigabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs vor Hypothese, Testpflichten einschließlich Oberflächen-Funktionstests, Git-Hygiene und Commit-Nachrichten, Projektstart-Gerüst, Abnahmeliste. Enthält Always-on-Kernregeln (SessionStart-Hook) und die Befehle /neo-grundregeln:neo-selbstkontrolle und /neo-grundregeln:neo-projektstart."
     },
     {
       "name": "neo-code",
@@ -23,7 +23,7 @@
     {
       "name": "neo-komponenten",
       "source": "./plugins/neo-komponenten",
-      "description": "Komponenten-Grundsatz für Oberflächen: Views rufen nur Wrapper-Komponenten der Produktfamilie auf (Neo*, LeoFlex*) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten, Größenskala, Farbe und Übersetzung in der Komponente, Wächter-Tests."
+      "description": "Komponenten-Grundsatz der NEO Digital für alle Oberflächen: Views rufen ausschließlich Wrapper-Komponenten der Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten wie NeoFormButtonDelete, der Vertrag einer Komponente, alle Zustände, Größen über eine benannte Skala, Farbe für Hell und Dunkel sowie Übersetzungen in der Komponente, Frameworktreue, Umgang mit bestehenden Bibliotheken und Frameworkwechsel, der Wächter-Test als maschinelle Durchsetzung, Abnahmeliste."
     },
     {
       "name": "neo-api",
@@ -33,7 +33,7 @@
     {
       "name": "neo-doku",
       "source": "./plugins/neo-doku",
-      "description": "Dokumentationsregeln: verbindliche Struktur unter docs (frontend/backend, Sprachordner, README.md je Ordner), trocken und IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots, Aufbau auch für generative Agenten, /plan für Geplantes, echte Umlaute."
+      "description": "Dokumentationsregeln: verbindliche Struktur unter docs (frontend/backend, Sprachordner, README.md je Ordner), trockene Sprache mit Verbotslisten und Zahlen statt Adjektiven, immer IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots, Entscheidungsakten (ADR), Vorlagen für Bedienungsseite, Entwicklerseite, Änderungsprotokoll und Übergabe, Aufbau auch für generative Agenten, /plan für Geplantes, echte Umlaute, Abnahmeliste."
     },
     {
       "name": "neo-recht",
@@ -63,7 +63,7 @@
     {
       "name": "neo-sicherheit",
       "source": "./plugins/neo-sicherheit",
-      "description": "Sicherheitsregeln nach EU-CRA-Baseline: Security by Design, Secrets, Logging, Mandantentrennung, Lieferkette, Schatten-/Paritätsbetrieb bei riskanten Umbauten, Release-Evidenz."
+      "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: zehn harte Verbote ohne Freigabeweg, Security by Design, Identität und Autorisierung mit objektbezogener Prüfung, Mandantentrennung mit Nachweistest, Sessions und Tokens, Secrets und Rotation, Protokollierung ohne personenbezogene Daten, Audit, hochsensible Daten mit Redaktionstests über alle Ausgabekanäle, Frontend-, Kopfzeilen-, Container- und Netzhärtung, Lieferkette und CI-Tore, Release-Evidenz, Schwachstellenmeldungen, Schatten- und Paritätsbetrieb bei riskanten Umbauten, Abnahmeliste. Meldeweg und CRA-Dokumente im Skill neo-recht."
     }
   ]
 }

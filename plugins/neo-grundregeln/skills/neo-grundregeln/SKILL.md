@@ -1,197 +1,132 @@
 ---
 name: neo-grundregeln
 description: >
-  Verbindliche NEO-Arbeitsregeln für jede nicht-triviale Entwicklungsaufgabe:
-  Prozess vor jeder Änderung (analysieren, begründen, Freigabe), Technologie-
-  Entscheidungen (Optionen statt Alleingang), Belegpflicht statt Annahmen,
-  Umgang mit fremden APIs und MCP, Selbstkontrolle und Auswirkungsanalyse,
-  Testpflichten, Git-Hygiene, kein Direkt-Push auf dev oder main. Diesen
-  Skill laden, bevor ein Feature, ein Bugfix, ein Refactoring oder eine
-  Integration begonnen wird.
+  Verbindliche NEO-Arbeitsregeln für jede nicht-triviale
+  Entwicklungsaufgabe: Prozess vor jeder Änderung (analysieren,
+  begründen, Freigabe abwarten), Technologie-Entscheidungen mit Optionen
+  statt Alleingang, Belegpflicht statt Annahmen, Umgang mit fremden APIs
+  und MCP, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs
+  vor Hypothese, Testpflichten einschließlich Oberflächen-Funktionstests,
+  Git-Hygiene und Commit-Nachrichten, kein Direkt-Push auf dev oder main,
+  Projektstart-Gerüst. Diesen Skill laden, bevor ein Feature, ein Bugfix,
+  ein Refactoring oder eine Integration begonnen wird.
 metadata:
   herkunft: NEO Digital — destilliert aus NEOcash- und LeoFlex-Regelwerken, Stand 2026-08
 ---
 
 # NEO-Grundregeln
 
-Es gelten Produktionsstandards, keine Prototyp-Standards (Leitsatz der
-NEO-Regelwerke: „Sauberer als sauber. Besser als gut. Sicherer als
-sicher."). Das gilt für Code, Architektur, Design und die Arbeitsweise —
-auch beim Debugging. Es gibt kein Zeitlimit-Argument: langsam,
-systematisch und sorgfältig arbeiten.
+Es gelten **Produktionsstandards, keine Prototyp-Standards**. Leitsatz
+der NEO-Regelwerke: „Sauberer als sauber. Besser als gut. Sicherer als
+sicher." Das gilt für Code, Architektur, Design und die Arbeitsweise —
+auch beim Debugging.
 
-## 1. Prozess vor jeder Änderung
+**Es gibt kein Zeitlimit-Argument.** Langsam, systematisch und sorgfältig
+arbeiten. Wer Geschwindigkeit gegen Korrektheit tauscht, hat die Regel
+verletzt, nicht abgekürzt.
 
-Verbindliche Reihenfolge — keine Änderung ohne ausdrückliche Freigabe.
-Einzige Ausnahme: harte Sicherheitslücken sofort beheben, danach
-unverzüglich melden (Abschnitt 5, Eskalationsregel).
+## Wie diese Regeln zu lesen sind
 
-1. **Analysieren** — was wird gebaut, was ist ausdrücklich nicht dabei.
-   Zuerst die Regelwerke des Projekts lesen (CLAUDE.md/AGENTS.md →
-   Architekturdokument → bereichsspezifisches Konzeptdokument). Wissen
-   allein aus der README reicht nie.
-2. **Abhängigkeiten prüfen** — welche bestehenden Funktionen, Verträge,
-   Tests und Dokumente kann die Änderung treffen? Realistische
-   Was-wäre-wenn-Fälle durchdenken, vor der Umsetzung.
-3. **Begründen und belegen** — jede Feststellung mit Quelle (Fundstelle
-   im Code, offizielle Dokumentation). Risiken benennen.
-4. **Zusammenfassen und Freigabe einholen** — auch wenn der Inhaber
-   „leg los" sagt: erst zusammenfassen, erst nach seinem Ok (oder mit
-   seiner Korrektur) umsetzen. Nie blind loslegen.
-5. **Umsetzen** — nur den freigegebenen Umfang.
-6. **Testen und reparieren** — neue Tests für neues Verhalten; rote Tests
-   beheben, nie umgehen oder abschwächen.
-7. **Nachbarfunktionen mitprüfen** — die unter 2. gefundenen
-   Abhängigkeiten nach der Umsetzung kontrollieren.
-8. **Dokumentieren im selben Schritt** — Systemdoku, Änderungsprotokoll,
-   betroffene Handbuch-/Regelseiten (Details: Skill `neo-doku`).
-9. **Fertigmelden** — was sichtbar ist, was offen blieb, was als
-   Nächstes ansteht. Ergebnisse ehrlich melden: rote Tests heißen rot.
+| Wort | Bedeutung |
+| --- | --- |
+| **Nie**, **immer**, **muss** | Verbindlich. Ein Verstoß ist ein **Blocker**: die Arbeit gilt als nicht fertig, ein Merge wird zurückgewiesen. |
+| **Ausnahme** | Nur mit ausdrücklicher Freigabe des Projektinhabers, festgehalten an der betroffenen Stelle mit Grund und Datum. **Ohne Vermerk gibt es keine Ausnahme**, auch wenn sie mündlich erteilt wurde. |
+| **Sollte** | Begründet abweichbar. Die Abweichung wird gemeldet, nicht stillschweigend genommen. |
 
-**Bei Oberflächen kommt ein Schritt davor:** kein Screen, kein Dialog,
-kein Layoutumbau ohne freigegebenen Entwurf. Mehrere Vorschläge bauen, als
-Skizze oder Screenshot vorlegen, Änderungsrunden abwarten, Freigabe
-einholen — erst dann Punkt 5. Einzelheiten im Skill `neo-design`,
-`references/entwurfsverfahren.md`.
+Diese Konvention gilt in allen Referenzdateien dieses Skills.
 
-Bei großen Aufgaben zuerst einen Prüf- und Umsetzungsplan als Markdown
-schreiben: Reihenfolge, betroffene Bereiche, benötigte Dokumentationen,
-mögliche Live-Tests, fehlende Zugangsdaten, nur theoretisch prüfbare
-Bereiche, Risiken. Erst danach mit der Arbeit beginnen.
+## Die fünf Sätze, die alles tragen
 
-## 2. Technologie-Entscheidungen
+1. **Die Entscheidung fällt ausnahmslos der Projektinhaber.** Der Agent
+   legt Optionen vor und empfiehlt. Er entscheidet nicht.
+2. **Keine Änderung ohne vorherige Freigabe.** Einzige Ausnahme: eine
+   harte Sicherheitslücke — sofort beheben, unverzüglich melden.
+3. **Keine Annahme, keine Spekulation.** Jede Feststellung ist belegt
+   oder wird als Vermutung gekennzeichnet.
+4. **Grüne Tests sind kein Beweis.** Was Laufzeit berührt, wird zur
+   Laufzeit geprüft.
+5. **Rote Tests sind Blocker, nie Folgeaufgaben.**
 
-- Keine freie Entscheidung über Technologieeinsatz, Pakete, Datenformate
-  oder schwer Umkehrbares. Immer mehrere Optionen vorlegen: je Option
-  Vorteile, Nachteile, Risiken, Wartungsaufwand — dazu eine begründete
-  Empfehlung. Die Entscheidung fällt ausnahmslos der Projektinhaber.
-- Jede tragende Entscheidung bekommt eine Entscheidungsakte (ADR) VOR der
-  Umsetzung, im Format des jeweiligen Projekts.
-- Neue Bibliothek oder neues Framework: zuerst prüfen, ob der bestehende
-  Stack das Problem löst. Ein Neuzugang braucht Entscheidungsakte und
-  Freigabe; erst dann Installation, Registereintrag und (wo vorhanden)
-  Wächter-Test — im selben Commit.
-- Bestehende Endpoints, Services und Komponenten bevorzugen. Neues nur,
-  wenn das Bestehende den Ablauf nachweislich nicht tragen kann.
+## Der Prozess in Kürze
 
-## 3. Belegpflicht — keine Annahmen
+Verbindliche Reihenfolge. Kein Schritt wird übersprungen, keiner
+getauscht:
 
-- Keine Annahmen, keine Spekulationen. Zulässige Quellen: offizieller
-  Quellcode, offizielle Dokumentation, offizielle APIs und SDKs. Fehlt
-  eine Information: dokumentieren und nachfragen, nie raten.
-- **Fremde Schnittstellen:** jede Integration gegen die offizielle
-  Dokumentation prüfen. Maschinenlesbare Verträge (OpenAPI, Postman,
-  llms.txt) haben Vorrang vor Prosa-Anleitungen. Referenzmaterial je
-  Integration im Repo ablegen und in der Regeldatei verlinken.
-- Ist die Dokumentation einer fremden API nicht öffentlich verfügbar:
-  genaue Unterlagen vom Anbieter oder Inhaber anfordern, bevor gebaut
-  wird. Unsicheres Anbieterverhalten im Code-Kommentar und in der Doku
-  festhalten statt eine Annahme zu implementieren.
-- **MCP-Rollen trennen:** Prüfen, ob für die Technologie oder API ein
-  MCP-Server verfügbar ist. Dokumentations-MCPs (z. B. einer UI-Library)
-  VOR der Implementierung konsultieren — exakte Props, Parameter und
-  Beispiele nachschlagen statt raten. Aktions-MCPs (Produktivsysteme)
-  sind Werkzeuge für Laufzeit-Aktionen, keine Dokumentationsquelle.
-  MCP-Zugangsdaten nie in Konfigurationsdateien ablegen.
-- Für verteilte Systeme gilt eine „Nie annehmen"-Liste: kein gemeinsamer
-  Host, kein localhost zwischen Diensten, kein gemeinsames Dateisystem,
-  kein direkter Datenbankzugriff vom Frontend, keine fixe Topologie —
-  alles läuft über definierte Schnittstellen.
+```
+1 Analysieren        was wird gebaut, was ausdrücklich nicht
+2 Abhängigkeiten     was kann die Änderung treffen
+3 Begründen          jede Feststellung mit Quelle, Risiken benannt
+4 Zusammenfassen     und die Freigabe ABWARTEN
+  ── bei Oberflächen davor: Entwurf vorlegen und freigeben lassen
+5 Umsetzen           nur den freigegebenen Umfang
+6 Testen             neue Tests für neues Verhalten, rote Tests beheben
+7 Nachbarn prüfen    die unter 2 gefundenen Abhängigkeiten
+8 Dokumentieren      im selben Schritt
+9 Fertigmelden       ehrlich: was offen blieb, was rot ist
+```
 
-## 4. Selbstkontrolle und Auswirkungsanalyse
+**„Leg los" hebt Schritt 4 nicht auf.** Auch dann wird erst
+zusammengefasst und die Bestätigung abgewartet.
 
-- Nach jeder Änderung den eigenen Code noch einmal lesen und gegen den
-  freigegebenen Umfang prüfen, BEVOR der nächste Schritt beginnt.
-- Auswirkungsanalyse ist Pflicht: benennen, welche anderen Programmteile,
-  Verträge, Tests, Dokumente und Betriebsaspekte betroffen sind —
-  einschließlich Sicherheits- und Betriebs-Auswirkung.
-- **Logs zuerst, dann Hypothese.** Beim Debugging vor jeder
-  Ursachentheorie die Laufzeit-Logs lesen; sichtbare Fehlermeldungen
-  sofort im Code verfolgen, nie als Nebeneffekt abtun.
-- Nie behaupten „das wird es beheben", solange nicht: das Log den exakten
-  Fehlerweg bestätigt, der Fix genau diesen Weg adressiert und der Nutzer
-  das Ergebnis verifiziert hat. Bei Unsicherheit die Aussage als
-  Vermutung kennzeichnen und Belege anfordern.
-- **Grüne Tests sind keine Laufzeitverifikation.** Kann eine Änderung
-  Laufzeitverhalten, Startvorgang, Migrationen, Routing, Auth oder extern
-  sichtbares Verhalten berühren: das tatsächlich ausgelieferte Verhalten
-  prüfen (Neustart, Build, Probelauf) — nicht nur die Tests.
-- Feste Validierungsreihenfolge nach substanziellen Änderungen:
-  Abhängigkeiten installieren → Lint/Analyse → Tests → Build. Rote Tests
-  und Analysefehler sind Blocker.
+Einzelheiten, was eine Freigabe ist und was nicht, und was ein
+Umsetzungsplan enthält: `references/prozess.md`.
 
-## 5. Qualität
+## Technologie-Entscheidungen
+
+- **Keine freie Entscheidung** über Technologieeinsatz, Pakete,
+  Datenformate oder schwer Umkehrbares.
+- **Immer mehrere Optionen** vorlegen: je Option Vorteile, Nachteile,
+  Risiken, Wartungsaufwand — dazu eine begründete Empfehlung.
+- Jede tragende Entscheidung bekommt eine **Entscheidungsakte (ADR) vor
+  der Umsetzung** (Skill `neo-doku`, `references/entscheidungsakten.md`).
+- Neue Bibliothek: zuerst prüfen, ob der bestehende Stack das Problem
+  löst. Ein Neuzugang braucht Entscheidungsakte und Freigabe; erst dann
+  Installation, Registereintrag und Wächter-Test — im selben Commit.
+- **Bestehende Endpoints, Dienste und Komponenten haben Vorrang.** Neues
+  nur, wenn das Bestehende den Ablauf nachweislich nicht trägt.
+
+## Qualität
 
 - Kein Quick-and-Dirty, kein „läuft erstmal", keine Workarounds, die
-  Ursachen verstecken, kein Copy-Paste ohne vollständiges Verstehen.
-- Keine TODOs im committeten Code — offene Punkte werden Issues oder
-  stehen im Plan-Ordner.
-- Bestehende Muster zuerst studieren und exakt fortsetzen. Definiert ein
-  bestehender Screen oder ein bestehendes Modul das Muster schon: das
-  Muster übernehmen statt eine lokale Variante zu erfinden.
-- Saubere Codestruktur ist Pflicht: klare Modul- und Schichtgrenzen mit
-  festgelegten Importrichtungen, eine Verantwortung pro Einheit,
-  konsistente Benennung und Ablage nach den Mustern des Projekts, keine
-  toten oder auskommentierten Pfade.
-- Eskalationsregel: harte Sicherheitslücken sofort beheben und
-  unverzüglich melden; jede andere ungefragte „Verbesserung" braucht
-  vorher eine Rückfrage.
-- Veraltete Werkzeuge und Abhängigkeiten erkennen und Updates auf die
-  neueste stabile Version vorschlagen; eingespielt wird nach Freigabe —
-  klein, nachvollziehbar und getestet (Skill `neo-sicherheit`,
-  Lieferkette).
+  Ursachen verstecken, **kein Copy-Paste ohne vollständiges Verstehen**.
+- **Keine TODOs im committeten Code.** Offene Punkte werden Aufgaben
+  oder stehen im Plan-Ordner.
+- **Bestehende Muster zuerst studieren und exakt fortsetzen.** Definiert
+  ein bestehender Screen oder ein bestehendes Modul das Muster schon,
+  wird es übernommen — keine lokale Variante.
+- Saubere Codestruktur nach den offiziellen Vorgaben des Stacks
+  (Skill `neo-code`): klare Schichtgrenzen mit festgelegter
+  Importrichtung, eine Verantwortung je Einheit, keine toten oder
+  auskommentierten Pfade.
+- **Eskalationsregel:** harte Sicherheitslücken sofort beheben und
+  unverzüglich melden; **jede andere ungefragte „Verbesserung"** —
+  Refactoring, Umbenennung, Stiländerung — braucht vorher eine Rückfrage.
+- Veraltete Werkzeuge erkennen und Updates vorschlagen; eingespielt wird
+  nach Freigabe, klein und getestet (Skill `neo-sicherheit`).
 
-## 6. Tests
+## Die Bereiche
 
-- Tests sind Pflicht für neue Funktionen, Bugfixes und geänderte Logik.
-  Kein Abschluss ohne Abdeckung.
-- **Oberflächen-Funktionstests (UI-Tests):** jedes Bedienelement — jeder
-  Knopf, Schalter, Menüpunkt, jede Dialogaktion — hat einen Test, der
-  die Bedienung auslöst und das beobachtbare Ergebnis prüft (Flutter:
-  Widget-/Integrationstests; Web: Component-/E2E-Tests). Ein
-  Bedienelement ohne solchen Test gilt als ungetestet, auch wenn die
-  dahinterliegende Logik getestet ist.
-- Keine fake-grünen Tests: Nur-Statuscode-Prüfungen reichen nicht —
-  Struktur und Bedeutung der Antwort prüfen. Mutierende Operationen
-  prüfen die beobachtbare Zustandsänderung.
-- Für jeden real aufgetretenen Fehler existiert ein Regressionstest,
-  bevor er als erledigt gilt.
-- Externe Anbieter in Tests faken; keine Abhängigkeit von interaktiven
-  Anmeldungen in der CI. Mock- und Demo-Schichten mitpflegen: jede neue
-  Schnittstellenfunktion braucht ihre Mock-Entsprechung.
-- Testdaten isolieren oder aufräumen.
+| Bereich | Referenz |
+| --- | --- |
+| Der Prozess im Detail, was Freigabe heißt, der Umsetzungsplan | `references/prozess.md` |
+| Belegpflicht, Quellen, fremde APIs, MCP-Rollen, verteilte Systeme | `references/belegpflicht.md` |
+| Selbstkontrolle, Auswirkungsanalyse, Debugging, Laufzeitverifikation | `references/selbstkontrolle.md` |
+| Tests: Arten, Oberflächen-Funktionstests, fake-grüne Tests, Mocks | `references/tests.md` |
+| Git, Commits, Commit-Nachrichten, Zweige, Hygiene | `references/git.md` |
+| Was ein neues Repository am ersten Tag mitbringt | `references/projektstart.md` |
+| Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 
-## 7. Git und Commits
+## Befehle
 
-- Vor jedem Commit: Tests laufen lassen, deutsche Texte auf echte Umlaute
-  prüfen (kein ue/ae/oe/ss), keine Secrets, keine TODOs, keine
-  temporären Dateien, keine leeren Ordner nach Refactorings.
-- **Die Commit-Nachricht selbst ist ein deutscher Text.** Sie trägt echte
-  Umlaute, keine Ersatzschreibung — ebenso Titel und Text eines Pull
-  Requests. Ein Dateiname oder ein Slug in der Nachricht bleibt
-  ASCII (`references/loeschkonzept.md`), der Fließtext daneben nicht.
-- Ein abgeschlossener, freigegebener Schritt = ein sauberes Commit-Paket.
-  Querschnitts-Refactorings nie auf einem unfertigen Feature-Branch.
-- Committen und pushen nur, wenn der Projektinhaber es verlangt oder das
-  Projekt es so festlegt.
-- **Nie direkt auf `dev` oder `main` pushen.** Beide Zweige nehmen
-  Änderungen ausschließlich über einen Pull Request entgegen.
-  Arbeitszweige gehen von `dev` aus, `main` nimmt ausschließlich Merges
-  aus `dev`. Zweigmodell, Schutzregeln, Pflichtprüfungen und Ausrollung:
-  Skill `neo-deployment`.
-
-## 8. Projektstart
-
-Was ein neues Repository am ersten Tag mitbringt — Gerüst, Werkzeuge,
-Zweige, Betrieb, Recht — steht in `references/projektstart.md`. Was dort
-am ersten Tag fehlt, fehlt in zwei Jahren immer noch. Der Befehl
-`/neo-grundregeln:neo-projektstart` prüft ein bestehendes Repository
-dagegen und berichtet den Fehlbestand.
+- `/neo-grundregeln:neo-selbstkontrolle` — den aktuellen Arbeitsstand
+  gegen diese Regeln prüfen und berichten.
+- `/neo-grundregeln:neo-projektstart` — ein Repository gegen die
+  Projektstartliste prüfen und den Fehlbestand berichten.
 
 Zugehörige Skills: `neo-design` (Gestaltung, Bedienung,
-Barrierefreiheit), `neo-komponenten` (Wrapper-Komponenten),
-`neo-doku` (Dokumentation), `neo-deployment` (Zweige, Auslieferung),
-`neo-contao` (Contao-Websites), `neo-betrieb` (Sicherung, Notfall,
-Umzug), `neo-ki` (KI im Produkt), `neo-recht` (Pflichtseiten,
-Löschkonzept), `neo-api` (Schnittstellen), `neo-code` (Codeaufbau),
-`neo-sicherheit` (Sicherheit, Release, riskante Umbauten).
+Barrierefreiheit), `neo-komponenten` (Wrapper-Komponenten), `neo-doku`
+(Dokumentation), `neo-deployment` (Zweige, Auslieferung), `neo-contao`
+(Contao-Websites), `neo-betrieb` (Sicherung, Notfall, Umzug), `neo-ki`
+(KI im Produkt), `neo-recht` (Pflichtseiten, Löschkonzept), `neo-api`
+(Schnittstellen), `neo-code` (Codeaufbau), `neo-sicherheit` (Sicherheit,
+Release, riskante Umbauten).

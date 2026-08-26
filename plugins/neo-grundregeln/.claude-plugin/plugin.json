@@ -1,7 +1,7 @@
 {
   "name": "neo-grundregeln",
   "displayName": "NEO Grundregeln",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "Verbindliche Arbeitsregeln der NEO Digital für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, Selbstkontrolle und Auswirkungsanalyse vor dem nächsten Schritt, Frameworktreue, rechtliche Pflichtbausteine, Testpflichten, Git-Hygiene, kein Direkt-Push auf dev oder main. Enthält die Projektstartliste und den Befehl /neo-grundregeln:neo-projektstart. Kernregeln werden über einen SessionStart-Hook in jede Sitzung geladen.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"
