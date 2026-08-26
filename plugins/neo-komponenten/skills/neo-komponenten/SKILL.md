@@ -5,41 +5,55 @@ description: >
   bevor ein Screen, eine View, ein Dialog, ein Widget oder eine
   UI-Komponente gebaut oder geändert wird — egal ob Nuxt/Vue,
   Flutter/Material oder Angular/Material. Regelt Wrapper-Komponenten
-  (Neo*, LeoFlex*), ihre Benennung, den Pflichtkatalog, Größen über eine
-  benannte Skala, Farbe und Sprache in der Komponente, Frameworktreue,
-  Design-Tokens, Interaktionskonventionen und Wächter-Tests.
+  (Neo*, LeoFlex*), ihre Benennung, den Pflichtkatalog, den Vertrag einer
+  Komponente, Größen über eine benannte Skala, Farbe und Sprache in der
+  Komponente, Frameworktreue, den Umgang mit bestehenden Bibliotheken,
+  Interaktionskonventionen und den Wächter-Test, der das maschinell
+  durchsetzt.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitt 1, ADR 0002, web/admin/test/guard.spec.ts), Stand 2026-08
 ---
 
 # NEO-Komponenten-Grundsatz
 
-## Kernregel: Views kennen nur die eigenen Komponenten
+## Wie diese Regeln zu lesen sind
 
-- Jedes wiederkehrende Oberflächenelement ist eine eigene
-  Wrapper-Komponente mit dem Präfix der Produktfamilie: **Neo*** bei
-  NEO-Digital-Anwendungen, **LeoFlex*** bei LeoFlex. Das gilt für
-  **alles**: jeden Buttonstil, jedes Eingabefeld, jede Tabelle, jeden
-  Schalter, jeden Dialog, jeden Inhaltsblock, jede Überschrift, den
-  Logobereich, die Werkzeugleiste, die Kopfzeile, die Fußzeile, die
-  Seitenleiste, das Navigationsmenü, das Benutzermenü, die
-  Meldungsleiste — und die gesamte AppShell.
-- **Views kennen das Designframework nicht.** Nuxt UI, Vuetify,
-  Material, Angular Material und wie sie heißen kommen in einer View
-  nicht vor: kein Import, kein Framework-Element, kein gestaltendes
-  HTML-Element, keine Utility-Klasse, kein `style`-Attribut, keine
-  Farbkonstante, keine erfundene Maßzahl.
-- Erlaubt sind in Views: Komponenten der Familie, Verzweigungen und
-  Schleifen, Slots, Bindungen.
-- Komponenten dürfen und sollen andere Komponenten der Familie
-  verwenden. Eine Buttongruppe nutzt die Buttons, ein Bestätigungsdialog
-  die Dialog-Hülle, die AppShell die Kopfzeile.
-- Auch das Gesamtlayout gibt eine Komponente vor (AppShell): derselbe
-  Block steht nicht in View A links und in View B rechts.
-- Gleiche Fläche mit anderen Daten = dieselbe Komponente mit Parametern.
-- Fehlt eine Komponente, wird sie gebaut — **kein generischer Ersatz,
-  keine lokale Variante.** Eine View, die ein rohes Element braucht,
-  deckt eine fehlende Komponente auf.
+| Wort | Bedeutung |
+| --- | --- |
+| **Nie**, **immer**, **muss** | Verbindlich. Ein Verstoß ist ein **Blocker**: der Wächter-Test schlägt fehl, der Merge wird zurückgewiesen. |
+| **Ausnahme** | Nur als Eintrag in der Positivliste des Wächters, mit Begründung, freigegeben vom Projektinhaber. **Es gibt keine Ausnahme, die nicht im Wächter steht** — genau das macht sie im Diff sichtbar. |
+| **Sollte** | Begründet abweichbar, die Abweichung wird gemeldet. |
+
+## Die Kernregel
+
+> **Views kennen nur die eigenen Komponenten.**
+
+Jedes wiederkehrende Oberflächenelement ist eine eigene
+Wrapper-Komponente mit dem Präfix der Produktfamilie: **Neo*** bei
+NEO-Digital-Anwendungen, **LeoFlex*** bei LeoFlex.
+
+Das gilt für **alles**, ohne Ausnahme: jeden Buttonstil, jedes
+Eingabefeld, jede Tabelle, jeden Schalter, jeden Dialog, jeden
+Inhaltsblock, jede Überschrift, den Logobereich, die Werkzeugleiste, die
+Kopfzeile, die Fußzeile, die Seitenleiste, das Navigationsmenü, das
+Benutzermenü, die Meldungsleiste — und die gesamte AppShell.
+
+**Views kennen das Designframework nicht.** In einer View kommen nicht
+vor:
+
+| Nie in einer View | Warum |
+| --- | --- |
+| Ein Import aus Nuxt UI, Vuetify, Material, Angular Material | Der Framework-Wechsel wandert sonst in jede View |
+| Ein gestaltendes HTML-Element: `div`, `span`, `section`, `button`, `input`, `table`, `ul`, `p`, `h1`–`h6` | Es trägt Gestaltung, die niemand zentral ändern kann |
+| Ein `class`- oder `style`-Attribut | Dasselbe |
+| Eine Farbkonstante: `#rgb`, `rgb(`, `hsl(`, benannte Farben | Farbe lebt im Token, nicht in der View |
+| Eine Maßzahl mit Einheit außerhalb einer Token-Referenz | Maße leben in der Skala |
+
+Erlaubt sind in Views: Komponenten der Familie, Verzweigungen und
+Schleifen, Slots, Bindungen — sonst nichts.
+
+**Fehlt eine Komponente, wird sie gebaut.** Kein generischer Ersatz,
+keine lokale Variante, kein „nur dieses eine Mal".
 
 **Warum:** Eine Designänderung passiert an genau einer Stelle. Ein
 Wechsel der Designbasis — Nuxt UI auf Vuetify, Material 3 auf einen
@@ -49,8 +63,8 @@ Dialog B.
 
 ## Was die Komponente selbst trägt
 
-Die Komponente ist der einzige Ort, an dem diese Dinge stehen. Keiner
-davon gehört in eine View:
+Die Komponente ist der **einzige** Ort für diese Dinge. Keiner davon
+gehört in eine View:
 
 | Gehört in die Komponente | Bleibt Aufgabe der View |
 | --- | --- |
@@ -77,7 +91,7 @@ Beispiel `NeoFormButtonDelete`:
 
 - Besteht nur aus dem Löschsymbol, Seitenverhältnis 1:1.
 - Standardgröße `xl`, über die Eigenschaft `size` auf `md` oder eine
-  andere Stufe der Skala verkleinerbar — nie über CSS in der View.
+  andere Stufe der Skala verkleinerbar — **nie über CSS in der View**.
 - Trägt die Fehlerfarbe für Hell und Dunkel selbst.
 - Trägt ihren zugänglichen Namen selbst; die View liefert höchstens noch,
   **was** gelöscht wird.
@@ -87,8 +101,8 @@ Beispiel `NeoFormButtonDelete`:
 Die View schreibt damit nur noch, dass hier gelöscht wird — nicht wie das
 aussieht, wie es heißt, welche Farbe es hat und ob nachgefragt wird.
 
-Dieselbe Bauart gilt für die anderen wiederkehrenden Handlungen:
-Anlegen, Bearbeiten, Speichern, Abbrechen, Duplizieren, Exportieren.
+Dieselbe Bauart für die anderen wiederkehrenden Handlungen: Anlegen,
+Bearbeiten, Speichern, Abbrechen, Duplizieren, Exportieren.
 
 ## Eine kleine Auswahl statt jeder Framework-Variante
 
@@ -97,24 +111,20 @@ eine **festgelegte, kleine Auswahl** — und für jede davon eine getrennte
 Komponente.
 
 - Der Kanon wird einmal festgelegt und in der Regeldatei des Projekts
-  benannt: die Rollen (etwa primär, sekundär, geist, gefährlich) plus die
+  benannt: die Rollen (primär, sekundär, geist, gefährlich) plus die
   handlungsspezifischen Komponenten.
-- Eine neue Variante ist eine Entscheidung des Projektinhabers, keine
-  Nebenwirkung einer View. Wer eine braucht, legt sie vor und begründet
-  sie.
+- **Eine neue Variante ist eine Entscheidung des Projektinhabers**, keine
+  Nebenwirkung einer View.
 - Getrennte Komponenten statt einer Komponente mit vielen Schaltern: eine
-  Komponente mit acht Wahrheitswerten ist ein Framework im Framework und
-  läuft genauso auseinander wie rohe Elemente.
+  Komponente mit acht Wahrheitswerten ist ein Framework im Framework.
 
 ## Größen über eine benannte Skala
 
-- Größen heißen `xs`, `sm`, `md`, `lg`, `xl` — nicht 34, nicht `2rem`.
+- Größen heißen `xs`, `sm`, `md`, `lg`, `xl` — **nie** 34, nie `2rem`.
 - Die Komponente legt ihre **Standardgröße** fest. Die View darf sie über
-  die Eigenschaft `size` auf eine andere Stufe der Skala setzen, sonst
-  nichts.
-- Die Stufen sind projektweit dieselben und kommen aus den Tokens. Eine
-  Komponente, die eigene Zahlen erfindet, bricht das System.
-- Kein `width`, kein `height`, kein `margin` von außen. Wer eine
+  `size` auf eine andere Stufe der Skala setzen, sonst nichts.
+- Die Stufen sind projektweit dieselben und kommen aus den Tokens.
+- **Kein `width`, kein `height`, kein `margin` von außen.** Wer eine
   Komponente von außen zurechtschiebt, hat die falsche Komponente.
 
 ## Benennung
@@ -129,79 +139,34 @@ NeoShellSidebar          Neo · Shell · Sidebar
 LeoFlexFeedbackToast     LeoFlex · Feedback · Toast
 ```
 
-Der Bereich ist zugleich der Ordner. Gleiches liegt beieinander, und der
-Name verrät ohne Suche, wo die Datei liegt. Pflichtkatalog, Bereiche und
-die Frage, wann eine neue Komponente entsteht: `references/katalog.md`.
-
-## Bestehende Komponentenbibliotheken
-
-- Eine bestehende, produktive Wrapper-Bibliothek (z. B. LeoFlex*) NIE
-  ohne vorherige, ausdrückliche Freigabe des Projektinhabers
-  umschreiben. Erlaubt ist höchstens: Regeln verschärfen und optimieren —
-  mit Begründung und Freigabe.
-- In jungen, noch nicht weit fortgeschrittenen Anwendungen darf Claude
-  nach Freigabe umbauen, was für den Grundsatz nötig ist.
-- Definiert ein bestehender Screen das Muster schon: Struktur und Aufbau
-  übernehmen, keine lokale Variante erfinden. Fehlt eine
-  Komponenten-Definition: keinen generischen Ersatz erfinden —
-  nachfragen.
-
-## Frameworktreue innerhalb der Komponenten
-
-- Rangfolge beim Bauen einer Komponente: Original-Komponente des
-  Frameworks → bestehender Projekt-Wrapper → Layout-Utilities → eigenes
-  CSS/Styling nur als letzter, begründeter Ausweg.
-- Nie nachbauen, was das Framework liefert: keine handgebauten Buttons,
-  Dialoge, Tabellen, Karten. Eigene Widgets nur dort, wo das Framework
-  keine Komponente hat — und auch dort nur aus Original-Tokens und
-  Original-Typografierollen zusammengesetzt.
-- Keine erfundenen Werte: Farben ausschließlich über Design-Tokens bzw.
-  Theme-Rollen (keine Hex-Werte, kein rgba, keine Opacity-Tricks),
-  Radien, Abstände und Schriftgrößen nur aus der Skala des
-  Design-Systems.
-- Keine dekorativen Verläufe, Schattensysteme oder Animationssysteme,
-  keine Ad-hoc-Designexperimente.
-- Vor Änderungen an geteilten Primitiven die Design-System-Doku des
-  Projekts lesen. Existiert ein Dokumentations-MCP oder eine
-  Offline-Referenz der UI-Library (llms.txt, Token-Export): exakte Props,
-  Parameter und Werte nachschlagen, dann bauen — nicht raten.
-- Liegt eine Design-Referenz vor (Design-Set, Klickprototyp, Screenshot):
-  sie pixelnah umsetzen statt improvisieren — aber nur mit
-  Original-Werten des Design-Systems.
+Der Bereich ist zugleich der Ordner.
 
 ## Interaktionskonventionen
 
-- **Destruktive Aktionen nie still:** Löschen, Entfernen, Stornieren
-  verlangen immer einen Bestätigungsdialog, der die Folge benennt.
-  Auslösender und bestätigender Knopf tragen die Fehlerfarbe; die
-  Fehlerfarbe ist für Zerstörendes reserviert.
+- **Destruktive Aktionen nie still.** Löschen, Entfernen, Stornieren
+  verlangen einen Bestätigungsdialog, der die Folge benennt. Auslösender
+  und bestätigender Knopf tragen die Fehlerfarbe; **die Fehlerfarbe ist
+  für Zerstörendes reserviert**.
 - **Jede Aktion sagt, dass sie stattgefunden hat.** Ein Formular, das auf
   Speichern hin still bleibt, sieht aus wie ein defektes.
-- Harte Fehler = blockierender Dialog. Toasts/Snackbars nur für Erfolg
-  und Information. Kein Auto-Dismiss für Inhalte, die der Nutzer lesen
-  muss.
-- Zustand nie nur über Farbe anzeigen — immer Symbol plus Wort.
+- Harte Fehler = blockierender Dialog. Kurzmeldungen nur für Erfolg und
+  Information. Kein Selbstschließen für Inhalte, die gelesen werden
+  müssen.
+- **Zustand nie nur über Farbe** — immer Symbol plus Wort.
 - Tabellen brauchen Suche, Filter, Seitennavigation und einen
-  Leer-Zustand.
+  Leer-Zustand (Grenzen in `references/komponentenbau.md`).
 - Sentence case, keine Emojis in der Oberfläche.
 
-Gestaltung, Eingabeführung, Barrierefreiheit und Verhalten auf allen
-Bildschirmgrößen regelt der Skill `neo-design`.
+## Die Bereiche
 
-## Durchsetzung
+| Bereich | Referenz |
+| --- | --- |
+| Pflichtkatalog, Bereiche, wann eine Komponente entsteht, Anti-Muster | `references/katalog.md` |
+| Der Vertrag einer Komponente: Eigenschaften, Slots, Ereignisse, Zustände, Zugänglichkeit, Tests | `references/komponentenbau.md` |
+| Der Wächter-Test: Regelliste, Algorithmus, Ausnahmeführung, CI | `references/waechter.md` |
+| Bestehende Bibliotheken, Migration, Frameworkwechsel | `references/bestandsbibliothek.md` |
+| Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 
-- Wo das Projekt es erlaubt, erzwingt ein Wächter-Test oder eine
-  Lint-Regel die Kernregel maschinell: der Wächter schlägt fehl, wenn
-  eine View ein rohes Framework-Widget, ein gestaltendes HTML-Element,
-  ein `class`- oder `style`-Attribut, eine Farbkonstante, eine erfundene
-  Maßzahl oder einen Import außerhalb der eigenen Komponenten enthält.
-  Vorbild: `web/admin/test/guard.spec.ts` in NEO Uptime.
-- Ausnahmen stehen als Positivliste **im Wächter selbst**, je Eintrag mit
-  Begründung. Ein neuer Eintrag ist eine Änderung am Wächter und damit
-  sichtbar im Diff — genau das ist der Zweck. Neue Ausnahmen brauchen
-  eine Freigabe.
-- Jede Komponente und jede View bringt Oberflächen-Funktionstests mit:
-  jedes Bedienelement per Test auslösen und das beobachtbare Ergebnis
-  prüfen (Details: Skill `neo-grundregeln`, Abschnitt Tests).
-- Der Komponenten-Grundsatz gehört als Entscheidungsakte (ADR) und als
-  Abschnitt in die Regeldatei des Projekts, mit Verweis auf den Wächter.
+Gestaltung, Eingabeführung, Barrierefreiheit, Verhalten auf allen
+Bildschirmgrößen und der Abgleich mit dem Designsystem: Skill
+`neo-design`.

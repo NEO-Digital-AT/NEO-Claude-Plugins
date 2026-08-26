@@ -2,125 +2,112 @@
 name: neo-sicherheit
 description: >
   NEO-Sicherheitsregeln (EU-CRA-orientiert). Diesen Skill laden bei:
-  neuen oder geänderten Endpoints, Authentifizierung/Autorisierung,
-  Secrets und Tokens, Logging, Datenbank- und Migrationsarbeit,
-  Datei-Import/-Export, Webhooks, Zahlungs- oder anderen hochsensiblen
-  Daten, Container-/Deployment-Änderungen, Abhängigkeits-Updates,
-  Releases sowie riskanten Umbauten bestehender Systeme
-  (Schatten-/Paritätsbetrieb).
+  neuen oder geänderten Endpoints, Authentifizierung und Autorisierung,
+  Sessions, Tokens und Scopes, Secrets, Logging und Audit,
+  Mandantentrennung, Datenbank- und Migrationsarbeit,
+  Datei-Import und -Export, Webhooks, Zahlungs-, Gesundheits- oder
+  Ausweisdaten, Frontend- und Container-Härtung, Sicherheitskopfzeilen,
+  Abhängigkeits-Updates und Lieferkette, Releases, Schwachstellenmeldungen
+  sowie riskanten Umbauten bestehender Systeme (Schatten- und
+  Paritätsbetrieb).
 metadata:
   herkunft: NEO Digital — destilliert aus den LeoFlex-Sicherheitsregelwerken (CRA-Baseline), Stand 2026-08
 ---
 
 # NEO-Sicherheitsregeln
 
-Baseline-Referenzen: EU Cyber Resilience Act (CRA), OWASP ASVS, OWASP
-Top 10, CWE Top 25, Least Privilege, Zero Trust für privilegierte
-Operationen. Ehrlichkeitsregel: „CRA-konform" nie behaupten — ohne
-Produktklassifizierung, Risikoanalyse, technisches Doku-Paket,
-SBOM-Automatisierung und Release-Evidenz ist es nur eine an CRA
-orientierte Engineering-Baseline.
+Grundlagen: EU Cyber Resilience Act (CRA), OWASP ASVS, OWASP Top 10,
+CWE Top 25, Least Privilege, Zero Trust für privilegierte Operationen.
 
-Bei Konflikt zwischen Geschwindigkeit und Produktionssicherheit gewinnt
-immer die Produktionssicherheit.
+**Bei Konflikt zwischen Geschwindigkeit und Produktionssicherheit gewinnt
+immer die Produktionssicherheit.** Ohne Ausnahme, ohne Termindruck-Rabatt.
+
+## Wie diese Regeln zu lesen sind
+
+| Wort | Bedeutung |
+| --- | --- |
+| **Nie**, **immer**, **muss** | Verbindlich. Ein Verstoß ist ein **Blocker**: die Arbeit gilt als nicht fertig, ein Merge wird zurückgewiesen, ein Release findet nicht statt. |
+| **Ausnahme** | Nur mit ausdrücklicher, dokumentierter Freigabe des Projektinhabers — vermerkt an der betroffenen Stelle im Code **und** in der Sicherheitsdoku, mit Grund und Datum. **Ohne diesen Vermerk gibt es keine Ausnahme**, auch wenn sie mündlich erteilt wurde. |
+| **Sollte** | Begründet abweichbar. Die Abweichung wird gemeldet, nicht stillschweigend genommen. |
+
+Diese Konvention gilt in allen Referenzdateien dieses Skills.
+
+## Ehrlichkeitsregel
+
+**„CRA-konform", „sicher" oder „gehärtet" wird nie behauptet.** Ohne
+Produktklassifizierung, Risikoanalyse, technisches Dokumentationspaket,
+SBOM-Automatisierung und Release-Evidenz ist es eine an CRA orientierte
+Engineering-Baseline — mehr nicht. Wer mehr behauptet, macht eine
+Zusage, die niemand einlösen kann.
+
+Welche Dokumente der CRA verlangt und welche Meldefristen gelten:
+Skill `neo-recht`, `references/cra-dokumentation.md`. **Dieser Skill
+regelt, wie gebaut wird; jener, was dokumentiert und gemeldet wird.**
+
+## Die zehn harten Verbote
+
+Sie gelten überall, ohne Ausnahme und ohne Freigabeweg. Wer eines davon
+findet, behebt es sofort und meldet es unverzüglich (Kernregel 18).
+
+1. **Nie** ein Secret im Code, in committeter Konfiguration oder in einem
+   Abbild.
+2. **Nie** personenbezogene Daten, Secrets, Tokens, Kennwörter oder
+   Zahlungsdaten in einem Protokoll.
+3. **Nie** Mandanten- oder Nutzerkontext aus Body, Query oder Route —
+   ausschließlich aus authentifizierten Ansprüchen.
+4. **Nie** einen Endpoint ohne ausdrückliche, feingliedrige
+   Berechtigungsregel. „Authentifiziert" allein ist keine.
+5. **Nie** einen Localhost-, Entwicklungs- oder Kopfzeilen-Bypass für
+   geschütztes Verhalten.
+6. **Nie** eine Anfrage direkt an eine Entität binden.
+7. **Nie** eine Webhook-Signatur überspringen oder fail-open prüfen.
+8. **Nie** Karten-, Gesundheits- oder Ausweisdaten dauerhaft speichern.
+9. **Nie** ein Token im local- oder sessionStorage.
+10. **Nie** Verstecken als Schutz ausgeben: ein unverlinkter Endpoint,
+    eine ausgeblendete Navigation oder eine geratene Adresse ersetzen
+    keine serverseitige Autorisierung. Eine WAF ist zusätzliche
+    Verteidigung, nie die erste.
 
 ## Security by Design
 
-- Sicherheit ist nie nachträglich: jede Methode, jeden Endpoint und jede
-  Datenbankoperation von Anfang an mit Sicherheitsblick bauen.
-- Nutzer- und Mandantenkontext kommt ausschließlich aus authentifizierten
-  Claims — nie aus Body- oder Query-Parametern. Durchsetzung liegt in
-  den Services, nicht nur in Controllern oder im Frontend;
-  Frontend-Guards sind Bedienkomfort, das Backend ist die einzige
-  Autorität für Berechtigungen.
-- Jeder Endpoint bekommt eine explizite, granulare Berechtigungs-Policy —
-  kein nacktes „authentifiziert". Geschützte Operationen dokumentieren
-  Auth-Modus und benötigte Rechte in der API-Beschreibung.
-- Requests nie direkt an Entities binden (Mass-Assignment-Schutz über
-  DTOs); ungültige Payloads nie still akzeptieren.
-- Webhook-Signaturen fail-closed prüfen. Idempotenz bei allem, was
-  wiederholt eintreffen kann. Rate Limiting global und nicht umgehbar.
-- Re-Authentifizierung vor destruktiven oder hochprivilegierten Aktionen.
-  Dauerhafte Tokens und Onboarding-/Consent-Flüsse nur für Admin-Rollen.
-- **Verbotene Abkürzungen:** keine Localhost-Bypässe für geschütztes
-  Verhalten, keine Fallbacks, die Sicherheit außerhalb der Entwicklung
-  schwächen, funktionierende Auth-Flows nie neu erfinden, Scope-Checks
-  und Mandantentrennung nie aufweichen. Verstecken ist kein Schutz:
-  versteckte Endpoints oder ausgeblendete Navigation ersetzen nie
-  serverseitige Autorisierung. Eine WAF ist nur zusätzliche Verteidigung.
+Sicherheit ist nie nachträglich. Jede Methode, jeder Endpoint und jede
+Datenbankoperation entsteht von Anfang an mit Sicherheitsblick.
 
-## Secrets und Logging
+- **Das Backend ist die einzige Autorität für Berechtigungen.**
+  Durchsetzung liegt in den Diensten, nicht nur in Controllern und nicht
+  im Frontend. Frontend-Prüfungen sind Bedienkomfort.
+- **Deny-by-default:** was seine Autorisierung nicht ausdrücklich
+  deklariert, ist geschlossen (Skill `neo-api`).
+- **Idempotenz** bei allem, was wiederholt eintreffen kann.
+- **Re-Authentifizierung** vor destruktiven und hochprivilegierten
+  Aktionen.
+- **Funktionierende Auth-Flüsse werden nie neu erfunden.** Wer einen
+  bestehenden Anmeldeweg umbaut, legt vorher einen Plan vor.
 
-- Secrets nie im Code, nie in committeter Konfiguration, nie in Images:
-  nur Umgebungs-Konfiguration oder ein Verschlüsselungsdienst. Rotation
-  muss ohne Codeänderung möglich sein.
-- Logs enthalten nie personenbezogene Daten, Secrets, Tokens, Passwörter
-  oder Zahlungsdaten. Strukturierte Sicherheits-Logs; Audit-Logs sind aus
-  Anwendungssicht unveränderlich.
-- Jeder Request erhält eine Korrelations-Kennung: sie geht an den
-  Aufrufer zurück, steht in jeder Fehlerantwort und ist in den Logs
-  suchbar.
+## Die Bereiche
 
-## Hochsensible Daten
+| Bereich | Referenz |
+| --- | --- |
+| Identität, Autorisierung, Sessions, Tokens, Mandantentrennung | `references/authentifizierung.md` |
+| Secrets, Rotation, Protokollierung, Audit, Korrelationskennung | `references/secrets-und-logging.md` |
+| Hochsensible Daten, Verschlüsselung, Export, Redaktionstests | `references/daten.md` |
+| Frontend, Sicherheitskopfzeilen, Container, Netz | `references/haertung.md` |
+| Abhängigkeiten, SBOM, CI-Tore, Release-Evidenz, Schwachstellenmeldungen, riskante Umbauten | `references/lieferkette-und-release.md` |
+| Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 
-Karten-, Gesundheits- und Ausweisdaten nie persistieren — nicht in
-Tabellen, Roh-Payloads, Queues, Job-Details, Logs, Fehlerantworten oder
-Exporten. Klardaten existieren nur transient im Speicher für genau einen
-Aufruf. Verarbeitung nur in isolierten Pfaden (kein öffentlicher Ingress,
-nur Allowlist-Egress). Vor Freigabe eines solchen Pfads:
-Redaktionstests über alle Ausgabekanäle.
+## Eskalation
 
-## Frontend- und Container-Härtung
+- Eine **harte Sicherheitslücke** wird sofort behoben und unverzüglich
+  gemeldet — sie ist die einzige Änderung, die ohne vorherige Freigabe
+  beginnen darf (Kernregel 1).
+- Sofort eskaliert wird bei: aktiver Ausnutzung, kompromittierten
+  Zugangsdaten, betroffenen Zahlungsdaten, Abfluss über die
+  Mandantengrenze.
+- **Ein Verdacht wird gemeldet, nicht erst der Beweis.** Wer wartet, bis
+  er sicher ist, meldet zu spät.
+- Meldewege nach außen und deren Fristen: Skill `neo-recht`.
 
-- Frontend: keine Tokens in local-/sessionStorage (HttpOnly-Cookies),
-  CSP, HSTS, nosniff, restriktive Referrer- und Permissions-Policy,
-  CSRF-Schutz für zustandsändernde Requests, keine ungeprüften
-  HTML-Injection-Senken (v-html, innerHTML, eval, dynamische Scripts).
-- Ruhende Daten verschlüsseln, wo die Plattform es vorsieht (z. B.
-  SQLCipher/Keystore auf Geräten).
-- Container: non-root, minimales Image, keine unnötigen Capabilities,
-  no-new-privileges, möglichst read-only Dateisystem, Healthcheck,
-  Builds aus Lockfiles, Basis-Images gepinnt.
-
-## Lieferkette
-
-- Reproduzierbare Installationen aus Lockfiles; Abhängigkeits-Audit als
-  Release-Gate. Keine bekannten mittleren oder höheren Schwachstellen
-  ohne explizite, dokumentierte Risikoakzeptanz.
-- Updates klein, nachvollziehbar und getestet. SBOM erzeugen, wo die
-  Pipeline es vorsieht.
-
-## Riskante Umbauten: Schatten-/Paritätsbetrieb
-
-Für Umbauten an tragenden, produktiven Teilen gilt das Paritätsmuster:
-
-1. Neue Komponente zuerst inaktiv (dormant) ausliefern; Datenmodell und
-   Invarianten validieren.
-2. Schatten- oder Brückenbetrieb: die neue Komponente läuft parallel zum
-   Bestand mit, ihre Ergebnisse werden verglichen, nicht verwendet.
-3. Umschalten erst nach nachgewiesener Parität — Scheibe für Scheibe,
-   nie alles auf einmal.
-4. Querschnitts-Refactorings nie auf einem unfertigen Feature-Branch,
-   sondern von einem stabilen, getesteten Stand aus.
-
-## Meldungen und Release-Evidenz
-
-- Für jede glaubwürdige Schwachstellenmeldung einen internen Eintrag
-  anlegen. Der Eintrag enthält: Eingang, betroffene Komponente und
-  Versionen, Auswirkung und Ausnutzbarkeit, Folgen für Kundendaten und
-  Mandantentrennung, Verantwortlichen, Patch- und Offenlegungszeitplan,
-  Entscheidung über Meldepflichten. Sofort eskalieren bei aktiver
-  Ausnutzung, Credential-Kompromittierung, Zahlungsdaten oder
-  Mandanten-Datenabfluss.
-- Je Release ein Evidenzpaket, soweit die Pipeline es hergibt:
-  Quell-Revision und Image-Digest, Scan-Ergebnisse, SBOM,
-  Testergebnisse, Build- und Start-Logs, Migrations- und
-  Rollback-Notizen, bekannte Schwachstellen mit Risikoakzeptanz.
-- CI-Gates verbindlich: Lint, Tests, Produktions-Build, Security-Scan,
-  Dependency-Check.
-- **Die Meldung nach außen ist geregelt, nicht improvisiert.** Welche
-  Dokumente der CRA verlangt und welche Fristen gelten — Meldepflicht
-  nach Artikel 14 ab 11.09.2026, Frühwarnung 24 Stunden, ausführliche
-  Meldung 72 Stunden, Abschlussbericht 14 Tage bzw. 1 Monat — steht im
-  Skill `neo-recht`, `references/cra-dokumentation.md`. Dieser Skill
-  regelt, wie gebaut wird; jener, was dokumentiert und gemeldet wird.
+Zugehörige Skills: `neo-api` (Endpoints, Autorisierung, Rate Limiting),
+`neo-recht` (CRA-Dokumente, Meldefristen, Datenschutz), `neo-betrieb`
+(Sicherung, Notfall), `neo-code` (Codeaufbau), `neo-deployment`
+(Zweigschutz, Ausrollung), `neo-grundregeln` (Prozess, Freigabe).
