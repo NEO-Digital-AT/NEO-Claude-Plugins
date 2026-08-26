@@ -26,14 +26,23 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 Nur wenn ein Designsystem, ein Artboard oder ein freigegebener
 Klickprototyp vorliegt.
 
-- [ ] Referenzaufnahmen liegen unter `design/referenz/` im Repository.
-- [ ] Referenz und gebaute Ansicht mit identischem Sichtfeld,
-      Bildmaßstab und identischen Bedingungen aufgenommen.
-- [ ] Bildabgleich je Fassung gelaufen (hell, dunkel, mobil), Zahl
-      berichtet: Bausteine ≤ 0,5 %, ganze Ansicht ≤ 2 %.
+- [ ] Marker (`data-abgleich`) auf beiden Seiten gesetzt, benennen die
+      Rolle des Elements.
+- [ ] Referenzmessung und Referenzaufnahme liegen unter
+      `design/referenz/` im Repository.
+- [ ] Referenz und gebaute Ansicht unter identischen Bedingungen
+      gemessen (Sichtfeld, Bildmaßstab, Farbschema, Sprache, Schriften).
+- [ ] **Layoutabgleich je Zustand und Fassung: 0 Abweichungen** bei 1 px
+      Toleranz — Ruhe, Hover, Fokus, Deaktiviert, Fehler, hell und dunkel.
+- [ ] Stilabgleich gelaufen: **null Funde**.
+- [ ] Bildabgleich auf dem Bausteine-Artboard höchstens 0,5 Prozent; bei
+      Ansichten mit echten Daten nur mit ausgenommenen Inhaltsbereichen.
 - [ ] Das Unterschiedsbild wurde **angesehen**, nicht nur die Zahl
       gelesen; markierte Bauteile sind benannt.
-- [ ] Stilabgleich gelaufen: **null Funde**.
+- [ ] Kein Befund entsteht aus abweichendem **Inhalt** — Feldwerte und
+      Listeneinträge sind dynamisch und werden nicht verglichen.
+- [ ] Statische Oberflächentexte nur mitverglichen, wenn der
+      Projektinhaber es verlangt hat.
 - [ ] Tokens wurden übernommen, nicht abgetippt.
 - [ ] Kein Code aus dem Designsystem in ein anderes Framework kopiert.
 

@@ -32,8 +32,9 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   `references/eingaben.md` — was nicht eingegeben werden kann, kann nicht
   falsch sein.
 - **Wenn ein Designsystem vorliegt:** `/neo-design:neo-designabgleich` —
-  fertig heißt gemessen, nicht behauptet. Bildabgleich unter der
-  Schwelle **und** null erfundene Werte im Stilabgleich.
+  fertig heißt gemessen, nicht behauptet. Verglichen wird das Aussehen
+  und das Verhalten, nicht der Inhalt: null Abweichungen im
+  Layoutabgleich, null erfundene Werte im Stilabgleich.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -136,6 +137,7 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
 | `kontrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
+| `layoutabgleich.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `markierung.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |

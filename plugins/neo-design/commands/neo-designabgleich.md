@@ -1,9 +1,10 @@
 ---
-description: Gebaute Oberfläche gegen das Designsystem messen — Bildabgleich und Stilabgleich, mit Zahlen statt Einschätzung
+description: Gebaute Oberfläche gegen das Designsystem messen — Layout, Stil und Bild, mit Zahlen statt Einschätzung
 ---
 
-Miss die gebaute Oberfläche gegen das Designsystem. **Zwei Prüfungen,
-beide müssen bestehen.** Ohne Zahlen gilt nichts als geprüft.
+Miss die gebaute Oberfläche gegen das Designsystem. **Verglichen wird
+das Aussehen und das Verhalten, nicht der Inhalt.** Ohne Zahlen gilt
+nichts als geprüft.
 
 Lade zuerst den Skill `neo-design` und
 `references/designsystem-abgleich.md`.
@@ -12,74 +13,89 @@ Lade zuerst den Skill `neo-design` und
 
 Kläre, falls es nicht im Projekt steht:
 
-1. Wo liegt das Designsystem (Artboards, Tokens, Referenzaufnahmen)?
+1. Wo liegt das Designsystem (Artboards, Tokens, Referenzmessungen)?
 2. Welche Ansicht wird abgeglichen, und welches Artboard entspricht ihr?
 3. Unter welcher Adresse läuft die gebaute Anwendung?
-4. Welche Fassungen sind zu prüfen — hell, dunkel, mobil?
+4. Welche Zustände und Fassungen sind zu prüfen? Vorgabe: Ruhe, Hover,
+   Fokus, Deaktiviert, Fehler, je hell und dunkel, dazu die mobile
+   Breite.
+5. **Sollen die statischen Oberflächentexte mitverglichen werden?**
+   Standard ist nein. Nur auf ausdrückliche Ansage des Projektinhabers ja.
 
-Fehlen Referenzaufnahmen unter `design/referenz/`, erzeuge sie aus den
-Artboards und melde das: sie sind ab jetzt die Abnahmegrundlage und
-gehören ins Repository.
+Fehlen Marker (`data-abgleich`) auf einer der beiden Seiten, ist das der
+erste Befund: ohne sie lässt sich nicht zuordnen, was mit was zu
+vergleichen ist. Melde es und schlage die Marker vor, statt über Rolle
+und Reihenfolge zu raten.
 
 ## Messen
 
-Für **jede** zu prüfende Fassung:
+Für **jeden** Zustand und **jede** Fassung, in dieser Reihenfolge:
 
-1. Referenz und gebaute Ansicht mit **identischem Sichtfeld, identischem
-   Bildmaßstab und identischen Bedingungen** aufnehmen
-   (`deviceScaleFactor`, `reducedMotion: 'reduce'`, Farbschema, Sprache,
-   Zeitzone, Schriften geladen). Weicht eines ab, vergleichst du zwei
-   verschiedene Dinge.
+### 1. Layoutabgleich — der wichtigste
 
-2. **Bildabgleich** mit Unterschiedsbild:
+```js
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/layoutabgleich.js' })
+const gebaut = await seite.evaluate(() => neoLayoutabgleich.messen({ nurMarkierte: true }))
+const e = neoLayoutabgleich.vergleichen(entwurf, gebaut, { toleranz: 1, nurMarkierte: true })
+```
 
-   ```
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/bildabgleich.py \
-     <referenz.png> <gebaut.png> --unterschied <diff.png> --schwelle <wert>
-   ```
+Er misst Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien,
+Schriftmaße und Farben — und liest den Text in den Feldern **nicht**.
+Erlaubt sind **0 Abweichungen** bei 1 px Toleranz.
 
-   Schwelle: **0.5** für einen Bausteine-Artboard, **2.0** für eine ganze
-   Ansicht mit echten Daten. Bereiche mit veränderlichem Inhalt mit
-   `--ignorieren x,y,b,h` ausnehmen und die Ausnahme benennen.
+Sollen Texte mit: beide Messungen mit `{ texte: true }` erzeugen und
+`vergleichen(..., { texte: true })` aufrufen.
 
-3. **Das Unterschiedsbild ansehen**, nicht nur die Zahl lesen. Benenne,
-   *welche* Bauteile magenta sind — ein halbes Prozent an der falschen
-   Stelle kann der Primärknopf sein.
+### 2. Stilabgleich
 
-4. **Stilabgleich** gegen die laufende Ansicht:
+```js
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/stilabgleich.js' })
+const b = await seite.evaluate(() => neoStilabgleich.pruefen())
+```
 
-   ```js
-   await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/stilabgleich.js' })
-   const b = await seite.evaluate(() => neoStilabgleich.pruefen())
-   ```
+Jeder Fund ist ein erfundener Wert. Erlaubt sind **null Funde**.
 
-   Jeder Fund ist ein erfundener Wert. **Erlaubt sind null Funde.**
+### 3. Bildabgleich — nur wo der Inhalt gleich ist
+
+```
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/bildabgleich.py \
+  <referenz.png> <gebaut.png> --unterschied <diff.png> --schwelle 0.5
+```
+
+Für den **Bausteine-Artboard**. Für eine Ansicht mit echten Daten
+entweder die Inhaltsbereiche mit `--ignorieren x,y,b,h` ausnehmen oder
+den Bildabgleich weglassen. **Ein roter Bildabgleich wegen abweichender
+Feldwerte ist kein Befund**, sondern ein falsch angesetztes Werkzeug —
+melde das, statt eine Zahl zu berichten, die nichts aussagt.
+
+Das Unterschiedsbild wird **angesehen**, nicht nur die Zahl gelesen.
 
 ## Berichten
 
-Je Fassung eine Zeile mit den gemessenen Zahlen:
+Je Zustand und Fassung eine Zeile:
 
 ```
-Bausteine hell    Bild 0.31 %  (Schwelle 0.5)   Stil 0 Funde    bestanden
-Bausteine dunkel  Bild 1.84 %  (Schwelle 0.5)   Stil 3 Funde    nicht bestanden
+Formular hell, Ruhe       Layout 0        Stil 0 Funde    bestanden
+Formular hell, Hover      Layout 3        Stil 0 Funde    nicht bestanden
+Bausteine dunkel, Ruhe    Layout 0        Stil 2 Funde    Bild 1.84 %   nicht bestanden
 ```
 
-Für jede nicht bestandene Fassung:
+Für jede nicht bestandene Zeile:
 
-- welche Bauteile im Unterschiedsbild markiert sind,
-- welche erfundenen Werte der Stilabgleich nennt, mit Fundstelle,
+- die Abweichungen aus dem Layoutbericht, gebündelt wie er sie liefert,
+- die erfundenen Werte aus dem Stilabgleich, mit Fundstelle,
 - die vermutete Ursache nach der Tabelle in
   `references/designsystem-abgleich.md`,
 - der Vorschlag zur Behebung.
 
 **Nichts reparieren, solange der Umfang nicht freigegeben ist.** Ist die
 Behebung freigegeben: beheben, **erneut messen**, die neuen Zahlen
-nennen. So oft, bis alle Fassungen bestehen.
+nennen. So oft, bis alle Zustände und Fassungen bestehen.
 
 Am Ende eine Zeile:
 
 - „Deckungsgleich mit dem Designsystem: ja/nein" — mit den Zahlen, nicht
   mit einer Einschätzung.
 
-Solange auch nur eine Fassung nicht besteht, lautet die Antwort nein.
-Das Wort „fertig" fällt erst danach.
+Solange auch nur ein Zustand nicht besteht, lautet die Antwort nein. Das
+Wort „fertig" fällt erst danach.
