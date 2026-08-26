@@ -1,0 +1,9 @@
+{
+  "name": "neo-ki",
+  "displayName": "NEO KI im Produkt",
+  "version": "1.0.0",
+  "description": "Regeln der NEO Digital für KI-Funktionen in eigenen Produkten: Transparenzpflichten nach Artikel 50 der EU-KI-Verordnung (seit 02.08.2026 verbindlich), Offenlegung gegenüber Nutzern, maschinenlesbare Kennzeichnung erzeugter Inhalte, Einstufung des Systems, KI-Kompetenz. Technisch: Anbieterzugriff nur serverseitig hinter einer gemeinsamen Abstraktion, Modell und Routing aus der Konfiguration, keine personenbezogenen Daten ohne Rechtsgrundlage an ein Modell, fremder Text ist Daten und nie Anweisung, Ausgaben werden geprüft statt geglaubt, Grenzen und Rückfall bei abgeschalteter Fähigkeit.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}

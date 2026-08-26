@@ -5,7 +5,8 @@ description: >
   Impressum, Offenlegung, Datenschutzerklärung, Cookie-Auflistung,
   Consent-Dialog und Einwilligungsverwaltung, Barrierefreiheitserklärung,
   Einbindung externer Dienste (Karten, Videos, Schriften, Analyse,
-  Newsletter, Chat, Schriftarten-Dienste, eingebettete Rahmen), beim
+  Newsletter, Chat, Schriftarten-Dienste, eingebettete Rahmen), bei
+  Aufbewahrungsfristen, Löschkonzept und Betroffenenrechten, beim
   Aufsetzen einer neuen Website oder Anwendung sowie bei Fragen zum EU
   Cyber Resilience Act, zur technischen Dokumentation und zum Meldeweg.
 metadata:
@@ -88,6 +89,24 @@ Fehlt eines davon, wird der Dienst nicht eingebaut. Der Vorschlag zum
 Einsatz eines Dienstes enthält diese Angaben; die Entscheidung fällt der
 Projektinhaber.
 
+## Löschen, nicht nur erklären
+
+Die Datenschutzerklärung nennt Speicherdauern — ein **Löschkonzept**
+sorgt dafür, dass sie stimmen. Je Datenart eine Frist mit Auslöser,
+danach automatisch löschen oder anonymisieren. Was von Hand gelöscht
+werden müsste, wird nie gelöscht. Betroffenenrechte müssen technisch
+bedienbar sein, nicht nur beschrieben.
+
+Verzeichnis, Konflikte mit Aufbewahrungspflichten, vergessene Orte und
+die Prüfliste: `references/loeschkonzept.md`.
+
+## KI im Produkt
+
+Setzt das Produkt KI ein, kommen die Pflichten der EU-KI-Verordnung dazu
+— die Transparenzpflichten aus Artikel 50 gelten seit **02.08.2026**.
+Einstufung, Offenlegung, Kennzeichnung und die Weitergabe von Daten an
+ein Modell: Skill `neo-ki`.
+
 ## Anwendungen und Portale: EU Cyber Resilience Act
 
 Zusätzlich zu den drei Pflichtseiten gilt für Web-, Android-, iOS- und
@@ -117,6 +136,10 @@ Konformitätserklärung.
 - [ ] Für jeden Fremddienst liegen die Angaben oben vor.
 - [ ] Schriften kommen von der eigenen Domain.
 - [ ] Bei Anwendungen: CRA-Dokumentenpaket angelegt und aktuell.
+- [ ] Löschkonzept vorhanden, Fristen decken sich mit der
+      Datenschutzerklärung, der Löschlauf läuft automatisch.
+- [ ] Bei KI-Funktionen: Offenlegung nach Artikel 50 vorhanden
+      (Skill `neo-ki`).
 
 Zugehörige Skills: `neo-design` (Barrierefreiheit im Bau, Messwerte),
 `neo-sicherheit` (CRA-Technik, Secrets, Release-Evidenz), `neo-contao`

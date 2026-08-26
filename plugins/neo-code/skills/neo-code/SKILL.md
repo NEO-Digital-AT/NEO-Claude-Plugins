@@ -6,7 +6,8 @@ description: >
   Projekt angelegt wird, und bei jeder Frage nach Ordnerstruktur,
   Schichten, Benennung, Formatierung, Lint- und Analyseregeln,
   Zustandsverwaltung, Abhängigkeitsinjektion, Nebenläufigkeit oder
-  Fehlerbehandlung. Deckt .NET und C#, Vue 3 und Flutter/Dart ab, dazu
+  Fehlerbehandlung. Ebenso beim Entwurf eines Datenmodells: Tabellen,
+  Spalten, Schemata, Mandantentrennung, Indizes, Löschart, Migrationen. Deckt .NET und C#, Vue 3 und Flutter/Dart ab, dazu
   Querschnittsregeln für Zeit, Geld, Kennungen, Protokollierung und
   Konfiguration.
 metadata:
@@ -115,6 +116,12 @@ Ohne Werkzeug zerfällt jede Konvention beim ersten Termindruck.
   Diff sichtbar und freigabepflichtig.
 - Formatierung wird nie von Hand nachgezogen und nie in einem
   Fachcommit vermischt.
+
+## Datenmodell
+
+Benennung, Schemata je Modul, Mandantentrennung, Schlüssel und Indizes,
+weiches gegen hartes Löschen, Historie, Migrationen ohne Ausfall und
+Testdaten ohne echte Kundendaten: `references/datenmodell.md`.
 
 ## Querschnitt
 

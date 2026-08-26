@@ -1,0 +1,9 @@
+{
+  "name": "neo-betrieb",
+  "displayName": "NEO Betrieb",
+  "version": "1.0.0",
+  "description": "Betriebsregeln der NEO Digital: Sicherung und nachgewiesene Wiederherstellung mit Wiederanlaufzeit und hinnehmbarem Datenverlust je Projekt, Notfall und Bereitschaft mit Eskalationsstufen und Nachbereitung, E-Mail-Zustellbarkeit über SPF, DKIM und DMARC samt Bounce-Behandlung, sowie Umzug und Neuauflage einer Website mit vollständigem Weiterleitungskonzept, damit keine Sichtbarkeit verloren geht.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}

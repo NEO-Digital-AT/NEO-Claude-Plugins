@@ -176,8 +176,18 @@ Bereiche, Risiken. Erst danach mit der Arbeit beginnen.
   aus `dev`. Zweigmodell, Schutzregeln, Pflichtprüfungen und Ausrollung:
   Skill `neo-deployment`.
 
+## 8. Projektstart
+
+Was ein neues Repository am ersten Tag mitbringt — Gerüst, Werkzeuge,
+Zweige, Betrieb, Recht — steht in `references/projektstart.md`. Was dort
+am ersten Tag fehlt, fehlt in zwei Jahren immer noch. Der Befehl
+`/neo-grundregeln:neo-projektstart` prüft ein bestehendes Repository
+dagegen und berichtet den Fehlbestand.
+
 Zugehörige Skills: `neo-design` (Gestaltung, Bedienung,
 Barrierefreiheit), `neo-komponenten` (Wrapper-Komponenten),
 `neo-doku` (Dokumentation), `neo-deployment` (Zweige, Auslieferung),
-`neo-contao` (Contao-Websites), `neo-sicherheit` (Sicherheit, Release,
-riskante Umbauten).
+`neo-contao` (Contao-Websites), `neo-betrieb` (Sicherung, Notfall,
+Umzug), `neo-ki` (KI im Produkt), `neo-recht` (Pflichtseiten,
+Löschkonzept), `neo-api` (Schnittstellen), `neo-code` (Codeaufbau),
+`neo-sicherheit` (Sicherheit, Release, riskante Umbauten).

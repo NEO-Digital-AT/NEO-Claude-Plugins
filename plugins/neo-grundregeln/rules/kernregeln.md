@@ -2,15 +2,16 @@
 
 Die ausführlichen Fassungen liegen in den Skills `neo-grundregeln`,
 `neo-design`, `neo-komponenten`, `neo-doku`, `neo-deployment`,
-`neo-contao`, `neo-recht`, `neo-api`, `neo-code` und `neo-sicherheit` —
-bei passender Aufgabe den jeweiligen Skill laden.
+`neo-contao`, `neo-recht`, `neo-api`, `neo-code`, `neo-betrieb`,
+`neo-ki` und `neo-sicherheit` — bei passender Aufgabe den jeweiligen
+Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und
    Nachteilen vorlegen, Empfehlung abgeben — die Entscheidung fällt
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
    zusammenfassen und die Freigabe abwarten. Einzige Ausnahme: harte
-   Sicherheitslücken (Regel 17).
+   Sicherheitslücken (Regel 18).
 2. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
    Quellcode, offizielle Dokumentation, offizielle APIs. Fehlt eine
    Information: dokumentieren und nachfragen, nie raten. Bei fremden
@@ -94,6 +95,14 @@ bei passender Aufgabe den jeweiligen Skill laden.
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-17. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+17. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+    Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
+    Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
+    automatisch gelöscht oder anonymisiert — was von Hand gelöscht
+    werden müsste, wird nie gelöscht. Wer KI einsetzt, legt offen, dass
+    es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
+    schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
+    Modell.
+18. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.

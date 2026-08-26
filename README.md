@@ -15,7 +15,9 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb | Skill mit zwei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Agentenlesbarkeit | Skill mit drei Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
+| `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
+| `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
 | `neo-sicherheit` | EU-CRA-orientierte Baseline, Secrets, Härtung, Paritätsbetrieb, Release-Evidenz | Skill, lädt bei Sicherheits-, API-, Release-Arbeit |
 
@@ -52,6 +54,14 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Vor jeder Fertigmeldung einer Webseite:** `neo-recht` — Impressum,
   Datenschutz, Barrierefreiheitserklärung, und im Netzwerkmitschnitt
   kein fremder Host vor der Einwilligung.
+- **Bevor ein Repo entsteht:** `/neo-grundregeln:neo-projektstart` — was
+  am ersten Tag fehlt, fehlt in zwei Jahren immer noch.
+- **Bei jeder KI-Funktion:** `neo-ki` — der Assistent gibt sich zu
+  erkennen, seit 02.08.2026 verbindlich.
+- **Vor dem Livegang:** `neo-betrieb` — eine Sicherung gilt erst, wenn
+  eine Wiederherstellung protokolliert ist.
+- **Vor jeder Neuauflage einer Website:** `neo-betrieb`,
+  `references/relaunch.md` — alte Adressen erheben, bevor umgebaut wird.
 - **Vor der Abnahme:** mobil messen. Best Practices und SEO 100,
   agentisches Browsen 3/3, Leistung und Barrierefreiheit mindestens 95.
 
@@ -76,7 +86,9 @@ Danach die Plugins aktivieren — entweder über `/plugin` oder in
     "neo-api@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
+    "neo-ki@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
+    "neo-betrieb@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
     "neo-sicherheit@neo-claude-plugins": true
   }
@@ -102,16 +114,19 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
     "neo-api@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
+    "neo-ki@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
+    "neo-betrieb@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
     "neo-sicherheit@neo-claude-plugins": true
   }
 }
 ```
 
-`neo-contao` und `neo-deployment` dürfen in Projekten weggelassen werden,
-die weder Contao einsetzen noch ein Zweigmodell mit `dev` und `main`
-führen. `neo-recht` bleibt aktiv, sobald etwas veröffentlicht wird.
+`neo-contao`, `neo-deployment` und `neo-ki` dürfen in Projekten
+weggelassen werden, die weder Contao einsetzen noch ein Zweigmodell mit
+`dev` und `main` führen noch KI verwenden. `neo-recht` und `neo-betrieb`
+bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 
 ## Werkzeuge in den Plugins
 

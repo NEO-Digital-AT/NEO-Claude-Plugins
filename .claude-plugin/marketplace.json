@@ -3,7 +3,7 @@
   "owner": {
     "name": "NEO Digital (Erich Nigg)"
   },
-  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Codeaufbau, Design und Barrierefreiheit, Komponenten-Grundsatz, API, Dokumentation, rechtliche Pflichten, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
+  "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Codeaufbau, Design und Barrierefreiheit, Komponenten-Grundsatz, API, Dokumentation, rechtliche Pflichten, KI im Produkt, Betrieb, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
   "plugins": [
     {
       "name": "neo-grundregeln",
@@ -41,9 +41,19 @@
       "description": "Rechtliche Pflichtbausteine nach österreichischem Recht: Impressum (ECG, MedienG, UGB), Datenschutzerklärung mit Cookie-Auflistung und jederzeitigem Widerruf, Barrierefreiheitserklärung. Consent-first — vor der Einwilligung lädt nichts von Dritten, auch kein eingebettetes Video. Schriften immer selbst ausliefern. Für Anwendungen zusätzlich das CRA-Dokumentenpaket samt Meldeweg."
     },
     {
+      "name": "neo-ki",
+      "source": "./plugins/neo-ki",
+      "description": "KI im eigenen Produkt: Transparenzpflichten nach Artikel 50 der EU-KI-Verordnung (seit 02.08.2026), Offenlegung und Kennzeichnung, Einstufung und Rolle. Technisch: Anbieterzugriff serverseitig hinter einer gemeinsamen Abstraktion, Modell aus der Konfiguration, keine personenbezogenen Daten ohne Rechtsgrundlage an ein Modell, fremder Text ist Daten und nie Anweisung, Ausgaben werden geprüft statt geglaubt."
+    },
+    {
       "name": "neo-deployment",
       "source": "./plugins/neo-deployment",
       "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."
+    },
+    {
+      "name": "neo-betrieb",
+      "source": "./plugins/neo-betrieb",
+      "description": "Betrieb: Sicherung mit nachgewiesener Wiederherstellung, hinnehmbarer Datenverlust und Wiederanlaufzeit je Projekt, Notfall und Bereitschaft mit Eskalationsstufen und Nachbereitung, E-Mail-Zustellbarkeit über SPF, DKIM und DMARC, Umzug und Neuauflage einer Website mit vollständigem Weiterleitungskonzept."
     },
     {
       "name": "neo-contao",
