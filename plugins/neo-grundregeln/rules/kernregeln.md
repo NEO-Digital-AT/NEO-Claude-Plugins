@@ -32,10 +32,13 @@ Skill laden.
    Beschriftung und Übersetzung leben in der Komponente; Views liefern
    nur Inhalt, Ziel und Funktion. Bestehende Komponentenbibliotheken nie
    ohne Freigabe umschreiben.
-6. **Entwurf vor Oberflächenbau.** Kein Screen, kein Dialog, kein
-   Layoutumbau ohne freigegebenen Entwurf: mehrere Vorschläge, als
-   Skizze oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche
-   Freigabe — erst dann bauen.
+6. **Entwurf vor Oberflächenbau, Messung danach.** Kein Screen, kein
+   Dialog, kein Layoutumbau ohne freigegebenen Entwurf: mehrere
+   Vorschläge, als Skizze oder Screenshot vorgelegt, Änderungsrunden,
+   ausdrückliche Freigabe — erst dann bauen. Liegt ein Designsystem oder
+   ein freigegebener Entwurf vor, ist er die **Abnahmegrundlage**: das
+   Gebaute wird dagegen gemessen, mit Bildabgleich und Stilabgleich, je
+   Fassung. **Fertig heißt gemessen**, nicht behauptet.
 7. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
    falsch bedienen". Ein Freitextfeld ist die letzte Wahl: ist die Menge
    der gültigen Werte bekannt oder abfragbar, wird ausgewählt, nicht

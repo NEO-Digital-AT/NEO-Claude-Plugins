@@ -11,7 +11,9 @@ description: >
   Bedienelement für eine Eingabe richtig ist. Ebenso bei Webseiten-
   gestaltung, Animationen, Burgermenü, three.js und bei den Zielwerten
   aus PageSpeed Insights und Lighthouse (Leistung, Barrierefreiheit,
-  Best Practices, SEO, agentisches Browsen).
+  Best Practices, SEO, agentisches Browsen). Ebenso, wenn eine Oberfläche
+  gegen ein Designsystem, ein Artboard aus Claude Design oder einen
+  Klickprototyp gebaut oder abgeglichen wird.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitte 1–3, ADR 0002/0018, tools/build-tokens.py), Stand 2026-08
 ---
@@ -200,7 +202,43 @@ Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.
 Formulierungen, Fehlertext-Muster, Leerzustände und Ladehinweise:
 `references/oberflaechentexte.md`.
 
-## 9. Messwerte
+## 9. Liegt ein Designsystem vor: dagegen messen
+
+Ein Designsystem — Artboards aus Claude Design, ein Design-Set, ein
+freigegebener Klickprototyp — ist **die Abnahmegrundlage, nicht eine
+Anregung**. Es gelesen zu haben ist keine Prüfung.
+
+**Fertig heißt gemessen.** Zwei Prüfungen, beide müssen bestehen:
+
+| Prüfung | Werkzeug | Antwort |
+| --- | --- | --- |
+| **Bildabgleich** | `scripts/bildabgleich.py` | Sieht es aus wie im Entwurf? |
+| **Stilabgleich** | `scripts/stilabgleich.js` | Stammt jeder Wert aus den Tokens? |
+
+```
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/bildabgleich.py referenz.png gebaut.png   --unterschied diff.png --schwelle 0.5
+```
+
+Schwellen: Bausteine-Artboard **0,5 %**, ganze Ansicht **2 %**,
+Stilabgleich **null Funde**. Gemessen wird je Fassung — hell, dunkel,
+mobil.
+
+**Das Designsystem ist Quelle für Werte und Aussehen, nicht für Code.**
+Claude Design liefert HTML in React-Nähe; dieser Code wird nie in ein
+Vue-, Nuxt-, Flutter- oder Contao-Projekt kopiert. Übernommen werden
+Tokens, Maße, Zustände und Anordnung — gebaut wird in den
+Wrapper-Komponenten der Produktfamilie (Skill `neo-komponenten`).
+Gemessen wird gegen das Artboard.
+
+**Selbstkontrolle ist Pflicht:** nach jeder Korrektur erneut messen und
+die Zahl nennen. „Sieht gut aus" ist keine Zahl. Solange eine Fassung
+nicht besteht, ist nichts fertig.
+
+Verfahren, Referenzaufnahmen, Schwellen und die Ursachen typischer
+Abweichungen: `references/designsystem-abgleich.md`. Der Befehl
+`/neo-design:neo-designabgleich` führt die Messung durch.
+
+## 10. Messwerte
 
 Gemessen wird **mobil**, mit PageSpeed Insights bzw. Lighthouse, für
 jede Seitenvorlage — nicht nur für die Startseite.
@@ -224,7 +262,7 @@ Berichtet werden Zahlen je Seite und Kategorie. Einzelheiten, Ursachen
 und der Unterschied zwischen Feld- und Laborwerten:
 `references/messwerte.md`.
 
-## 10. Abnahme
+## 11. Abnahme
 
 Vor jeder Fertigmeldung die Liste in `references/pruefliste.md`
 durchgehen und das Ergebnis berichten. Nicht Geprüftes gilt als nicht

@@ -10,7 +10,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Tests, Git | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Vollfassung als Skill; Befehl `/neo-grundregeln:neo-selbstkontrolle` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit acht Referenzdateien, Kontrastrechner, Befehl `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit neun Referenzdateien, drei Werkzeugen, Befehle `/neo-design:neo-oberflaechenpruefung` und `/neo-design:neo-designabgleich` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Größenskala, Frameworktreue | Skill mit Katalog-Referenz, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb | Skill mit zwei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Agentenlesbarkeit | Skill mit drei Referenzdateien und der Markierungsebene für Screenshots |
@@ -31,6 +31,9 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Bevor ein Feld ein Textfeld wird:** `neo-design`,
   `references/eingaben.md` — was nicht eingegeben werden kann, kann nicht
   falsch sein.
+- **Wenn ein Designsystem vorliegt:** `/neo-design:neo-designabgleich` —
+  fertig heißt gemessen, nicht behauptet. Bildabgleich unter der
+  Schwelle **und** null erfundene Werte im Stilabgleich.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -133,6 +136,8 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
 | `kontrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
+| `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
+| `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `markierung.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken

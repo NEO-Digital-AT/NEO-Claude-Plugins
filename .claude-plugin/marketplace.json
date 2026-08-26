@@ -18,7 +18,7 @@
     {
       "name": "neo-design",
       "source": "./plugins/neo-design",
-      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Aufbau vor Optik, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K ohne horizontales Scrollen, Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Mit Kontrastrechner und dem Befehl /neo-design:neo-oberflaechenpruefung."
+      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K ohne horizontales Scrollen, Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Designsystem vor, ist es die Abnahmegrundlage: gemessen wird mit Bildabgleich und Stilabgleich. Mit Kontrastrechner und den Befehlen /neo-design:neo-oberflaechenpruefung und /neo-design:neo-designabgleich."
     },
     {
       "name": "neo-komponenten",

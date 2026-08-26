@@ -21,6 +21,22 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 - [ ] Aktionen stehen am Ort ihrer Wirkung, nicht im Kopf.
 - [ ] Höchstens zwei Verschachtelungsebenen.
 
+## Abgleich mit dem Designsystem
+
+Nur wenn ein Designsystem, ein Artboard oder ein freigegebener
+Klickprototyp vorliegt.
+
+- [ ] Referenzaufnahmen liegen unter `design/referenz/` im Repository.
+- [ ] Referenz und gebaute Ansicht mit identischem Sichtfeld,
+      Bildmaßstab und identischen Bedingungen aufgenommen.
+- [ ] Bildabgleich je Fassung gelaufen (hell, dunkel, mobil), Zahl
+      berichtet: Bausteine ≤ 0,5 %, ganze Ansicht ≤ 2 %.
+- [ ] Das Unterschiedsbild wurde **angesehen**, nicht nur die Zahl
+      gelesen; markierte Bauteile sind benannt.
+- [ ] Stilabgleich gelaufen: **null Funde**.
+- [ ] Tokens wurden übernommen, nicht abgetippt.
+- [ ] Kein Code aus dem Designsystem in ein anderes Framework kopiert.
+
 ## Komponenten
 
 - [ ] Die View verwendet ausschließlich Komponenten der Produktfamilie
