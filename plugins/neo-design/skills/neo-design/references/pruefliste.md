@@ -21,10 +21,31 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 - [ ] Aktionen stehen am Ort ihrer Wirkung, nicht im Kopf.
 - [ ] Höchstens zwei Verschachtelungsebenen.
 
-## Abgleich mit dem Designsystem
+## Bauen nach dem Designsystem
 
 Nur wenn ein Designsystem, ein Artboard oder ein freigegebener
-Klickprototyp vorliegt.
+Klickprototyp vorliegt. Verfahren: `claude-design.md`.
+
+- [ ] **Eigene Gestaltungsentscheidungen: 0.** Kein Layout, kein Abstand,
+      kein Radius, kein Schriftmaß, keine Farbe, kein Bauteil selbst
+      gewählt.
+- [ ] Das **Inventar** wurde vor der ersten Zeile Code geschrieben, aus
+      dem Artboard **gemessen** und vorgelegt.
+- [ ] Es listet **jedes** Element, nicht die wichtigen; offene Fragen
+      stehen darin und wurden beantwortet, bevor gebaut wurde.
+- [ ] Gebaut wurde **Element für Element** von oben nach unten, nach
+      jedem Element gemessen — nicht die Seite gebaut und dann verglichen.
+- [ ] Jedes Element hat einzeln bestanden, bevor das nächste begann.
+- [ ] Kein Bauteil erfunden, wo der Entwurf keins zeigt; kein Bauteil des
+      Entwurfs weggelassen.
+- [ ] Abweichungen wurden **vorgelegt**, nicht entschieden: zwei Bilder
+      nebeneinander, Maße, Grund, mindestens zwei Wege, Empfehlung.
+- [ ] Bei einer bestehenden Seite wurde die Zusammenführung **vorgelegt**,
+      nicht durchgeführt.
+- [ ] Nach dem letzten Element wurde die Seite **im Ganzen** neben dem
+      Artboard betrachtet — Rhythmus, Gewichtung, Eindruck.
+
+## Abgleich mit dem Designsystem
 
 - [ ] Marker (`data-abgleich`) auf beiden Seiten gesetzt, benennen die
       Rolle des Elements.

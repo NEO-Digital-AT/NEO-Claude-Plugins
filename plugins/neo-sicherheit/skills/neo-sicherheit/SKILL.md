@@ -47,7 +47,7 @@ regelt, wie gebaut wird; jener, was dokumentiert und gemeldet wird.**
 ## Die zehn harten Verbote
 
 Sie gelten überall, ohne Ausnahme und ohne Freigabeweg. Wer eines davon
-findet, behebt es sofort und meldet es unverzüglich (Kernregel 18).
+findet, behebt es sofort und meldet es unverzüglich (Kernregel 19).
 
 1. **Nie** ein Secret im Code, in committeter Konfiguration oder in einem
    Abbild.

@@ -32,19 +32,30 @@ Skill laden.
    Beschriftung und Übersetzung leben in der Komponente; Views liefern
    nur Inhalt, Ziel und Funktion. Bestehende Komponentenbibliotheken nie
    ohne Freigabe umschreiben.
-6. **Entwurf vor Oberflächenbau, Messung danach.** Kein Screen, kein
-   Dialog, kein Layoutumbau ohne freigegebenen Entwurf: mehrere
-   Vorschläge, als Skizze oder Screenshot vorgelegt, Änderungsrunden,
-   ausdrückliche Freigabe — erst dann bauen. Liegt ein Designsystem oder
-   ein freigegebener Entwurf vor, ist er die **Abnahmegrundlage**: das
-   Gebaute wird dagegen gemessen, mit Bildabgleich und Stilabgleich, je
-   Fassung. **Fertig heißt gemessen**, nicht behauptet.
-7. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
+6. **Entwurf vor Oberflächenbau.** Kein Screen, kein Dialog, kein
+   Layoutumbau ohne freigegebenen Entwurf: mehrere Vorschläge, als Skizze
+   oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche Freigabe —
+   erst dann bauen.
+7. **Das Designsystem gibt vor, der Agent setzt um — der Agent gestaltet
+   nicht.** Liegt ein Entwurf vor — Artboard aus Claude Design,
+   Design-Set, freigegebener Klickprototyp —, ist er **Bauvorgabe und
+   Abnahmegrundlage**. Der Agent trifft **keine** Gestaltungsentscheidung:
+   nicht über Layout, Abstand, Polster, Radius, Schriftmaß, Farbe,
+   Bauteilwahl, Lage der Aktionen oder Umbruchverhalten. **Jede
+   Abweichung ist eine Rückfrage** — auch eine bessere, auch eine winzige,
+   auch eine offensichtliche. Empfehlen ja, entscheiden nie. Welche Felder
+   ein Formular hat und welche Werte in einer Auswahl stehen, bestimmt
+   dagegen die Fachlichkeit; sie darf abweichen. Gebaut wird nach
+   Inventar, Element für Element, nach jedem Element gemessen
+   (Layout-, Stil-, Bildabgleich, je Fassung). **Fertig heißt gemessen**,
+   nicht behauptet — und die letzte Zeile jeder Fertigmeldung lautet
+   „Eigene Gestaltungsentscheidungen: 0".
+8. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
    falsch bedienen". Ein Freitextfeld ist die letzte Wahl: ist die Menge
    der gültigen Werte bekannt oder abfragbar, wird ausgewählt, nicht
    getippt. Eingabemasken führen beim Tippen; geprüft wird beim Tippen,
    nicht erst beim Speichern.
-8. **Barrierefreiheit und Größen.** WCAG 2.2 AA ist hart: Text
+9. **Barrierefreiheit und Größen.** WCAG 2.2 AA ist hart: Text
    mindestens 4,5:1, Bedienelemente und Grafik mindestens 3:1 — gegen den
    tatsächlichen Untergrund, in Hell und Dunkel, in **jedem** Zustand
    einschließlich Hover. Kontrast wird gerechnet, nicht geschätzt. Jeder
@@ -54,39 +65,39 @@ Skill laden.
    Practices und SEO 100, agentisches Browsen 3/3, Leistung und
    Barrierefreiheit mindestens 95 — der Lighthouse-Wert ersetzt die
    Prüfung nicht.
-9. **Rechtliche Pflichtbausteine.** Impressum, Datenschutzerklärung und
+10. **Rechtliche Pflichtbausteine.** Impressum, Datenschutzerklärung und
    Barrierefreiheitserklärung sind eigene, immer erreichbare Seiten nach
    österreichischem Recht. Vor der Einwilligung lädt nichts von Dritten —
    auch kein eingebettetes Video. Schriften werden immer selbst
    ausgeliefert. Für Anwendungen und Portale gilt zusätzlich der EU
    Cyber Resilience Act samt Dokumentenpaket und Meldeweg.
-10. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
+11. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
     IST-Zustand und zieht im selben Schritt nach, ohne Marketingsprache.
     Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
     `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
     markierten Screenshots im Repository. Geplantes liegt unter /plan.
-11. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
+12. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
     Das gilt für **jeden** deutschen Text, einschließlich
     Commit-Nachrichten, Pull-Request-Titeln und -Texten, Code-Kommentaren
     und Meldungen im Terminal. Ausnahmen nur Slugs, URLs, Dateinamen,
     Code und englische Bezeichner. Keine Emojis in Dokumentation,
     Commits und Oberflächen.
-12. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
+13. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-13. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
+14. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
     pushen — beide nehmen nur Merges über Pull Requests. Arbeitszweige
     gehen von `dev` aus; `main` nimmt ausschließlich `dev`. Ausgerollt
     wird nur, was grüne Tests hat. Keine Prüfung abschalten, um einen
     Merge oder ein Deployment durchzubekommen.
-14. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
+15. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
     Erweiterungen bleiben unangetastet. Bildkompression und Imagesets nur
     über Contao, Styles ausnahmslos in SCSS und im Layout gewählt, jede
     Seite liefert nur, was sie braucht. Eigene Erweiterung erst, wenn es
     keine marktreife gibt.
-15. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
+16. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
     Vorgaben des jeweiligen Stacks** (.NET, Vue 3, Flutter): klare
@@ -95,13 +106,13 @@ Skill laden.
     Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
     Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
     gewinnt immer Letzteres.
-16. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+17. **Schnittstellen.** Wird an einer API entwickelt, ist ein
     OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
     geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-17. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+18. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
     Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
     Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
     automatisch gelöscht oder anonymisiert — was von Hand gelöscht
@@ -109,6 +120,6 @@ Skill laden.
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell.
-18. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+19. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.

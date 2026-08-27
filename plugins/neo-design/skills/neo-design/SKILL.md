@@ -11,9 +11,10 @@ description: >
   Bedienelement für eine Eingabe richtig ist. Ebenso bei Webseiten-
   gestaltung, Animationen, Burgermenü, three.js und bei den Zielwerten
   aus PageSpeed Insights und Lighthouse (Leistung, Barrierefreiheit,
-  Best Practices, SEO, agentisches Browsen). Ebenso, wenn eine Oberfläche
-  gegen ein Designsystem, ein Artboard aus Claude Design oder einen
-  Klickprototyp gebaut oder abgeglichen wird.
+  Best Practices, SEO, agentisches Browsen). Zwingend, sobald ein Entwurf
+  vorliegt und umgesetzt wird: Artboard aus Claude Design, Design-Set,
+  Design-System, Klickprototyp — beim Bauen danach, beim Abgleichen
+  dagegen und bei jeder Abweichung davon.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitte 1–3, ADR 0002/0018, tools/build-tokens.py), Stand 2026-08
 ---
@@ -64,6 +65,10 @@ Oberflächen werden nicht „einfach gebaut". Reihenfolge ist verbindlich:
 Freigabe → Bau.** Die Entscheidung, was und wie gebaut wird, liegt
 ausnahmslos beim Projektinhaber. Eigenmächtige Gestaltung ist ein
 Regelverstoß, auch wenn das Ergebnis gefällt.
+
+**Liegt bereits ein Entwurf aus Claude Design vor, ist dieser Schritt
+erledigt und die Gestaltung entschieden.** Dann gilt nicht „Vorschläge
+machen", sondern Abschnitt 9: umsetzen, was da ist.
 
 Ablauf, Format der Vorschläge und was eine Skizze zeigen muss:
 `references/entwurfsverfahren.md`.
@@ -202,41 +207,74 @@ Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.
 Formulierungen, Fehlertext-Muster, Leerzustände und Ladehinweise:
 `references/oberflaechentexte.md`.
 
-## 9. Liegt ein Designsystem vor: dagegen messen
+## 9. Liegt ein Designsystem vor: es gibt vor, der Agent setzt um
+
+> **Claude Design gibt vor. Der Agent setzt um. Der Agent gestaltet
+> nicht.**
 
 Ein Designsystem — Artboards aus Claude Design, ein Design-Set, ein
-freigegebener Klickprototyp — ist **die Abnahmegrundlage, nicht eine
-Anregung**. Es gelesen zu haben ist keine Prüfung.
+freigegebener Klickprototyp — ist **die Bauvorgabe und die
+Abnahmegrundlage**, keine Anregung. Der Projektinhaber hat den Entwurf
+gemacht und hat ein Ergebnis im Kopf. Gebaut wird **dieses** Ergebnis —
+nicht ein ähnliches, nicht ein besseres.
 
-**Fertig heißt gemessen.** Zwei Prüfungen, beide müssen bestehen:
+**Der Agent trifft keine Gestaltungsentscheidung.** Nicht über Layout,
+Abstand, Polster, Radius, Schriftmaß, Farbe, Bauteilwahl, Lage der
+Aktionen oder Umbruchverhalten. Jede Abweichung — auch eine bessere,
+auch eine winzige, auch eine offensichtliche — ist eine **Rückfrage**.
+Eine Empfehlung ist erlaubt, eine Entscheidung nicht.
 
-| Prüfung | Werkzeug | Antwort |
-| --- | --- | --- |
-| **Bildabgleich** | `scripts/bildabgleich.py` | Sieht es aus wie im Entwurf? |
-| **Stilabgleich** | `scripts/stilabgleich.js` | Stammt jeder Wert aus den Tokens? |
+**Die Trennlinie läuft zwischen Gestaltung und Fachlichkeit:**
 
-```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/bildabgleich.py referenz.png gebaut.png   --unterschied diff.png --schwelle 0.5
-```
+| Vorgegeben — nur nach Rückfrage anders | Von der Aufgabe bestimmt — frei |
+| --- | --- |
+| Seitenaufbau, Raster, Karten, Abstände, Typografie, Farben, Zustände, Aufbau von Formular und Tabelle, Lage der Aktionen | **Welche** Felder ein Formular hat, **welche** Werte in Auswahl und Combobox stehen, Pflicht/optional, Prüfregeln, Verhalten, Zeilenzahl aus Daten |
 
-Schwellen: Bausteine-Artboard **0,5 %**, ganze Ansicht **2 %**,
-Stilabgleich **null Funde**. Gemessen wird je Fassung — hell, dunkel,
-mobil.
+> **Ein Feld mehr ist normal. Ein Feld, das anders aussieht als die
+> Felder im Designsystem, ist ein Fehler.**
 
-**Das Designsystem ist Quelle für Werte und Aussehen, nicht für Code.**
-Claude Design liefert HTML in React-Nähe; dieser Code wird nie in ein
-Vue-, Nuxt-, Flutter- oder Contao-Projekt kopiert. Übernommen werden
-Tokens, Maße, Zustände und Anordnung — gebaut wird in den
-Wrapper-Komponenten der Produktfamilie (Skill `neo-komponenten`).
-Gemessen wird gegen das Artboard.
+**Kein Bau ohne Inventar.** Vor der ersten Zeile wird jedes Element des
+Artboards von oben nach unten mit seinen **gemessenen** Maßen gelistet
+und vorgelegt. Dann wird **Element für Element** gebaut und nach jedem
+Element gemessen — nicht die Seite bauen und am Ende vergleichen. Zum
+Schluss der Durchgang über die ganze Seite, auch als Gesamteindruck.
 
-**Selbstkontrolle ist Pflicht:** nach jeder Korrektur erneut messen und
-die Zahl nennen. „Sieht gut aus" ist keine Zahl. Solange eine Fassung
-nicht besteht, ist nichts fertig.
+**Fertig heißt gemessen.** Drei Prüfungen, in dieser Reihenfolge:
 
-Verfahren, Referenzaufnahmen, Schwellen und die Ursachen typischer
-Abweichungen: `references/designsystem-abgleich.md`. Der Befehl
-`/neo-design:neo-designabgleich` führt die Messung durch.
+| Prüfung | Werkzeug | Antwort | Erlaubt |
+| --- | --- | --- | --- |
+| **1. Layout** | `scripts/layoutabgleich.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
+| **2. Stil** | `scripts/stilabgleich.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
+| **3. Bild** | `scripts/bildabgleich.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
+
+Der Layoutabgleich ist der wichtigste: er misst das **Aussehen** und
+liest die Feldinhalte nicht. Der Bildabgleich ist der schwächste — er
+schlägt bei abweichenden Feldwerten an, und das ist kein Befund, sondern
+ein falsch angesetztes Werkzeug. Gemessen wird je Fassung und Zustand:
+hell, dunkel, mobil; Ruhe, Hover, Fokus, Deaktiviert, Fehler.
+
+**Das Designsystem ist Quelle für Aussehen und Werte, nicht für Code.**
+Claude Design liefert React-nahes HTML; dieser Code wird nie in ein Vue-,
+Nuxt-, Flutter- oder Contao-Projekt kopiert. Übernommen werden Tokens,
+Maße, Zustände und Anordnung — gebaut wird in den Wrapper-Komponenten
+der Produktfamilie (Skill `neo-komponenten`).
+
+**Trifft eine Designänderung eine bestehende Seite**, entscheidet der
+Agent **nie**, wie alt und neu zusammengeführt werden. Er legt die
+Unterschiede mit Maßen dar, zeigt mindestens zwei Wege mit
+Gegenüberstellung, empfiehlt — und wartet.
+
+**Selbstkontrolle ist Pflicht.** Nach jeder Korrektur erneut messen und
+die Zahl nennen; „sieht gut aus" ist keine Zahl. Die letzte Zeile jeder
+Fertigmeldung lautet: **„Eigene Gestaltungsentscheidungen: 0."** Steht
+dort etwas anderes, ist die Arbeit nicht abnahmefähig.
+
+Bauverfahren, Inventar, verbotene Entscheidungen und die vierteilige
+Rückfrage mit Gegenüberstellungsbild: `references/claude-design.md` —
+**vor dem ersten Bauschritt lesen**. Messverfahren, Marker, Schwellen und
+Ursachen typischer Abweichungen: `references/designsystem-abgleich.md`.
+Befehle: `/neo-design:neo-designumsetzung` baut nach Entwurf,
+`/neo-design:neo-designabgleich` misst eine bestehende Ansicht.
 
 ## 10. Messwerte
 

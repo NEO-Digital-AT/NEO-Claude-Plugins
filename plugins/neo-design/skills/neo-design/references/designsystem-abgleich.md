@@ -1,5 +1,9 @@
 # Abgleich mit dem Designsystem
 
+Dieser Text beschreibt **wie gemessen wird**. Wie **gebaut** wird und
+wer welche Entscheidung trifft, steht in `claude-design.md` — beim Bau
+nach einem Entwurf gilt jener Text und ist zuerst zu lesen.
+
 ## Das Problem
 
 Ein Designsystem aus Claude Design liegt als HTML-Artboards vor, oft in

@@ -65,6 +65,12 @@ Ergebnis gefällt.
 Skizze oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche
 Freigabe (Skill `neo-design`, `references/entwurfsverfahren.md`).
 
+**Liegt bereits ein Entwurf aus Claude Design vor**, entfällt dieser
+Schritt — die Gestaltung ist entschieden. Dann gilt: der Entwurf gibt
+vor, umgesetzt wird nach Inventar Element für Element, und **jede**
+Abweichung ist eine Rückfrage, keine Entscheidung (Skill `neo-design`,
+`references/claude-design.md`).
+
 ### 5. Umsetzen
 
 **Nur den freigegebenen Umfang.** Fällt beim Bauen etwas auf, das

@@ -10,7 +10,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit sieben Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit neun Referenzdateien, drei Werkzeugen, Befehle `/neo-design:neo-oberflaechenpruefung` und `/neo-design:neo-designabgleich` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, 320 px bis 4K, Messwerte | Skill mit zehn Referenzdateien, fünf Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb | Skill mit zwei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
@@ -31,10 +31,18 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Bevor ein Feld ein Textfeld wird:** `neo-design`,
   `references/eingaben.md` — was nicht eingegeben werden kann, kann nicht
   falsch sein.
-- **Wenn ein Designsystem vorliegt:** `/neo-design:neo-designabgleich` —
-  fertig heißt gemessen, nicht behauptet. Verglichen wird das Aussehen
-  und das Verhalten, nicht der Inhalt: null Abweichungen im
-  Layoutabgleich, null erfundene Werte im Stilabgleich.
+- **Wenn ein Entwurf aus Claude Design vorliegt:**
+  `/neo-design:neo-designumsetzung` — der Entwurf gibt vor, der Agent
+  setzt um und gestaltet nicht. Keine eigene Gestaltungsentscheidung,
+  jede Abweichung ist eine Rückfrage mit zwei Bildern nebeneinander.
+  Gebaut wird nach Inventar, Element für Element, nach jedem Element
+  gemessen. Welche Felder ein Formular hat und welche Werte in einer
+  Auswahl stehen, bestimmt dagegen die Fachlichkeit.
+- **Wenn eine bestehende Ansicht zu prüfen ist:**
+  `/neo-design:neo-designabgleich` — fertig heißt gemessen, nicht
+  behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
+  Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
+  Stilabgleich.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -140,6 +148,7 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | `layoutabgleich.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
+| `gegenueberstellung.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
 | `markierung.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken
@@ -175,7 +184,7 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 13, Skill `neo-deployment`). Dieses
+- **Kein `dev`-Zweig** (Kernregel 14, Skill `neo-deployment`). Dieses
   Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
