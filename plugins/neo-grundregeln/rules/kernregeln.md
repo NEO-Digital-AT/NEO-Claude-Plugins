@@ -3,8 +3,8 @@
 Die ausführlichen Fassungen liegen in den Skills `neo-grundregeln`,
 `neo-design`, `neo-komponenten`, `neo-doku`, `neo-deployment`,
 `neo-contao`, `neo-recht`, `neo-api`, `neo-code`, `neo-betrieb`,
-`neo-ki` und `neo-sicherheit` — bei passender Aufgabe den jeweiligen
-Skill laden.
+`neo-ki`, `neo-assistent` und `neo-sicherheit` — bei passender Aufgabe
+den jeweiligen Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und

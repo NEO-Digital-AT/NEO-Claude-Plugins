@@ -46,6 +46,11 @@
       "description": "KI im eigenen Produkt: Transparenzpflichten nach Artikel 50 der EU-KI-Verordnung (seit 02.08.2026), Offenlegung und Kennzeichnung, Einstufung und Rolle. Technisch: Anbieterzugriff serverseitig hinter einer gemeinsamen Abstraktion, Modell aus der Konfiguration, keine personenbezogenen Daten ohne Rechtsgrundlage an ein Modell, fremder Text ist Daten und nie Anweisung, Ausgaben werden geprüft statt geglaubt."
     },
     {
+      "name": "neo-assistent",
+      "source": "./plugins/neo-assistent",
+      "description": "Bau von KI-Assistenten mit Werkzeugzugriff: fünf getrennte Schichten statt eines großen Prompts, Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeugbeschreibung als Routing und striktes Schema statt Prosa, Zustand und Vorbedingungen im Code. Eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen: Goldfälle je Absicht und Sprache, mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Das Modell ist ein festgenagelter, gemessener Parameter. Mit Goldfall-Prüfer, Prompt-Inventar und den Befehlen /neo-assistent:neo-assistentpruefung und /neo-assistent:neo-goldlauf."
+    },
+    {
       "name": "neo-deployment",
       "source": "./plugins/neo-deployment",
       "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."

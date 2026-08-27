@@ -80,9 +80,12 @@ er steht im Inhalt.
 - Getestet wird das Verhalten drumherum: Abstraktion, Prüfung der
   Ausgabe, Fehlerfall, Zeitüberschreitung, abgeschaltete Fähigkeit,
   Grenzen.
-- Für die Qualität der Antworten selbst: eine kleine, gepflegte Sammlung
-  echter Fälle mit erwarteter Antwortart, die bei Modellwechsel erneut
+- Für die Qualität der Antworten selbst: eine gepflegte Sammlung echter
+  Fälle mit erwartetem Ergebnis, die bei jeder Änderung erneut
   durchlaufen wird. Sie ersetzt keinen Test, sie ist ein Vergleich.
+  Ruft die KI-Funktion **Werkzeuge** auf, ist diese Sammlung Pflicht und
+  hat ein festes Format — Goldfälle, mehrfach gelaufen, mit Schwellen je
+  Fallart (Skill `neo-assistent`, `references/goldfaelle.md`).
 - **Ein Modellwechsel ist eine Änderung mit Auswirkung** und wird wie
   eine solche behandelt: vorlegen, vergleichen, freigeben (Skill
   `neo-grundregeln`).

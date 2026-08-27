@@ -116,6 +116,12 @@ und Tests: `references/technik.md`.
 - Der Anwender kann eine falsche Ausgabe melden, und die Meldung landet
   irgendwo, wo sie jemand liest.
 
-Zugehörige Skills: `neo-recht` (Datenschutz, Consent, Pflichtseiten),
+**Wird ein Assistent mit Werkzeugzugriff gebaut** — Chat, Agent,
+Copilot, ein angebundener MCP-Server —, gilt zusätzlich der Skill
+`neo-assistent`: Aufbau in Schichten, Absichten statt Schlüsselwörter,
+Werkzeugschemata, Mehrsprachigkeit, Goldfälle, Modellwahl.
+
+Zugehörige Skills: `neo-assistent` (Bau von Assistenten),
+`neo-recht` (Datenschutz, Consent, Pflichtseiten),
 `neo-sicherheit` (Secrets, Härtung), `neo-design` (Oberfläche, Hinweise,
 Barrierefreiheit), `neo-api` (Endpoints), `neo-code` (Abstraktion).

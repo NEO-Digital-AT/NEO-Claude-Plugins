@@ -16,6 +16,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
+| `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit sieben Referenzdateien, zwei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung` und `/neo-assistent:neo-goldlauf` |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
@@ -43,6 +44,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
   Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
   Stilabgleich.
+- **Bevor ein KI-Assistent entsteht oder wächst:** `neo-assistent` —
+  ein Assistent ist eine Architektur, kein Prompt. Absichten statt
+  Schlüsselwörter, Schema statt Prosa, und keine Änderung an Prompt,
+  Werkzeug oder Modell ohne Goldfall-Lauf davor und danach.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -99,6 +104,7 @@ Danach die Plugins aktivieren — entweder über `/plugin` oder in
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
     "neo-ki@neo-claude-plugins": true,
+    "neo-assistent@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
     "neo-betrieb@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
@@ -127,6 +133,7 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
     "neo-ki@neo-claude-plugins": true,
+    "neo-assistent@neo-claude-plugins": true,
     "neo-deployment@neo-claude-plugins": true,
     "neo-betrieb@neo-claude-plugins": true,
     "neo-contao@neo-claude-plugins": true,
@@ -149,6 +156,8 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `gegenueberstellung.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
+| `goldlauf.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
+| `promptinventar.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
 | `markierung.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken
@@ -192,7 +201,7 @@ festgehaltenen Ausnahme:
 
 ## Aufbau der Plugins
 
-Alle zwölf folgen demselben Muster:
+Alle dreizehn folgen demselben Muster:
 
 - **`SKILL.md`** — Wegweiser: die Lesekonvention, die harten Regeln, eine
   Tabelle der Bereiche. 100 bis 180 Zeilen, damit sie ganz gelesen wird.
