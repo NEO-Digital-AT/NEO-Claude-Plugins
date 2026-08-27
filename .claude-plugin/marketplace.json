@@ -48,7 +48,7 @@
     {
       "name": "neo-assistent",
       "source": "./plugins/neo-assistent",
-      "description": "Bau von KI-Assistenten mit Werkzeugzugriff: fünf getrennte Schichten statt eines großen Prompts, Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeugbeschreibung als Routing und striktes Schema statt Prosa, Zustand und Vorbedingungen im Code. Eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen: Goldfälle je Absicht und Sprache, mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Das Modell ist ein festgenagelter, gemessener Parameter. Mit Goldfall-Prüfer, Prompt-Inventar und den Befehlen /neo-assistent:neo-assistentpruefung und /neo-assistent:neo-goldlauf."
+      "description": "Bau von KI-Assistenten mit Werkzeugzugriff: fünf getrennte Schichten statt eines großen Prompts, Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeugbeschreibung als Routing und striktes Schema statt Prosa, Zustand und Vorbedingungen im Code. Eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen: Goldfälle und elf Pflichtklassen an Härtefällen — ungenaue Sprache, ganze Abläufe, Einmalgeheimnisse, Zahlung, Eskalation, Einschleusung — mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Modellzugang über Requesty und den EU-Router, Schlüssel nur aus der Umgebung. Mit Goldfall-Prüfer, Requesty-Adapter, Prompt-Inventar und den Befehlen /neo-assistent:neo-assistentpruefung, /neo-assistent:neo-goldlauf und /neo-assistent:neo-haertefaelle."
     },
     {
       "name": "neo-deployment",

@@ -13,7 +13,11 @@ description: >
   Prompt, der zu groß geworden ist, bei Änderungen, die an anderer Stelle
   etwas kaputt machen, bei der Wahl und beim Wechsel des Modells und
   immer dann, wenn die Zuverlässigkeit eines Assistenten gemessen werden
-  soll.
+  soll. Ebenso bei allem, was den Modellzugang über Requesty betrifft —
+  EU-Router, API-Schlüssel, Modellkennung, Policy, Datenhaltung — und bei
+  Härtefällen: ungenaue Eingaben, ganze Abläufe über mehrere Schritte,
+  Einmalgeheimnisse wie Codes und Schlüssel, Zahlungsvorgänge,
+  Eskalation und Einschleusung über Fremddaten.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, Stand 2026-08
 ---
@@ -30,9 +34,8 @@ Skill `neo-ki` und gelten zusätzlich.
 
 > **Ein Assistent ist eine Architektur, kein Prompt.**
 
-Ein Assistent, der aus einem großen Systemprompt besteht, wird ab einer
-gewissen Größe unwartbar — und zwar mit Ansage, an denselben vier
-Stellen:
+Ein Assistent aus einem großen Systemprompt wird ab einer gewissen Größe
+unwartbar, und zwar an denselben vier Stellen:
 
 | Symptom | Ursache |
 | --- | --- |
@@ -46,8 +49,7 @@ Ursachen.** Es verschiebt die Grenze und bringt sie später zurück.
 
 ## 1. Fünf Schichten, getrennt
 
-Was heute in einem Prompt steht, gehört auf fünf Orte verteilt. Die
-Trennung ist der eigentliche Gewinn: was getrennt ist, kann einander
+Die Trennung ist der eigentliche Gewinn: was getrennt ist, kann einander
 nicht mehr kaputt machen.
 
 | Schicht | Inhalt | Ort |
@@ -99,9 +101,9 @@ Dazuschalten: `references/sprachen.md`.
 - **Ein Werkzeug, eine Aufgabe.** Kein `aktion(typ, nutzlast)`. Der Name
   ist eine Handlung: `auftrag_stornieren`, nicht `apiCallV2`.
 - **Aufzählungen statt Freitext**, Formate deklariert,
-  `additionalProperties: false`, Pflicht ist Pflicht.
-- **Kennungen werden nie erfunden.** Sie stammen aus einem Ergebnis oder
-  aus dem Zustand; davor gehört ein Suchschritt.
+  `additionalProperties: false`. **Kennungen werden nie erfunden**: sie
+  stammen aus einem Ergebnis oder aus dem Zustand, davor gehört ein
+  Suchschritt.
 - **Geprüft wird vor der Ausführung.** Ein ungültiger Aufruf geht mit
   Begründung zurück ans Modell, höchstens zweimal, dann Abbruch mit
   Klartext. Nie stillschweigend das nächstbeste Werkzeug.
@@ -140,7 +142,55 @@ gewirkt hat.
 Format, Abdeckung, Schwellen, CI und das Vorgehen bei einem Rückschritt:
 `references/goldfaelle.md`.
 
-## 5. Das Modell ist ein gemessener Parameter
+## 5. Der klare Fall genügt nicht
+
+> **Der klare Fall beweist, dass er funktioniert. Der Härtefall beweist,
+> dass er nicht schadet.**
+
+Elf Klassen sind Pflicht, jede in jeder Sprache: ungenaue Sprache mit
+Tippfehlern und halben Sätzen, der vollständige Ablauf über mehrere
+Schritte, Anfragen außerhalb der Zuständigkeit, Zusatzleistungen zu einem
+bestehenden Vorgang, **Einmalgeheimnisse**, Eskalation, die aktuelle
+Betriebslage, Zahlungsvorgänge, Störungsmeldungen und Einschleusung über
+Fremddaten.
+
+**Eine Mengenregel steht nie im Prompt, sondern im Code.** Wovon je
+Person genau eines ausgegeben werden darf — ein Code, ein Schlüssel, eine
+Kennzahl —, wird von einer Vorbedingung durchgesetzt, die den zweiten
+Aufruf zurückweist. Auch beim zweiten Fragen. Auch wenn dringlich
+gefragt wird. Auch wenn „es nicht funktioniert hat" — dann folgt
+**Eskalation, nie ein zweites Geheimnis**.
+
+Klassen, Pflichtfälle je Klasse und was ein Härtefall nie tut:
+`references/haertefaelle.md`. Der Befehl
+`/neo-assistent:neo-haertefaelle` erzeugt sie und fährt sie.
+
+## 6. Requesty, EU-Router, Schlüssel aus der Umgebung
+
+**Modelle werden über Requesty angesprochen, über den EU-Router**
+(`https://router.eu.requesty.ai/v1`, OpenAI-kompatibel). Der Schlüssel
+steht **ausschließlich** in `REQUESTY_API_KEY` — nie in einer
+Konfiguration, nie im Repository, nie in einem Protokoll.
+
+> **Der EU-Router allein hält die Verarbeitung nicht in der EU.** Zeigt
+> die Modellkennung auf ein Modell außerhalb der EU, geht die Anfrage vom
+> Router aus hinaus. EU-Modelle tragen eine Regionsangabe in der Kennung
+> (`@eu-central-1`, `@eu`, `@francecentral`). Eine Kennung ohne
+> Regionsangabe ist ein Befund, kein Detail.
+
+Eine Policy (`policy/<name>`) als Rückfallkette ist erlaubt und meist
+besser — **jedes Kettenglied ist ein eigenes Modell** und wird gegen
+dieselben Goldfälle gemessen. Ein ungeprüftes Rückfallmodell ist ein
+zweiter, ungeprüfter Assistent.
+
+`scripts/requesty_adapter.py` verbindet den Goldfall-Prüfer mit dem
+Router: er fährt den Fall, zeichnet jeden Werkzeugaufruf auf, **ohne ihn
+auszuführen**, und prüft die Argumente gegen das Schema.
+`--pruefen` prüft Zugang und Konfiguration und warnt, wenn die
+Verarbeitung die EU verlässt. Adressen, Kennungsform, strenge Ausgaben,
+Fehlercodes und Belege: `references/requesty.md`.
+
+## 7. Das Modell ist ein gemessener Parameter
 
 - **Festgenagelte Version**, nie „latest". Ein stiller Modellwechsel
   bricht den Assistenten ohne eine einzige Codeänderung.
@@ -156,7 +206,7 @@ Format, Abdeckung, Schwellen, CI und das Vorgehen bei einem Rückschritt:
 Vergleich, Wechsel und was billiger ist als hochrüsten:
 `references/modellwahl.md`.
 
-## 6. Ein bestehender Assistent wird nicht neu geschrieben
+## 8. Ein bestehender Assistent wird nicht neu geschrieben
 
 Ein gewachsener Assistent wird **in Schritten** umgebaut, jeder einzeln
 gemessen, vom billigsten zum teuersten Eingriff: **Inventar**
@@ -171,7 +221,7 @@ zurückgenommen statt nachgebessert. Vorgehen je Schritt:
 `/neo-assistent:neo-assistentpruefung` führt Inventar und
 Ausgangsmessung durch und legt den Umbauplan vor.
 
-## 7. Mehrere Assistenten teilen ein Skelett
+## 9. Mehrere Assistenten teilen ein Skelett
 
 Gemeinsam sind Schichtung, Router, Schemaprüfung, Fehlerrückgabe,
 Sprachbehandlung, Goldfall-Prüfer, Adapter und Protokollierung. Eigen
@@ -179,7 +229,7 @@ sind nur Absichten, Werkzeuge, Ton und Goldfälle. Wer den zweiten
 Assistenten als Kopie des ersten anlegt, pflegt ab dem Tag zwei
 Fassungen jeder Regel.
 
-## 8. Abnahme
+## 10. Abnahme
 
 Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und das
 Ergebnis mit Zahlen berichten. Nicht Geprüftes gilt als nicht erfüllt.

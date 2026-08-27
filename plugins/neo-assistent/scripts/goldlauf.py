@@ -155,6 +155,11 @@ def lauf_bewerten(fall: dict, ergebnis: dict) -> list[str]:
                     ):
                         maengel.append(f"Aufruf {i + 1}: {m}")
 
+    # Schemaverstösse, die der Adapter beim Prüfen der Argumente gefunden hat.
+    # Sie sind immer ein Mangel — auch wenn Werkzeug und Argumente sonst passen.
+    for verstoss in ergebnis.get("schemafehler") or []:
+        maengel.append(f"Schema: {verstoss}")
+
     # Antworttext.
     klein = antwort.lower()
     for teil in erwartet.get("antwort_enthaelt") or []:
@@ -179,6 +184,7 @@ def adapter_rufen(befehl: str, fall: dict, frist: int) -> dict:
             "absicht": fall.get("absicht"),
             "verlauf": fall.get("verlauf") or [],
             "zustand": fall.get("zustand") or {},
+            "werkzeugergebnisse": fall.get("werkzeugergebnisse") or {},
         },
         ensure_ascii=False,
     )

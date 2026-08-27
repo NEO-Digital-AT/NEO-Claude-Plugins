@@ -16,7 +16,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit vier Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
-| `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit sieben Referenzdateien, zwei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung` und `/neo-assistent:neo-goldlauf` |
+| `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle und Härtefälle, Modellzugang über Requesty, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit neun Referenzdateien, drei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung`, `/neo-assistent:neo-goldlauf` und `/neo-assistent:neo-haertefaelle` |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
@@ -48,6 +48,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   ein Assistent ist eine Architektur, kein Prompt. Absichten statt
   Schlüsselwörter, Schema statt Prosa, und keine Änderung an Prompt,
   Werkzeug oder Modell ohne Goldfall-Lauf davor und danach.
+- **Bevor ein Assistent abgenommen wird:** `/neo-assistent:neo-haertefaelle`
+  — der klare Fall beweist, dass er funktioniert, der Härtefall, dass er
+  nicht schadet. Elf Pflichtklassen, je Sprache, schreibende Werkzeuge
+  und Einmalgeheimnisse bei 100 Prozent.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -157,6 +161,7 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `gegenueberstellung.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
 | `goldlauf.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
+| `requesty_adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `promptinventar.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
 | `markierung.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
