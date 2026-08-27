@@ -16,7 +16,7 @@ description: >
   Design-System, Klickprototyp — beim Bauen danach, beim Abgleichen
   dagegen und bei jeder Abweichung davon.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitte 1–3, ADR 0002/0018, tools/build-tokens.py), Stand 2026-08
+  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an bestehenden NEO-Projekten (Regeldateien, Entscheidungsakten zu Komponenten-Grundsatz und Logo/SVG, Token-Erzeugung), Stand 2026-08
 ---
 
 # NEO-Gestaltungsregeln
@@ -175,7 +175,7 @@ Umsetzung, mehr nicht.
 Kontrast rechnen statt schätzen:
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5C5470" "#FFFFFF"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5A6273" "#FFFFFF"
 ```
 
 Vollständige Anforderungen, Tastaturbedienung, Fokus, Vorlesegeräte,
@@ -199,7 +199,7 @@ das Verhalten auf sehr großen Flächen: `references/responsiv.md`.
 
 ## 8. Texte in der Oberfläche
 
-Beschriftungen sagen, was passiert („Monitor anlegen", nicht „OK").
+Beschriftungen sagen, was passiert („Auftrag anlegen", nicht „OK").
 Fehlermeldungen benennen Ursache und nächsten Schritt, nie einen Code
 allein. Hilfetexte stehen am Feld, nicht im Handbuch. Sentence case,
 Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.

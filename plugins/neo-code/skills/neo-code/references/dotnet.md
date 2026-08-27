@@ -14,7 +14,7 @@ src/
   <Produkt>.Tests            Unit- und Integrationstests
 ```
 
-Belegt an `NEO-Digital-AT/uptime`. Weitere Projekte (Worker, Shared)
+So in bestehenden NEO-Projekten geschnitten. Weitere Projekte (Worker, Shared)
 kommen dazu, wo sie gebraucht werden — nie ein Projekt „für später".
 
 **Die Verweisrichtung ist eine Einbahnstraße.** `Domain` verweist auf
@@ -67,8 +67,8 @@ ein Architekturbruch.
   Schlüssel schon feststeht. Eine nur über die Navigation gefundene Zeile
   hält EF für bestehend, schickt ein UPDATE hinaus, trifft null Zeilen
   und reißt die Anfrage mit einem Nebenläufigkeitsfehler ab. Dieser
-  Fehler ist in NEO Uptime dreimal aufgetreten — jedes Mal erst im
-  Laufzeitlauf, nie im Test.
+  Fehler ist in einem bestehenden Projekt dreimal aufgetreten — jedes Mal
+  erst im Laufzeitlauf, nie im Test.
 - Rohes SQL nur parametrisiert und nur mit Begründung.
 
 ## Fehler und Ergebnisse

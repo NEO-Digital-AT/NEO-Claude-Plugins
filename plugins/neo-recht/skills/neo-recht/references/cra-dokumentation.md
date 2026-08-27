@@ -38,7 +38,7 @@ Meldepflichtig sind **aktiv ausgenutzte Schwachstellen** und
 ## Das Dokumentenpaket
 
 Ablage: `docs/cra/` — sprachneutral bzw. in der Sprache, in der geliefert
-wird. Struktur wie in `NEO-Digital-AT/uptime`:
+wird. Bewährte Struktur:
 
 | Dokument | Inhalt |
 | --- | --- |

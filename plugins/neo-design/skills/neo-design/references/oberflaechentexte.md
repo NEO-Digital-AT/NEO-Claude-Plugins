@@ -17,11 +17,11 @@ Oberfläche, die man ohne Handbuch versteht, verdankt das ihren Texten.
 
 ## Beschriftungen
 
-- Knöpfe tragen **Verb plus Objekt**: „Monitor anlegen", „Änderungen
+- Knöpfe tragen **Verb plus Objekt**: „Auftrag anlegen", „Änderungen
   speichern", „Einladung senden". Nicht „OK", nicht „Absenden", nicht
   „Weiter" ohne Ziel.
 - Die Beschriftung sagt, was **passiert**, nicht was man tut. Im
-  Bestätigungsdialog steht auf dem Knopf die Folge: „Monitor löschen",
+  Bestätigungsdialog steht auf dem Knopf die Folge: „Auftrag löschen",
   nicht „Ja".
 - Abbrechen heißt „Abbrechen". Ein zweites Wort dafür verwirrt.
 - Feldbeschriftungen stehen **über** dem Feld und bleiben stehen. Ein
@@ -73,9 +73,9 @@ Derselbe Text für beides ist ein Fehler.
 
 ## Bestätigungen
 
-Der Dialog benennt **das Objekt** und **die Folge**: „Monitor
-‚Kundenportal' löschen? Die Messreihe der letzten 90 Tage wird mit
-gelöscht und lässt sich nicht wiederherstellen."
+Der Dialog benennt **das Objekt** und **die Folge**: „Auftrag
+‚Kundenportal' löschen? Die Verlaufsdaten der letzten 90 Tage werden mit
+gelöscht und lassen sich nicht wiederherstellen."
 
 Kein „Sind Sie sicher?" ohne Inhalt. Bei großer Tragweite den Namen
 abtippen lassen. Wo Rückgängig möglich ist, ist Rückgängig besser als

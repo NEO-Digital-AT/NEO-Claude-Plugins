@@ -27,23 +27,23 @@ Satz — kein Fließtext, keine Wiederholung des Inhalts.
 
 ```markdown
 ---
-titel: Monitore bedienen
+titel: Aufträge bedienen
 zielgruppe: anwender
 sprache: de
 stand: 2026-08-26
 ---
 
-# Monitore bedienen
+# Aufträge bedienen
 
-Anlegen, Ändern und Pausieren von Monitoren in der Verwaltung.
+Anlegen, Ändern und Pausieren von Aufträgen in der Verwaltung.
 
 ## Inhalt
 
 | Seite | Worum es geht |
 | --- | --- |
-| [Monitor anlegen](anlegen.md) | Einen neuen Monitor einrichten, vom Typ bis zum ersten Testlauf |
-| [Regeln festlegen](regeln.md) | Wann ein Monitor als beeinträchtigt oder ausgefallen gilt |
-| [Monitor pausieren](pausieren.md) | Prüfungen vorübergehend aussetzen, etwa bei Wartung |
+| [Auftrag anlegen](anlegen.md) | Einen neuen Auftrag einrichten, vom Typ bis zum ersten Probelauf |
+| [Regeln festlegen](regeln.md) | Wann ein Auftrag als verzögert oder fehlgeschlagen gilt |
+| [Auftrag pausieren](pausieren.md) | Ausführung vorübergehend aussetzen, etwa bei Wartung |
 
 ## Untergeordnet
 

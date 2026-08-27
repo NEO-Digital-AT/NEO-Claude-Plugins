@@ -71,10 +71,10 @@ besteht. Deshalb:
 
 ```
 # Ein Paar
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5C5470" "#FFFFFF"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5A6273" "#FFFFFF"
 
 # Durchsichtige Hover-Fläche über einer Grundfarbe
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#FFFFFFCC" "#2A025F" --grund "#0F0524"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#FFFFFFCC" "#1F3A5F" --grund "#0B1220"
 
 # Alle Paare eines Projekts, als Tor in der CI
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py --paare design/kontrastpaare.json

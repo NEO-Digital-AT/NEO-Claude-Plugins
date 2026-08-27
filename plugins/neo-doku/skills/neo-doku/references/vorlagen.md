@@ -113,12 +113,12 @@ aus Sicht dessen, der es merkt.
 ## 2026-08-26
 
 ### Geändert
-- Das Intervall eines Monitors lässt sich jetzt auf 30 Sekunden setzen.
+- Das Intervall eines Auftrags lässt sich jetzt auf 30 Sekunden setzen.
   Vorher war 60 Sekunden die Untergrenze; Kunden mit kurzen
   Wartungsfenstern brauchten die feinere Stufe.
 
 ### Behoben
-- Ein Monitor mit Umlaut im Namen erschien in der Suche nicht.
+- Ein Auftrag mit Umlaut im Namen erschien in der Suche nicht.
   Ursache war ein Vergleich ohne Normalisierung.
 
 ### Entfernt

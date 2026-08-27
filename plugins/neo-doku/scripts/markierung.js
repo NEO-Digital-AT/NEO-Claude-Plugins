@@ -8,9 +8,9 @@
  * Einbinden (Playwright):
  *   await page.addScriptTag({ path: 'tools/markierung.js' })
  *   await page.evaluate(() => {
- *     neoMarkierung.rahmen('[data-test="monitor-anlegen"]', { nummer: 1 })
+ *     neoMarkierung.rahmen('[data-test="auftrag-anlegen"]', { nummer: 1 })
  *     neoMarkierung.pfeil('#speichern', { text: 'Speichern nicht vergessen' })
- *     neoMarkierung.infokasten({ text: 'Das Intervall gilt je Monitor.', an: '#intervall' })
+ *     neoMarkierung.infokasten({ text: 'Das Intervall gilt je Auftrag.', an: '#intervall' })
  *   })
  *   await page.screenshot({ path: '...', fullPage: true })
  *

@@ -77,7 +77,7 @@ await page.evaluate(() => {
     .marker('h1')
     .infokasten({ text: 'Der Typ legt fest, welche Felder erscheinen.', an: '[data-test="typ"]' })
 })
-await page.screenshot({ path: 'docs/frontend/de/bedienung/bilder/monitor-anlegen.png', fullPage: true })
+await page.screenshot({ path: 'docs/frontend/de/bedienung/bilder/auftrag-anlegen.png', fullPage: true })
 ```
 
 | Aufruf | Wofür |
@@ -107,12 +107,12 @@ Regeln zur Markierung:
 ## Ablage und Benennung
 
 ```
-docs/frontend/de/bedienung/monitore/
+docs/frontend/de/bedienung/auftraege/
   anlegen.md
   bilder/
-    monitor-anlegen.png
-    monitor-anlegen-typ-detail.png
-    monitor-anlegen-fehler.png
+    auftrag-anlegen.png
+    auftrag-anlegen-typ-detail.png
+    auftrag-anlegen-fehler.png
 ```
 
 - Bilder liegen in `bilder/` **neben** der Datei, die sie verwendet.
@@ -128,8 +128,8 @@ docs/frontend/de/bedienung/monitore/
 ## Einbinden
 
 ```markdown
-![Das Formular „Monitor anlegen“. Rahmen 1 markiert das Auswahlfeld
-„Typ“, Rahmen 2 das Auswahlfeld „Intervall“.](bilder/monitor-anlegen.png)
+![Das Formular „Auftrag anlegen“. Rahmen 1 markiert das Auswahlfeld
+„Typ“, Rahmen 2 das Auswahlfeld „Intervall“.](bilder/auftrag-anlegen.png)
 ```
 
 - **Der Alternativtext beschreibt, was zu sehen ist**, nicht „Screenshot".

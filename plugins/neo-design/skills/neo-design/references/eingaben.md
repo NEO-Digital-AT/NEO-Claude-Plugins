@@ -96,7 +96,8 @@ darüber, ob das Ergebnis brauchbar ist:
   einzeln angezeigt und einzeln änderbar gemacht — Verlaufsstopps
   eingeschlossen. Für den Dunkelmodus wird eine eigene Fassung
   angeboten; was gegen dunklen Grund schon trägt, bleibt unverändert.
-  Umgesetzt in NEO Uptime, `docs/adr/0018-logo-und-svg.md`.
+  In einem bestehenden Projekt umgesetzt und dort als Entscheidungsakte
+  „Logo und SVG" festgehalten.
 - Wo die Rechnung nicht reicht, eine zweite Datei zulassen — gespeichert
   nur, wenn sie sich unterscheidet.
 

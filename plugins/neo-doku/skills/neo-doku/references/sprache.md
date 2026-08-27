@@ -45,7 +45,7 @@ beginnen:
 
 | Vorher | Nachher |
 | --- | --- |
-| „Das System bietet eine leistungsstarke und intuitive Möglichkeit zur Verwaltung von Monitoren." | „Monitore werden unter Überblick → Monitore verwaltet." |
+| „Das System bietet eine leistungsstarke und intuitive Möglichkeit zur Verwaltung von Aufträgen." | „Aufträge werden unter Überblick → Aufträge verwaltet." |
 | „Es ist grundsätzlich möglich, dass die Prüfung fehlschlägt." | „Die Prüfung schlägt fehl, wenn das Ziel nicht innerhalb von 10 Sekunden antwortet." |
 | „Die Konfiguration erfolgt über die Datei." | „Die Datei `app.yaml` konfiguriert den Dienst." |
 | „Nach erfolgter Durchführung der Migration …" | „Nach der Migration …" |
@@ -59,8 +59,8 @@ Bedingungen statt Andeutungen.**
 
 - **Beim ersten Auftreten erklären.** Die Doku richtet sich nicht nur an
   Programmierer.
-- **Ein Begriff je Sache**, im ganzen Projekt. Nicht „Prüfung", „Check"
-  und „Monitor" für dasselbe.
+- **Ein Begriff je Sache**, im ganzen Projekt. Nicht „Lauf", „Job"
+  und „Auftrag" für dasselbe.
 - Wo Synonyme im Umlauf sind, werden sie einmal in einer Begriffsliste
   zugeordnet und dann nicht mehr verwendet.
 - Englische Fachwörter nur, wo es kein etabliertes deutsches gibt.

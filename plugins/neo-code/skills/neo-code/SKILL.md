@@ -11,7 +11,7 @@ description: >
   Querschnittsregeln für Zeit, Geld, Kennungen, Protokollierung und
   Konfiguration.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg; Stackkonventionen nach den offiziellen Leitfäden, Schichtung belegt an NEO Uptime (src/NeoUptime.Api|Domain|Infrastructure|Tests), Stand 2026-08
+  herkunft: NEO Digital — Vorgaben Erich Nigg; Stackkonventionen nach den offiziellen Leitfäden, Schichtung belegt an bestehenden NEO-Projekten (src/<Produkt>.Api|Domain|Infrastructure|Tests), Stand 2026-08
 ---
 
 # NEO-Codeaufbau
@@ -48,7 +48,7 @@ Nebenprodukt einer Fehlerbehebung.
 - **Schichtgrenzen sind festgelegt, und die Importrichtung ist eine
   Einbahnstraße.** Innen kennt außen nicht: die Fachlogik weiß nichts von
   der Datenbank, nichts vom Web und nichts von der Oberfläche.
-- Bewährter Schnitt, wie in NEO Uptime (`src/NeoUptime.*`):
+- Bewährter Schnitt, wie in bestehenden NEO-Projekten (`src/<Produkt>.*`):
 
   ```
   Domain          Fachlichkeit, Regeln, Verträge — kennt nichts

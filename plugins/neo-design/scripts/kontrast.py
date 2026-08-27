@@ -9,8 +9,8 @@ unlesbaren Knopf.
 
 Ohne Abhängigkeiten, damit das Skript in jeder CI läuft.
 
-    kontrast.py "#5C5470" "#FFFFFF"
-    kontrast.py "#FFFFFF" "#2A025F1F" --grund "#0F0524" --art element
+    kontrast.py "#5A6273" "#FFFFFF"
+    kontrast.py "#FFFFFF" "#1F3A5F1F" --grund "#0B1220" --art element
     kontrast.py --paare design/kontrastpaare.json
     kontrast.py --beispiel > design/kontrastpaare.json
 
@@ -137,8 +137,9 @@ BEISPIEL = {
     "_hinweis": (
         "Kontrastpaare des Projekts. Jede Farbkombination, die ein Anwender "
         "sieht, steht hier — auch die Hover-Fassung. Prüfen mit: "
-        "kontrast.py --paare <diese Datei>. Die Werte stammen aus NEO Uptime "
-        "und dienen als Muster; sie sind durch die eigenen zu ersetzen. "
+        "kontrast.py --paare <diese Datei>. Die Farben unten sind ein "
+        "Platzhaltersatz und dienen nur als Muster; sie sind durch die "
+        "Tokens des eigenen Projekts zu ersetzen. "
         "„Rand eines Feldes“ fällt absichtlich durch: ein Rand, der ein "
         "Bedienelement überhaupt erst erkennbar macht, braucht 3:1. Eine rein "
         "trennende Linie ohne diese Aufgabe braucht das nicht und gehört "
@@ -147,15 +148,15 @@ BEISPIEL = {
     "grund": "#FFFFFF",
     "stufe": "aa",
     "paare": [
-        {"name": "Hell · Fließtext auf Fläche", "vorne": "#0C0025", "hinten": "#FFFFFF"},
-        {"name": "Hell · Nebentext auf Fläche", "vorne": "#5C5470", "hinten": "#FFFFFF"},
-        {"name": "Hell · Primärknopf, Ruhe", "vorne": "#FFFFFF", "hinten": "#2A025F"},
-        {"name": "Hell · Primärknopf, Hover", "vorne": "#FFFFFF", "hinten": "#3A0B7F"},
-        {"name": "Hell · Rand eines Feldes", "vorne": "#D5D0E4", "hinten": "#FFFFFF", "art": "element"},
-        {"name": "Hell · Geistknopf, Hover mit Alpha", "vorne": "#2A025F", "hinten": "#2A025F14", "grund": "#FFFFFF"},
-        {"name": "Dunkel · Fließtext auf Fläche", "vorne": "#F5F2FC", "hinten": "#121214", "grund": "#0A0A0B"},
-        {"name": "Dunkel · Primärknopf, Ruhe", "vorne": "#14101F", "hinten": "#A8F20D"},
-        {"name": "Dunkel · Fokusring", "vorne": "#A8F20D", "hinten": "#121214", "art": "element"},
+        {"name": "Hell · Fließtext auf Fläche", "vorne": "#111827", "hinten": "#FFFFFF"},
+        {"name": "Hell · Nebentext auf Fläche", "vorne": "#5A6273", "hinten": "#FFFFFF"},
+        {"name": "Hell · Primärknopf, Ruhe", "vorne": "#FFFFFF", "hinten": "#1F3A5F"},
+        {"name": "Hell · Primärknopf, Hover", "vorne": "#FFFFFF", "hinten": "#2C5282"},
+        {"name": "Hell · Rand eines Feldes", "vorne": "#D5D8E0", "hinten": "#FFFFFF", "art": "element"},
+        {"name": "Hell · Geistknopf, Hover mit Alpha", "vorne": "#1F3A5F", "hinten": "#1F3A5F14", "grund": "#FFFFFF"},
+        {"name": "Dunkel · Fließtext auf Fläche", "vorne": "#F3F4F6", "hinten": "#111827", "grund": "#0B1220"},
+        {"name": "Dunkel · Primärknopf, Ruhe", "vorne": "#101820", "hinten": "#7DD3FC"},
+        {"name": "Dunkel · Fokusring", "vorne": "#7DD3FC", "hinten": "#111827", "art": "element"},
     ],
 }
 
@@ -217,7 +218,7 @@ def main(argv: list[str] | None = None) -> int:
     zerleger = argparse.ArgumentParser(
         description="Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen.",
         epilog="Ohne Angabe von --art gilt „text“ (4,5:1 auf Stufe AA).")
-    zerleger.add_argument("vorne", nargs="?", help="Vordergrundfarbe, z. B. \"#0C0025\"")
+    zerleger.add_argument("vorne", nargs="?", help="Vordergrundfarbe, z. B. \"#111827\"")
     zerleger.add_argument("hinten", nargs="?", help="Hintergrundfarbe, z. B. \"#FFFFFF\"")
     zerleger.add_argument("--grund", help="Undurchsichtiger Grund unter durchsichtigen Farben")
     zerleger.add_argument("--art", default="text", choices=sorted(ARTEN),

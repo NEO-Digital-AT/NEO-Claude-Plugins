@@ -80,9 +80,10 @@ Verhalten geprüft — nicht nur die Tests:**
 Geprüft heißt: **Neustart, Build, Probelauf** — und das Ergebnis
 angesehen. Nicht „sollte gehen".
 
-Belegt an NEO Uptime: die EF-Falle beim Anlegen über die Navigation ist
-dreimal aufgetreten und jedes Mal **erst im Laufzeitlauf** aufgefallen,
-nie im Test (Skill `neo-code`, `references/dotnet.md`).
+Aus der Praxis belegt: die EF-Falle beim Anlegen über die Navigation ist
+in einem Projekt dreimal aufgetreten und jedes Mal **erst im
+Laufzeitlauf** aufgefallen, nie im Test (Skill `neo-code`,
+`references/dotnet.md`).
 
 ## Validierungsreihenfolge
 

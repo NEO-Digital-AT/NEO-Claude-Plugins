@@ -26,9 +26,9 @@ sie überall.
 | Radien, Farben, Schriftgröße, Zeilenhöhe, Laufweite | Daten aus der Datenbank oder aus fremden APIs |
 | Verhalten in Hover, Fokus, Deaktiviert, Fehler | — |
 
-Inhalte sind dynamisch. Die Verbindungsarten eines Proxy-Monitors kommen
-aus der Anwendung, ein Feldwert aus der Datenbank, eine Liste aus einer
-fremden API. Dass dort etwas anderes steht als im Entwurf, ist **kein
+Inhalte sind dynamisch. Die Einträge einer Auswahlliste kommen aus der
+Anwendung, ein Feldwert aus der Datenbank, eine Liste aus einer fremden
+API. Dass dort etwas anderes steht als im Entwurf, ist **kein
 Mangel**. Dass das Feld vier Pixel niedriger ist, schon.
 
 ### Statische Oberflächentexte: auf Ansage
@@ -88,14 +88,14 @@ Gebauten entspricht. Das Markup unterscheidet sich zwangsläufig — ein
 
 ```html
 <!-- im Artboard -->
-<select data-abgleich="feld-verbindungsart">…</select>
+<select data-abgleich="feld-typ">…</select>
 
 <!-- in der Anwendung, anderes Framework, anderes Markup -->
-<NeoSelect data-abgleich="feld-verbindungsart" … />
+<NeoSelect data-abgleich="feld-typ" … />
 ```
 
 - Der Marker benennt die **Rolle** des Elements, nicht seinen Inhalt:
-  `feld-verbindungsart`, `knopf-speichern`, `kopfzeile`, nicht
+  `feld-typ`, `knopf-speichern`, `kopfzeile`, nicht
   `select-2`.
 - Markiert wird, was gemessen werden soll: Felder, Knöpfe, Karten,
   Abschnitte, Kopf- und Fußbereiche. Nicht jedes Element.

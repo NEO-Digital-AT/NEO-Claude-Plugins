@@ -88,7 +88,7 @@ Annahmen braucht, legt sie als Entscheidung vor.
 ## Wie eine Behauptung belegt wird
 
 Nicht: „Das Feld ist optional."
-Sondern: „Das Feld ist optional — `openapi.json`, `components.schemas.Monitor`,
+Sondern: „Das Feld ist optional — `openapi.json`, `components.schemas.Auftrag`,
 `required` enthält es nicht."
 
 Nicht: „Contao kann das."

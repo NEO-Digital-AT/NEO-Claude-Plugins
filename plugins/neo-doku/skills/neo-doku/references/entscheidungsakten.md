@@ -88,16 +88,16 @@ Wird nachgetragen, sobald etwas schiefging. Konkret, mit Fundstelle.
 Der wertvollste Abschnitt der ganzen Akte.
 ```
 
-Der Titel benennt die **Entscheidung**, nicht das Thema: „Das Logo einer
-Statuspage, und warum SVG hier erlaubt ist" statt „Logo".
+Der Titel benennt die **Entscheidung**, nicht das Thema: „Das Logo im
+Kopfbereich, und warum SVG hier erlaubt ist" statt „Logo".
 
 ## Der Abschnitt „Was dabei schiefging"
 
-Ein NEO-Eigenes, belegt an `NEO-Digital-AT/uptime`. Er wird
+Ein NEO-Eigenes, aus der Praxis bestehender Projekte. Er wird
 **nachgetragen**, wenn beim Bauen oder im Betrieb etwas an dieser
 Entscheidung hängen blieb.
 
-Beispiel aus ADR 0018 dort:
+Beispiel aus einer solchen Akte:
 
 > **Angelegt wird über das DbSet, nicht über die Navigation.** Der
 > Schlüssel steht schon im Initialisierer, und eine nur über

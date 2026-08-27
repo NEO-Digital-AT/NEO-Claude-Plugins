@@ -19,7 +19,7 @@
  * Verwendung (Playwright):
  *   await seite.addScriptTag({ path: '<plugin>/scripts/gegenueberstellung.js' })
  *   const masse = await seite.evaluate(() => neoGegenueberstellung.zeigen({
- *     ueberschrift: 'Monitor anlegen — Formularkarte',
+ *     ueberschrift: 'Auftrag anlegen — Formularkarte',
  *     links:  { bild: 'file:///.../design.png',    titel: 'Designsystem' },
  *     rechts: { bild: 'file:///.../vorschlag.png', titel: 'Vorschlag' },
  *     hinweis: 'Rechts zwei Felder mehr. Karte, Abstaende und Feldhoehe unveraendert.'

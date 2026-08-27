@@ -85,7 +85,7 @@ die Aufgabe damit **ohne Rückfrage** erledigt.
 - Je Ablauf: Ziel, Voraussetzungen, nummerierte Schritte, Ergebnis,
   häufige Fehler und was dann zu tun ist.
 - **Bedienelemente werden wörtlich benannt**, wie sie in der Oberfläche
-  stehen: die Schaltfläche „Monitor anlegen", nicht „der Anlegen-Knopf".
+  stehen: die Schaltfläche „Auftrag anlegen", nicht „der Anlegen-Knopf".
 - **Screenshots gehören dazu**, einschließlich Detailausschnitten, im
   Repository eingecheckt.
 - Wichtige Stellen werden markiert: roter Rahmen, roter Pfeil,

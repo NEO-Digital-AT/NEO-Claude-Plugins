@@ -14,8 +14,8 @@ es geht, für wen und ob der Inhalt noch gilt.
 
 ```yaml
 ---
-titel: Monitor anlegen
-kurzfassung: Einen neuen Monitor einrichten, vom Typ bis zum ersten Testlauf.
+titel: Auftrag anlegen
+kurzfassung: Einen neuen Auftrag einrichten, vom Typ bis zum ersten Probelauf.
 zielgruppe: anwender          # anwender | entwickler | betrieb
 bereich: frontend             # frontend | backend
 sprache: de
@@ -34,7 +34,7 @@ nicht gepflegt wird, ist schlimmer als keines.
 
 - **Ein Thema je Datei.** Wer zwei Abläufe in eine Datei legt, bekommt
   Antworten, die beide vermischen.
-- **Die Überschrift benennt die Sache**, nicht die Kategorie: „Monitor
+- **Die Überschrift benennt die Sache**, nicht die Kategorie: „Auftrag
   anlegen", nicht „Anleitung" oder „Allgemeines".
 - **Überschriften sind stabil.** Sie sind Anker; wer sie umbenennt,
   bricht Verweise. Keine Nummerierung in der Überschrift, die sich beim
@@ -46,15 +46,15 @@ nicht gepflegt wird, ist schlimmer als keines.
 ## Formulierung
 
 - **Namen ausschreiben, nicht verweisen.** „Das Auswahlfeld ‚Typ' im
-  Formular ‚Monitor anlegen'" statt „das erwähnte Feld". Kein „siehe
+  Formular ‚Auftrag anlegen'" statt „das erwähnte Feld". Kein „siehe
   oben", kein „wie bereits beschrieben" über Dateigrenzen hinweg.
 - **Keine mehrdeutigen Pronomen.** „Er wird dann geprüft" — wer? Den
   Gegenstand wiederholen, auch wenn es sich hölzern liest.
 - **Exakte Zeichenketten in Anführung**: Beschriftungen genau so, wie sie
   in der Oberfläche stehen; Pfade, Befehle, Feldnamen und Werte genau so,
   wie sie eingegeben werden.
-- **Ein Begriff je Sache**, im ganzen Projekt. Nicht „Prüfung",
-  „Check" und „Monitor" für dasselbe. Wo Synonyme im Umlauf sind, werden
+- **Ein Begriff je Sache**, im ganzen Projekt. Nicht „Lauf",
+  „Job" und „Auftrag" für dasselbe. Wo Synonyme im Umlauf sind, werden
   sie einmal in einer Begriffsliste zugeordnet.
 - **Bedingungen ausschreiben:** „Wenn das Intervall unter 60 Sekunden
   liegt, verlangt die Anwendung eine Begründung." Nicht: „ggf. mit

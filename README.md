@@ -46,7 +46,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
-  python3 plugins/neo-design/scripts/kontrast.py "#5C5470" "#FFFFFF"
+  python3 plugins/neo-design/scripts/kontrast.py "#5A6273" "#FFFFFF"
   python3 plugins/neo-design/scripts/kontrast.py --paare design/kontrastpaare.json
   ```
 
@@ -167,13 +167,13 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 - Projekt-Regeldateien (CLAUDE.md) können zusätzlich auf die Skills
   verweisen.
 - Projektspezifische Regelwerke (z. B. NEOcash CLAUDE.md, LeoFlex
-  AGENTS.md, NEO Uptime CLAUDE.md) bleiben führend, wo sie konkreter
+  AGENTS.md) bleiben führend, wo sie konkreter
   sind. Diese Plugins liefern den gemeinsamen Unterbau.
 
 ## Herkunft
 
 Destilliert aus den Vorgaben von Erich Nigg sowie den Regelwerken der
-NEOcash-, LeoFlex-, NEO-Uptime- und Website-Repos (CLAUDE.md, AGENTS.md,
+NEOcash-, LeoFlex-, Website- und weiterer Anwendungs-Repos (CLAUDE.md, AGENTS.md,
 Security-/CRA-Doku, UI- und Design-System-Regeln, ADRs, Wächter-Tests,
 Standardprompt Contao). Aufbau nach dem Standardmuster für
 Claude-Code-Marketplaces: ein Repo, ein Marketplace-Manifest, je Plugin
@@ -202,6 +202,13 @@ Alle zwölf folgen demselben Muster:
   Abhakbar, mit dem Satz „Nicht Geprüftes gilt als nicht erfüllt".
 - **`scripts/`** — Werkzeuge, wo eine Regel messbar ist.
 - **`commands/`** — Befehle, wo eine Prüfung wiederkehrt.
+
+**Die Beispiele sind projektneutral.** Wo ein Beispiel einen fachlichen
+Gegenstand braucht, steht ein Platzhalter — `Auftrag`, `Account`,
+`Invoice`, dazu ein Platzhaltersatz Farben. Kein Beispiel beschreibt ein
+bestimmtes NEO-Projekt, und keines ist als Vorgabe für ein Datenmodell,
+eine Farbe oder eine Fachlichkeit zu lesen. Übernommen wird die **Form**,
+nicht der Inhalt.
 
 Die Lesekonvention ist in allen Skills dieselbe:
 

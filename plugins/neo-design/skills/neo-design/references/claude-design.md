@@ -91,7 +91,7 @@ Das Inventar entsteht aus dem Artboard, von oben nach unten, und listet
 **jedes** Element mit seinen Maßen:
 
 ```markdown
-## Inventar — Artboard „Monitor anlegen" (1440 px, hell)
+## Inventar — Artboard „Auftrag anlegen" (1440 px, hell)
 
 | # | Element | Marker | Maße und Aussehen aus dem Entwurf |
 |---|---|---|---|
@@ -178,7 +178,7 @@ Eine Rückfrage besteht aus **vier Teilen**:
 ```js
 await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/gegenueberstellung.js' })
 const masse = await seite.evaluate((b) => neoGegenueberstellung.zeigen({
-  ueberschrift: 'Monitor anlegen — Formularkarte',
+  ueberschrift: 'Auftrag anlegen — Formularkarte',
   links:  { bild: b.entwurf,   titel: 'Designsystem', unterzeile: 'Artboard B5' },
   rechts: { bild: b.vorschlag, titel: 'Vorschlag',    unterzeile: 'Entscheidung offen' },
   hinweis: '…'

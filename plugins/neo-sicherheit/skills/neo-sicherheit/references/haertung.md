@@ -51,8 +51,8 @@ kein Feinschliff.
 
 **Konsolenbefehle nie als `root` ausführen** — oder danach die
 Dateirechte richtigstellen. Sonst gehören erzeugte Dateien dem falschen
-Benutzer und die Anwendung kann nicht mehr schreiben (belegt an NEO
-Uptime und am Contao-Standardprompt).
+Benutzer und die Anwendung kann nicht mehr schreiben (in bestehenden
+Projekten und am Contao-Standardprompt belegt).
 
 ## Netz
 

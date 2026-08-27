@@ -11,7 +11,7 @@ description: >
   Interaktionskonventionen und den Wächter-Test, der das maschinell
   durchsetzt.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO Uptime (CLAUDE.md Abschnitt 1, ADR 0002, web/admin/test/guard.spec.ts), Stand 2026-08
+  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an bestehenden NEO-Projekten (Regeldatei, Entscheidungsakte zum Komponenten-Grundsatz, Wächter-Test), Stand 2026-08
 ---
 
 # NEO-Komponenten-Grundsatz

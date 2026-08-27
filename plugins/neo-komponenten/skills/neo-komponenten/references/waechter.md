@@ -7,7 +7,8 @@ Termindruck.** Er ist deshalb keine Kür, sondern Teil des Grundsatzes:
 ein Projekt mit Oberflächen und ohne Wächter erfüllt die Regel nicht,
 auch wenn der Code heute sauber aussieht.
 
-Vorbild und Beleg: `web/admin/test/guard.spec.ts` in NEO Uptime, dazu
+Vorbild und Beleg: der Wächter-Test `web/admin/test/guard.spec.ts` in
+einem bestehenden Nuxt-Projekt, dazu dessen
 `docs/adr/0002-komponenten-grundsatz.md`.
 
 ## Was er prüft
@@ -20,7 +21,7 @@ Komponenten — und schlägt fehl bei:
 | --- | --- | --- |
 | 1 | Ein gestaltendes HTML-Element im Template | `<div class="row">`, `<button>`, `<input>`, `<table>`, `<ul>`, `<p>`, `<h1>`–`<h6>`, `<span>`, `<section>` |
 | 2 | Ein `class`- oder `style`-Attribut | `class="mt-4"`, `style="color:red"` |
-| 3 | Ein Farbliteral | `#fff`, `#a8f20d`, `rgb(`, `rgba(`, `hsl(`, `red`, `white` |
+| 3 | Ein Farbliteral | `#fff`, `#1f3a5f`, `rgb(`, `rgba(`, `hsl(`, `red`, `white` |
 | 4 | Eine Maßzahl mit Einheit außerhalb einer Token-Referenz | `12px`, `1.5rem`, `50%`, `2em` |
 | 5 | Ein Import außerhalb der erlaubten Quellen | alles außer `~/components/<familie>/`, `~/composables/`, `vue`, `#app` |
 
@@ -56,11 +57,11 @@ const ERLAUBT: { datei: string; grund: string }[] = [
 ## Wie er meldet
 
 Ein Fund nennt: **Datei, Zeile, verletzte Regel, gefundener Ausdruck**.
-Eine Meldung wie „Verstoß in pages/monitore.vue" ist nutzlos.
+Eine Meldung wie „Verstoß in pages/auftraege.vue" ist nutzlos.
 
 ```
-app/pages/monitore/[id].vue:42   Regel 1   gestaltendes Element <div>
-app/pages/monitore/[id].vue:47   Regel 3   Farbliteral #2A025F
+app/pages/auftraege/[id].vue:42   Regel 1   gestaltendes Element <div>
+app/pages/auftraege/[id].vue:47   Regel 3   Farbliteral #1F3A5F
 app/layouts/default.vue:12       Regel 5   Import aus 'vuetify/components'
 ```
 

@@ -3,7 +3,7 @@
 ## Bereiche
 
 Der Bereich im Namen ist zugleich der Ordner. Die Liste ist der Rahmen;
-Projekte ergänzen fachliche Bereiche (etwa `Monitor`, `Account`,
+Projekte ergänzen fachliche Bereiche (etwa `Contract`, `Account`,
 `Invoice`), sie erfinden aber keine zweiten Namen für dasselbe.
 
 | Bereich | Was darin liegt |
