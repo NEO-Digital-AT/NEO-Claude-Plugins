@@ -10,6 +10,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit acht Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
+| `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
+| `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
+| `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
+| `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers | Skill mit einer Referenzdatei, lädt bei App-Arbeit |
 | `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Messwerte | Skill mit elf Referenzdateien, sieben Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
@@ -44,6 +48,11 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
   Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
   Stilabgleich.
+- **Bevor Code gegen eine Bibliothek entsteht:** ihre `llms.txt` lesen,
+  nicht die Signatur erinnern — Nuxt, Nuxt UI, Vue, Vuetify, Angular und
+  Flutter liefern eine; Laravel liefert stattdessen Laravel Boost. Die
+  Liste mit Prüfdatum steht in `neo-grundregeln`,
+  `references/belegpflicht.md`.
 - **Bevor für Contao etwas gebaut wird:** `neo-contao` — die Rangfolge
   Bordmittel → fremde Erweiterung → bestehende NEO-Erweiterung →
   bestehende ergänzen → neu, jede Stufe belegt. Zwei Erweiterungen für
@@ -118,6 +127,10 @@ Danach die Plugins aktivieren — entweder über `/plugin` oder in
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
     "neo-code@neo-claude-plugins": true,
+    "neo-php@neo-claude-plugins": true,
+    "neo-vue@neo-claude-plugins": true,
+    "neo-angular@neo-claude-plugins": true,
+    "neo-mobil@neo-claude-plugins": true,
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
     "neo-api@neo-claude-plugins": true,
@@ -147,6 +160,10 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
     "neo-code@neo-claude-plugins": true,
+    "neo-php@neo-claude-plugins": true,
+    "neo-vue@neo-claude-plugins": true,
+    "neo-angular@neo-claude-plugins": true,
+    "neo-mobil@neo-claude-plugins": true,
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
     "neo-api@neo-claude-plugins": true,
@@ -224,7 +241,7 @@ festgehaltenen Ausnahme:
 
 ## Aufbau der Plugins
 
-Alle dreizehn folgen demselben Muster:
+Alle siebzehn folgen demselben Muster:
 
 - **`SKILL.md`** — Wegweiser: die Lesekonvention, die harten Regeln, eine
   Tabelle der Bereiche. 100 bis 180 Zeilen, damit sie ganz gelesen wird.

@@ -22,6 +22,37 @@ eines Sprachmodells, Erinnerung, Analogie zu einem anderen Produkt,
 **Maschinenlesbare Verträge haben Vorrang vor Prosa.** Wo eine OpenAPI
 existiert, wird sie gelesen, nicht die Anleitung daneben.
 
+## Bibliotheken: aus der Quelle, nicht aus dem Gedächtnis
+
+**Die API einer Bibliothek wird nachgeschlagen, nie erinnert.** Frameworks
+ändern sich schneller, als ein Modell trainiert wird; eine erinnerte
+Signatur ist eine Vermutung mit gutem Ruf.
+
+Viele Hersteller liefern ihre Dokumentation inzwischen maschinenlesbar
+als `llms.txt` an der Domain-Wurzel — das ist Rang 2. **Vor dem
+Schreiben von Code gegen eine dieser Bibliotheken wird sie gelesen:**
+
+| Bibliothek | Quelle | Geprüft |
+| --- | --- | --- |
+| Nuxt | <https://nuxt.com/llms.txt> | 2026-08 |
+| Nuxt UI | <https://ui.nuxt.com/llms.txt>, dazu `llms-full.txt` | 2026-08 |
+| Vue | <https://vuejs.org/llms.txt>, dazu `llms-full.txt` | 2026-08 |
+| Vuetify | <https://vuetifyjs.com/llms.txt> | 2026-08 |
+| Angular | <https://angular.dev/llms.txt> | 2026-08 |
+| Flutter | <https://docs.flutter.dev/llms.txt> | 2026-08 |
+
+**Wo es keine gibt**, gilt die Rangfolge oben — offizielle Doku, offizielles
+SDK. Für **Laravel** liefert der Hersteller stattdessen **Laravel Boost**:
+einen MCP-Server mit Werkzeugen für die eigene Anwendung, mitgelieferten
+KI-Richtlinien und einer Dokumentations-Schnittstelle. Wo Boost
+verfügbar ist, ist es die Quelle (Skill `neo-php`). Für **.NET** und
+**Angular Material** gibt es derzeit keine `llms.txt`; dort wird die
+offizielle Dokumentation gelesen.
+
+**Die Liste wird nachgeprüft, nicht geglaubt.** Eine Adresse, die heute
+antwortet, kann morgen weg sein; eine, die es nicht gibt, kann dazukommen.
+Wer eine neue findet, trägt sie mit Prüfdatum ein.
+
 ## Wenn eine Information fehlt
 
 1. **Dokumentieren, dass sie fehlt** — an der Stelle, an der sie

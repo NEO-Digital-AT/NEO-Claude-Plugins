@@ -24,12 +24,23 @@ zurechtfindet** und nicht erst eine Hausordnung lernen muss.
 
 | Stack | Maßgeblich |
 | --- | --- |
-| .NET, C# | Die C#-Codierungskonventionen und die Framework Design Guidelines von Microsoft, durchgesetzt über `.editorconfig` und Analyzer |
+| .NET, C# | **.NET 10 ist der Standard** für Neues. Die C#-Codierungskonventionen und die Framework Design Guidelines von Microsoft, durchgesetzt über `.editorconfig` und Analyzer |
 | Vue 3 | Der offizielle Vue-Stilleitfaden (Prioritäten A bis D), Composition API mit `<script setup>`, durchgesetzt über ESLint mit dem Vue-Regelsatz |
 | Flutter, Dart | Effective Dart (Style, Documentation, Usage, Design) und `flutter_lints`, durchgesetzt über `analysis_options.yaml` |
 
 Einzelheiten je Stack: `references/dotnet.md`, `references/vue.md`,
 `references/flutter.md`.
+
+**Für die Frameworks darüber gibt es eigene Skills**, weil dort mehr
+geregelt ist als der Codestil: `neo-php` (PHP und Laravel), `neo-vue`
+(Vue 3, Nuxt, Nuxt UI, Vuetify), `neo-angular` (Angular, Angular
+Material, Material Design 3), `neo-mobil` (Flutter, Material 3),
+`neo-contao` (Contao-Bundles). Dieser Skill bleibt die Klammer:
+Schichten, Benennung, Datenmodell, Querschnitt.
+
+**Die API einer Bibliothek wird nachgeschlagen, nicht erinnert** — über
+die `llms.txt` des Herstellers, wo es sie gibt (Skill `neo-grundregeln`,
+`references/belegpflicht.md`).
 
 ## Rangfolge bei Widersprüchen
 

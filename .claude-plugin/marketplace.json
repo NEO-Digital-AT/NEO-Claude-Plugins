@@ -16,6 +16,26 @@
       "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit."
     },
     {
+      "name": "neo-php",
+      "source": "./plugins/neo-php",
+      "description": "PHP und Laravel: die API wird nachgeschlagen statt erinnert — über Laravel Boost, wo verfügbar. strict_types in jeder Datei, alles typisiert, Enums statt Zeichenketten, readonly und DateTimeImmutable. Laravel wie gemeint verwendet: Validierung in Formularanfragen, Rechte in Policies, Ausgabe in Ressourcen, dünne Controller, keine Fassaden im Fachcode. Kein N+1, und die Abfragezahl wird gemessen. Migrationen vorwärtsgerichtet ohne Datenverlust, Jobs idempotent, statische Analyse auf hoher Stufe als Blocker."
+    },
+    {
+      "name": "neo-vue",
+      "source": "./plugins/neo-vue",
+      "description": "Vue 3, Nuxt, Nuxt UI, Vuetify und Pinia: jede Bibliothek liefert eine llms.txt, und sie wird vor dem Schreiben gelesen. script setup mit TypeScript, typisierte Props und Emits, ref als Standard, computed statt watch, jedes Aufräumen erledigt. Bei Nuxt die harte Grenze zwischen Server und Browser — was im geteilten Code steht, landet im Bündel. Genau eine UI-Bibliothek je Projekt, hinter den Neo-Wrappern, Theme aus Tokens statt überschriebenem CSS."
+    },
+    {
+      "name": "neo-angular",
+      "source": "./plugins/neo-angular",
+      "description": "Angular, Angular Material und Material Design 3: standalone, inject(), Signals für Zustand und RxJS für Ströme, OnPush überall, jedes Abonnement beendet, reaktive typisierte Formulare. Material-Komponenten hinter den Neo-Wrappern, Theme aus Tokens, kein ::ng-deep und kein !important. Material Design 3 wird als System übernommen, nicht als Sammlung einzelner Werte — und wo das Designsystem abweicht, gewinnt das Designsystem."
+    },
+    {
+      "name": "neo-mobil",
+      "source": "./plugins/neo-mobil",
+      "description": "Mobile Anwendungen mit Flutter und Material Design 3: kleine Widgets, const wo möglich, keine Fachlogik in build, jede Ressource freigegeben. Eine Zustandsverwaltung je Projekt. Größen auf Telefon und Tablet, hoch und quer, bei kleinster und größter Systemschrift — kein Überlauf, nichts ragt hinaus, kein abgeschnittener Text. Keine Geheimnisse im Paket, Berechtigungen sparsam und erklärt, Offline als Zustand statt als Fehler. Flutter oder nativ entscheidet der Projektinhaber."
+    },
+    {
       "name": "neo-design",
       "source": "./plugins/neo-design",
       "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K mit fünf maschinell geprüften Regeln (kein waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher beim Umbrechen, Bedienziele nach Gerät, kein Text abgeschnitten oder unleserlich schmal), Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Entwurf aus Claude Design vor, gibt er vor und der Agent setzt um: keine eigene Gestaltungsentscheidung, jede Abweichung ist eine Rückfrage mit Gegenüberstellungsbild, gebaut wird nach Inventar Element für Element und nach jedem Element gemessen — Layoutabgleich, Stilabgleich, Bildabgleich. Mit Kontrastrechner, Überlauf- und Textpassungsprüfer und den Befehlen /neo-design:neo-responsivpruefung, /neo-design:neo-designumsetzung, /neo-design:neo-designabgleich und /neo-design:neo-oberflaechenpruefung."

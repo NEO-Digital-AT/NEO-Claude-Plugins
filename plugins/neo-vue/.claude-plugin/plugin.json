@@ -1,0 +1,7 @@
+{
+  "name": "neo-vue",
+  "displayName": "NEO Vue, Nuxt und UI-Bibliotheken",
+  "version": "1.0.0",
+  "description": "Regeln der NEO Digital für Vue 3, Nuxt, Nuxt UI, Vuetify und Pinia. Die API wird nachgeschlagen, nicht erinnert: jede der vier Bibliotheken liefert eine llms.txt, und sie wird vor dem Schreiben gelesen — eine erinnerte Prop-Signatur ist der häufigste Grund, warum eine Komponente fast funktioniert. Eine Art, Komponenten zu schreiben: script setup mit TypeScript, typisierte Props und Emits, kein any, keine Fachlogik im Template. Reaktivität ohne Überraschung: ref als Standard, computed statt watch, jedes Aufräumen erledigt. Bei Nuxt die harte Grenze zwischen Server und Browser — was im geteilten Code steht, landet im Bündel, auch hinter einer Serverprüfung. Genau eine UI-Bibliothek je Projekt, hinter den Neo-Wrappern, Theme aus Tokens statt überschriebenem CSS, und Kontraste sowie Bedienziele werden auch bei einer guten Bibliothek gemessen statt angenommen.",
+  "author": { "name": "NEO Digital (Erich Nigg)" }
+}

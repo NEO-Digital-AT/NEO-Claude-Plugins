@@ -1,0 +1,7 @@
+{
+  "name": "neo-php",
+  "displayName": "NEO PHP und Laravel",
+  "version": "1.0.0",
+  "description": "PHP- und Laravel-Regeln der NEO Digital. Die API wird nachgeschlagen, nicht erinnert — über Laravel Boost, wo verfügbar, sonst über die offizielle Doku der eingesetzten Fassung. Die Sprache wird ausgereizt: strict_types in jeder Datei, alles typisiert, Enums statt Zeichenketten, readonly und DateTimeImmutable, keine Arrays als Datenstruktur. Laravel wird verwendet, wie Laravel gemeint ist: Validierung in Formularanfragen, Rechte in Policies, Ausgabe in Ressourcen, lange Arbeit in der Warteschlange, dünne Controller, keine Fassaden im Fachcode. Kein N+1, und die Abfragezahl wird gemessen statt geschätzt. Migrationen vorwärtsgerichtet ohne Datenverlust, neue Spalten nullbar, gegen eine Kopie eines echten Bestands geprüft. Jobs idempotent. Statische Analyse auf hoher Stufe als Blocker, die Stufe wird nicht gesenkt, um grün zu werden.",
+  "author": { "name": "NEO Digital (Erich Nigg)" }
+}

@@ -4,6 +4,24 @@ Maßgeblich sind die **C#-Codierungskonventionen** und die **Framework
 Design Guidelines** von Microsoft. Was dort steht, gilt; hier steht nur,
 was NEO zusätzlich festlegt oder wo erfahrungsgemäß gestritten wird.
 
+## Fassung
+
+**.NET 10 ist der Standard für alles Neue.** Ein neues Projekt beginnt
+dort; ein bestehendes wird beim nächsten größeren Schritt gehoben, nicht
+nebenbei.
+
+- **Die Fassung steht zentral**, nicht je Projektdatei einzeln.
+- **`<Nullable>enable</Nullable>` und `<TreatWarningsAsErrors>true`** in
+  jedem Projekt. Eine Warnung, die man wegsehen kann, wird weggesehen.
+- **Analyzer auf hoher Stufe**, in der CI, als Blocker — die Stufe wird
+  nicht gesenkt, um grün zu werden, und jede Unterdrückung trägt eine
+  Begründung in derselben Zeile.
+- **Kein Sprachfeature, weil es neu ist.** Verwendet wird, was den Code
+  klarer macht — und was das Team liest.
+- Für **.NET gibt es keine `llms.txt`**; gelesen wird die offizielle
+  Dokumentation der eingesetzten Fassung, nicht die einer anderen
+  (Skill `neo-grundregeln`, Belegpflicht).
+
 ## Projektschnitt
 
 ```
