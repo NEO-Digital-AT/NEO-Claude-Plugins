@@ -8,7 +8,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit neun Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit neun Referenzdateien, einem Werkzeug; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sechs Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
@@ -192,28 +192,69 @@ Beides gleichzeitig einzutragen ist nicht falsch, aber unnötig.
 
 ### Aktualisieren
 
-**Eine Änderung an diesem Repo kommt nicht von selbst an.** Ein
-installiertes Plugin ist eine Kopie. Nach jedem Push hier:
+**Automatisch.** `neo-grundregeln` bringt einen SessionStart-Hook mit, der
+den Marktplatz auffrischt und veraltete Anheftungen löst. Er meldet sich
+nur, wenn es etwas zu melden gab:
 
 ```
-claude plugin marketplace update            # holt die neuen Commits
-claude plugin update neo-grundregeln        # setzt die neue Fassung ein
+NEO rules updated - active from the next session
+    neo-grundregeln  2.4.0 -> 2.5.0
+    neo-design       1.8.0 -> 1.9.0
 ```
 
-Danach Claude Code **neu starten** — `claude plugin update` sagt das
-selbst („restart required to apply"). Zu aktualisieren sind die Plugins,
-deren Fassung sich geändert hat; `claude plugin list` zeigt, welche
-Fassung installiert ist.
+**Es wirkt ab der nächsten Sitzung, nicht in der laufenden.** Der Hook
+steckt im Plugin — damit er läuft, ist das Plugin schon geladen.
+`claude plugin update` sagt dasselbe: „restart required to apply".
+
+Der Hook braucht **Python 3** auf dem Rechner. Fehlt es, tut er nichts und
+sagt nichts; dann bleiben die Wege von Hand. Er ruft höchstens alle zehn
+Minuten das Netz (`NEO_RULES_INTERVAL` in Minuten, `0` schaltet die
+Drosselung ab) und lässt sich mit `NEO_RULES_UPDATE=off` ganz abschalten.
+Fremde Plugins aus anderen Marktplätzen rührt er nicht an.
+
+Wer nur wissen will, ob etwas offen ist, ohne dass sich etwas ändert:
+
+```
+python3 <plugin>/scripts/rules-update.py --check
+```
+
+**Von Hand, Weg A** — kürzer als siebzehn Befehle:
+
+```
+claude plugin marketplace update
+del "%USERPROFILE%\.claude\plugins\installed_plugins.json"
+```
+
+Danach neu starten; die nächste Sitzung installiert alles auf dem frischen
+Stand. Verloren geht dabei nichts — in der Datei steht nur, welche Fassung
+angeheftet ist. Was installiert sein soll, steht in `settings.json`.
+
+**Von Hand, Weg B** — je Plugin ein Befehl. `claude plugin update` kennt
+kein `--all`, also eine Schleife (Git Bash):
+
+```bash
+for p in neo-grundregeln neo-code neo-doku neo-design neo-komponenten \
+         neo-api neo-php neo-vue neo-angular neo-mobil neo-contao \
+         neo-assistent neo-ki neo-recht neo-sicherheit neo-deployment neo-betrieb; do
+  claude plugin update $p@neo-claude-plugins -y
+done
+```
+
+Das dauert rund 17 Sekunden. Ein Plugin, das schon aktuell ist, meldet das
+und tut nichts — es schadet also nicht, immer alle durchlaufen zu lassen.
+
+**Beim allerersten Mal braucht es zwei Starts.** Der erste klont den
+Marktplatz, der zweite installiert die Plugins. Erst danach greifen die
+Regeln. Solange das nicht geschehen ist, meldet `claude plugin list`
+„No plugins installed", obwohl in `settings.json` alles richtig steht.
 
 Die **Kernregeln** kommen über den SessionStart-Hook und werden bei jedem
-Sitzungsstart frisch gelesen — aber aus der installierten Kopie. Eine
-neue Sitzung allein reicht also nicht; ist das Plugin einmal
-aktualisiert, hat jede weitere Sitzung die neuen Kernregeln ohne weiteres
-Zutun.
+Sitzungsstart frisch gelesen — aber aus der installierten Kopie. Eine neue
+Sitzung allein holt nichts von GitHub.
 
 Deshalb hebt jede Regeländerung die Fassung des betroffenen Plugins in
-dessen `.claude-plugin/plugin.json`. Ohne neue Nummer gibt es keinen
-Anhaltspunkt, dass etwas nachzuziehen ist.
+dessen `.claude-plugin/plugin.json`. Ohne neue Nummer sieht weder der Hook
+noch `claude plugin update`, dass etwas nachzuziehen ist.
 
 ### Global heißt verfügbar, nicht verbindlich
 
@@ -247,6 +288,7 @@ Tor in der CI.
 | `gold-run.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
 | `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `prompt-inventory.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
+| `rules-update.py` | `plugins/neo-grundregeln/scripts/` | Hält die installierten Regel-Plugins auf dem Stand des Marktplatzes. Läuft aus dem SessionStart-Hook, frischt den Marktplatz auf und löst veraltete Anheftungen, sodass die nächste Sitzung neu installiert. Meldet sich nur, wenn sich etwas geändert hat; ohne Python, ohne Netz und bei unlesbarer Registrierung tut es nichts. Fremde Marktplätze bleiben unangetastet. |
 | `annotate.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken

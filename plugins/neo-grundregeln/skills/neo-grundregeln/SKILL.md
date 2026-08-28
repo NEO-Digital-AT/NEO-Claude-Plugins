@@ -113,6 +113,7 @@ Umsetzungsplan enthält: `references/prozess.md`.
 | Bereich | Referenz |
 | --- | --- |
 | Die Auftragsliste: Punkte bilden, abarbeiten, belegen | `references/auftragsliste.md` |
+| Werkzeug `scripts/rules-update.py`: hält die Regel-Plugins auf dem Stand des Marktplatzes, läuft aus dem SessionStart-Hook | — |
 | Der Prozess im Detail, was Freigabe heißt, der Umsetzungsplan | `references/prozess.md` |
 | Belegpflicht, Quellen, fremde APIs, MCP-Rollen, verteilte Systeme | `references/belegpflicht.md` |
 | Selbstkontrolle, Auswirkungsanalyse, Debugging, Laufzeitverifikation | `references/selbstkontrolle.md` |

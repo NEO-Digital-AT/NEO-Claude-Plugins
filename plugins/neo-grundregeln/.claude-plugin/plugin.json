@@ -1,7 +1,7 @@
 {
   "name": "neo-grundregeln",
   "displayName": "NEO Grundregeln",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Verbindliche Arbeitsregeln der NEO Digital für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, Auftragsliste statt Abbruch (eine neue Nachricht hängt einen Punkt an, sie bricht die laufende Aufgabe nicht ab), CLAUDE.md als Pflicht mit den geltenden Skills als Vorgabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, das Designsystem gibt vor und der Agent gestaltet nicht, Selbstkontrolle und Auswirkungsanalyse vor dem nächsten Schritt, Frameworktreue, rechtliche Pflichtbausteine, Testpflichten einschließlich Oberflächendurchlauf (jedes Bedienelement an jeder Stelle, an der es vorkommt) und Rauchtest je Route, Git-Hygiene, kein Direkt-Push auf dev oder main. Enthält die Projektstartliste und den Befehl /neo-grundregeln:neo-projektstart. Kernregeln werden über einen SessionStart-Hook in jede Sitzung geladen. Das System spricht englisch und der Mensch deutsch; mehrsprachig heißt vollständig, und die Vollständigkeit wird gemessen.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"
