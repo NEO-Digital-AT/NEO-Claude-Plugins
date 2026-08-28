@@ -10,8 +10,8 @@ Requesty is OpenAI compatible, so the adapter speaks
 `POST <base>/chat/completions` without an SDK and without dependencies.
 
     export REQUESTY_API_KEY="…"
-    requesty_adapter.py --config assistant.json --check
-    gold-run.py gold-cases.json --adapter "python3 tools/requesty_adapter.py --config assistant.json"
+    requesty-adapter.py --config assistant.json --check
+    gold-run.py gold-cases.json --adapter "python3 tools/requesty-adapter.py --config assistant.json"
 
 The key comes **exclusively** from the environment. It never appears in
 the configuration, never in the repository and never in any output of this

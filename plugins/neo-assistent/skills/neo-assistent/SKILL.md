@@ -183,7 +183,7 @@ besser — **jedes Kettenglied ist ein eigenes Modell** und wird gegen
 dieselben Goldfälle gemessen. Ein ungeprüftes Rückfallmodell ist ein
 zweiter, ungeprüfter Assistent.
 
-`scripts/requesty_adapter.py` verbindet den Goldfall-Prüfer mit dem
+`scripts/requesty-adapter.py` verbindet den Goldfall-Prüfer mit dem
 Router: er fährt den Fall, zeichnet jeden Werkzeugaufruf auf, **ohne ihn
 auszuführen**, und prüft die Argumente gegen das Schema.
 `--check` prüft Zugang und Konfiguration und warnt, wenn die

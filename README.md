@@ -125,42 +125,23 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 ## Installation
 
-Lokal (CLI und VS-Code-Erweiterung), gilt für alle Projekte des Nutzers:
+### Global — gilt in jedem Projekt
+
+Der übliche Fall. Zwei Befehle im Terminal, gleich in welchem
+Verzeichnis:
 
 ```
-claude plugin marketplace add C:\Entwicklung\neo-digital-at\NEO-Claude-Plugins
+claude plugin marketplace add NEO-Digital-AT/NEO-Claude-Plugins
+claude plugin install neo-grundregeln@neo-claude-plugins
 ```
 
-Danach die Plugins aktivieren — entweder über `/plugin` oder in
-`~/.claude/settings.json`:
+Ohne `--scope` schreiben beide in die **Benutzerkonfiguration**, und das
+ist die globale. Für jedes weitere Plugin denselben `install`-Befehl mit
+anderem Namen.
 
-```json
-{
-  "enabledPlugins": {
-    "neo-grundregeln@neo-claude-plugins": true,
-    "neo-code@neo-claude-plugins": true,
-    "neo-php@neo-claude-plugins": true,
-    "neo-vue@neo-claude-plugins": true,
-    "neo-angular@neo-claude-plugins": true,
-    "neo-mobil@neo-claude-plugins": true,
-    "neo-design@neo-claude-plugins": true,
-    "neo-komponenten@neo-claude-plugins": true,
-    "neo-api@neo-claude-plugins": true,
-    "neo-doku@neo-claude-plugins": true,
-    "neo-recht@neo-claude-plugins": true,
-    "neo-ki@neo-claude-plugins": true,
-    "neo-assistent@neo-claude-plugins": true,
-    "neo-deployment@neo-claude-plugins": true,
-    "neo-betrieb@neo-claude-plugins": true,
-    "neo-contao@neo-claude-plugins": true,
-    "neo-sicherheit@neo-claude-plugins": true
-  }
-}
-```
-
-Für Claude Code im Web (claude.ai/code) und für Team-Nutzung muss das
-Repo auf GitHub liegen (privat reicht). Dann je Projekt in
-`.claude/settings.json`:
+Schneller geht es, die Datei direkt zu schreiben —
+`%USERPROFILE%\.claude\settings.json` unter Windows,
+`~/.claude/settings.json` unter macOS und Linux:
 
 ```json
 {
@@ -191,10 +172,59 @@ Repo auf GitHub liegen (privat reicht). Dann je Projekt in
 }
 ```
 
-`neo-contao`, `neo-deployment` und `neo-ki` dürfen in Projekten
-weggelassen werden, die weder Contao einsetzen noch ein Zweigmodell mit
-`dev` und `main` führen noch KI verwenden. `neo-recht` und `neo-betrieb`
-bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
+Danach Claude Code neu starten. Beim ersten Start wird der Marktplatz von
+GitHub geklont; das Repo darf privat sein, der Klon nutzt die vorhandene
+GitHub-Anmeldung.
+
+Statt der GitHub-Quelle geht auch ein lokaler Klon
+(`claude plugin marketplace add C:\Entwicklung\neo-digital-at\NEO-Claude-Plugins`).
+Das bindet die Plugins allerdings an diesen einen Rechner und an diesen
+Pfad.
+
+### Je Projekt — wenn das Team es über das Repo bekommen soll
+
+Derselbe Inhalt, aber in `<Projekt>/.claude/settings.json` statt in der
+Benutzerkonfiguration. Wird mitcommittet und gilt **nur in diesem
+Projekt**. Wer es hier einträgt und sich wundert, warum die Regeln
+anderswo fehlen, hat genau diesen Unterschied erwischt.
+
+Beides gleichzeitig einzutragen ist nicht falsch, aber unnötig.
+
+### Aktualisieren
+
+**Eine Änderung an diesem Repo kommt nicht von selbst an.** Ein
+installiertes Plugin ist eine Kopie. Nach jedem Push hier:
+
+```
+claude plugin marketplace update            # holt die neuen Commits
+claude plugin update neo-grundregeln        # setzt die neue Fassung ein
+```
+
+Danach Claude Code **neu starten** — `claude plugin update` sagt das
+selbst („restart required to apply"). Zu aktualisieren sind die Plugins,
+deren Fassung sich geändert hat; `claude plugin list` zeigt, welche
+Fassung installiert ist.
+
+Die **Kernregeln** kommen über den SessionStart-Hook und werden bei jedem
+Sitzungsstart frisch gelesen — aber aus der installierten Kopie. Eine
+neue Sitzung allein reicht also nicht; ist das Plugin einmal
+aktualisiert, hat jede weitere Sitzung die neuen Kernregeln ohne weiteres
+Zutun.
+
+Deshalb hebt jede Regeländerung die Fassung des betroffenen Plugins in
+dessen `.claude-plugin/plugin.json`. Ohne neue Nummer gibt es keinen
+Anhaltspunkt, dass etwas nachzuziehen ist.
+
+### Global heißt verfügbar, nicht verbindlich
+
+Alle siebzehn global zu aktivieren heißt nur, dass sie **geladen werden
+können**. Welche in einem Projekt **gelten**, sagt dessen `CLAUDE.md`,
+namentlich und als Vorgabe (Kernregel 3). Ein Contao-Projekt schleppt so
+die Flutter-Regeln nicht mit, ohne dass jemand am globalen Schalter
+drehen muss.
+
+`neo-recht` und `neo-betrieb` gehören in jede `CLAUDE.md`, sobald etwas
+veröffentlicht oder betrieben wird.
 
 ## Werkzeuge in den Plugins
 
@@ -215,7 +245,7 @@ Tor in der CI.
 | `style-audit.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `comparison.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
 | `gold-run.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
-| `requesty_adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
+| `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `prompt-inventory.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
 | `annotate.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
@@ -292,6 +322,10 @@ Die Lesekonvention ist in allen Skills dieselbe:
 - Regeländerung = Textänderung hier + Versionssprung im betroffenen
   `plugin.json` + Commit. Die Regeln dieses Repos gelten auch für dieses
   Repo selbst (echte Umlaute, IST-Zustand, keine Marketingsprache).
+- **Nach dem Push nachziehen**, sonst arbeitet jeder weiter mit der alten
+  Fassung: `claude plugin marketplace update`, dann
+  `claude plugin update <plugin>`, dann Claude Code neu starten
+  (Abschnitt „Aktualisieren").
 - Neue Plugins in `.claude-plugin/marketplace.json` registrieren.
 - Eine Regel gehört in genau ein Plugin. Wo zwei Plugins dieselbe Sache
   berühren, verweist das eine auf das andere, statt sie zu wiederholen.

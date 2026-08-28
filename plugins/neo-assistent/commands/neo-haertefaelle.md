@@ -14,7 +14,7 @@ Lade zuerst den Skill `neo-assistent`, dazu
 
 ```
 export REQUESTY_API_KEY="…"
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/requesty_adapter.py --config assistant.json --check
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/requesty-adapter.py --config assistant.json --check
 ```
 
 Der Schlüssel kommt **ausschließlich** aus der Umgebung. Steht er in der
@@ -94,7 +94,7 @@ mehr Schaden an als keiner.
 
 ```
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py hard-cases.json \
-  --adapter "python3 tools/requesty_adapter.py --config assistant.json" \
+  --adapter "python3 tools/requesty-adapter.py --config assistant.json" \
   --runs 5 --report hard-cases-report.json
 ```
 
