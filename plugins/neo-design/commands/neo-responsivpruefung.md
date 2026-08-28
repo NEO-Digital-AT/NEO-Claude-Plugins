@@ -20,21 +20,21 @@ Kläre, falls es nicht im Projekt steht:
    ohne Leerzeichen, eine achtstellige Zahl. Ein Layout, das nur mit
    kurzen Daten hält, hält nicht.
 5. Welche Bereiche dürfen ausdrücklich waagrecht scrollen? Sie tragen
-   `data-tabellenbereich` und `overflow-x: auto`.
+   `data-table-area` und `overflow-x: auto`.
 
 ## Messen
 
 Für **jede** Seite, jede Sprache, jede Fassung, jeden Zustand:
 
 ```js
-await page.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/ueberlauf.js' })
-await page.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/textpassung.js' })
+await page.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/overflow.js' })
+await page.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/text-fit.js' })
 for (const breite of [320, 390, 768, 1024, 1280, 1920, 2560, 3840]) {
   await page.setViewportSize({ width: breite, height: 900 })
-  for (const w of ['neoUeberlauf', 'neoTextpassung']) {
-    const e = await page.evaluate((n) => window[n].pruefen(), w)
-    const text = await page.evaluate(([n, x]) => window[n].bericht(x), [w, e])
-    expect(e.befunde, text).toHaveLength(0)
+  for (const w of ['neoOverflow', 'neoTextFit']) {
+    const e = await page.evaluate((n) => window[n].check(), w)
+    const text = await page.evaluate(([n, x]) => window[n].report(x), [w, e])
+    expect(e.findings, text).toHaveLength(0)
   }
 }
 ```

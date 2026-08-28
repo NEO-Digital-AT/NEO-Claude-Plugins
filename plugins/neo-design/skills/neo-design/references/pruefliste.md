@@ -153,7 +153,7 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
 
 ## Größe und Gerät
 
-Maschinell geprüft mit `ueberlauf.js` auf 320, 390, 768, 1024, 1280,
+Maschinell geprüft mit `overflow.js` auf 320, 390, 768, 1024, 1280,
 1920, 2560 und 3840 px. **Null Befunde**, je Seite, je Sprache, in Hell
 und Dunkel.
 
@@ -177,7 +177,7 @@ und Dunkel.
 - [ ] Mit **langen Daten** geprüft: Name über 60 Zeichen, Kennung ohne
       Leerzeichen, achtstellige Zahl.
 
-### Text im Layout (`textpassung.js`, null Befunde)
+### Text im Layout (`text-fit.js`, null Befunde)
 
 - [ ] **Kein Text abgeschnitten** — weder waagrecht hinter der Kante noch
       senkrecht bei fester Höhe.

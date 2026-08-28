@@ -15,11 +15,11 @@ Scrollbalken und fällt in keiner Überlaufprüfung auf.**
 
 | Art | Was man sieht | Wo es auffällt |
 | --- | --- | --- |
-| **Ragt hinaus** | Der Kasten wird zu breit, die Seite scrollt | `ueberlauf.js` |
-| **Waagrecht abgeschnitten** | Text verschwindet hinter der Kante | `textpassung.js` |
-| **Senkrecht abgeschnitten** | Unten fehlt etwas, ohne Hinweis | `textpassung.js` |
-| **Bereich zu schmal** | Eine Spalte mit zwei Zeichen je Zeile | `textpassung.js` |
-| **Falsch umgebrochen** | Bruch mitten im Wort statt an der Silbe | `textpassung.js` |
+| **Ragt hinaus** | Der Kasten wird zu breit, die Seite scrollt | `overflow.js` |
+| **Waagrecht abgeschnitten** | Text verschwindet hinter der Kante | `text-fit.js` |
+| **Senkrecht abgeschnitten** | Unten fehlt etwas, ohne Hinweis | `text-fit.js` |
+| **Bereich zu schmal** | Eine Spalte mit zwei Zeichen je Zeile | `text-fit.js` |
+| **Falsch umgebrochen** | Bruch mitten im Wort statt an der Silbe | `text-fit.js` |
 
 Nur die erste erzeugt einen Balken. Die anderen vier sehen aus wie
 Absicht — deshalb werden sie gemessen.
@@ -142,13 +142,13 @@ die in einer anderen Sprache länger ist.
 ## Messen
 
 ```js
-await page.addScriptTag({ path: 'tools/textpassung.js' })
-const e = await page.evaluate(() => neoTextpassung.pruefen())
-expect(e.befunde, await page.evaluate((x) => neoTextpassung.bericht(x), e))
+await page.addScriptTag({ path: 'tools/text-fit.js' })
+const e = await page.evaluate(() => neoTextFit.check())
+expect(e.findings, await page.evaluate((x) => neoTextFit.report(x), e))
   .toHaveLength(0)
 ```
 
-Erlaubt sind **null Befunde**. Gemessen wird zusammen mit `ueberlauf.js`,
+Erlaubt sind **null Befunde**. Gemessen wird zusammen mit `overflow.js`,
 auf denselben acht Breiten, je Sprache, in Hell und Dunkel — und
 zusätzlich:
 

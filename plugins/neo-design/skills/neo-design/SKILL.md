@@ -190,7 +190,7 @@ Aussehen nie**. Was weggelassen wird, entscheidet der Projektinhaber,
 nicht der Umbruchpunkt.
 
 Fünf harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
-`scripts/ueberlauf.js`, erlaubt sind **null Befunde**:
+`scripts/overflow.js`, erlaubt sind **null Befunde**:
 
 1. **Kein waagrechtes Scrollen des Seitenkörpers** — auf keiner Breite,
    auch nicht am Schreibtisch. Breite Inhalte scrollen in ihrem eigenen
@@ -215,7 +215,7 @@ Tokens, damit ein Formular auf 4K nicht über die halbe Wand läuft.
 
 **Der Überlauf ist nur die Hälfte.** Ein Kasten kann richtig sitzen und
 der Text darin abgeschnitten, zwei Zeichen breit oder falsch umgebrochen
-sein — das erzeugt keinen Balken. Deshalb misst `scripts/textpassung.js`
+sein — das erzeugt keinen Balken. Deshalb misst `scripts/text-fit.js`
 zusätzlich, was **innen** nicht passt. Für Fließtext gilt `hyphens: auto`
 mit gesetzter Sprache — **ohne `lang` trennt der Browser nicht**;
 `overflow-wrap: anywhere` ist für Kennungen richtig und für Fließtext

@@ -25,7 +25,7 @@ der Projektinhaber, nicht der Umbruchpunkt.
    umgebrochen.
 
 Alle sechs werden **maschinell geprüft**, auf acht Breiten, mit
-`scripts/ueberlauf.js` und `scripts/textpassung.js`. Nicht Gemessenes
+`scripts/overflow.js` und `scripts/text-fit.js`. Nicht Gemessenes
 gilt als nicht erfüllt.
 
 Die ersten fünf stehen hier. Die sechste hat einen eigenen Text, weil sie
@@ -77,12 +77,12 @@ Jede Ansicht bekommt einen Test, der auf **jeder** Prüfbreite alle fünf
 harten Regeln prüft:
 
 ```js
-await page.addScriptTag({ path: 'tools/ueberlauf.js' })
+await page.addScriptTag({ path: 'tools/overflow.js' })
 for (const breite of [320, 390, 768, 1024, 1280, 1920, 2560, 3840]) {
   await page.setViewportSize({ width: breite, height: 900 })
-  const e = await page.evaluate(() => neoUeberlauf.pruefen())
-  const text = await page.evaluate((x) => neoUeberlauf.bericht(x), e)
-  expect(e.befunde, text).toHaveLength(0)
+  const e = await page.evaluate(() => neoOverflow.check())
+  const text = await page.evaluate((x) => neoOverflow.report(x), e)
+  expect(e.findings, text).toHaveLength(0)
 }
 ```
 
@@ -172,7 +172,7 @@ lässt Fläche frei, und die freie Fläche wirkt wie ein Ladefehler.
 - Lange Inhalte in Zellen brechen um (`overflow-wrap: anywhere`) oder
   werden gekürzt — sie schieben die Tabelle nicht auf.
 - Eine Tabelle **breiter** als der Inhaltsbereich ist nur in einem
-  ausdrücklichen Scrollbereich zulässig (`data-tabellenbereich` mit
+  ausdrücklichen Scrollbereich zulässig (`data-table-area` mit
   `overflow-x: auto`). Auch dort ist sie nie **schmaler** als der
   sichtbare Bereich.
 
