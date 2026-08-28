@@ -9,7 +9,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit acht Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
-| `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Sprache im System: englisch** | Skill mit fünf Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
+| `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sechs Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
@@ -48,6 +48,11 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
   Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
   Stilabgleich.
+- **Bevor eine Abstraktion entsteht:** `neo-code`,
+  `references/lesbarkeit.md` — der häufigste Fehler in maschinell
+  geschriebenem Code ist Überbau. Eine Funktion ab der dritten
+  Wiederholung, kein Interface für eine Umsetzung, und von der
+  Fehlermeldung in drei Sprüngen zur Ursache.
 - **Sobald etwas benannt wird:** `neo-code`, `references/sprache.md` —
   das System spricht englisch, der Mensch deutsch. Eine englische
   Fehlermeldung ist besser als eine deutsche, die es nur auf Deutsch gibt.

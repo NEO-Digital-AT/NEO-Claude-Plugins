@@ -42,6 +42,37 @@ Schichten, Benennung, Datenmodell, Querschnitt.
 die `llms.txt` des Herstellers, wo es sie gibt (Skill `neo-grundregeln`,
 `references/belegpflicht.md`).
 
+## Sauber heißt nicht abstrakt
+
+> **„Das hast du mit der KI geschrieben, gell — das kann keiner mehr
+> lesen."**
+
+Der häufigste Fehler in maschinell geschriebenem Code ist nicht
+Schlamperei, sondern **Überbau**: drei Dateien für eine Aufgabe, ein
+Interface je Klasse, eine Funktion für jedes `if`.
+
+**Der Maßstab ist ein Entwickler, der programmieren kann und von
+objektorientierter Programmierung nur die Grundlagen hat.** Er bekommt
+eine Fehlermeldung, findet die Datei und von dort die Ursache — **in
+höchstens drei Sprüngen**. Die Zahl der Dateien je Ablauf wird genannt.
+
+- **Eine eigene Funktion ab der dritten Wiederholung**, oder wenn ihr
+  Name einen Kommentar ersetzt, oder wenn sie eigenständig testbar sein
+  muss. Nicht für jedes `if`.
+- **Zwei Funktionen, die dasselbe tun, sind eine zu viel.** Sie kommen in
+  eine gemeinsame Schicht, die beide Module verwenden — nachdem geklärt
+  ist, **warum** sie sich unterschieden. Der Grenzfall wird übernommen,
+  der Fehler nicht.
+- **Was sich aus verschiedenen Gründen ändert, bleibt getrennt.** Sonst
+  entsteht eine Sammelklasse mit fünf Schaltern, und die ist schlimmer
+  als die Kopie.
+- **Kein Muster ohne Anlass**: kein Interface für eine Umsetzung, keine
+  Fabrik für einen Typ, kein Repository um eine Abfrage, kein Ereignis
+  mit einem Zuhörer.
+
+Richtwerte, der Weg vom Fehler zur Ursache, was Enterprise **nicht**
+heißt und der Lesetest vor der Fertigmeldung: `references/lesbarkeit.md`.
+
 ## Das System spricht englisch
 
 **Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen,

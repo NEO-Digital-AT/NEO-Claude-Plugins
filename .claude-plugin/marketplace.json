@@ -13,7 +13,7 @@
     {
       "name": "neo-code",
       "source": "./plugins/neo-code",
-      "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit. Das System spricht englisch: Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen, Tabellen und Aufzählungswerte ausnahmslos — deutsch bleibt, was ein deutschsprachiger Mensch liest."
+      "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit. Das System spricht englisch: Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen, Tabellen und Aufzählungswerte ausnahmslos — deutsch bleibt, was ein deutschsprachiger Mensch liest. Sauber heißt nicht abstrakt: Überbau ist der häufigste Fehler in maschinell geschriebenem Code — eine Funktion ab der dritten Wiederholung, kein Muster ohne Anlass, und von der Fehlermeldung in drei Sprüngen zur Ursache."
     },
     {
       "name": "neo-php",

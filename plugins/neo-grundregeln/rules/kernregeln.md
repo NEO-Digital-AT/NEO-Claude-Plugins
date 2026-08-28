@@ -117,19 +117,29 @@ den jeweiligen Skill laden.
 18. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
-    Vorgaben des jeweiligen Stacks** (.NET, Vue 3, Flutter): klare
-    Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je
-    Einheit, englische Bezeichner bei deutschen Oberflächentexten.
+    Vorgaben des jeweiligen Stacks**: klare Schichtgrenzen mit
+    festgelegter Importrichtung, eine Verantwortung je Einheit.
     Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
     Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
     gewinnt immer Letzteres.
-19. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+19. **Sauber heißt nicht abstrakt.** Der Code muss von jemandem lesbar
+    sein, der programmieren kann und von objektorientierter Programmierung
+    nur die Grundlagen hat: von der Fehlermeldung zur Datei zur Ursache,
+    **in höchstens drei Sprüngen**. Eine eigene Funktion entsteht ab der
+    **dritten** Wiederholung, oder wenn ihr Name einen Kommentar ersetzt
+    — nicht für jedes `if`. Kein Muster ohne Anlass: kein Interface für
+    eine Umsetzung, keine Fabrik für einen Typ, kein Ereignis mit einem
+    Zuhörer. **Zwei Funktionen, die dasselbe tun, sind eine zu viel** und
+    werden in einer gemeinsamen Schicht zusammengelegt, nachdem geklärt
+    ist, warum sie sich unterschieden. Was sich aus **verschiedenen
+    Gründen** ändert, bleibt getrennt.
+20. **Schnittstellen.** Wird an einer API entwickelt, ist ein
     OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
     geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-20. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+21. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
     Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
     Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
     automatisch gelöscht oder anonymisiert — was von Hand gelöscht
@@ -137,6 +147,6 @@ den jeweiligen Skill laden.
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell.
-21. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+22. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.
