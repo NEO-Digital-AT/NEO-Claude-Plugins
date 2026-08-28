@@ -15,6 +15,11 @@ Oberfläche, die man ohne Handbuch versteht, verdankt das ihren Texten.
 - Wer drei Sätze Hilfetext an einem Feld braucht, hat das falsche
   Bedienelement gewählt — siehe `eingaben.md`.
 
+**Dieser Text regelt den Wortlaut.** Ob der Wortlaut in seinen Kasten
+passt — Umbruch, Kürzung, zu schmale Bereiche, Schriftgrößen —, steht in
+`textpassung.md`. Eine gute Beschriftung, die abgeschnitten wird, ist
+keine gute Beschriftung.
+
 ## Beschriftungen
 
 - Knöpfe tragen **Verb plus Objekt**: „Auftrag anlegen", „Änderungen

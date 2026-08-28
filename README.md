@@ -10,7 +10,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit acht Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Messwerte | Skill mit zehn Referenzdateien, sechs Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Messwerte | Skill mit elf Referenzdateien, sieben Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
@@ -49,6 +49,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher
   beim Umbrechen, Bedienziele groß genug. Gilt für Anwendungen wie für
   Webseiten.
+- **Und weil der Überlauf nur die Hälfte ist:** derselbe Befehl misst mit
+  `textpassung.js`, was **innen** nicht passt — abgeschnittener Text,
+  Spalten mit zwei Zeichen je Zeile, Umbrüche mitten im Wort. Nichts
+  davon erzeugt einen Scrollbalken; alles davon sieht falsch aus.
 - **Wenn ein Knopf an zwei Stellen vorkommt:** `neo-grundregeln`,
   `references/durchlauf.md` — er wird an **beiden** geprüft. Ein Element,
   das auf Seite A getestet ist und auf Seite B nicht, bricht auf Seite B.
@@ -166,6 +170,7 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | `kontrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
 | `layoutabgleich.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
 | `ueberlauf.js` | `plugins/neo-design/scripts/` | Misst je Prüfbreite, was nicht in den Bildschirm passt: waagrechtes Scrollen, Elemente über dem Rand, Inhalt breiter als sein Platz, Tabellen unter der Inhaltsbreite, zu kleine Bedienziele und **Löcher in umgebrochenen Reihen** — drei Kacheln, die auf zwei Spalten umbrechen und eine halbe Reihe frei lassen. Framework-unabhängig am fertigen DOM. |
+| `textpassung.js` | `plugins/neo-design/scripts/` | Prüft, ob der Text in seinen Bereich passt — der Gegenspieler zum Überlauf, denn nichts davon erzeugt einen Scrollbalken: waagrecht und senkrecht abgeschnittener Text, Kürzung ohne erreichbaren Volltext, überlappende Texte, Bereiche unter acht Zeichen je Zeile, Umbruch mitten im Wort, `hyphens: auto` ohne `lang` und zu kleine Schrift. |
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `gegenueberstellung.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |

@@ -20,9 +20,17 @@ der Projektinhaber, nicht der Umbruchpunkt.
 4. **Keine Löcher beim Umbrechen.** Eine umgebrochene Reihe lässt keine
    halbe Reihe frei.
 5. **Bedienziele wachsen zum schmalen Gerät hin**, sie schrumpfen nicht.
+6. **Kein Text verschwindet** — nicht hinausragend, nicht abgeschnitten,
+   nicht auf zwei Zeichen je Zeile gestaucht, nicht mitten im Wort
+   umgebrochen.
 
-Alle fünf werden **maschinell geprüft**, auf acht Breiten, mit
-`scripts/ueberlauf.js`. Nicht Gemessenes gilt als nicht erfüllt.
+Alle sechs werden **maschinell geprüft**, auf acht Breiten, mit
+`scripts/ueberlauf.js` und `scripts/textpassung.js`. Nicht Gemessenes
+gilt als nicht erfüllt.
+
+Die ersten fünf stehen hier. Die sechste hat einen eigenen Text, weil sie
+anders funktioniert: sie erzeugt **keinen** Scrollbalken und fällt in
+keiner Überlaufprüfung auf — `textpassung.md`.
 
 ## Die harte Regel: kein horizontales Scrollen
 
@@ -181,7 +189,9 @@ Rangfolge, in dieser Reihenfolge zu prüfen:
    Datenmengen.
 
 Nie: die Tabelle so schrumpfen, dass Zahlen umbrechen oder Text auf zwei
-Buchstaben abgeschnitten wird.
+Buchstaben abgeschnitten wird. **Untergrenze sind im Mittel acht Zeichen
+je Zeile** — darunter ist eine Spalte ein senkrechter Buchstabenstapel und
+wird weggelassen, nicht schmaler gemacht (`textpassung.md`).
 
 ## Bedienziele wachsen nach unten hin
 

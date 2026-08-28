@@ -205,17 +205,32 @@ Fünf harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
 5. **Bedienziele wachsen zum schmalen Gerät hin**: bis 768 px mindestens
    44 × 44 px, darüber 24 × 24 px. Symbolknöpfe in Tabellenzeilen sind
    der häufigste Verstoß.
+6. **Kein Text verschwindet** — und wo er nicht ganz passt, ist
+   entschieden, wie. Nichts abgeschnitten, nichts überlappt, kein Bereich
+   unter acht Zeichen je Zeile, kein Bruch mitten im Wort.
 
 Dazu: unter dem Umbruchpunkt liegt das Hauptmenü hinter einem Knopf;
 Inhaltsbereich, Textspalte und Eingabefelder haben **Höchstbreiten** aus
 Tokens, damit ein Formular auf 4K nicht über die halbe Wand läuft.
 
+**Der Überlauf ist nur die Hälfte.** Ein Kasten kann richtig sitzen und
+der Text darin abgeschnitten, zwei Zeichen breit oder falsch umgebrochen
+sein — das erzeugt keinen Balken. Deshalb misst `scripts/textpassung.js`
+zusätzlich, was **innen** nicht passt. Für Fließtext gilt `hyphens: auto`
+mit gesetzter Sprache — **ohne `lang` trennt der Browser nicht**;
+`overflow-wrap: anywhere` ist für Kennungen richtig und für Fließtext
+falsch. Wer kürzt, bietet den vollen Text an; eine Auslassung ohne
+Volltext ist Datenverlust.
+
 Gemessen wird je Seite, je Sprache, in Hell und Dunkel, mit **langen
-Testdaten** — ein Layout, das nur mit kurzen Daten hält, hält nicht.
+Testdaten** und bei 200 % Textvergrößerung — ein Layout, das nur mit
+kurzen Daten hält, hält nicht.
 
 Umbruchpunkte, Tabellenrangfolge, Lückenregel mit Beispielcode,
-Höchstbreiten und Navigation: `references/responsiv.md`. Der Befehl
-`/neo-design:neo-responsivpruefung` führt die Messung durch.
+Höchstbreiten und Navigation: `references/responsiv.md`. Umbruch, Kürzen,
+zu schmale Bereiche und mitwachsende Schriftgrößen:
+`references/textpassung.md`. Der Befehl
+`/neo-design:neo-responsivpruefung` führt beide Messungen durch.
 
 ## 8. Texte in der Oberfläche
 

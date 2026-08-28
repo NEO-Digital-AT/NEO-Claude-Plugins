@@ -174,6 +174,29 @@ und Dunkel.
       Eingabefelder — kein Feld über die halbe Wand auf 4K.
 - [ ] Mit **langen Daten** geprüft: Name über 60 Zeichen, Kennung ohne
       Leerzeichen, achtstellige Zahl.
+
+### Text im Layout (`textpassung.js`, null Befunde)
+
+- [ ] **Kein Text abgeschnitten** — weder waagrecht hinter der Kante noch
+      senkrecht bei fester Höhe.
+- [ ] **Wo gekürzt wird, ist der volle Text erreichbar** (`title`,
+      `aria-label`, Tooltip oder Detailansicht). Eine Auslassung ohne
+      Volltext ist Datenverlust.
+- [ ] **Nichts überlappt** — zwei Texte liegen nie übereinander.
+- [ ] **Kein Bereich unter acht Zeichen je Zeile.** Zu schmale Spalten
+      werden weggelassen oder zur Karte, nicht schmaler gemacht.
+- [ ] **Fließtext trennt an Silbengrenzen**: `hyphens: auto` **und**
+      `lang` am Dokument — ohne `lang` trennt der Browser nicht.
+- [ ] `overflow-wrap: anywhere` nur für Kennungen, URLs und Prüfsummen;
+      `word-break: break-all` nirgends im Fließtext.
+- [ ] **Schriftgrößen** mindestens 12 px, auf schmalen Geräten 14 px;
+      Text wird auf dem Telefon nicht kleiner als am Schreibtisch.
+- [ ] Mitwachsende Größen über `clamp()` **mit Boden und Decke**, aus
+      Tokens; kein reines `vw` als Schriftmaß.
+- [ ] Bei **200 % Textvergrößerung** und **400 % Zoom** ist nichts
+      abgeschnitten, nichts überlappt, nichts verschwunden.
+- [ ] In der **längsten ausgelieferten Sprache** geprüft, nicht nur in
+      Englisch.
 - [ ] In jeder ausgelieferten Sprache geprüft, nicht nur in einer.
 - [ ] Auf großen Bildschirmen wird verteilt, nicht gedehnt; Textzeile
       bleibt unter 90 Zeichen.
