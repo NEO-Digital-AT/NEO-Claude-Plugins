@@ -17,8 +17,9 @@ Oberfläche, die man ohne Handbuch versteht, verdankt das ihren Texten.
 
 **Dieser Text regelt den Wortlaut.** Ob der Wortlaut in seinen Kasten
 passt — Umbruch, Kürzung, zu schmale Bereiche, Schriftgrößen —, steht in
-`textpassung.md`. Eine gute Beschriftung, die abgeschnitten wird, ist
-keine gute Beschriftung.
+`textpassung.md`. Ob es ihn in jeder Sprache gibt, in
+`uebersetzungen.md`. Eine gute Beschriftung, die abgeschnitten wird oder
+nur auf Deutsch existiert, ist keine gute Beschriftung.
 
 ## Beschriftungen
 

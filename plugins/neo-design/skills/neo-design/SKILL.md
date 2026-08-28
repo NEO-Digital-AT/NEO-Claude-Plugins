@@ -239,8 +239,17 @@ Fehlermeldungen benennen Ursache und nächsten Schritt, nie einen Code
 allein. Hilfetexte stehen am Feld, nicht im Handbuch. Sentence case,
 Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.
 
+**In einem mehrsprachigen Produkt hat jeder sichtbare Text in jeder
+ausgelieferten Sprache eine Übersetzung — gemessen, nicht angenommen**
+(`scripts/uebersetzungen.py`): null fehlende Schlüssel, null leere Werte,
+null abweichende Platzhalter. Ein Schlüssel mitten in der Oberfläche ist
+der sichtbarste Mangel, den ein Produkt haben kann. Rückfall ist
+**Englisch**, nie der Schlüssel und nie ein leerer Text.
+
 Formulierungen, Fehlertext-Muster, Leerzustände und Ladehinweise:
-`references/oberflaechentexte.md`.
+`references/oberflaechentexte.md`. Vollständigkeit, Platzhalter,
+Pluralformen und was das Werkzeug **nicht** sieht:
+`references/uebersetzungen.md`.
 
 ## 9. Liegt ein Designsystem vor: es gibt vor, der Agent setzt um
 

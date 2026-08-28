@@ -76,28 +76,45 @@ den jeweiligen Skill laden.
     Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
     `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
     markierten Screenshots im Repository. Geplantes liegt unter /plan.
-12. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
+12. **Das System spricht englisch, der Mensch deutsch.** Bezeichner,
+    Kommentare, Protokolle, technische Fehlermeldungen, Fehlercodes,
+    Konfigurationsschlüssel, Übersetzungsschlüssel, Tabellen, Spalten,
+    Aufzählungswerte, Schnittstellen und Backend-Oberflächen sind
+    **englisch** — ausnahmslos, auch in einem rein deutschsprachigen
+    Team. **Eine englische Fehlermeldung ist besser als eine deutsche,
+    die es nur auf Deutsch gibt**: Englisch ist die Rückfallsprache jedes
+    Produkts. Deutsch bleibt, was ein deutschsprachiger Mensch liest:
+    Oberflächentexte eines deutschen Produkts, Projektdokumentation,
+    Commit-Nachrichten. Deutsche Fachbegriffe ohne englische Entsprechung
+    bleiben deutsch und werden einmal erklärt.
+13. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
+    ausgelieferten Sprache eine Übersetzung — **gemessen, nicht
+    angenommen** (`uebersetzungen.py`). Null fehlende Schlüssel, null
+    leere Werte, null abweichende Platzhalter. Ein Schlüssel mitten in
+    der Oberfläche ist der sichtbarste Mangel, den ein Produkt haben
+    kann. Keine harte Zeichenkette in der Oberfläche, kein Satz aus
+    Teilschlüsseln zusammengesetzt.
+14. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
     Das gilt für **jeden** deutschen Text, einschließlich
-    Commit-Nachrichten, Pull-Request-Titeln und -Texten, Code-Kommentaren
-    und Meldungen im Terminal. Ausnahmen nur Slugs, URLs, Dateinamen,
-    Code und englische Bezeichner. Keine Emojis in Dokumentation,
-    Commits und Oberflächen.
-13. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
+    Commit-Nachrichten, Pull-Request-Titeln und -Texten und Meldungen im
+    Terminal. Ausnahmen nur Slugs, URLs, Dateinamen, Code und englische
+    Bezeichner. Keine Emojis in Dokumentation, Commits und Oberflächen.
+15. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-14. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
+16. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
     pushen — beide nehmen nur Merges über Pull Requests. Arbeitszweige
     gehen von `dev` aus; `main` nimmt ausschließlich `dev`. Ausgerollt
     wird nur, was grüne Tests hat. Keine Prüfung abschalten, um einen
     Merge oder ein Deployment durchzubekommen.
-15. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
+17. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
     Erweiterungen bleiben unangetastet. Bildkompression und Imagesets nur
     über Contao, Styles ausnahmslos in SCSS und im Layout gewählt, jede
     Seite liefert nur, was sie braucht. Eigene Erweiterung erst, wenn es
     keine marktreife gibt.
-16. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
+18. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
     Vorgaben des jeweiligen Stacks** (.NET, Vue 3, Flutter): klare
@@ -106,13 +123,13 @@ den jeweiligen Skill laden.
     Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
     Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
     gewinnt immer Letzteres.
-17. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+19. **Schnittstellen.** Wird an einer API entwickelt, ist ein
     OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
     geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-18. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+20. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
     Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
     Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
     automatisch gelöscht oder anonymisiert — was von Hand gelöscht
@@ -120,6 +137,6 @@ den jeweiligen Skill laden.
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell.
-19. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+21. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte „Verbesserung" (Refactoring, Umbenennung, Stiländerung)
     braucht vorher eine Rückfrage.

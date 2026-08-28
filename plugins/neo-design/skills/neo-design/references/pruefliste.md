@@ -214,6 +214,15 @@ und Dunkel.
       zusammengesetzten Sätze.
 - [ ] Zahlen, Datum und Währung über die Formatierung der Sprache.
 - [ ] Echte Umlaute, Sie-Form, keine Emojis, keine Marketingsprache.
+- [ ] **Übersetzungen vollständig**: `uebersetzungen.py` meldet null
+      Blocker — nichts fehlt, nichts ist leer, keine Platzhalter- und
+      keine Pluralabweichung. Abdeckung je Sprache **berichtet**.
+- [ ] Rückfall auf **Englisch** konfiguriert und geprüft — nie ein
+      Schlüssel, nie ein leerer Text in der Oberfläche.
+- [ ] Kein Satz aus Teilschlüsseln zusammengesetzt; Platzhalter tragen
+      sprechende Namen.
+- [ ] Die Oberfläche wurde **in jeder Sprache bedient**, nicht nur in der
+      Leitsprache.
 
 ## Recht
 

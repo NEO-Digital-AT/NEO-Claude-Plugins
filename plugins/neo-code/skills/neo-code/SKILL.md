@@ -42,6 +42,22 @@ Schichten, Benennung, Datenmodell, Querschnitt.
 die `llms.txt` des Herstellers, wo es sie gibt (Skill `neo-grundregeln`,
 `references/belegpflicht.md`).
 
+## Das System spricht englisch
+
+**Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen,
+Fehlercodes, Konfigurations- und Übersetzungsschlüssel, Tabellen,
+Spalten, Aufzählungswerte, Schnittstellen und Backend-Oberflächen sind
+englisch** — ausnahmslos, auch in einem rein deutschsprachigen Team.
+
+> **Eine englische Fehlermeldung ist besser als eine deutsche, die es nur
+> auf Deutsch gibt.** Englisch ist die Rückfallsprache jedes Produkts.
+
+Deutsch bleibt, was ein deutschsprachiger Mensch liest: Oberflächentexte
+eines deutschen Produkts, Projektdokumentation, Commit-Nachrichten — dort
+mit echten Umlauten. Die vollständige Trennlinie, die Regel für
+Fehlermeldungen und der Umgang mit deutschen Fachbegriffen:
+`references/sprache.md`.
+
 ## Rangfolge bei Widersprüchen
 
 1. **Das bestehende Muster des Projekts.** Konsistenz schlägt Reinheit.

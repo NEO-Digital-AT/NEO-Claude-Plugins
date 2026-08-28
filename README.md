@@ -9,12 +9,12 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit acht Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
-| `neo-code` | Codeaufbau nach den Vorgaben von .NET, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt | Skill mit vier Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
+| `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Sprache im System: englisch** | Skill mit fünf Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
 | `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers | Skill mit einer Referenzdatei, lädt bei App-Arbeit |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Messwerte | Skill mit elf Referenzdateien, sieben Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit zwölf Referenzdateien, acht Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
@@ -48,6 +48,13 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
   Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
   Stilabgleich.
+- **Sobald etwas benannt wird:** `neo-code`, `references/sprache.md` —
+  das System spricht englisch, der Mensch deutsch. Eine englische
+  Fehlermeldung ist besser als eine deutsche, die es nur auf Deutsch gibt.
+- **Sobald es mehr als eine Sprache gibt:** `neo-design`,
+  `references/uebersetzungen.md` — jeder Text in jeder Sprache, gemessen
+  mit `uebersetzungen.py`. Ein Schlüssel mitten in der Oberfläche ist der
+  sichtbarste Mangel, den ein Produkt haben kann.
 - **Bevor Code gegen eine Bibliothek entsteht:** ihre `llms.txt` lesen,
   nicht die Signatur erinnern — Nuxt, Nuxt UI, Vue, Vuetify, Angular und
   Flutter liefern eine; Laravel liefert stattdessen Laravel Boost. Die
@@ -191,6 +198,7 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 | `kontrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
 | `layoutabgleich.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
 | `ueberlauf.js` | `plugins/neo-design/scripts/` | Misst je Prüfbreite, was nicht in den Bildschirm passt: waagrechtes Scrollen, Elemente über dem Rand, Inhalt breiter als sein Platz, Tabellen unter der Inhaltsbreite, zu kleine Bedienziele und **Löcher in umgebrochenen Reihen** — drei Kacheln, die auf zwei Spalten umbrechen und eine halbe Reihe frei lassen. Framework-unabhängig am fertigen DOM. |
+| `uebersetzungen.py` | `plugins/neo-design/scripts/` | Vergleicht die Sprachdateien gegen die Leitsprache und meldet fehlende Schlüssel, leere Werte, **abweichende Platzhalter** (der gefährlichste Fall: die Meldung bricht oder lässt eine Lücke im Satz), fehlende Pluralformen, unübersetzt Gebliebenes, verwaiste und tote Schlüssel. Liest JSON, ARB, PHP-Rückgabe-Arrays und flaches YAML; was es nicht sicher lesen kann, meldet es. Ohne Abhängigkeiten. |
 | `textpassung.js` | `plugins/neo-design/scripts/` | Prüft, ob der Text in seinen Bereich passt — der Gegenspieler zum Überlauf, denn nichts davon erzeugt einen Scrollbalken: waagrecht und senkrecht abgeschnittener Text, Kürzung ohne erreichbaren Volltext, überlappende Texte, Bereiche unter acht Zeichen je Zeile, Umbruch mitten im Wort, `hyphens: auto` ohne `lang` und zu kleine Schrift. |
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
@@ -233,7 +241,7 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 14, Skill `neo-deployment`). Dieses
+- **Kein `dev`-Zweig** (Kernregel 16, Skill `neo-deployment`). Dieses
   Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
