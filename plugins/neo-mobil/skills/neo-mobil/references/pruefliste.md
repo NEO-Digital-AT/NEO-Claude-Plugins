@@ -62,6 +62,34 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] Signierung und Veröffentlichung dokumentiert und reproduzierbar;
       Schlüssel nicht im Repository.
 
+## Lokale Daten
+
+- [ ] Gerätestellungen, Bewegungsdaten und Stammdaten getrennt; ein
+      abgeschlossener Vorgang trägt **Kopien**, keine Verweise.
+- [ ] Jede Schemaänderung mit erhöhter Version **und** Migrationsschritt.
+- [ ] **Migrationstest** je Schritt: alte Fassung roh angelegt, geöffnet,
+      Altdaten unversehrt, neue Spalte benutzbar.
+- [ ] Neustart-Simulation geprüft: laufende Nummern laufen fort.
+- [ ] Aufzeichnungen, die lückenlos sein müssen: **nur anhängen**, kein
+      Änderungs- oder Löschweg vorhanden; Korrektur als Gegenbuchung.
+- [ ] Geschrieben, **bevor** die Oberfläche aufräumt; Leser nach jedem
+      Anhängen aufgefrischt.
+- [ ] Ein Durchlauf **ohne Netz** gemacht.
+
+## Geräte und Peripherie
+
+- [ ] Vollbild/Kiosk am echten Gerät geprüft; die dafür nötige
+      Einstellung ist **belegt**, nicht vermutet.
+- [ ] Fremdgeräte, die wie eine Tastatur sprechen: EIN Zuhörer, Eingabe
+      endet mit Enter, Scan zählt nie als Fehlversuch, unbekannte Codes
+      still verworfen.
+- [ ] Ausgabegeräte hinter einer Schnittstelle mit Attrappe; ein
+      Gerätefehler blockiert keinen Vorgang.
+- [ ] Jedes Fremdgerät **abgesteckt** geprüft (Scanner, Drucker, Netz).
+- [ ] Jede Berechtigung **abgelehnt** durchgespielt; zweiter Weg
+      vorhanden.
+- [ ] Biometrische Merkmale bleiben auf dem Gerät.
+
 ## Tests
 
 - [ ] Widget-Test je Bedienelement, der das **beobachtbare Ergebnis**

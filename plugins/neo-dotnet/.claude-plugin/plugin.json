@@ -1,0 +1,7 @@
+{
+  "name": "neo-dotnet",
+  "displayName": "NEO .NET und ASP.NET Core",
+  "version": "1.0.0",
+  "description": "ASP.NET-Core-Regeln der NEO Digital für Serveranwendungen. Die API wird nachgeschlagen, nicht erinnert — über die offizielle Doku der eingesetzten Fassung, und die Fassung ist eine LTS-Entscheidung des Projektinhabers. Endpunkte bleiben dünn: annehmen, prüfen, an einen Dienst geben, antworten; Fachlogik liegt nie im Endpunkt. Konfiguration über das Options-Muster mit Prüfung beim Start, Geheimnisse niemals in appsettings. Datenzugriff mit EF Core ohne N+1, mit AsNoTracking für Lesepfade, Mandantentrennung im Datenzugriff statt in der Abfrage des Aufrufers, Migrationen vorwärtsgerichtet ohne Datenverlust und gegen eine Kopie eines echten Bestands geprüft. Asynchron durchgehend, CancellationToken durchgereicht, kein sync-over-async. Fehlerantworten als ProblemDetails nach der Fehlerhülle des API-Skills, Ausnahmen sind kein Steuerfluss. Strukturierte Protokolle ohne Geheimnisse, Health-Endpunkte abgesichert. Integrationstests gegen die echte Datenbank statt gegen eine Attrappe.",
+  "author": { "name": "NEO Digital (Erich Nigg)" }
+}

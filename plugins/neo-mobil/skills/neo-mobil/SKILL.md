@@ -9,7 +9,10 @@ description: >
   Telefon und Tablet, zu Themes und Material-Design-3-Tokens, zu
   Berechtigungen, Offline-Verhalten, Hintergrundarbeit und
   Benachrichtigungen, zu Barrierefreiheit auf Mobilgeräten und zu Tests
-  mit Widget- und Integrationstests. Ebenso bei der Frage, ob eine
+  mit Widget- und Integrationstests. Ebenso bei lokaler Datenhaltung,
+  Schemaversionen und Migrationen, unveränderlichen Aufzeichnungen sowie
+  bei Betriebsgeräten und Peripherie: Vollbild und Kiosk, Scanner und
+  Kartenleser als Tastatur, Drucker, Lade, Kamera und Biometrie. Ebenso bei der Frage, ob eine
   Funktion nativ statt in Flutter gebaut werden sollte.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, Stand 2026-08
@@ -69,6 +72,10 @@ stammt oft aus einer Fassung, die es im Projekt nicht gibt (Skill
 - **Material-Widgets hinter den Wrappern der Produktfamilie**, wie im
   Web (Skill `neo-komponenten`).
 
+Was Flutter von Material 3 liefert und was nicht, die Größenklassen der
+Tasten, die geschlossenen Skalen für Symbol, Radius und Textrolle sowie
+die bekannten Lücken des Rahmens: `references/material3.md`.
+
 ## 4. Größen: Telefon ist nicht die einzige Größe
 
 Es gilt Skill `neo-design`, `references/responsiv.md` sinngemäß — die
@@ -113,7 +120,24 @@ Prüfbreiten sind andere, die Regeln dieselben:
 - **Signierung und Veröffentlichung sind dokumentiert und
   reproduzierbar**; Schlüssel liegen nicht im Repository.
 
-## 7. Flutter oder nativ
+## 7. Lokale Daten
+
+Eine mobile Anwendung ist offline-fähig oder sie ist es nicht.
+Gerätestellungen, Bewegungsdaten und Stammdaten bleiben getrennt; jede
+Schemaänderung erhöht die Version und bekommt ihren Migrationsschritt
+samt Test; Aufzeichnungen, die lückenlos sein müssen, werden nur
+angehängt und nie geändert. Geschrieben wird, BEVOR die Oberfläche
+aufräumt. Einzelheiten: `references/persistenz.md`.
+
+## 8. Geräte und Peripherie
+
+Betriebsgeräte stehen in einer Halterung und hängen an Drucker, Scanner
+oder Lade: Vollbild und Kiosk, Fremdgeräte, die wie eine Tastatur
+sprechen, Ausgabegeräte hinter einer Schnittstelle mit Attrappe,
+Berechtigungen zum Zeitpunkt des Bedarfs, Offline als Normalfall.
+Einzelheiten: `references/geraete.md`.
+
+## 9. Flutter oder nativ
 
 Die Frage wird **gestellt, nicht stillschweigend beantwortet**. Für nativ
 spricht: tiefe Systemintegration, Hardwarezugriff jenseits verfügbarer
@@ -126,7 +150,7 @@ vorgelegt, und sie wird als Entscheidungsakte festgehalten (Skill
 `neo-doku`). Ein Wechsel mitten im Projekt ist eine Änderung mit
 Auswirkung, kein Detail.
 
-## 8. Tests
+## 10. Tests
 
 Es gilt Skill `neo-grundregeln`, `references/tests.md`. Zusätzlich:
 
@@ -140,7 +164,7 @@ Es gilt Skill `neo-grundregeln`, `references/tests.md`. Zusätzlich:
   abweichendem Inhalt an, nicht nur bei abweichendem Aussehen.
 - **Auf beiden Plattformen geprüft**, nicht nur auf der des Entwicklers.
 
-## 9. Abnahme
+## 11. Abnahme
 
 Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und das
 Ergebnis mit Zahlen berichten. Nicht Geprüftes gilt als nicht erfüllt.

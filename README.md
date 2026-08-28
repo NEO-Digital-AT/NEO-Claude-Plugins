@@ -10,10 +10,11 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | --- | --- | --- |
 | `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit neun Referenzdateien, einem Werkzeug; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sechs Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
+| `neo-dotnet` | ASP.NET Core: dünne Endpunkte, Options-Muster mit Startprüfung, EF Core ohne N+1, Mandantentrennung im Datenzugriff, Migrationen gegen eine Bestandskopie, async durchgehend, ProblemDetails, Integrationstests gegen eine echte Datenbank | Skill mit zwei Referenzdateien (EF Core, Abnahmeliste), lädt bei Backend-Arbeit |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
-| `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers | Skill mit einer Referenzdatei, lädt bei App-Arbeit |
+| `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers; lokale Daten mit Schemaversion, Migrationstest und unveränderlichen Aufzeichnungen; Betriebsgeräte: Vollbild/Kiosk, Scanner als Tastatur, Drucker und Lade, Offline als Normalfall | Skill mit vier Referenzdateien (Material 3 in Flutter, lokale Daten und Migrationen, Geräte und Peripherie, Abnahmeliste), lädt bei App-Arbeit |
 | `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit zwölf Referenzdateien, acht Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
@@ -153,6 +154,7 @@ Schneller geht es, die Datei direkt zu schreiben —
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
     "neo-code@neo-claude-plugins": true,
+    "neo-dotnet@neo-claude-plugins": true,
     "neo-php@neo-claude-plugins": true,
     "neo-vue@neo-claude-plugins": true,
     "neo-angular@neo-claude-plugins": true,
@@ -240,7 +242,7 @@ kein `--all`, also eine Schleife (Git Bash):
 
 ```bash
 for p in neo-grundregeln neo-code neo-doku neo-design neo-komponenten \
-         neo-api neo-php neo-vue neo-angular neo-mobil neo-contao \
+         neo-api neo-dotnet neo-php neo-vue neo-angular neo-mobil neo-contao \
          neo-assistent neo-ki neo-recht neo-sicherheit neo-deployment neo-betrieb; do
   claude plugin update $p@neo-claude-plugins -y
 done
