@@ -16,6 +16,12 @@ Menüpunkt, jede Dialogaktion, jedes Feld.
 die dahinterliegende Logik vollständig getestet ist. Das ist die Regel,
 die am häufigsten übergangen wird, und sie ist ein Blocker.
 
+**Und zwar an jeder Stelle, an der es vorkommt.** Dieselbe Tabelle mit
+demselben Knopf auf zwei Seiten sind **zwei** Prüfungen. Ein Element, das
+auf Seite A getestet ist und auf Seite B nicht, gilt auf Seite B als
+ungetestet — dort bricht es. Inventar, Durchlauf und Rauchtest:
+`durchlauf.md`.
+
 | Stack | Womit |
 | --- | --- |
 | Vue, Nuxt | Komponententests, dazu Ende-zu-Ende für die Abläufe |
@@ -92,8 +98,9 @@ als überflüssig entfernt.
 | Bereich | Was |
 | --- | --- |
 | Mandantentrennung | Für jede neue mandantenbezogene Tabelle: A sieht B nicht (Skill `neo-sicherheit`) |
-| Autorisierung | Jeder Endpoint: erlaubt, verboten, fremdes Objekt |
-| Oberflächengrößen | Kein horizontales Scrollen auf acht Breiten (Skill `neo-design`) |
+| Schnittstellen | Je Endpunkt sechs Pflichtfälle, Antwort gegen den Vertrag (Skill `neo-api`, `references/tests.md`) |
+| Oberflächendurchlauf | Jedes Bedienelement an jeder Stelle, Rauchtest je Route (`durchlauf.md`) |
+| Oberflächengrößen | Acht Breiten: kein Überlauf, nichts ragt hinaus, keine Löcher, Bedienziele (Skill `neo-design`) |
 | Komponenten-Grundsatz | Der Wächter-Test (Skill `neo-komponenten`) |
 | Designsystem | Layout- und Stilabgleich (Skill `neo-design`) |
 | Migrationen | Lauf gegen eine Kopie des Bestands |

@@ -183,19 +183,39 @@ Bewegung und die Prüfliste: `references/barrierefreiheit.md`.
 
 ## 7. Von 320 px bis 4K
 
-- **Horizontales Scrollen der Seite ist ein Fehler**, kein Kompromiss.
-  Breite Inhalte (Tabellen, Diagramme, Code) scrollen in ihrem eigenen
-  Bereich, nie der Seitenkörper.
-- Jede Ansicht wird auf 320, 390, 768, 1280, 1920 und 3840 px angesehen,
-  bevor sie als fertig gilt.
-- Auf großen Bildschirmen wird die Zeile begrenzt, nicht gedehnt. Eine
-  Textzeile über 90 Zeichen ist unlesbar; eine Fläche, die auf 4K nur
-  gestreckt wird, sieht billig aus.
-- Bedienziele mindestens 24 × 24 px, auf Berührung 44 × 44 px.
-- Mobil ist kein Restposten: dieselbe Aufgabe, andere Anordnung.
+**Gilt für Anwendungen und Portale genauso wie für Webseiten.** Eine
+Web-Anwendung ist keine Ausnahme, weil sie „am Schreibtisch bedient
+wird". Der Funktionsumfang darf auf schmalen Geräten kleiner sein — **das
+Aussehen nie**. Was weggelassen wird, entscheidet der Projektinhaber,
+nicht der Umbruchpunkt.
 
-Umbruchpunkte, Tabellen auf schmalen Geräten, Dialoge, Seitenleisten und
-das Verhalten auf sehr großen Flächen: `references/responsiv.md`.
+Fünf harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
+`scripts/ueberlauf.js`, erlaubt sind **null Befunde**:
+
+1. **Kein waagrechtes Scrollen des Seitenkörpers** — auf keiner Breite,
+   auch nicht am Schreibtisch. Breite Inhalte scrollen in ihrem eigenen
+   Bereich. `overflow-x: hidden` am Körper ist keine Behebung.
+2. **Nichts ragt hinaus.** Kein Element steht über dem sichtbaren
+   Bereich — auch kein geöffnetes Menü, kein klebender Kopf, kein Dialog.
+3. **Tabellen füllen die Inhaltsbreite**, 100 %, nie schmaler. Breiter
+   nur in einem ausdrücklichen Scrollbereich.
+4. **Keine Löcher beim Umbrechen.** Drei Kacheln auf zwei Spalten lassen
+   in der zweiten Reihe eine halbe Fläche frei — entweder gleich
+   einspaltig, oder das letzte Element nimmt die volle Breite.
+5. **Bedienziele wachsen zum schmalen Gerät hin**: bis 768 px mindestens
+   44 × 44 px, darüber 24 × 24 px. Symbolknöpfe in Tabellenzeilen sind
+   der häufigste Verstoß.
+
+Dazu: unter dem Umbruchpunkt liegt das Hauptmenü hinter einem Knopf;
+Inhaltsbereich, Textspalte und Eingabefelder haben **Höchstbreiten** aus
+Tokens, damit ein Formular auf 4K nicht über die halbe Wand läuft.
+
+Gemessen wird je Seite, je Sprache, in Hell und Dunkel, mit **langen
+Testdaten** — ein Layout, das nur mit kurzen Daten hält, hält nicht.
+
+Umbruchpunkte, Tabellenrangfolge, Lückenregel mit Beispielcode,
+Höchstbreiten und Navigation: `references/responsiv.md`. Der Befehl
+`/neo-design:neo-responsivpruefung` führt die Messung durch.
 
 ## 8. Texte in der Oberfläche
 

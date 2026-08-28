@@ -151,8 +151,29 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
 
 ## Größe und Gerät
 
-- [ ] Kein horizontales Scrollen des Seitenkörpers auf 320, 390, 768,
-      1024, 1280, 1920, 2560 und 3840 px — maschinell geprüft.
+Maschinell geprüft mit `ueberlauf.js` auf 320, 390, 768, 1024, 1280,
+1920, 2560 und 3840 px. **Null Befunde**, je Seite, je Sprache, in Hell
+und Dunkel.
+
+- [ ] **Kein horizontales Scrollen des Seitenkörpers** auf keiner Breite.
+- [ ] **Kein `overflow-x: hidden` am Körper** — das versteckt den Fehler.
+- [ ] **Nichts ragt über den sichtbaren Rand** — auch kein geöffnetes
+      Menü, kein Dialog, kein klebender Kopf. Geöffnete Zustände wurden
+      mitgemessen.
+- [ ] **Tabellen nutzen 100 % des Inhaltsbereichs**, nie schmaler;
+      breiter nur in einem ausdrücklichen Scrollbereich.
+- [ ] **Keine Löcher in umgebrochenen Reihen** — entweder einspaltig oder
+      das letzte Element füllt. Keine leere Platzhalterkachel.
+- [ ] **Bedienziele**: bis 768 px mindestens 44 × 44 px, darüber
+      24 × 24 px; mindestens 8 px Abstand zwischen zwei Zielen.
+- [ ] Symbolknöpfe in Tabellenzeilen sind auf schmal bedienbar oder durch
+      eine Zeilenaktion ersetzt.
+- [ ] Unter dem Umbruchpunkt liegt das Hauptmenü hinter einem Knopf, mit
+      `aria-expanded`, Fokusführung und Escape.
+- [ ] **Höchstbreiten** aus Tokens für Inhaltsbereich, Textspalte und
+      Eingabefelder — kein Feld über die halbe Wand auf 4K.
+- [ ] Mit **langen Daten** geprüft: Name über 60 Zeichen, Kennung ohne
+      Leerzeichen, achtstellige Zahl.
 - [ ] In jeder ausgelieferten Sprache geprüft, nicht nur in einer.
 - [ ] Auf großen Bildschirmen wird verteilt, nicht gedehnt; Textzeile
       bleibt unter 90 Zeichen.
@@ -181,7 +202,11 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
 ## Tests und Doku
 
 - [ ] Jedes Bedienelement hat einen Oberflächen-Funktionstest, der die
-      Bedienung auslöst und das beobachtbare Ergebnis prüft.
+      Bedienung auslöst und das beobachtbare Ergebnis prüft — **an jeder
+      Stelle, an der es vorkommt** (Skill `neo-grundregeln`,
+      `references/durchlauf.md`).
+- [ ] Rauchtest je Route: lädt, rendert, keine Konsolenfehler, kein
+      unerwarteter 4xx/5xx.
 - [ ] Die Bedienungsdoku ist im selben Schritt nachgezogen, mit
       Screenshots und Markierungen (Skill `neo-doku`).
 - [ ] Lint, Tests und Build laufen grün.

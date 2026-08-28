@@ -175,6 +175,11 @@ Backend-Doku unter `docs/backend/<sprache>/` (Skill `neo-doku`): dort
 stehen Zusammenhänge, Entscheidungen, Betriebsverhalten und Eigenheiten
 fremder APIs — alles, was ein Schema nicht ausdrückt.
 
+**Jeder Endpunkt wird getestet, und zwar auf das, was er liefert** —
+sechs Pflichtfälle je Endpunkt, die Antwort gegen das OpenAPI-Schema, und
+für schreibende Endpunkte der gelesene Zustand danach:
+`references/tests.md`.
+
 Zugehörige Skills: `neo-sicherheit` (Auth, Secrets, Härtung, CRA),
 `neo-doku` (Backend-Doku), `neo-deployment` (Ausrollung),
 `neo-code` (Aufbau des Codes dahinter), `neo-grundregeln` (Prozess).

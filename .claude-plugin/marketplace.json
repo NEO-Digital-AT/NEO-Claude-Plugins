@@ -8,7 +8,7 @@
     {
       "name": "neo-grundregeln",
       "source": "./plugins/neo-grundregeln",
-      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, der Prozess in neun Schritten mit abgewarteter Freigabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, das Designsystem gibt vor und der Agent gestaltet nicht, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs vor Hypothese, Testpflichten einschließlich Oberflächen-Funktionstests, Git-Hygiene und Commit-Nachrichten, Projektstart-Gerüst, Abnahmeliste. Enthält Always-on-Kernregeln (SessionStart-Hook) und die Befehle /neo-grundregeln:neo-selbstkontrolle und /neo-grundregeln:neo-projektstart."
+      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, der Prozess in neun Schritten mit abgewarteter Freigabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, das Designsystem gibt vor und der Agent gestaltet nicht, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs vor Hypothese, Testpflichten einschließlich Oberflächendurchlauf über jedes Bedienelement an jeder Stelle und Rauchtest je Route, Git-Hygiene und Commit-Nachrichten, Projektstart-Gerüst, Abnahmeliste. Enthält Always-on-Kernregeln (SessionStart-Hook) und die Befehle /neo-grundregeln:neo-selbstkontrolle und /neo-grundregeln:neo-projektstart."
     },
     {
       "name": "neo-code",
@@ -18,7 +18,7 @@
     {
       "name": "neo-design",
       "source": "./plugins/neo-design",
-      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K ohne horizontales Scrollen, Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Entwurf aus Claude Design vor, gibt er vor und der Agent setzt um: keine eigene Gestaltungsentscheidung, jede Abweichung ist eine Rückfrage mit Gegenüberstellungsbild, gebaut wird nach Inventar Element für Element und nach jedem Element gemessen — Layoutabgleich, Stilabgleich, Bildabgleich. Mit Kontrastrechner und den Befehlen /neo-design:neo-designumsetzung, /neo-design:neo-designabgleich und /neo-design:neo-oberflaechenpruefung."
+      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K mit fünf maschinell geprüften Regeln (kein waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher beim Umbrechen, Bedienziele nach Gerät), Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Entwurf aus Claude Design vor, gibt er vor und der Agent setzt um: keine eigene Gestaltungsentscheidung, jede Abweichung ist eine Rückfrage mit Gegenüberstellungsbild, gebaut wird nach Inventar Element für Element und nach jedem Element gemessen — Layoutabgleich, Stilabgleich, Bildabgleich. Mit Kontrastrechner, Überlaufprüfer und den Befehlen /neo-design:neo-responsivpruefung, /neo-design:neo-designumsetzung, /neo-design:neo-designabgleich und /neo-design:neo-oberflaechenpruefung."
     },
     {
       "name": "neo-komponenten",
@@ -28,7 +28,7 @@
     {
       "name": "neo-api",
       "source": "./plugins/neo-api",
-      "description": "API-Regeln nach dem Muster von LeoFlex: Swagger und OpenAPI sind Pflicht, ein Dokument je Fachbereich mit stabiler und Vorschau-Fassung, Versionierung ohne Bruch, wiederverwendbare Verträge, eine einheitliche Fehlerhülle für alle Fehlerantworten, klare PUT- und PATCH-Semantik, Autorisierung deny-by-default, CORS und Cookies aus der Konfiguration, Webhooks nach dem Store-First-Modell, Rate Limiting nach authentifiziertem Aufrufer, Migrationen ohne Datenverlust, abgesicherter Statusendpunkt."
+      "description": "API-Regeln nach dem Muster von LeoFlex: Swagger und OpenAPI sind Pflicht, ein Dokument je Fachbereich mit stabiler und Vorschau-Fassung, Versionierung ohne Bruch, wiederverwendbare Verträge, eine einheitliche Fehlerhülle für alle Fehlerantworten, klare PUT- und PATCH-Semantik, Autorisierung deny-by-default, CORS und Cookies aus der Konfiguration, Webhooks nach dem Store-First-Modell, Rate Limiting nach authentifiziertem Aufrufer, Migrationen ohne Datenverlust, abgesicherter Statusendpunkt. Sechs Pflichttestfälle je Endpunkt, Antwort gegen den Vertrag geprüft, Abdeckung als Zahl."
     },
     {
       "name": "neo-doku",

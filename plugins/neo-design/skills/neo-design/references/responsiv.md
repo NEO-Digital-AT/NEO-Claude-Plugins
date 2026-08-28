@@ -3,6 +3,27 @@
 Eine Ansicht ist fertig, wenn sie auf jedem Gerät ihre Aufgabe erfüllt —
 nicht, wenn sie auf dem Bildschirm des Entwicklers gut aussieht.
 
+**Das gilt für Anwendungen und Portale genauso wie für Webseiten.** Eine
+Web-Anwendung ist keine Ausnahme, weil sie „am Schreibtisch bedient
+wird". Wer sie am Telefon öffnet, bekommt keine Entschuldigung zu sehen,
+sondern eine Oberfläche. Der Funktionsumfang darf auf schmalen Geräten
+kleiner sein — **das Aussehen nie**. Was weggelassen wird, entscheidet
+der Projektinhaber, nicht der Umbruchpunkt.
+
+## Die fünf harten Regeln
+
+1. **Kein waagrechtes Scrollen des Seitenkörpers** — auf keiner Breite,
+   auch nicht am Schreibtisch.
+2. **Nichts ragt hinaus.** Kein Element steht über dem sichtbaren
+   Bereich, auf keiner Breite.
+3. **Tabellen füllen die Inhaltsbreite** — 100 %, nie schmaler.
+4. **Keine Löcher beim Umbrechen.** Eine umgebrochene Reihe lässt keine
+   halbe Reihe frei.
+5. **Bedienziele wachsen zum schmalen Gerät hin**, sie schrumpfen nicht.
+
+Alle fünf werden **maschinell geprüft**, auf acht Breiten, mit
+`scripts/ueberlauf.js`. Nicht Gemessenes gilt als nicht erfüllt.
+
 ## Die harte Regel: kein horizontales Scrollen
 
 Der Seitenkörper scrollt **nie** waagrecht. Auf keiner Breite, in keiner
@@ -31,23 +52,42 @@ Die üblichen Ursachen, in der Reihenfolge, in der sie auftreten:
 `overflow-x: hidden` am Körper ist **keine** Lösung. Es versteckt den
 Fehler, macht den Inhalt unerreichbar und bricht klebende Elemente.
 
+### Nichts ragt hinaus
+
+Der Körper kann still stehen und trotzdem etwas hinausragen: ein Element
+in einem Elternteil mit `overflow: hidden`, ein `position: fixed`-Kopf,
+ein Menü, das über den Rand schiebt. **Der Seitenüberlauf allein ist
+keine ausreichende Prüfung.**
+
+Geprüft wird deshalb je Element: keine rechte Kante über der
+Bildschirmbreite, keine linke Kante darunter — außer in einem
+ausdrücklichen Scrollbereich.
+
 ### Maschinell prüfen
 
-Jede Ansicht bekommt einen Test, der bei jeder Prüfbreite feststellt,
-dass nicht waagrecht gescrollt wird:
+Jede Ansicht bekommt einen Test, der auf **jeder** Prüfbreite alle fünf
+harten Regeln prüft:
 
 ```js
+await page.addScriptTag({ path: 'tools/ueberlauf.js' })
 for (const breite of [320, 390, 768, 1024, 1280, 1920, 2560, 3840]) {
   await page.setViewportSize({ width: breite, height: 900 })
-  const ueberstand = await page.evaluate(() =>
-    document.documentElement.scrollWidth - document.documentElement.clientWidth)
-  expect(ueberstand, `Überstand bei ${breite} px`).toBeLessThanOrEqual(0)
+  const e = await page.evaluate(() => neoUeberlauf.pruefen())
+  const text = await page.evaluate((x) => neoUeberlauf.bericht(x), e)
+  expect(e.befunde, text).toHaveLength(0)
 }
 ```
 
-Der Test läuft für jede Seite der Anwendung, in beiden Themes und in
+Der Prüfer meldet Seitenüberlauf, Elemente über dem Rand, Inhalt breiter
+als sein Platz, Tabellen unter der Inhaltsbreite, zu kleine Bedienziele
+und **Löcher in umgebrochenen Reihen**. Erlaubt sind **null Befunde**.
+
+Der Test läuft für **jede** Seite der Anwendung, in beiden Themes und in
 jeder ausgelieferten Sprache — deutsche Beschriftungen sind länger als
-englische, und genau daran bricht das Layout zuerst.
+englische, und genau daran bricht das Layout zuerst. Zusätzlich mit
+**langen Daten**: ein Name über 60 Zeichen, eine Kennung ohne
+Leerzeichen, eine Zahl mit acht Stellen. Ein Layout, das nur mit kurzen
+Testdaten hält, hält nicht.
 
 ## Prüfbreiten
 
@@ -80,6 +120,54 @@ Framework Container-Abfragen unterstützt, werden sie den
 Bildschirmabfragen vorgezogen: eine Karte in einer schmalen Spalte ist
 schmal, auch auf einem 4K-Monitor.
 
+## Umbrechen ohne Löcher
+
+**Eine umgebrochene Reihe lässt kein Loch stehen.** Drei Kacheln, die auf
+zwei Spalten umbrechen, ergeben in der zweiten Reihe eine halbe leere
+Fläche. Das sieht nach einem Fehler aus, weil es einer ist.
+
+Zwei erlaubte Auflösungen, beide bewusst gewählt:
+
+| Weg | Wann | Wie |
+| --- | --- | --- |
+| **Gleich einspaltig** | wenige, große Kacheln | ein Umbruchpunkt weniger; unter der Schwelle direkt eine Spalte |
+| **Das letzte Element füllt** | viele, gleichartige Kacheln | die Kachel, die allein in der letzten Reihe steht, nimmt die volle Breite |
+
+```css
+/* Zweispaltig, und das ungerade letzte Element füllt die Reihe */
+.kacheln { display: flex; flex-wrap: wrap; gap: var(--neo-luecke); }
+.kacheln > * { flex: 0 0 calc(50% - var(--neo-luecke) / 2); min-width: 0; }
+.kacheln > :last-child:nth-child(odd) { flex-basis: 100%; }
+
+/* Oder: mitwachsende Spalten, die den Rest von selbst aufteilen */
+.kacheln > * { flex: 1 1 280px; min-width: 0; }
+```
+
+**Nie**: eine leere Platzhalterkachel einsetzen, um die Reihe zu füllen.
+Sie ist für Vorlesegeräte ein Element ohne Inhalt und beim nächsten
+Datensatz an der falschen Stelle.
+
+Die Regel gilt für **jede** umbrechende Reihe: Kacheln, Karten,
+Kennzahlen, Filterknöpfe, Bildergitter, Formularspalten. Der Prüfer misst
+sie, indem er die Kinder nach Reihen gruppiert und die letzte Reihe mit
+den vorherigen vergleicht.
+
+## Tabellen
+
+**Eine Tabelle nutzt immer die volle Breite ihres Inhaltsbereichs.** Eine
+Tabelle mit 600 px in einem 1248 px breiten Bereich ist ein Fehler: sie
+lässt Fläche frei, und die freie Fläche wirkt wie ein Ladefehler.
+
+- `width: 100%`, nie eine feste Pixelbreite.
+- Spaltenbreiten in Prozent oder über `table-layout: fixed`, nicht in
+  Pixeln.
+- Lange Inhalte in Zellen brechen um (`overflow-wrap: anywhere`) oder
+  werden gekürzt — sie schieben die Tabelle nicht auf.
+- Eine Tabelle **breiter** als der Inhaltsbereich ist nur in einem
+  ausdrücklichen Scrollbereich zulässig (`data-tabellenbereich` mit
+  `overflow-x: auto`). Auch dort ist sie nie **schmaler** als der
+  sichtbare Bereich.
+
 ## Tabellen auf schmalen Geräten
 
 Rangfolge, in dieser Reihenfolge zu prüfen:
@@ -94,6 +182,62 @@ Rangfolge, in dieser Reihenfolge zu prüfen:
 
 Nie: die Tabelle so schrumpfen, dass Zahlen umbrechen oder Text auf zwei
 Buchstaben abgeschnitten wird.
+
+## Bedienziele wachsen nach unten hin
+
+Ein Finger ist kein Mauszeiger. **Auf schmalen Geräten werden
+Bedienelemente größer als am Schreibtisch, nicht kleiner.**
+
+| Breite | Kleinstes Bedienziel |
+| --- | --- |
+| bis 768 px | **44 × 44 px** |
+| darüber | 24 × 24 px (WCAG 2.2, 2.5.8) |
+
+- Das gilt für die **Trefferfläche**, nicht für das Symbol. Ein 20 px
+  großes Symbol in einem 44 px großen Knopf ist richtig.
+- Zwischen zwei Zielen mindestens 8 px Abstand — sonst trifft der Finger
+  beide.
+- **Symbolknöpfe in Tabellenzeilen** sind der häufigste Verstoß: am
+  Schreibtisch 24 px, am Telefon unbedienbar. Auf schmal werden sie zu
+  einer Zeilenaktion mit Text oder zu einem Menü.
+- Werkzeugleisten in Editoren werden auf schmal **größer und weniger**,
+  nicht kleiner und mehr. Was nicht in eine Reihe passt, geht in ein
+  Überlaufmenü — nicht in eine zweite, halbleere Reihe.
+- Ein Textlink im Fließtext ist ausgenommen; ein Link, der wie ein Knopf
+  aussieht, nicht.
+
+## Navigation auf schmalen Geräten
+
+- **Unter dem Umbruchpunkt ist das Hauptmenü nicht dauerhaft sichtbar.**
+  Es liegt hinter einem Knopf — Burger, Symbolleiste, Schublade —, und
+  der Knopf ist selbst ein Bedienziel nach der Tabelle oben.
+- **Nichts davon ragt hinaus.** Eine geöffnete Schublade bleibt im
+  sichtbaren Bereich; ein Menü, das rechts hinausschiebt, erzeugt genau
+  den waagrechten Balken, den es nicht geben darf.
+- `aria-expanded` am Knopf, Fokus in das geöffnete Menü, Fokusfalle,
+  Escape schließt, Fokus zurück auf den Knopf (Skill `neo-design`,
+  `references/barrierefreiheit.md`).
+- Der **geschlossene** Zustand ist der Ausgangszustand. Ein Menü, das
+  beim Laden offen steht und dann zuklappt, springt.
+
+## Höchstbreiten
+
+Auf großen Bildschirmen sind Höchstbreiten kein Feinschliff, sondern
+Voraussetzung dafür, dass eine Anwendung nicht auseinanderfällt.
+
+| Was | Höchstbreite |
+| --- | --- |
+| Inhaltsbereich | aus dem Token, meist 1280 bis 1600 px |
+| Fließtextspalte | 60 bis 90 Zeichen |
+| Formularspalte | so breit wie das breiteste sinnvolle Feld, nicht wie der Bildschirm |
+| Einzelnes Textfeld | nach Inhalt: Postleitzahl kurz, Kennung mittel, Freitext voll |
+
+- **Ein Textfeld, das über die halbe Wand läuft, ist ein Fehler**, auch
+  wenn technisch nichts kaputt ist. Ein Eingabefeld zeigt durch seine
+  Breite, wie viel erwartet wird.
+- Höchstbreiten stehen in **Tokens**, nicht als Zahl in der View.
+- Der Inhaltsbereich wird zentriert, nicht linksbündig an die Wand
+  geheftet.
 
 ## Weitere Muster
 
