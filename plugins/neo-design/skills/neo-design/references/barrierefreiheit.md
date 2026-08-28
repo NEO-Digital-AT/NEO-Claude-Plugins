@@ -71,18 +71,18 @@ besteht. Deshalb:
 
 ```
 # Ein Paar
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5A6273" "#FFFFFF"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py "#5A6273" "#FFFFFF"
 
 # Durchsichtige Hover-Fläche über einer Grundfarbe
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#FFFFFFCC" "#1F3A5F" --grund "#0B1220"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py "#FFFFFFCC" "#1F3A5F" --backdrop "#0B1220"
 
 # Alle Paare eines Projekts, als Tor in der CI
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py --paare design/kontrastpaare.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py --pairs design/contrast-pairs.json
 ```
 
 Die Paardatei gehört ins Projekt und wächst mit ihm. Sie ist der Beleg,
 dass geprüft wurde — nicht der Satz „sieht gut aus". Beispiel für den
-Aufbau liefert `--beispiel`.
+Aufbau liefert `--example`.
 
 ## Tastatur
 

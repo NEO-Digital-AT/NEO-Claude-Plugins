@@ -53,11 +53,11 @@ jobs:
 
       # Oberflächen-Prüfungen aus dem Skill neo-design gehören hierher:
       # Wächter-Test, Kontrastpaare, kein horizontales Scrollen.
-      # kontrast.py wird aus dem Plugin neo-design ins Projekt übernommen
-      # (tools/kontrast.py) — die CI erreicht das Plugin nicht.
+      # contrast.py wird aus dem Plugin neo-design ins Projekt übernommen
+      # (tools/contrast.py) — die CI erreicht das Plugin nicht.
       - name: Kontrastpaare
-        if: hashFiles('design/kontrastpaare.json') != ''
-        run: python3 tools/kontrast.py --paare design/kontrastpaare.json
+        if: hashFiles('design/contrast-pairs.json') != ''
+        run: python3 tools/contrast.py --pairs design/contrast-pairs.json
 
   ausrollen-entwicklung:
     name: ausrollen-entwicklung

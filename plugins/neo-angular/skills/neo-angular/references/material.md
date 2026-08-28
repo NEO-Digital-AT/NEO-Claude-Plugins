@@ -54,7 +54,7 @@ Angular Material ist zugänglich gebaut — und **nicht automatisch
 zugänglich konfiguriert**:
 
 - **Kontraste gerechnet**, auch für Theme-Farben und besonders in
-  Hover- und Deaktiviert-Zuständen (`kontrast.py`, Skill `neo-design`).
+  Hover- und Deaktiviert-Zuständen (`contrast.py`, Skill `neo-design`).
   Eine Farbrolle, die dem System entspricht, kann im eigenen Theme
   trotzdem durchfallen.
 - **Bedienziele**: Symbolknöpfe in Tabellenzeilen sind der häufigste

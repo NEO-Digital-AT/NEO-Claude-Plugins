@@ -49,8 +49,8 @@ Sollen Texte mit: beide Messungen mit `{ texte: true }` erzeugen und
 ### 2. Stilabgleich
 
 ```js
-await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/stilabgleich.js' })
-const b = await seite.evaluate(() => neoStilabgleich.pruefen())
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/style-audit.js' })
+const b = await seite.evaluate(() => neoStyleAudit.check())
 ```
 
 Jeder Fund ist ein erfundener Wert. Erlaubt sind **null Funde**.

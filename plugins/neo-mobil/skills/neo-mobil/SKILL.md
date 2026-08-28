@@ -90,7 +90,7 @@ Prüfbreiten sind andere, die Regeln dieselben:
 ## 5. Barrierefreiheit gilt auch auf dem Telefon
 
 - **Jedes Bedienelement hat einen Namen** für Vorlesegeräte.
-- **Kontraste gerechnet**, nicht geschätzt (`kontrast.py`, Skill
+- **Kontraste gerechnet**, nicht geschätzt (`contrast.py`, Skill
   `neo-design`).
 - **Die Systemschrift wird respektiert** — eine App, die bei 200 %
   Schrift bricht, ist nicht fertig.

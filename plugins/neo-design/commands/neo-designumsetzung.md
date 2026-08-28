@@ -85,7 +85,7 @@ Sobald eine Abweichung nötig scheint: **anhalten**. Vier Teile, keiner
 davon optional:
 
 1. **Zwei Bilder nebeneinander** — links die Vorgabe, rechts der
-   Vorschlag, erzeugt mit `scripts/gegenueberstellung.js`. Meldet das
+   Vorschlag, erzeugt mit `scripts/comparison.js`. Meldet das
    Werkzeug `brauchbar: false`, wird die Rückfrage nicht abgeschickt.
 2. **Was abweicht, in Maßen**: Vorgabe, Vorschlag, Differenz.
 3. **Warum** es nötig ist — fachlich, nicht geschmacklich.

@@ -175,7 +175,7 @@ Umsetzung, mehr nicht.
 Kontrast rechnen statt schätzen:
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py "#5A6273" "#FFFFFF"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py "#5A6273" "#FFFFFF"
 ```
 
 Vollständige Anforderungen, Tastaturbedienung, Fokus, Vorlesegeräte,
@@ -288,7 +288,7 @@ Schluss der Durchgang über die ganze Seite, auch als Gesamteindruck.
 | Prüfung | Werkzeug | Antwort | Erlaubt |
 | --- | --- | --- | --- |
 | **1. Layout** | `scripts/layoutabgleich.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
-| **2. Stil** | `scripts/stilabgleich.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
+| **2. Stil** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
 | **3. Bild** | `scripts/bildabgleich.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
 
 Der Layoutabgleich ist der wichtigste: er misst das **Aussehen** und

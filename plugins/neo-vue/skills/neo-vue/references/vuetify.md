@@ -37,7 +37,7 @@ Bedienelementen entsteht — Tabellen, Formulare, Dialoge, Datenlisten.
 Eine ausgereifte Bibliothek nimmt viel ab und **nicht alles**:
 
 - **Kontraste werden gerechnet**, auch für Bibliotheksfarben — besonders
-  in Hover- und Deaktiviert-Zuständen (`kontrast.py`, Skill `neo-design`).
+  in Hover- und Deaktiviert-Zuständen (`contrast.py`, Skill `neo-design`).
 - **Bedienziele**: Symbolknöpfe in Tabellenzeilen sind der häufigste
   Verstoß gegen 44 × 44 px auf schmalen Geräten.
 - **Tabellen** füllen die Inhaltsbreite und folgen auf schmalen Geräten

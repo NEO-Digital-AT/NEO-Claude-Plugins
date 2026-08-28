@@ -166,7 +166,7 @@ Eine Rückfrage besteht aus **vier Teilen**:
 
 1. **Zwei Bilder nebeneinander:** links die Vorgabe aus dem Entwurf,
    rechts der Vorschlag. Erzeugt mit
-   `${CLAUDE_PLUGIN_ROOT}/scripts/gegenueberstellung.js`.
+   `${CLAUDE_PLUGIN_ROOT}/scripts/comparison.js`.
 2. **Was abweicht**, in Maßen: was der Entwurf sagt, was der Vorschlag
    sagt, um wie viel.
 3. **Warum** die Abweichung nötig ist — die fachliche Notwendigkeit,
@@ -176,8 +176,8 @@ Eine Rückfrage besteht aus **vier Teilen**:
    Projektinhaber liegt.
 
 ```js
-await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/gegenueberstellung.js' })
-const masse = await seite.evaluate((b) => neoGegenueberstellung.zeigen({
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/comparison.js' })
+const masse = await seite.evaluate((b) => neoComparison.render({
   ueberschrift: 'Auftrag anlegen — Formularkarte',
   links:  { bild: b.entwurf,   titel: 'Designsystem', unterzeile: 'Artboard B5' },
   rechts: { bild: b.vorschlag, titel: 'Vorschlag',    unterzeile: 'Entscheidung offen' },

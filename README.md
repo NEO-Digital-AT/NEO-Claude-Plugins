@@ -92,8 +92,8 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
-  python3 plugins/neo-design/scripts/kontrast.py "#5A6273" "#FFFFFF"
-  python3 plugins/neo-design/scripts/kontrast.py --paare design/kontrastpaare.json
+  python3 plugins/neo-design/scripts/contrast.py "#5A6273" "#FFFFFF"
+  python3 plugins/neo-design/scripts/contrast.py --pairs design/contrast-pairs.json
   ```
 
 - **Beim Dokumentieren:** `neo-doku` — feste Struktur
@@ -200,14 +200,14 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
-| `kontrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
+| `contrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
 | `layoutabgleich.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
 | `ueberlauf.js` | `plugins/neo-design/scripts/` | Misst je Prüfbreite, was nicht in den Bildschirm passt: waagrechtes Scrollen, Elemente über dem Rand, Inhalt breiter als sein Platz, Tabellen unter der Inhaltsbreite, zu kleine Bedienziele und **Löcher in umgebrochenen Reihen** — drei Kacheln, die auf zwei Spalten umbrechen und eine halbe Reihe frei lassen. Framework-unabhängig am fertigen DOM. |
 | `uebersetzungen.py` | `plugins/neo-design/scripts/` | Vergleicht die Sprachdateien gegen die Leitsprache und meldet fehlende Schlüssel, leere Werte, **abweichende Platzhalter** (der gefährlichste Fall: die Meldung bricht oder lässt eine Lücke im Satz), fehlende Pluralformen, unübersetzt Gebliebenes, verwaiste und tote Schlüssel. Liest JSON, ARB, PHP-Rückgabe-Arrays und flaches YAML; was es nicht sicher lesen kann, meldet es. Ohne Abhängigkeiten. |
 | `textpassung.js` | `plugins/neo-design/scripts/` | Prüft, ob der Text in seinen Bereich passt — der Gegenspieler zum Überlauf, denn nichts davon erzeugt einen Scrollbalken: waagrecht und senkrecht abgeschnittener Text, Kürzung ohne erreichbaren Volltext, überlappende Texte, Bereiche unter acht Zeichen je Zeile, Umbruch mitten im Wort, `hyphens: auto` ohne `lang` und zu kleine Schrift. |
 | `bildabgleich.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
-| `stilabgleich.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
-| `gegenueberstellung.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
+| `style-audit.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
+| `comparison.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
 | `goldlauf.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
 | `requesty_adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `promptinventar.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |

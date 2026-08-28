@@ -62,7 +62,7 @@ lässt sich mit `data-abgleich-ohne="text"` ausnehmen.
 | Prüfung | Werkzeug | Antwort | Inhaltsabhängig |
 | --- | --- | --- | --- |
 | **1. Layoutabgleich** | `scripts/layoutabgleich.js` | Sind Maße, Abstände, Positionen und Aussehen gleich? | **nein** |
-| **2. Stilabgleich** | `scripts/stilabgleich.js` | Stammt jeder Wert aus den Tokens? | nein |
+| **2. Stilabgleich** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | nein |
 | **3. Bildabgleich** | `scripts/bildabgleich.py` | Sieht die Fläche insgesamt gleich aus? | **ja** |
 
 **Der Layoutabgleich ist der wichtigste.** Er misst genau das, was das

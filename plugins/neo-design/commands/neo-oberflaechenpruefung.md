@@ -36,7 +36,7 @@ mit einer Fundstelle (Datei und Zeile) oder einer Zahl:
    Fokusfassungen, in Hell und Dunkel, und rechne sie:
 
    ```
-   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/kontrast.py <vorne> <hinten> [--grund <grund>] [--art element]
+   python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py <vorne> <hinten> [--grund <grund>] [--usage element]
    ```
 
    Berichte jeden Wert als Zahl. Text unter 4,5:1 sowie Bedienelement
