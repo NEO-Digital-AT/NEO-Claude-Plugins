@@ -193,8 +193,9 @@ Beides gleichzeitig einzutragen ist nicht falsch, aber unnötig.
 ### Aktualisieren
 
 **Automatisch.** `neo-grundregeln` bringt einen SessionStart-Hook mit, der
-den Marktplatz auffrischt und veraltete Anheftungen löst. Er meldet sich
-nur, wenn es etwas zu melden gab:
+den Marktplatz auffrischt und für jedes veraltete Plugin
+`claude plugin update` ausführt. Er meldet sich nur, wenn es etwas zu
+melden gab:
 
 ```
 NEO rules updated - active from the next session
@@ -205,6 +206,11 @@ NEO rules updated - active from the next session
 **Es wirkt ab der nächsten Sitzung, nicht in der laufenden.** Der Hook
 steckt im Plugin — damit er läuft, ist das Plugin schon geladen.
 `claude plugin update` sagt dasselbe: „restart required to apply".
+
+Er benutzt ausschließlich die Befehle, die Claude selbst anbietet, und
+fasst dessen Buchführung nie direkt an: Eine von Hand gesetzte
+Fassungsnummer ohne die zugehörigen Dateien führt dazu, dass das Plugin
+stillschweigend gar nicht mehr lädt.
 
 Der Hook braucht **Python 3** auf dem Rechner. Fehlt es, tut er nichts und
 sagt nichts; dann bleiben die Wege von Hand. Er ruft höchstens alle zehn
@@ -288,7 +294,7 @@ Tor in der CI.
 | `gold-run.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
 | `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `prompt-inventory.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
-| `rules-update.py` | `plugins/neo-grundregeln/scripts/` | Hält die installierten Regel-Plugins auf dem Stand des Marktplatzes. Läuft aus dem SessionStart-Hook, frischt den Marktplatz auf und löst veraltete Anheftungen, sodass die nächste Sitzung neu installiert. Meldet sich nur, wenn sich etwas geändert hat; ohne Python, ohne Netz und bei unlesbarer Registrierung tut es nichts. Fremde Marktplätze bleiben unangetastet. |
+| `rules-update.py` | `plugins/neo-grundregeln/scripts/` | Hält die installierten Regel-Plugins auf dem Stand des Marktplatzes. Läuft aus dem SessionStart-Hook, frischt den Marktplatz auf und führt für jedes veraltete Plugin `claude plugin update` aus. Meldet sich nur, wenn sich etwas geändert hat; ohne Python, ohne Netz und bei unlesbarer Registrierung tut es nichts. Fremde Marktplätze bleiben unangetastet. |
 | `annotate.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Keeps the installed NEO rule plugins level with the marketplace.
 
-Runs from the SessionStart hook. It refreshes the marketplace clone and
-then removes the version pins of this marketplace from Claude's plugin
-registry, so the next session installs the current state.
+Runs from the SessionStart hook. It refreshes the marketplace and then
+runs `claude plugin update` for every plugin of this marketplace that is
+behind. Both are the commands Claude itself offers — the script never
+edits Claude's own bookkeeping, because a half-written registry leaves a
+plugin that no longer loads at all.
 
 It cannot update the session it runs in: the hook lives inside a plugin,
 so the plugins are already loaded by the time it starts. What it changes
@@ -17,10 +19,10 @@ something changed, and then it names what:
       neo-grundregeln  2.4.0 -> 2.5.0
       neo-design       1.8.0 -> 1.9.0
 
-Offline, without git, or with an unreadable registry it does nothing and
-says nothing. A session start is never blocked by a failure here.
+Offline or with an unreadable registry it does nothing and says nothing.
+A session start is never blocked by a failure here.
 
-    rules-update.py              refresh and unpin
+    rules-update.py              refresh and update
     rules-update.py --check      report only, change nothing
     rules-update.py --interval 0 ignore the throttle
 
@@ -42,7 +44,8 @@ import time
 
 STAMP = ".neo-rules-checked"
 DEFAULT_INTERVAL = 10      # minutes between two network calls
-GIT_TIMEOUT = 20           # seconds
+REFRESH_TIMEOUT = 60       # seconds for the marketplace refresh
+UPDATE_TIMEOUT = 60        # seconds per plugin
 
 
 def read_json(path: pathlib.Path, default):
@@ -66,26 +69,37 @@ def plugins_dir(plugin_root: pathlib.Path) -> pathlib.Path | None:
 def marketplace_name(plugin_root: pathlib.Path, plugins: pathlib.Path) -> str | None:
     """The marketplace this plugin came from.
 
-    Installed plugins live at <plugins>/cache/<marketplace>/<plugin>/<version>.
+    Claude keeps a plugin in one of two places, and both occur:
+
+        <plugins>/cache/<marketplace>/<plugin>/<version>
+        <plugins>/marketplaces/<marketplace>/plugins/<plugin>
+
+    In both the marketplace name is the second path element.
     """
     try:
         parts = plugin_root.relative_to(plugins).parts
     except ValueError:
         return None
-    return parts[1] if len(parts) >= 2 and parts[0] == "cache" else None
+    if len(parts) >= 2 and parts[0] in ("cache", "marketplaces"):
+        return parts[1]
+    return None
 
 
-def refresh(clone: pathlib.Path, marketplace: str) -> None:
-    """Fetches the newest marketplace state. Failures are not an error."""
-    if (clone / ".git").exists():
-        command = ["git", "-C", str(clone), "pull", "--quiet", "--ff-only"]
-    else:
-        command = ["claude", "plugin", "marketplace", "update", marketplace]
+def claude(arguments: list[str], timeout: int) -> bool:
+    """Runs a claude subcommand quietly. A failure is not an error here."""
     try:
-        subprocess.run(command, timeout=GIT_TIMEOUT, stdin=subprocess.DEVNULL,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        done = subprocess.run(["claude", *arguments], timeout=timeout,
+                              stdin=subprocess.DEVNULL,
+                              stdout=subprocess.DEVNULL,
+                              stderr=subprocess.DEVNULL)
+        return done.returncode == 0
     except (OSError, subprocess.SubprocessError):
-        pass
+        return False
+
+
+def refresh(marketplace: str) -> None:
+    """Fetches the newest marketplace state."""
+    claude(["plugin", "marketplace", "update", marketplace], REFRESH_TIMEOUT)
 
 
 def offered(clone: pathlib.Path) -> dict[str, str]:
@@ -113,21 +127,16 @@ def pinned(registry: dict, marketplace: str) -> dict[str, str]:
     return versions
 
 
-def unpin(path: pathlib.Path, registry: dict, marketplace: str,
-          names: list[str]) -> bool:
-    """Drops the pins of the named plugins, so the next session reinstalls.
+def update(marketplace: str, names: list[str]) -> list[str]:
+    """Updates the named plugins and returns those that went through.
 
-    Only entries of this marketplace are touched; plugins from elsewhere
-    keep their pin.
+    Uses `claude plugin update`, which also copies the new files into
+    place. Editing the registry by hand would set the version but leave
+    the files behind, and the plugin would silently stop loading.
     """
-    plugins = registry.get("plugins") or {}
-    for name in names:
-        plugins.pop(f"{name}@{marketplace}", None)
-    try:
-        path.write_text(json.dumps(registry, indent=2) + "\n", encoding="utf-8")
-        return True
-    except OSError:
-        return False
+    return [name for name in names
+            if claude(["plugin", "update", f"{name}@{marketplace}", "-y"],
+                      UPDATE_TIMEOUT)]
 
 
 def throttled(plugins: pathlib.Path, minutes: int) -> bool:
@@ -178,14 +187,13 @@ def main(argv: list[str] | None = None) -> int:
     clone = pathlib.Path(location)
 
     if not args.check:
-        refresh(clone, marketplace)
+        refresh(marketplace)
         try:
             (plugins / STAMP).touch()
         except OSError:
             pass
 
-    registry_path = plugins / "installed_plugins.json"
-    registry = read_json(registry_path, {})
+    registry = read_json(plugins / "installed_plugins.json", {})
     have, there = pinned(registry, marketplace), offered(clone)
 
     behind = sorted(name for name, version in have.items()
@@ -193,19 +201,20 @@ def main(argv: list[str] | None = None) -> int:
     if not behind:
         return 0
 
-    width = max(len(name) for name in behind)
-    lines = [f"    {name:<{width}}  {have[name]} -> {there[name]}"
-             for name in behind]
-
     if args.check:
+        width = max(len(name) for name in behind)
         print(f"NEO rules: {len(behind)} plugin(s) behind the marketplace")
-        print("\n".join(lines))
+        for name in behind:
+            print(f"    {name:<{width}}  {have[name]} -> {there[name]}")
         return 1
 
-    if not unpin(registry_path, registry, marketplace, behind):
+    done = update(marketplace, behind)
+    if not done:
         return 0
+    width = max(len(name) for name in done)
     print("NEO rules updated - active from the next session")
-    print("\n".join(lines))
+    for name in done:
+        print(f"    {name:<{width}}  {have[name]} -> {there[name]}")
     return 0
 
 
