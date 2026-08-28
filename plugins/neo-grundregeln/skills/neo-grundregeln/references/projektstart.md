@@ -22,12 +22,60 @@ Diese vier Punkte werden **erfragt**, nicht angenommen:
 | Datei | Inhalt |
 | --- | --- |
 | `README.md` | Was das Projekt ist, wie man es startet, wie man es testet, wohin die Doku zeigt |
-| `CLAUDE.md` | Regeldatei für Agenten: Betriebsart, Stack, Besonderheiten, Verweis auf die NEO-Plugins. Projektregeln, die konkreter sind, gehen vor |
+| `CLAUDE.md` | **Pflicht.** Regeldatei für Agenten, siehe unten. Ohne sie beginnt keine Codeänderung |
 | `CHANGELOG.md` | Änderungsprotokoll ab dem ersten Eintrag |
 | `.env.example` | Jeder Konfigurationsschlüssel mit Bedeutung, ohne echten Wert |
 | `.gitignore` | Passend zum Stack; keine Erzeugnisse, keine Secrets, keine lokalen Ordner |
 | `LICENSE` bzw. Lizenzhinweis | Auch bei geschlossenen Projekten: `proprietary` steht ausdrücklich da |
 | `SECURITY.md` | Wie eine Schwachstelle gemeldet wird, an wen, mit welcher Reaktionszeit |
+
+## Die CLAUDE.md
+
+**Pflicht in jedem Projekt, vor der ersten Codeänderung.** Fehlt sie,
+ist das der erste Punkt der Auftragsliste: anlegen, vorlegen, freigeben
+lassen.
+
+Sie zählt die geltenden NEO-Skills **namentlich** auf, je Skill ein Satz,
+wofür er in diesem Projekt gilt. **Das ist keine Empfehlung, sondern
+Vorgabe**: Der Agent wägt nicht ab, ob ein Skill passt — er lädt ihn und
+hält ihn ein. Ein Skill, der nicht dort steht, gilt nicht; ein Skill, der
+dort steht, gilt ohne Ausnahme.
+
+```markdown
+# <Projektname>
+
+Betriebsart: Anwendung | Portal | Webseite
+Stack: <Sprache/Framework, Fassung>
+Sprachen: <ausgeliefert>, Leitsprache <…>
+
+## Geltende Regeln
+
+Die NEO-Kernregeln gelten immer. Zusätzlich sind für dieses Projekt
+**verbindlich**:
+
+| Skill | Wofür in diesem Projekt |
+| --- | --- |
+| `neo-grundregeln` | Prozess, Freigaben, Auftragsliste, Tests |
+| `neo-code` | Codestruktur, Lesbarkeit, Sprache im System |
+| `neo-design` | Oberfläche, Responsivität, Barrierefreiheit |
+| … | … |
+
+Nicht geltend, mit Grund: `neo-contao` (kein Contao), `neo-mobil`
+(keine App).
+
+## Besonderheiten dieses Projekts
+
+<Was von den Regeln abweicht, mit Grund und Datum. Ohne Vermerk gibt es
+keine Abweichung.>
+```
+
+- **Jeder Skill, der gilt, steht drin.** Auch die, die selbstverständlich
+  wirken — was nicht dasteht, wird nicht geladen.
+- **Was nicht gilt, steht mit Grund drin.** Ein weggelassener Skill ohne
+  Begründung ist ein Befund, kein Weglassen.
+- **Geändert wird die Datei nur vom Projektinhaber.** Der Agent schlägt
+  vor und wartet.
+- Projektregeln, die konkreter sind als die Kernregeln, gehen vor.
 
 ## Struktur
 

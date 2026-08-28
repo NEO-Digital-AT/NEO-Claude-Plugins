@@ -7,8 +7,21 @@ erfüllt.**
 Der Befehl `/neo-grundregeln:neo-selbstkontrolle` geht diese Liste am
 aktuellen Arbeitsstand durch.
 
+## Auftragsliste
+
+- [ ] **Jeder Punkt der Auftragsliste ist erledigt oder gestrichen** —
+      auch die, die zwischendurch nachgereicht wurden
+      (`auftragsliste.md`).
+- [ ] Kein Punkt steht auf **wartend**, ohne dass die Rückfrage offen
+      sichtbar gestellt wurde.
+- [ ] **Jede Anweisung zu Git wurde ausgeführt und belegt** — Merge,
+      Commit, Push mit Kennung, nicht angekündigt.
+- [ ] Die Liste steht in der Antwort, mit Stand je Punkt.
+
 ## Prozess
 
+- [ ] Eine `CLAUDE.md` liegt vor, zählt die geltenden Skills namentlich
+      auf und wurde eingehalten.
 - [ ] Die Regelwerke des Projekts wurden gelesen, nicht nur die README.
 - [ ] Umfang und Nicht-Umfang wurden benannt.
 - [ ] Die Abhängigkeiten wurden **vor** der Umsetzung erhoben.

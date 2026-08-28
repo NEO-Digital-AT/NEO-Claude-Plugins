@@ -35,7 +35,7 @@ verletzt, nicht abgekürzt.
 
 Diese Konvention gilt in allen Referenzdateien dieses Skills.
 
-## Die fünf Sätze, die alles tragen
+## Die sechs Sätze, die alles tragen
 
 1. **Die Entscheidung fällt ausnahmslos der Projektinhaber.** Der Agent
    legt Optionen vor und empfiehlt. Er entscheidet nicht.
@@ -43,9 +43,13 @@ Diese Konvention gilt in allen Referenzdateien dieses Skills.
    harte Sicherheitslücke — sofort beheben, unverzüglich melden.
 3. **Keine Annahme, keine Spekulation.** Jede Feststellung ist belegt
    oder wird als Vermutung gekennzeichnet.
-4. **Grüne Tests sind kein Beweis.** Was Laufzeit berührt, wird zur
+4. **Eine neue Nachricht bricht die laufende Aufgabe nicht ab.** Sie wird
+   ein Punkt auf der Auftragsliste. Kein Punkt verfällt, und eine
+   Anweisung gilt erst als erledigt, wenn sie ausgeführt und belegt ist
+   (`references/auftragsliste.md`).
+5. **Grüne Tests sind kein Beweis.** Was Laufzeit berührt, wird zur
    Laufzeit geprüft.
-5. **Rote Tests sind Blocker, nie Folgeaufgaben.**
+6. **Rote Tests sind Blocker, nie Folgeaufgaben.**
 
 ## Der Prozess in Kürze
 
@@ -108,6 +112,7 @@ Umsetzungsplan enthält: `references/prozess.md`.
 
 | Bereich | Referenz |
 | --- | --- |
+| Die Auftragsliste: Punkte bilden, abarbeiten, belegen | `references/auftragsliste.md` |
 | Der Prozess im Detail, was Freigabe heißt, der Umsetzungsplan | `references/prozess.md` |
 | Belegpflicht, Quellen, fremde APIs, MCP-Rollen, verteilte Systeme | `references/belegpflicht.md` |
 | Selbstkontrolle, Auswirkungsanalyse, Debugging, Laufzeitverifikation | `references/selbstkontrolle.md` |

@@ -8,7 +8,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit acht Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung; Skill mit neun Referenzdateien; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sechs Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
@@ -232,8 +232,9 @@ Tor in der CI.
   (Oberflächenarbeit, Doku-Arbeit, Zweigarbeit, Contao-Arbeit,
   Sicherheitsarbeit). Die Referenzdateien unter `references/` liest der
   Agent erst, wenn er sie braucht — so bleibt die Kernfassung kurz.
-- Projekt-Regeldateien (CLAUDE.md) können zusätzlich auf die Skills
-  verweisen.
+- **Jedes Projekt hat eine `CLAUDE.md`**, die die geltenden Skills
+  namentlich aufzählt (Kernregel 3). Was dort steht, ist Vorgabe, keine
+  Empfehlung — der Agent entscheidet nicht, ob ein Skill „passt".
 - Projektspezifische Regelwerke (z. B. NEOcash CLAUDE.md, LeoFlex
   AGENTS.md) bleiben führend, wo sie konkreter
   sind. Diese Plugins liefern den gemeinsamen Unterbau.
@@ -252,7 +253,7 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 16, Skill `neo-deployment`). Dieses
+- **Kein `dev`-Zweig** (Kernregel 18, Skill `neo-deployment`). Dieses
   Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
