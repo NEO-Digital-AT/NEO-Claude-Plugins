@@ -40,7 +40,7 @@ die Adresse „eu" enthält und alles funktioniert.
   Auftragsverarbeitung und Trainingsausschluss in die Erklärung, bevor
   gebaut wird (Skill `neo-recht`, Skill `neo-ki`).
 
-Der Adapter `scripts/requesty_adapter.py` warnt bei `--pruefen`, wenn die
+Der Adapter `scripts/requesty_adapter.py` warnt bei `--check`, wenn die
 Basisadresse nicht der EU-Router ist oder die Modellkennung weder
 Regionsangabe noch Policy trägt. Die Warnung ersetzt die Prüfung nicht.
 
@@ -114,13 +114,13 @@ Kostengrenze sind gesetzt (Skill `neo-ki`).
 
 ```json
 {
-  "basis": "https://router.eu.requesty.ai/v1",
-  "modell": "policy/assistent-eu",
-  "systemprompt": "prompts/system.md",
-  "werkzeuge": "prompts/werkzeuge.json",
-  "temperatur": 0,
-  "hoechstschritte": 8,
-  "frist": 90
+  "base": "https://router.eu.requesty.ai/v1",
+  "model": "policy/assistent-eu",
+  "system_prompt": "prompts/system.md",
+  "tools": "prompts/tools.json",
+  "temperature": 0,
+  "max_steps": 8,
+  "timeout": 90
 }
 ```
 
@@ -129,10 +129,10 @@ wo eine Umgebung das braucht.
 
 ```
 export REQUESTY_API_KEY="…"
-python3 tools/requesty_adapter.py --konfig assistent.json --pruefen
+python3 tools/requesty_adapter.py --config assistant.json --check
 ```
 
-`--pruefen` nennt Router, Modell, Promptgröße und Werkzeugzahl, warnt bei
+`--check` nennt Router, Modell, Promptgröße und Werkzeugzahl, warnt bei
 fehlender EU-Kennung und führt einen echten Aufruf aus. Das ist der erste
 Befehl bei jedem Verdacht, dass „irgendetwas mit der Verbindung nicht
 stimmt".

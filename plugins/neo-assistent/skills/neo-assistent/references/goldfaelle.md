@@ -16,17 +16,17 @@ geht". Es geht nicht plötzlich kaputt; es war nur nie gemessen.
 ```json
 {
   "id": "stornieren-erst-suchen.de",
-  "absicht": "auftrag_stornieren",
-  "sprache": "de",
-  "schreibend": true,
-  "verlauf": [
-    { "rolle": "benutzer", "text": "Storniere bitte den Auftrag von Frau Huber." }
+  "intent": "auftrag_stornieren",
+  "language": "de",
+  "writing": true,
+  "history": [
+    { "role": "user", "text": "Storniere bitte den Auftrag von Frau Huber." }
   ],
-  "zustand": { "heute": "2026-08-27", "mandant": "M1" },
-  "erwartet": {
-    "werkzeug": "auftrag_suchen",
-    "argumente": { "nachname": "Huber" },
-    "verboten": ["auftrag_stornieren"]
+  "state": { "heute": "2026-08-27", "mandant": "M1" },
+  "expect": {
+    "tool": "auftrag_suchen",
+    "arguments": { "nachname": "Huber" },
+    "forbidden": ["auftrag_stornieren"]
   }
 }
 ```
@@ -39,21 +39,21 @@ Felder der Erwartung:
 
 | Feld | Bedeutung |
 | --- | --- |
-| `werkzeug` | Name des ersten Aufrufs. `null` heißt: **kein** Werkzeug |
-| `werkzeuge` | eine Folge, wenn die Reihenfolge zählt |
-| `argumente` | Teilmenge; genannt wird nur, was geprüft werden soll |
-| `verboten` | diese Werkzeuge dürfen im ganzen Lauf nicht vorkommen |
-| `antwort_enthaelt` | Zeichenketten, die in der Antwort stehen müssen |
-| `antwort_frei_von` | Zeichenketten, die nicht vorkommen dürfen |
+| `tool` | Name des ersten Aufrufs. `null` heißt: **kein** Werkzeug |
+| `tools` | eine Folge, wenn die Reihenfolge zählt |
+| `arguments` | Teilmenge; genannt wird nur, was geprüft werden soll |
+| `forbidden` | diese Werkzeuge dürfen im ganzen Lauf nicht vorkommen |
+| `answer_contains` | Zeichenketten, die in der Antwort stehen müssen |
+| `answer_free_of` | Zeichenketten, die nicht vorkommen dürfen |
 
 Argumentwerte prüfen genau, als Muster, als Auswahl oder nur auf
 Anwesenheit:
 
 ```json
-"auftragsnummer": { "muster": "^A-[0-9]+$" }
-"grund":          { "eines_von": ["kundenwunsch", "doppelt"] }
-"mandant":        { "beliebig": true }
-"nachname":       { "nicht": "unbekannt" }
+"auftragsnummer": { "pattern": "^A-[0-9]+$" }
+"grund":          { "one_of": ["kundenwunsch", "doppelt"] }
+"mandant":        { "any": true }
+"nachname":       { "not": "unbekannt" }
 ```
 
 ## Abdeckung
@@ -69,7 +69,7 @@ Anwesenheit:
 **Dazu, unabhängig von der Absichtszahl:**
 
 - Je **Vorbedingung** ein Fall, der sie verletzt sieht (schreibendes
-  Werkzeug `verboten`, Suchwerkzeug erwartet).
+  Werkzeug `forbidden`, Suchwerkzeug erwartet).
 - Je **Sprache** derselbe Satz, mit übersetztem Benutzertext und
   **identischer** Erwartung (`sprachen.md`).
 - **Einschleusung**: Anweisungstext im Namen eines Datensatzes, in einer
@@ -115,8 +115,8 @@ der einen Fall als JSON entgegennimmt und das Ergebnis als JSON
 zurückgibt:
 
 ```
-Eingabe   { "id", "sprache", "absicht", "verlauf": [...], "zustand": {...} }
-Ausgabe   { "werkzeuge": [ { "name", "argumente" } ], "antwort": "…" }
+Eingabe   { "id", "language", "intent", "history": [...], "state": {...} }
+Ausgabe   { "tools": [ { "name", "arguments" } ], "answer": "…" }
 ```
 
 - **Der Adapter fährt denselben Weg wie die Anwendung.** Einordnung,
@@ -132,17 +132,17 @@ Ausgabe   { "werkzeuge": [ { "name", "argumente" } ], "antwort": "…" }
 
 ```
 # alles, vor der Freigabe
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py goldfaelle.json \
-  --adapter "python3 tools/assistent_adapter.py" --laeufe 5
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py gold-cases.json \
+  --adapter "python3 tools/assistant_adapter.py" --runs 5
 
 # nur eine Sprache, während der Arbeit
-… --sprache it --laeufe 3
+… --language it --runs 3
 
 # nur eine Absicht
-… --absicht auftrag_stornieren
+… --intent auftrag_stornieren
 
 # maschinenlesbar, für den Vergleich vorher/nachher
-… --bericht bericht-nachher.json
+… --report report-after.json
 ```
 
 Der Bericht nennt je Fall die Trefferquote und die häufigsten Mängel,

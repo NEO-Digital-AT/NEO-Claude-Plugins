@@ -119,8 +119,8 @@ Schemata, Beschreibungen, Abgrenzung, Fehlerrückgabe und Vorbedingungen:
 Goldfall-Lauf davor und danach.** „Es wirkt besser" ist keine Zahl.
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py goldfaelle.json \
-  --adapter "python3 tools/assistent_adapter.py" --laeufe 5
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py gold-cases.json \
+  --adapter "python3 tools/assistant_adapter.py" --runs 5
 ```
 
 Der Prüfer läuft jeden Fall mehrfach, weil ein Modell nicht
@@ -186,7 +186,7 @@ zweiter, ungeprüfter Assistent.
 `scripts/requesty_adapter.py` verbindet den Goldfall-Prüfer mit dem
 Router: er fährt den Fall, zeichnet jeden Werkzeugaufruf auf, **ohne ihn
 auszuführen**, und prüft die Argumente gegen das Schema.
-`--pruefen` prüft Zugang und Konfiguration und warnt, wenn die
+`--check` prüft Zugang und Konfiguration und warnt, wenn die
 Verarbeitung die EU verlässt. Adressen, Kennungsform, strenge Ausgaben,
 Fehlercodes und Belege: `references/requesty.md`.
 
@@ -210,7 +210,7 @@ Vergleich, Wechsel und was billiger ist als hochrüsten:
 
 Ein gewachsener Assistent wird **in Schritten** umgebaut, jeder einzeln
 gemessen, vom billigsten zum teuersten Eingriff: **Inventar**
-(`scripts/promptinventar.py`) → **Ausgangsmessung** → **Schemata
+(`scripts/prompt-inventory.py`) → **Ausgangsmessung** → **Schemata
 härten** → **Fachwissen herausziehen** → **Absichten schneiden** →
 **Router**, letzterer erst, wenn die Messung ihn nötig macht.
 

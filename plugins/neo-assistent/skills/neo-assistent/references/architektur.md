@@ -115,7 +115,7 @@ nicht in Prosa erzählt:
   "mandant": "M1",
   "benutzer": { "rolle": "sachbearbeitung" },
   "auswahl": { "auftragsnummer": "A-4711" },
-  "letztes_ergebnis": { "werkzeug": "auftrag_suchen", "treffer": 1 }
+  "letztes_ergebnis": { "tool": "auftrag_suchen", "treffer": 1 }
 }
 ```
 
@@ -136,7 +136,7 @@ zusammensetzt: Systemprompt, Absicht, Werkzeuge, Zustand, Verlauf. Sie
 ist zugleich der Punkt, an dem die Goldfälle ansetzen.
 
 ```
-tools/assistent_adapter.py   Fall (JSON) auf stdin  →  Ergebnis (JSON) auf stdout
+tools/assistant_adapter.py   Fall (JSON) auf stdin  →  Ergebnis (JSON) auf stdout
 ```
 
 Der Adapter fährt denselben Weg wie die Anwendung — nicht einen

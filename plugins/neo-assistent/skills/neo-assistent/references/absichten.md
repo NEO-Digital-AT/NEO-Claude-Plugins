@@ -87,8 +87,8 @@ Streng, über strukturierte Ausgabe erzwungen:
 
 ```json
 {
-  "absicht": "auftrag_suchen",
-  "sprache": "de",
+  "intent": "auftrag_suchen",
+  "language": "de",
   "sicher": true
 }
 ```

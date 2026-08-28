@@ -46,7 +46,7 @@ Was dabei bricht, bricht nur in der Kette:
 - Ein Zwischenschritt wird übersprungen, weil die Absicht schon feststand.
 - Nach einem Themenwechsel wird der alte Vorgang fortgeführt.
 
-Als Fall mit `werkzeuge` als **Folge**, nicht nur mit dem ersten Aufruf.
+Als Fall mit `tools` als **Folge**, nicht nur mit dem ersten Aufruf.
 
 ## 3. Außerhalb der Zuständigkeit
 

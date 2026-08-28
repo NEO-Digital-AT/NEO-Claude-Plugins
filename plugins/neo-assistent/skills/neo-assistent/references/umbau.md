@@ -24,7 +24,7 @@ verbessert hat.
 ## Schritt 1 — Inventar
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/promptinventar.py prompts/assistent.md
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/prompt-inventory.py prompts/assistent.md
 ```
 
 Das Skript zählt und findet Muster; es urteilt nicht. Es meldet

@@ -7,7 +7,7 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 ## Aufbau
 
 - [ ] Der Systemprompt ist **unter 150 Zeilen** — gemessen, nicht
-      geschätzt (`promptinventar.py`).
+      geschätzt (`prompt-inventory.py`).
 - [ ] Er enthält **keine** Werkzeugauswahl, kein Fachwissen, kein Schema
       und keinen Beispieldialog.
 - [ ] Absichten, Werkzeuge, Zustand und Ablauf liegen getrennt.
@@ -15,7 +15,7 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
       **Code**, nicht im Prompt.
 - [ ] `heute`, Zeitzone, Mandant und Auswahl kommen als **Daten** aus dem
       Zustand.
-- [ ] `promptinventar.py` meldet **null** Befunde der Art
+- [ ] `prompt-inventory.py` meldet **null** Befunde der Art
       Schlüsselwort-Verzweigung.
 
 ## Absichten

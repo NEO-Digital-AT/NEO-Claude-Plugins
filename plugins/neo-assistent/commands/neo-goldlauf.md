@@ -31,8 +31,8 @@ ausführt.
 ## Messen
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py goldfaelle.json \
-  --adapter "<befehl>" --laeufe 5 --bericht bericht.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py gold-cases.json \
+  --adapter "<befehl>" --runs 5 --report report.json
 ```
 
 | Anlass | Läufe |
@@ -44,8 +44,8 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py goldfaelle.json \
 Ein einzelner grüner Lauf beweist nichts — ein Modell antwortet nicht
 deterministisch.
 
-Für einen Ausschnitt: `--sprache it`, `--absicht auftrag_stornieren`,
-`--fall <kennung>`.
+Für einen Ausschnitt: `--language it`, `--intent auftrag_stornieren`,
+`--case <kennung>`.
 
 ## Deuten
 

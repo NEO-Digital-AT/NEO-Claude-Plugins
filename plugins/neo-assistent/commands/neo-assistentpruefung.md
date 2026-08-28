@@ -26,7 +26,7 @@ Friere den Ist-Zustand in einem Commit ein, bevor du misst.
 ## Schritt 1 — Inventar
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/promptinventar.py <promptdatei> --bericht inventar.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/prompt-inventory.py <promptdatei> --report inventory.json
 ```
 
 Das Skript meldet Schlüsselwort-Verzweigung, Schemata in der Prosa,
@@ -63,12 +63,12 @@ Ohne sie ist jede spätere Verbesserung eine Behauptung.
 2. **Goldfälle anlegen** — je Absicht der klare, der mehrdeutige und der
    Fall ohne Werkzeug, je Sprache, dazu Einschleusung, Datumsrechnung und
    je Vorbedingung ein Fall (`references/goldfaelle.md`).
-   Vorlage: `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py --beispiel`
+   Vorlage: `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py --example`
 3. **Messen**, zehn Läufe:
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py goldfaelle.json \
-  --adapter "<befehl>" --laeufe 10 --bericht ausgang.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py gold-cases.json \
+  --adapter "<befehl>" --runs 10 --report baseline.json
 ```
 
 Berichte die Zahlen **je Sprache und je Absicht**, nicht nur den

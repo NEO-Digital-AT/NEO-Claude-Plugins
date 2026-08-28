@@ -14,7 +14,7 @@ Lade zuerst den Skill `neo-assistent`, dazu
 
 ```
 export REQUESTY_API_KEY="…"
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/requesty_adapter.py --konfig assistent.json --pruefen
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/requesty_adapter.py --config assistant.json --check
 ```
 
 Der Schlüssel kommt **ausschließlich** aus der Umgebung. Steht er in der
@@ -68,7 +68,7 @@ Elf Pflichtklassen, je Absicht und je Sprache
 Vorlage für das Format:
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py --beispiel
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py --example
 ```
 
 **Beim Erzeugen gilt:**
@@ -76,12 +76,12 @@ python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py --beispiel
 - **Die Erwartung steht vorher fest**, aus der fachlichen Regel — nie aus
   einem Probelauf. Ein Fall, dessen Erwartung aus dem Verhalten stammt,
   macht falsches Verhalten dauerhaft grün.
-- **`verboten` ist wichtiger als `werkzeug`.** Bei Vorbedingungen,
+- **`forbidden` ist wichtiger als `tool`.** Bei Vorbedingungen,
   Einmalgeheimnissen und Einschleusung ist das, was **nicht** passieren
   darf, der eigentliche Prüfgegenstand.
 - **`schreibend: true`** bei jedem Fall, der ein schreibendes Werkzeug
   berührt — auch wenn er es verbietet. Das setzt die Schwelle auf 100 %.
-- **`werkzeugergebnisse`** je Fall hinterlegen, damit mehrschrittige
+- **`tool_results`** je Fall hinterlegen, damit mehrschrittige
   Abläufe reproduzierbar sind. Nichts wird wirklich ausgeführt.
 - Erfundene Namen und Kennungen, **keine echten personenbezogenen Daten**.
 - Übersetzt wird der **Benutzertext**, nie die Erwartung.
@@ -93,9 +93,9 @@ mehr Schaden an als keiner.
 ## Schritt 3 — Fahren
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/goldlauf.py haertefaelle.json \
-  --adapter "python3 tools/requesty_adapter.py --konfig assistent.json" \
-  --laeufe 5 --bericht haerte-bericht.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py hard-cases.json \
+  --adapter "python3 tools/requesty_adapter.py --config assistant.json" \
+  --runs 5 --report hard-cases-report.json
 ```
 
 Der Adapter zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**,

@@ -75,7 +75,7 @@ dort, wo sie nicht passen.
    Sprachsuffix (`suchen-klar.it`). Übersetzt wird der **Benutzertext**;
    die Erwartung — Werkzeug und Argumente — bleibt **identisch**. Genau
    darin liegt der Beweis.
-3. **Messen** — `goldlauf.py --sprache it`. Die neue Sprache muss
+3. **Messen** — `gold-run.py --language it`. Die neue Sprache muss
    dieselben Schwellen erreichen wie die bestehenden.
 4. **Vergleichen** — sinkt die Trefferquote nur in der neuen Sprache,
    liegt es fast immer an einem der drei Punkte oben: ein Wort im Prompt,
