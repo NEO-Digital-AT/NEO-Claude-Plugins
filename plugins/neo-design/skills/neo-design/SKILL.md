@@ -325,7 +325,10 @@ jede Seitenvorlage — nicht nur für die Startseite.
 | Agentisches Browsen | 3/3 | 3/3 |
 
 Agentisches Browsen prüft drei Dinge: sauberer Accessibility-Tree,
-stabiles Layout, gültige `llms.txt` an der Domain-Wurzel.
+stabiles Layout, gültige `llms.txt` an der Domain-Wurzel. **Die
+`llms.txt` ist bei Webseiten Pflicht** — zusammen mit `llms-full.txt`.
+Bei Web-Anwendungen, Portalen und APIs ist sie es nicht; dort ist OpenAPI
+der maschinenlesbare Vertrag (Skill `neo-api`).
 
 **Der Wert für Barrierefreiheit ist kein Nachweis.** Er prüft
 automatisch, was sich automatisch prüfen lässt — ein Bruchteil der

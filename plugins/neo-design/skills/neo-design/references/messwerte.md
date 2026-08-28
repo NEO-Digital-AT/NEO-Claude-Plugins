@@ -39,7 +39,7 @@ von 0 bis 100, sondern ein Verhältnis. Die drei Standardprüfungen:
 | --- | --- | --- |
 | Sauberer Accessibility-Tree | Bedienelemente haben Namen, Rollen und gültige Verschachtelung; nichts Bedienbares ist vor dem Baum versteckt | Fällt ab, wenn `barrierefreiheit.md` eingehalten wird: jedes Symbol mit Namen, Beschriftungen verknüpft, Überschriften ohne Sprünge, keine bedienbaren Elemente hinter `aria-hidden` |
 | Stabiles Layout | Nichts verschiebt sich, während die Seite steht — ein Agent soll den richtigen Knopf treffen | Maße an Bildern und eingebetteten Rahmen, Platz für nachgeladene Inhalte reservieren, Schriften ohne Umsprung laden, Bewegung nur über `transform` und `opacity` (`webseiten.md`) |
-| Gültige `llms.txt` | Eine `llms.txt` an der Domain-Wurzel, die dem Format entspricht | Aus der Datenbank erzeugt, nicht von Hand gepflegt; dazu `llms-full.txt` (Skill `neo-contao`) |
+| Gültige `llms.txt` | Eine `llms.txt` an der Domain-Wurzel, die dem Format entspricht | **Bei Webseiten Pflicht**, aus der Datenbank erzeugt, nicht von Hand gepflegt, dazu `llms-full.txt` (Skill `neo-contao`). Bei Web-Anwendungen und APIs nicht verlangt — dort ist OpenAPI der Vertrag (Skill `neo-api`) |
 
 Die Kategorie ist eine Diagnose, kein Ranking-Faktor. Sie fordert nichts,
 was diese Regeln nicht ohnehin verlangen — deshalb ist 3/3 die

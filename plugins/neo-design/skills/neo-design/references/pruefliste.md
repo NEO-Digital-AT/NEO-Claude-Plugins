@@ -145,7 +145,9 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
 - [ ] Leistung und Barrierefreiheit mindestens 95, Ziel 100.
 - [ ] Die drei Kernwerte für Ladezeit, Reaktion und Layoutstabilität
       berichtet.
-- [ ] `llms.txt` an der Domain-Wurzel vorhanden und gültig.
+- [ ] Bei einer **Webseite**: `llms.txt` und `llms-full.txt` an der
+      Domain-Wurzel vorhanden, gültig und aus dem Bestand erzeugt. Bei
+      Web-Anwendungen und APIs nicht verlangt.
 - [ ] Klar benannt, dass der Barrierefreiheitswert ein Teilcheck ist —
       die Prüfung oben ersetzt er nicht.
 

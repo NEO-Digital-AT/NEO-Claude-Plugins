@@ -45,7 +45,14 @@ Was sich ändern soll, ändert sich im Imageset — dann rechnet Contao neu.
 
 ## llms.txt
 
-**Jede Seite hat `llms.txt`**, dazu die vollständige **`llms-full.txt`**.
+**Bei einer Webseite sind `llms.txt` und `llms-full.txt` Pflicht.** Ohne
+Ausnahme, an der Domain-Wurzel.
+
+Für **Web-Anwendungen, Portale und APIs sind sie es nicht.** Dort ist der
+maschinenlesbare Vertrag ein anderer: OpenAPI für die Schnittstelle
+(Skill `neo-api`), die Dokumentation für die Bedienung (Skill
+`neo-doku`). Eine `llms.txt` schadet dort nicht, sie wird aber nicht
+verlangt und ersetzt nichts.
 
 - Erzeugt aus der Datenbank, nicht von Hand gepflegt. In
   `NEO-Digital-AT/website` erledigt das `neo/llms-bundle`.

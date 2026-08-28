@@ -7,7 +7,11 @@ description: >
   Imagesets und Bildkompression, SCSS und dessen Einbindung im Layout,
   MetaModels oder Contao Catalog,
   Backend-Rechte, Composer-Bundles, Migrationen und Seed, Deployment,
-  Minifizierung von CSS und JavaScript, llms.txt. Ebenso bei der Frage,
+  Minifizierung von CSS und JavaScript, llms.txt. Ebenso beim Bau einer
+  eigenen Contao-Erweiterung (Bundle, Plugin): composer.json,
+  Manager-Plugin, Dienste-Tags, DCA, Migrationen, Aktualisierung ohne
+  Schaden für bestehende Installationen. Ebenso bei Themes: Aufbau,
+  Export als .cto, Import anderswo, Voraussetzungen. Ebenso bei der Frage,
   ob eine fremde Erweiterung eingesetzt oder eine eigene gebaut wird.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO-Digital-AT/website (docs/STANDARD-PROMPT-CONTAO.md, composer.json, bundles/), Stand 2026-08
@@ -127,16 +131,70 @@ eigenen Bundles und die vorhandenen NEO-Bundles:
 - Alles, was für Contao gebaut wird, ist eine **eigene Extension in einem
   eigenen Repository**.
 - Repository-Name: **`Contao-<NameDerErweiterung>-by-NEO`**, ohne
-  Leerzeichen.
-- Composer-Paket `neo/<name>-bundle`, Tabellen `tl_neo_*`.
+  Leerzeichen. Composer-Paket `neo/<name>-bundle`, Namensraum
+  `Neo\Contao<Name>Bundle`, Tabellen `tl_neo_*`, Templates mit
+  eigenem Präfix.
 - Keine Projekt-Spezifika im Bundle: alles, was ein anderes Projekt
   anders braucht, ist ein Einstellungsfeld — Routen statt fester
   Adressen, Auswahl statt eingebauter Firmenregel.
+
+**Die Rangfolge vor der ersten Zeile Code, jede Stufe belegt:**
+
+1. Bordmittel? → 2. fremde Erweiterung? → 3. **bestehende NEO-Erweiterung,
+die das schon kann?** → 4. **eine, der nur etwas fehlt?** → 5. erst dann
+eine neue, nach Freigabe.
+
+> **Zwei Erweiterungen für dieselbe Aufgabe sind ein Regelverstoß.**
+> Fehlt einer bestehenden etwas, wird **sie** ergänzt — dann haben alle
+> Installationen etwas davon.
+
+**Und zwar so, dass jede bestehende Installation aktualisieren kann, ohne
+dass sich für sie etwas ändert.** Neue Felder sind optional mit
+Standardwert; kein Feld wird umbenannt oder entfernt, solange es jemand
+nutzen könnte; keine Pflicht wird nachträglich eingeführt; kein
+Standardwert ändert sich ohne Migration. Semantische Versionierung und
+ein Änderungsprotokoll je Fassung.
+
+Aufbau eines Bundles, `composer.json`, Registrierung über Dienste-Tags,
+Migrationen, Tests und die Doku im Paket: `references/erweiterungsbau.md`.
 
 In `NEO-Digital-AT/website` liegen bereits Bundles, die noch **nicht** in
 eigenen Repositories stehen und weiterverwendet werden dürfen:
 `neo/super-agent-bundle` (KI-Chat), `neo/brevo-newsletter-bundle`,
 `neo/llms-bundle`. Beim Herauslösen gilt die Namensregel oben.
+
+## Webdesign ist ein Theme
+
+**Jedes Webdesign wird als Theme gebaut**, exportierbar als `.cto` und
+anderswo installierbar, **ohne dass jemand KI zu Hilfe nehmen muss**.
+
+- Die Quellen — Templates, SCSS, Bilder, der Entwurf — liegen im
+  Repository. Die `.cto` ist ein eingechecktes Erzeugnis, kein Original.
+- **Templates in einem eigenen Unterordner.** Ein Import überschreibt
+  vorhandene Templates.
+- **Voraussetzungen zuerst installieren.** Datensätze zu Feldern einer
+  fehlenden Erweiterung werden beim Import **stillschweigend
+  übergangen** — das Theme sieht importiert aus und ist unvollständig.
+  Deshalb führt jedes Theme eine Liste seiner Voraussetzungen.
+- Die Installationsanleitung ist so geschrieben, dass sie **ohne KI**
+  funktioniert — und das wird nachgewiesen, nicht angenommen.
+
+Aufbau, Ablauf vom Entwurf zum Theme und die Abnahme:
+`references/themes.md`.
+
+## Die Gestaltung kommt aus Claude Design
+
+Fast jede NEO-Seite wird in Claude Design entworfen. Dann gilt **Skill
+`neo-design`, `references/claude-design.md` ohne Abstriche**: Inventar vor
+der ersten Zeile, Element für Element bauen, nach jedem Element messen,
+jede Abweichung ist eine Rückfragen — auch hier.
+
+**Contao ist kein Grund für eine Abweichung.** Wo ein Contao-Element
+nicht so aussieht wie im Entwurf, wird das Template angepasst, nicht der
+Entwurf. Ebenso gelten ohne Abzug: Barrierefreiheit nach WCAG 2.2 AA
+(gerechnet, nicht vom Lighthouse-Wert abgeleitet), die PageSpeed-Zielwerte
+mobil je Seitenvorlage, und die Größenprüfung auf acht Breiten
+einschließlich Textpassung.
 
 ## Auslieferung
 
@@ -146,7 +204,9 @@ eigenen Repositories stehen und weiterverwendet werden dürfen:
 - **Alles minifiziert und komprimiert ausliefern**: HTML, CSS,
   JavaScript. Contao kann JavaScript nur zusammenfassen, nicht
   minifizieren — dafür kommt eine Erweiterung dazu, keine Handarbeit.
-- **Jede Seite hat `llms.txt`**, dazu die vollständige `llms-full.txt`.
+- **`llms.txt` und `llms-full.txt` sind bei einer Webseite Pflicht**, an
+  der Domain-Wurzel. Bei Web-Anwendungen und APIs sind sie es nicht —
+  dort ist OpenAPI der Vertrag (Skill `neo-api`).
 - Bildkompression und Formate ausschließlich über die Imagesets.
 
 Konkrete Einstellungen, Erweiterungen für die Minifizierung und die
@@ -166,8 +226,16 @@ Prüfung der Auslieferung: `references/betrieb.md`.
   übertragen; nach dem Ausrollen ist die Seite vollständig, ohne dass
   jemand etwas nachträgt.
 
+Die Struktur steht in der DCA, alles Weitere ist eine **Migration**
+(`contao.migration`, `MigrationInterface`). Dabei gilt: `shouldRun()`
+wird **defensiv** geschrieben — die Anwendung kann in jedem Zustand sein
+—, die Migration ist **wiederholbar**, und sie **verliert keine Daten**.
+Getestet wird gegen eine Kopie eines echten Bestands; eine leere
+Datenbank besteht jede Migration.
+
 Migrationen, idempotenter Seed, Übertragung von `files/` und Assets:
-`references/betrieb.md`.
+`references/betrieb.md`. Migrationen im eigenen Bundle:
+`references/erweiterungsbau.md`.
 
 ## Dokumentation
 
@@ -190,6 +258,11 @@ Redaktion.
 - Bedienung heißt Bedienung im Backend: welches Modul, welches Feld,
   welche Wirkung — mit Screenshots aus dem Contao-Backend.
 
+## Abnahme
+
+Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und das
+Ergebnis mit Zahlen berichten. Nicht Geprüftes gilt als nicht erfüllt.
+
 ## Projektstart
 
 Für ein neues Kundenprojekt gilt zusätzlich der Standardprompt
@@ -198,7 +271,9 @@ Aufbau, getrennter Admin-Port, Grundkonfiguration als idempotenter
 Befehl, Rechtemodell für Redakteure, Pflicht-Bausteine jeder Seite
 (Mail-Schutz, Consent, SEO, Barrierefreiheit) und die Abnahmekriterien.
 
-Zugehörige Skills: `neo-design` (Gestaltung, Eingabeführung,
-Barrierefreiheit), `neo-doku` (Dokumentation), `neo-deployment` (Zweige
-und Ausrollung), `neo-sicherheit` (Secrets, Härtung, Lieferkette),
-`neo-grundregeln` (Prozess und Freigabe).
+Zugehörige Skills: `neo-design` (Gestaltung nach Claude Design,
+Eingabeführung, Barrierefreiheit, Größen, Messwerte), `neo-doku`
+(Dokumentation, Screenshots), `neo-deployment` (Zweige und Ausrollung),
+`neo-recht` (Pflichtseiten, Consent), `neo-sicherheit` (Secrets, Härtung,
+Lieferkette), `neo-code` (PHP- und Symfony-Konventionen),
+`neo-grundregeln` (Prozess, Freigabe, Tests).

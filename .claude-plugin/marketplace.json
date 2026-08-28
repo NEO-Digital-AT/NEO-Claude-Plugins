@@ -63,7 +63,7 @@
     {
       "name": "neo-contao",
       "source": "./plugins/neo-contao",
-      "description": "Contao-Websites: vollständig in Contao verwaltbar, keine festen Texte in Templates, Insert-Tags, korrekte Feldtypen, Styles ausnahmslos in SCSS mit Ebenen und im Layout gewählt, Kern und Erweiterungen unangetastet, Fremderweiterungen vor Eigenbau, eigene Extensions als Contao-<Name>-by-NEO, Imagesets für Bilder, minifizierte Auslieferung, migrierfähige Datenbank mit idempotentem Seed, llms.txt."
+      "description": "Contao-Websites: alles in Contao verwaltbar, kein fester Text im Template, Bordmittel vor Eigenbau. Erweiterungsbau mit belegter Rangfolge — eine bestehende wird ergänzt statt eine zweite gebaut, und zwar so, dass jede Installation ohne Schaden aktualisieren kann; Migrationen defensiv, wiederholbar, ohne Datenverlust. Jedes Webdesign ist ein .cto-exportierbares Theme, anderswo ohne KI installierbar. Gestaltung aus Claude Design, Barrierefreiheit und PageSpeed ohne Abzug. Doku im Paket, englisch Pflicht."
     },
     {
       "name": "neo-sicherheit",

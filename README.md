@@ -19,7 +19,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle und Härtefälle, Modellzugang über Requesty, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit neun Referenzdateien, drei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung`, `/neo-assistent:neo-goldlauf` und `/neo-assistent:neo-haertefaelle` |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
-| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungen, Betrieb | Skill mit drei Referenzdateien, lädt bei Contao-Arbeit |
+| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit sieben Referenzdateien, lädt bei Contao-Arbeit |
 | `neo-sicherheit` | Zehn harte Verbote, Autorisierung und Mandantentrennung, Secrets und Protokolle, hochsensible Daten, Härtung, Lieferkette, Release-Evidenz, Paritätsbetrieb | Skill mit sechs Referenzdateien, lädt bei Sicherheits-, API-, Release-Arbeit |
 
 ## Was wo geregelt ist
@@ -44,6 +44,10 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
   behauptet. Verglichen wird das Aussehen und das Verhalten, nicht der
   Inhalt: null Abweichungen im Layoutabgleich, null erfundene Werte im
   Stilabgleich.
+- **Bevor für Contao etwas gebaut wird:** `neo-contao` — die Rangfolge
+  Bordmittel → fremde Erweiterung → bestehende NEO-Erweiterung →
+  bestehende ergänzen → neu, jede Stufe belegt. Zwei Erweiterungen für
+  dieselbe Aufgabe sind ein Regelverstoß.
 - **Bevor eine Oberfläche als fertig gilt:**
   `/neo-design:neo-responsivpruefung` — acht Breiten, null Befunde. Kein
   waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher
