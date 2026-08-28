@@ -198,6 +198,12 @@ bleiben aktiv, sobald etwas veröffentlicht oder betrieben wird.
 
 ## Werkzeuge in den Plugins
 
+**Die Regeln sind deutsch, die Werkzeuge sind englisch.** Kommentare,
+Bezeichner, Meldungen, Dateinamen und Schalter jedes Skripts sind
+englisch — es ist Code, und Code ist bei NEO englisch (Skill `neo-code`,
+`references/sprache.md`). Alle laufen ohne Abhängigkeiten und taugen als
+Tor in der CI.
+
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
 | `contrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |

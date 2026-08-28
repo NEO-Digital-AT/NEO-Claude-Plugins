@@ -1,7 +1,7 @@
 {
   "name": "neo-assistent",
   "displayName": "NEO KI-Assistenten",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Regeln der NEO Digital für den Bau von KI-Assistenten mit Werkzeugzugriff. Ein Assistent ist eine Architektur, kein Prompt: fünf getrennte Schichten mit einem Systemprompt unter 150 Zeilen, ein geschlossener Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeuge, deren Beschreibung die Auswahl trägt und deren Schema erzwingt, was Prosa nur erbittet, Zustand und Vorbedingungen im Code. Mehrsprachig heißt: eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen — Goldfälle je Absicht und Sprache, mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Dazu elf Pflichtklassen an Härtefällen: ungenaue Sprache, ganze Abläufe, Einmalgeheimnisse mit Mengenregel im Code, Zahlungsvorgänge, Eskalation, Betriebslage und Einschleusung. Modellzugang über Requesty und den EU-Router, Schlüssel nur aus der Umgebung, Regionsangabe in der Modellkennung — der EU-Router allein hält die Verarbeitung nicht in der EU. Enthält den Goldfall-Prüfer, den Requesty-Adapter, das Prompt-Inventar und die Befehle /neo-assistent:neo-assistentpruefung, /neo-assistent:neo-goldlauf und /neo-assistent:neo-haertefaelle.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

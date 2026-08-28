@@ -58,6 +58,24 @@ Daraus folgt für den Bau:
 
 Die Grenze verläuft am Publikum, nicht am Schweregrad.
 
+## Das Regelwerk selbst
+
+Dieses Regelwerk ist der Beleg für die Trennlinie, nicht die Ausnahme
+davon:
+
+- **Die Regeln sind deutsch.** Sie sind Text für Menschen, die deutsch
+  lesen — dieselbe Kategorie wie eine Bedienungsanleitung.
+- **Die Werkzeuge sind englisch.** Jedes Skript in `plugins/*/scripts/`
+  hat englische Kommentare, englische Bezeichner, englische Meldungen
+  und einen englischen Dateinamen. Ein Werkzeug ist Code, kein Text.
+- **Deutsch bleibt, wo es gesucht wird.** Ein Prüfmuster, das nach
+  deutschem Wortlaut sucht, enthält deutschen Wortlaut — das ist
+  gesuchter Text, keine Programmiersprache, und wird im Kopf des Skripts
+  vermerkt.
+
+Wer ein Skript hier ergänzt, schreibt englisch. Wer eine Regel ergänzt,
+schreibt deutsch. Beides zurückzudrehen ist ein Befund.
+
 ## Bezeichner
 
 - **Englisch, durchgängig, ohne Mischung.** `OrderService`, nicht
