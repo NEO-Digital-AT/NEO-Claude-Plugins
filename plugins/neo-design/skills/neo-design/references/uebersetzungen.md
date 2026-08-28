@@ -25,7 +25,7 @@ entdeckt.**
 
 ## Was geprüft wird
 
-`scripts/uebersetzungen.py` liest die Sprachdateien und vergleicht sie
+`scripts/translations.py` liest die Sprachdateien und vergleicht sie
 gegen die Leitsprache. Sieben Befundarten, in der Reihenfolge ihrer
 Schwere:
 
@@ -47,10 +47,10 @@ statt „Auftrag 4711 für Frau Huber wurde angelegt".
 ## Messen
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/uebersetzungen.py lang/ --leitsprache en
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/uebersetzungen.py app/locales \
-  --leitsprache en --sprachen de,fr,it --quellen app/,resources/ \
-  --bericht uebersetzungen.json
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/translations.py lang/ --source-language en
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/translations.py app/locales \
+  --source-language en --languages de,fr,it --sources app/,resources/ \
+  --report uebersetzungen.json
 ```
 
 Gelesen werden **JSON und ARB**, **PHP-Rückgabe-Arrays** (Laravel,
@@ -126,7 +126,7 @@ Ehrlich benannt, damit niemand sich darauf verlässt:
 
 ## Abnahme
 
-- [ ] `uebersetzungen.py` läuft in der CI und bricht bei Befunden.
+- [ ] `translations.py` läuft in der CI und bricht bei Befunden.
 - [ ] **Null Blocker** je Sprache: nichts fehlt, nichts ist leer, keine
       Platzhalter- und keine Pluralabweichung.
 - [ ] **Abdeckung je Sprache berichtet**, als Zahl.

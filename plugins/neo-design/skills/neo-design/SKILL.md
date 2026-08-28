@@ -241,7 +241,7 @@ Sie-Form, echte Umlaute, keine Emojis, keine Marketingsprache.
 
 **In einem mehrsprachigen Produkt hat jeder sichtbare Text in jeder
 ausgelieferten Sprache eine Übersetzung — gemessen, nicht angenommen**
-(`scripts/uebersetzungen.py`): null fehlende Schlüssel, null leere Werte,
+(`scripts/translations.py`): null fehlende Schlüssel, null leere Werte,
 null abweichende Platzhalter. Ein Schlüssel mitten in der Oberfläche ist
 der sichtbarste Mangel, den ein Produkt haben kann. Rückfall ist
 **Englisch**, nie der Schlüssel und nie ein leerer Text.
@@ -287,9 +287,9 @@ Schluss der Durchgang über die ganze Seite, auch als Gesamteindruck.
 
 | Prüfung | Werkzeug | Antwort | Erlaubt |
 | --- | --- | --- | --- |
-| **1. Layout** | `scripts/layoutabgleich.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
+| **1. Layout** | `scripts/layout-diff.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
 | **2. Stil** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
-| **3. Bild** | `scripts/bildabgleich.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
+| **3. Bild** | `scripts/image-diff.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
 
 Der Layoutabgleich ist der wichtigste: er misst das **Aussehen** und
 liest die Feldinhalte nicht. Der Bildabgleich ist der schwächste — er

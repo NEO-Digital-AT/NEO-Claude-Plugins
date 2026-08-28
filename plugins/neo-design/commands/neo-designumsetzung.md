@@ -30,15 +30,15 @@ ableiten.
 Miss das Artboard und liste **jedes** Element von oben nach unten:
 
 ```js
-await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/layoutabgleich.js' })
-const entwurf = await seite.evaluate(() => neoLayoutabgleich.messen({ nurMarkierte: true }))
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/layout-diff.js' })
+const entwurf = await seite.evaluate(() => neoLayoutDiff.measure({ markedOnly: true }))
 ```
 
 Format und Beispiel stehen in `references/claude-design.md`. Es gilt:
 
 - jedes Element, nicht die wichtigen;
 - Maße **gemessen**, nicht geschätzt;
-- je Element ein Marker (`data-abgleich`), der später auf beiden Seiten
+- je Element ein Marker (`data-compare`), der später auf beiden Seiten
   steht;
 - was die Aufgabe braucht und der Entwurf nicht zeigt, steht als **offene
   Frage** im Inventar.

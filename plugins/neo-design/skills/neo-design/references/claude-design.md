@@ -110,7 +110,7 @@ Das Inventar entsteht aus dem Artboard, von oben nach unten, und listet
 
 - **Jedes** Element, nicht die wichtigen.
 - Die Maße kommen aus dem Artboard, **gemessen**, nicht geschätzt —
-  `layoutabgleich.js` misst das Artboard genauso wie später die
+  `layout-diff.js` misst das Artboard genauso wie später die
   gebaute Seite.
 - Jedes Element bekommt seinen **Marker**, der später auf beiden Seiten
   steht (`designsystem-abgleich.md`).

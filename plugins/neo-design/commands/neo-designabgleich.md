@@ -22,7 +22,7 @@ Kläre, falls es nicht im Projekt steht:
 5. **Sollen die statischen Oberflächentexte mitverglichen werden?**
    Standard ist nein. Nur auf ausdrückliche Ansage des Projektinhabers ja.
 
-Fehlen Marker (`data-abgleich`) auf einer der beiden Seiten, ist das der
+Fehlen Marker (`data-compare`) auf einer der beiden Seiten, ist das der
 erste Befund: ohne sie lässt sich nicht zuordnen, was mit was zu
 vergleichen ist. Melde es und schlage die Marker vor, statt über Rolle
 und Reihenfolge zu raten.
@@ -34,17 +34,17 @@ Für **jeden** Zustand und **jede** Fassung, in dieser Reihenfolge:
 ### 1. Layoutabgleich — der wichtigste
 
 ```js
-await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/layoutabgleich.js' })
-const gebaut = await seite.evaluate(() => neoLayoutabgleich.messen({ nurMarkierte: true }))
-const e = neoLayoutabgleich.vergleichen(entwurf, gebaut, { toleranz: 1, nurMarkierte: true })
+await seite.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/layout-diff.js' })
+const gebaut = await seite.evaluate(() => neoLayoutDiff.measure({ markedOnly: true }))
+const e = neoLayoutDiff.compare(entwurf, gebaut, { tolerance: 1, markedOnly: true })
 ```
 
 Er misst Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien,
 Schriftmaße und Farben — und liest den Text in den Feldern **nicht**.
 Erlaubt sind **0 Abweichungen** bei 1 px Toleranz.
 
-Sollen Texte mit: beide Messungen mit `{ texte: true }` erzeugen und
-`vergleichen(..., { texte: true })` aufrufen.
+Sollen Texte mit: beide Messungen mit `{ text: true }` erzeugen und
+`compare(..., { text: true })` aufrufen.
 
 ### 2. Stilabgleich
 
@@ -58,12 +58,12 @@ Jeder Fund ist ein erfundener Wert. Erlaubt sind **null Funde**.
 ### 3. Bildabgleich — nur wo der Inhalt gleich ist
 
 ```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/bildabgleich.py \
-  <referenz.png> <gebaut.png> --unterschied <diff.png> --schwelle 0.5
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/image-diff.py \
+  <referenz.png> <gebaut.png> --diff <diff.png> --threshold 0.5
 ```
 
 Für den **Bausteine-Artboard**. Für eine Ansicht mit echten Daten
-entweder die Inhaltsbereiche mit `--ignorieren x,y,b,h` ausnehmen oder
+entweder die Inhaltsbereiche mit `--ignore x,y,b,h` ausnehmen oder
 den Bildabgleich weglassen. **Ein roter Bildabgleich wegen abweichender
 Feldwerte ist kein Befund**, sondern ein falsch angesetztes Werkzeug —
 melde das, statt eine Zahl zu berichten, die nichts aussagt.

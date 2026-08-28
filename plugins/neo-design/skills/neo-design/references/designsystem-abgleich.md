@@ -44,26 +44,26 @@ Projektinhabers**, weil sie sich im Bau oft noch ändern:
 
 ```js
 // Standard: Texte bleiben außen vor
-neoLayoutabgleich.vergleichen(entwurf, gebaut)
+neoLayoutDiff.compare(entwurf, gebaut)
 
-// Auf Ansage: Texte werden mitgeprüft — beide Messungen brauchen texte: true
-neoLayoutabgleich.messen({ nurMarkierte: true, texte: true })
-neoLayoutabgleich.vergleichen(entwurf, gebaut, { texte: true })
+// Auf Ansage: Texte werden mitgeprüft — beide Messungen brauchen text: true
+neoLayoutDiff.measure({ markedOnly: true, text: true })
+neoLayoutDiff.compare(entwurf, gebaut, { text: true })
 ```
 
 Erfasst wird dabei nur der **eigene** Text eines Elements, also die
 unmittelbaren Textknoten. Die Beschriftung eines Feldes und die Aufschrift
 eines Knopfes fallen darunter; die Einträge einer Auswahlliste nicht —
 die stehen in Kindelementen und bleiben Inhalt. Ein einzelnes Element
-lässt sich mit `data-abgleich-ohne="text"` ausnehmen.
+lässt sich mit `data-compare-except="text"` ausnehmen.
 
 ## Drei Prüfungen, in dieser Reihenfolge
 
 | Prüfung | Werkzeug | Antwort | Inhaltsabhängig |
 | --- | --- | --- | --- |
-| **1. Layoutabgleich** | `scripts/layoutabgleich.js` | Sind Maße, Abstände, Positionen und Aussehen gleich? | **nein** |
+| **1. Layoutabgleich** | `scripts/layout-diff.js` | Sind Maße, Abstände, Positionen und Aussehen gleich? | **nein** |
 | **2. Stilabgleich** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | nein |
-| **3. Bildabgleich** | `scripts/bildabgleich.py` | Sieht die Fläche insgesamt gleich aus? | **ja** |
+| **3. Bildabgleich** | `scripts/image-diff.py` | Sieht die Fläche insgesamt gleich aus? | **ja** |
 
 **Der Layoutabgleich ist der wichtigste.** Er misst genau das, was das
 Designsystem vorgibt, und ist blind für den Inhalt: er liest den Text in
@@ -74,7 +74,7 @@ sobald irgendwo ein anderer Wert steht — deshalb ist er nur dort
 brauchbar, wo der Inhalt von sich aus gleich ist: beim
 **Bausteine-Artboard** (Knöpfe, Felder, Abzeichen, Zustände
 nebeneinander). Für eine Ansicht mit echten Daten ist er entweder mit
-`--ignorieren` auf die inhaltsfreien Bereiche zu begrenzen oder
+`--ignore` auf die inhaltsfreien Bereiche zu begrenzen oder
 wegzulassen. Ein roter Bildabgleich wegen anderer Feldwerte ist kein
 Befund, sondern ein falsch angesetztes Werkzeug.
 
@@ -88,10 +88,10 @@ Gebauten entspricht. Das Markup unterscheidet sich zwangsläufig — ein
 
 ```html
 <!-- im Artboard -->
-<select data-abgleich="feld-typ">…</select>
+<select data-compare="feld-typ">…</select>
 
 <!-- in der Anwendung, anderes Framework, anderes Markup -->
-<NeoSelect data-abgleich="feld-typ" … />
+<NeoSelect data-compare="feld-typ" … />
 ```
 
 - Der Marker benennt die **Rolle** des Elements, nicht seinen Inhalt:
@@ -102,10 +102,10 @@ Gebauten entspricht. Das Markup unterscheidet sich zwangsläufig — ein
 - Ohne Marker ordnet das Werkzeug über Rolle und Reihenfolge zu
   (`textfeld#1`, `knopf#2`). Das trägt für einen ersten Blick, bricht
   aber, sobald sich die Struktur unterscheidet. **Für die Abnahme werden
-  Marker gesetzt** und mit `{ nurMarkierte: true }` gemessen.
+  Marker gesetzt** und mit `{ markedOnly: true }` gemessen.
 - Wo der Inhalt die Größe bestimmen **soll** — ein Knopf, der mit seiner
   Beschriftung wächst —, wird das Feld einzeln ausgenommen:
-  `data-abgleich-ohne="breite"`. Die Ausnahme ist sichtbar und
+  `data-compare-except="breite"`. Die Ausnahme ist sichtbar und
   begründbar, statt still hingenommen.
 
 Marker im Artboard zu setzen kostet fünf Minuten und ist die Bedingung
@@ -118,11 +118,11 @@ zeigt, ist nicht fertig. Gemessen wird je Zustand — der Zustand wird
 ausgelöst, dann gemessen:
 
 ```js
-await seite.hover('[data-abgleich="knopf-speichern"]')
-const hover = await seite.evaluate(() => neoLayoutabgleich.messen({ zustand: 'hover' }))
+await seite.hover('[data-compare="knopf-speichern"]')
+const hover = await seite.evaluate(() => neoLayoutDiff.measure({ state: 'hover' }))
 
-await seite.focus('[data-abgleich="feld-adresse"]')
-const fokus = await seite.evaluate(() => neoLayoutabgleich.messen({ zustand: 'fokus' }))
+await seite.focus('[data-compare="feld-adresse"]')
+const fokus = await seite.evaluate(() => neoLayoutDiff.measure({ state: 'focus' }))
 ```
 
 Pflichtzustände: **Ruhe, Hover, Fokus, Deaktiviert, Fehler** — und jeder
@@ -141,8 +141,8 @@ fehlen sie im Artboard, ist das der erste Befund, nicht der letzte.
 4. **Layoutabgleich** je Zustand und je Fassung:
 
    ```js
-   const e = neoLayoutabgleich.vergleichen(entwurf, gebaut, { toleranz: 1, nurMarkierte: true })
-   console.log(neoLayoutabgleich.bericht(e))
+   const e = neoLayoutDiff.compare(entwurf, gebaut, { tolerance: 1, markedOnly: true })
+   console.log(neoLayoutDiff.report(e))
    ```
 
    Der Bericht bündelt dieselbe Abweichung über mehrere Elemente zu
@@ -191,7 +191,7 @@ Code.**
 | Zeilenhöhe weicht ab, Schriftgröße stimmt | Zeilenhöhe als Zahl gegen Zeilenhöhe in Pixeln |
 | Gleichmäßiger Versatz aller Elemente | anderer Außenabstand oder anderes Polster an der Wurzel |
 | Nur ein Element sitzt falsch | fehlender Umbruch, falsche Ausrichtung im Flex-Bereich |
-| Breite eines Knopfes weicht ab | der Knopf wächst mit seiner Beschriftung — entweder dieselbe Beschriftung messen oder `data-abgleich-ohne="breite"` |
+| Breite eines Knopfes weicht ab | der Knopf wächst mit seiner Beschriftung — entweder dieselbe Beschriftung messen oder `data-compare-except="breite"` |
 | Schriftart weicht ab | Schrift nicht selbst ausgeliefert oder nicht geladen |
 | Text weicht ab (nur bei zugeschaltetem Textvergleich) | Wortlaut aus dem Entwurf nicht übernommen, oder der Entwurf ist neuer als die Sprachdatei |
 

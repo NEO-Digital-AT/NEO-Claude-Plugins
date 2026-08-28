@@ -89,7 +89,7 @@ den jeweiligen Skill laden.
     bleiben deutsch und werden einmal erklärt.
 13. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
     ausgelieferten Sprache eine Übersetzung — **gemessen, nicht
-    angenommen** (`uebersetzungen.py`). Null fehlende Schlüssel, null
+    angenommen** (`translations.py`). Null fehlende Schlüssel, null
     leere Werte, null abweichende Platzhalter. Ein Schlüssel mitten in
     der Oberfläche ist der sichtbarste Mangel, den ein Produkt haben
     kann. Keine harte Zeichenkette in der Oberfläche, kein Satz aus

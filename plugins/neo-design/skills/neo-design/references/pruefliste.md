@@ -47,7 +47,7 @@ Klickprototyp vorliegt. Verfahren: `claude-design.md`.
 
 ## Abgleich mit dem Designsystem
 
-- [ ] Marker (`data-abgleich`) auf beiden Seiten gesetzt, benennen die
+- [ ] Marker (`data-compare`) auf beiden Seiten gesetzt, benennen die
       Rolle des Elements.
 - [ ] Referenzmessung und Referenzaufnahme liegen unter
       `design/referenz/` im Repository.
@@ -214,7 +214,7 @@ und Dunkel.
       zusammengesetzten Sätze.
 - [ ] Zahlen, Datum und Währung über die Formatierung der Sprache.
 - [ ] Echte Umlaute, Sie-Form, keine Emojis, keine Marketingsprache.
-- [ ] **Übersetzungen vollständig**: `uebersetzungen.py` meldet null
+- [ ] **Übersetzungen vollständig**: `translations.py` meldet null
       Blocker — nichts fehlt, nichts ist leer, keine Platzhalter- und
       keine Pluralabweichung. Abdeckung je Sprache **berichtet**.
 - [ ] Rückfall auf **Englisch** konfiguriert und geprüft — nie ein
