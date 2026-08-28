@@ -138,6 +138,6 @@ Regeln und Vorlage: `references/agentenlesbarkeit.md`.
 
 ## Werkzeug
 
-`scripts/markierung.js` blendet Rahmen, Pfeile, Nummern, Infokästen,
+`scripts/annotate.js` blendet Rahmen, Pfeile, Nummern, Infokästen,
 Textmarker und Scheinwerfer **vor** der Aufnahme in die Seite ein und
 wird mitfotografiert — vektorscharf, an den Elementen ausgerichtet.

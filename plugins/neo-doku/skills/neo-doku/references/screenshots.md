@@ -68,30 +68,30 @@ Elementen und sind auf hellem wie dunklem Grund lesbar (weiße Fassung
 unter dem Rot).
 
 ```js
-await page.addScriptTag({ path: '<plugin>/scripts/markierung.js' })
+await page.addScriptTag({ path: '<plugin>/scripts/annotate.js' })
 await page.evaluate(() => {
-  neoMarkierung
-    .rahmen('[data-test="typ"]', { nummer: 1 })
-    .rahmen('[data-test="intervall"]', { nummer: 2 })
-    .pfeil('[data-test="speichern"]', { text: 'Erst danach wird geprüft', richtung: 'oben' })
-    .marker('h1')
-    .infokasten({ text: 'Der Typ legt fest, welche Felder erscheinen.', an: '[data-test="typ"]' })
+  neoAnnotate
+    .frame('[data-test="typ"]', { number: 1 })
+    .frame('[data-test="intervall"]', { number: 2 })
+    .arrow('[data-test="speichern"]', { text: 'Erst danach wird geprüft', direction: 'top' })
+    .highlight('h1')
+    .note({ text: 'Der Typ legt fest, welche Felder erscheinen.', at: '[data-test="typ"]' })
 })
 await page.screenshot({ path: 'docs/frontend/de/bedienung/bilder/auftrag-anlegen.png', fullPage: true })
 ```
 
 | Aufruf | Wofür |
 | --- | --- |
-| `rahmen(ziel, {nummer, text, luft, alle})` | Roter Rahmen, wahlweise mit Nummernmarke |
-| `pfeil(ziel, {richtung, text, laenge})` | Roter Pfeil auf ein Element, `richtung`: links, rechts, oben, unten |
-| `nummer(ziel, n)` | Nummernmarke ohne Rahmen |
-| `infokasten({text, an, position, breite})` | Kasten mit Erklärtext, an einem Element ausgerichtet |
-| `marker(ziel)` | Textmarker über den Textzeilen |
-| `scheinwerfer(ziel, {staerke, luft})` | Alles außer dem Ziel abdunkeln — für Detailaufnahmen |
-| `ausschnitt(ziel, luft)` | Liefert den `clip`-Bereich für eine Detailaufnahme |
-| `aufraeumen()` | Entfernt alle Markierungen |
+| `frame(ziel, {number, text, padding, all})` | Roter Rahmen, wahlweise mit Nummernmarke |
+| `arrow(ziel, {direction, text, length})` | Roter Pfeil auf ein Element, `direction`: `left`, `right`, `top`, `bottom` |
+| `number(ziel, n)` | Nummernmarke ohne Rahmen |
+| `note({text, at, position, width})` | Kasten mit Erklärtext, an einem Element ausgerichtet |
+| `highlight(ziel)` | Textmarker über den Textzeilen |
+| `spotlight(ziel, {dim, padding})` | Alles außer dem Ziel abdunkeln — für Detailaufnahmen |
+| `clip(ziel, padding)` | Liefert den `clip`-Bereich für eine Detailaufnahme |
+| `clear()` | Entfernt alle Markierungen |
 
-Für eine Detailaufnahme: `scheinwerfer` setzen, `ausschnitt` holen, mit
+Für eine Detailaufnahme: `spotlight` setzen, `clip` holen, mit
 `page.screenshot({ clip })` aufnehmen.
 
 Regeln zur Markierung:
