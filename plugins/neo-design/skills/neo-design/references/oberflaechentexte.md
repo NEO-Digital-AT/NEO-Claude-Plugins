@@ -21,6 +21,65 @@ passt — Umbruch, Kürzung, zu schmale Bereiche, Schriftgrößen —, steht in
 `uebersetzungen.md`. Eine gute Beschriftung, die abgeschnitten wird oder
 nur auf Deutsch existiert, ist keine gute Beschriftung.
 
+## Jeder Text hat eine Herkunft
+
+> **Ein Satz, den niemand verlangt hat, gehört nicht in die Oberfläche —
+> auch wenn er hilfreich klingt.**
+
+Der teuerste Text ist der gut gemeinte: ein Hinweis unter einem Feld,
+der erklärt, wo man das Ergebnis später findet. Er liest sich hilfreich,
+er stand in keinem Entwurf, und er sagt etwas zu, das die Anwendung nicht
+tut. Der Anwender glaubt ihn trotzdem — er hat keinen zweiten Ort, an dem
+er nachsehen könnte.
+
+**Zulässige Herkunft, sonst keine:**
+
+| Herkunft | Woran man sie erkennt |
+| --- | --- |
+| Der freigegebene Entwurf | Der Text steht im Artboard, wörtlich |
+| Eine freigegebene Textliste | Der Schlüssel steht in der Sprachdatei, freigegeben |
+| Eine Anweisung des Projektinhabers | Nachricht, Ticket, Akte |
+
+**Was die Oberfläche zusätzlich braucht, wird vorgelegt, nicht
+geschrieben.** Fehlermeldungen, Leerzustände, Ladehinweise und
+Bestätigungen fehlen in fast jedem Entwurf — sie sind trotzdem kein
+Freibrief. Der Weg ist: Liste der fehlenden Texte, Vorschlag je Eintrag,
+Freigabe, dann in die Sprachdatei. **Nicht: beim Bauen ausformulieren.**
+
+- **Im Zweifel weglassen.** Ein fehlender Hinweis ist eine Rückfrage. Ein
+  erfundener Hinweis ist ein Fehler im Produkt.
+- **Kein Text „zur Sicherheit".** Wer nicht weiß, ob ein Hinweis nötig
+  ist, fragt — er schreibt ihn nicht vorsorglich hin.
+- **Kein Beispielwert, keine erfundene Zahl, keine erfundene Adresse.**
+  Ein Platzhalter im Entwurf ist ein Platzhalter, kein Inhalt.
+
+## Ein Satz in der Oberfläche ist eine Zusage
+
+Sobald ein Text sagt, **was das System tut**, ist er kein Text mehr,
+sondern eine Aussage über das Verhalten — und die kann falsch sein:
+
+| Satzart | Beispiel | Was belegt sein muss |
+| --- | --- | --- |
+| Erreichbarkeit | „Die Statusseite ist unter dieser Adresse erreichbar" | Dass es die Seite gibt und dass sie unter **dieser** Adresse liegt |
+| Automatik | „Der Bericht wird automatisch versendet" | Der Code, der versendet, und sein Auslöser |
+| Frist | „Die Freigabe erfolgt innerhalb von 24 Stunden" | Wo diese Frist herkommt |
+| Wahlfreiheit | „Sie können die Adresse frei wählen" | Dass das Feld überhaupt wählbar ist |
+| Folge | „Löschen kann nicht rückgängig gemacht werden" | Dass es wirklich endgültig ist |
+
+**Vor dem Schreiben wird am Code belegt, dass die Zusage stimmt** — mit
+Fundstelle, und die Fundstelle wird berichtet. Ein Satz, der eine
+Erreichbarkeit oder eine Wahlmöglichkeit behauptet, wird gegen die
+Umsetzung geprüft, nicht gegen die Absicht.
+
+**Der häufigste Fall ist die Adresse.** Wird eine Kennung erzeugt — GUID,
+Zufallsschlüssel, laufende Nummer —, dann ist sie **nicht wählbar**, und
+kein Text darf das Gegenteil nahelegen. Wer das prüfen will, sucht die
+Stelle, die die Kennung erzeugt, nicht die Stelle, die sie anzeigt.
+
+**Und der Test dazu:** Ein Test, der einen solchen Satz festhält, hält
+die Zusage mit fest. Er ist nur zulässig, wenn der Satz eine Herkunft hat
+(Kernregel 2, Skill `neo-grundregeln`, `references/tests.md`).
+
 ## Beschriftungen
 
 - Knöpfe tragen **Verb plus Objekt**: „Auftrag anlegen", „Änderungen

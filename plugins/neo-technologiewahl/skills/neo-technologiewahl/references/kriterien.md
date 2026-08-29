@@ -87,7 +87,7 @@ ist, wie oft.
   Testwerkzeuge kostet in jeder Abnahme.
 - **Wird mit einem Agenten gebaut, zählt die Sprachkenntnis des Teams
   weniger** — aber die Lesbarkeit des Ergebnisses zählt mehr
-  (Kernregel 22).
+  (Kernregel 23).
 
 ## 8. Lizenz und Kosten
 

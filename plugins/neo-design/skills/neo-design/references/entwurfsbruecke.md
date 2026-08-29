@@ -265,7 +265,7 @@ Das ist nützlich — beantwortet aber nicht die Frage, um die es hier geht.
 > Entwurf nicht entspricht — und wird grün, wenn er es tut.
 
 Damit ist „sieht aus wie im Entwurf" kein Streitpunkt mehr, sondern ein
-Testergebnis. Genau das verlangt Kernregel 10: **Fertig heißt gemessen.**
+Testergebnis. Genau das verlangt Kernregel 11: **Fertig heißt gemessen.**
 
 Damit die Messung etwas aussagt, werden die Bedingungen festgehalten und
 sind in Entwurf und Test **dieselben**:

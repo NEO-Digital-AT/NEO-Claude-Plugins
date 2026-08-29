@@ -75,7 +75,7 @@ die Rechnung kommt in Monat neun, nicht in Woche eins.
 
 ## 3. Belege, nicht Meinungen
 
-Es gilt Kernregel 5. Für Technologievergleiche im Besonderen:
+Es gilt Kernregel 6. Für Technologievergleiche im Besonderen:
 
 | Zählt als Beleg | Zählt nicht |
 | --- | --- |

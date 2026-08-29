@@ -243,6 +243,16 @@ und Dunkel.
 
 ## Texte
 
+- [ ] **Jeder sichtbare Text hat eine Herkunft** — Entwurf, freigegebene
+      Textliste oder Anweisung: `ui-text-check.py` meldet **null Texte
+      ohne Herkunft**. Ein Eintrag im Bestand ohne Herkunft zählt nicht.
+- [ ] **Kein Text ist beim Bauen entstanden.** Fehlermeldungen,
+      Leerzustände und Ladehinweise wurden vorgelegt und freigegeben.
+- [ ] **Jede Zusage ist am Code belegt** — „erreichbar unter", „wird
+      automatisch", „innerhalb von", „Sie können wählen" —, mit
+      Fundstelle berichtet. Erzeugte Kennungen sind nicht wählbar.
+- [ ] **Kein Test hält einen Text fest, dessen Herkunft niemand nennen
+      kann** (Skill `neo-grundregeln`, `references/tests.md`).
 - [ ] Knöpfe tragen Verb plus Objekt; Bestätigungsknöpfe die Folge.
 - [ ] Fehlermeldungen nennen Ursache und nächsten Schritt.
 - [ ] Kein Platzhalter als Beschriftung.

@@ -54,6 +54,42 @@ Vertrauen ohne Grundlage.
 **Eine abgeschwächte Zusicherung ist ein Regelverstoß**, kein
 Zwischenschritt. Sie fällt im Diff auf und wird zurückgewiesen.
 
+## Kein Test zu einer selbst erfundenen Anforderung
+
+> **Ein Test über Erfundenes ist schlimmer als die Erfindung.**
+
+Die Erfindung allein ist ein Fehler, den jemand beim Lesen bemerkt. Der
+Test darüber macht sie zum **Soll**: Er ist grün, er steht im Bericht,
+und ab da gilt das erfundene Verhalten als geprüft. Wer es später
+korrigiert, macht den Test rot und sieht aus, als hätte er etwas kaputt
+gemacht. So wird aus einem Satz, den niemand verlangt hat, eine
+Eigenschaft des Produkts, die niemand mehr anzweifelt.
+
+**Vor jedem Test wird die Anforderung benannt** — nicht beschrieben,
+benannt:
+
+| Zulässige Herkunft | Beispiel |
+| --- | --- |
+| Der freigegebene Entwurf | Artboard, Zustand, Beschriftung |
+| Eine Anweisung des Projektinhabers | Nachricht, Ticket, Akte |
+| Ein Vertrag | OpenAPI, Schema, Gesetzestext, Fiskalvorschrift |
+| Ein real aufgetretener Fehler | Regressionstest, siehe unten |
+
+**Findet sich keine dieser Herkünfte, wird kein Test geschrieben,
+sondern gefragt.** Ein Test ist kein Ort, an dem eine offene Frage
+entschieden wird.
+
+- **Der Test darf nicht die Umsetzung abschreiben.** Er prüft, was
+  verlangt wurde, nicht, was der Code gerade tut. Wer den Test aus dem
+  eigenen Code ableitet, hat bewiesen, dass der Code tut, was er tut.
+- **Ein Test, der einen Oberflächentext festhält**, hält damit auch die
+  **Zusage** fest, die in diesem Text steht. Er ist nur zulässig, wenn
+  der Text eine Herkunft hat (Kernregel 2).
+- **Wird eine Erfindung entdeckt, geht der Test mit.** Der Text wird
+  entfernt und der Test, der ihn festhielt, ebenfalls — nicht
+  angepasst, bis er wieder grün ist. Und beides wird gemeldet, nicht
+  stillschweigend berichtigt.
+
 ## Regressionstests
 
 **Für jeden real aufgetretenen Fehler existiert ein Regressionstest,
@@ -107,6 +143,8 @@ als überflüssig entfernt.
 
 ## Was der Agent nie tut
 
+- **Einen Test zu etwas schreiben, das er sich selbst ausgedacht hat.**
+- **Einen Oberflächentext prüfen, dessen Herkunft er nicht nennen kann.**
 - Einen Test überspringen, deaktivieren oder quarantänieren, um grün zu
   werden.
 - Eine Zusicherung abschwächen.

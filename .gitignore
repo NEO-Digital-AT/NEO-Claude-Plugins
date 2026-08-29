@@ -1,0 +1,4 @@
+# Bauartefakte, die beim Prüfen der Werkzeuge entstehen. Dieses Repository
+# enthält nur Regeln und Werkzeuge im Quelltext.
+__pycache__/
+*.pyc

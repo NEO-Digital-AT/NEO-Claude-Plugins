@@ -80,7 +80,7 @@ Einzelheiten: `references/efcore.md`. Was hier zählt:
 
 - **Erst messen, dann feilen.** Zuteilungen zu jagen, bevor eine Messung
   sie als Ursache benennt, ist verlorene Zeit und macht den Code
-  schlechter lesbar (Kernregel 22).
+  schlechter lesbar (Kernregel 23).
 - Wo eine Messung es verlangt: keine unnötige Zwischenliste, keine
   Zeichenkettenverkettung in einer Schleife, kein Doppelaufzählen einer
   `IEnumerable`.

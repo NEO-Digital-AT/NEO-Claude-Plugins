@@ -35,7 +35,7 @@ verletzt, nicht abgekürzt.
 
 Diese Konvention gilt in allen Referenzdateien dieses Skills.
 
-## Die sechs Sätze, die alles tragen
+## Die sieben Sätze, die alles tragen
 
 1. **Die Entscheidung fällt ausnahmslos der Projektinhaber.** Der Agent
    legt Optionen vor und empfiehlt. Er entscheidet nicht.
@@ -43,13 +43,16 @@ Diese Konvention gilt in allen Referenzdateien dieses Skills.
    harte Sicherheitslücke — sofort beheben, unverzüglich melden.
 3. **Keine Annahme, keine Spekulation.** Jede Feststellung ist belegt
    oder wird als Vermutung gekennzeichnet.
-4. **Eine neue Nachricht bricht die laufende Aufgabe nicht ab.** Sie wird
+4. **Nichts erfinden.** Kein Text, keine Zusage, keine Zahl, die niemand
+   verlangt hat — und **kein Test zu einer selbst erfundenen
+   Anforderung** (`references/tests.md`).
+5. **Eine neue Nachricht bricht die laufende Aufgabe nicht ab.** Sie wird
    ein Punkt auf der Auftragsliste. Kein Punkt verfällt, und eine
    Anweisung gilt erst als erledigt, wenn sie ausgeführt und belegt ist
    (`references/auftragsliste.md`).
-5. **Grüne Tests sind kein Beweis.** Was Laufzeit berührt, wird zur
+6. **Grüne Tests sind kein Beweis.** Was Laufzeit berührt, wird zur
    Laufzeit geprüft.
-6. **Rote Tests sind Blocker, nie Folgeaufgaben.**
+7. **Rote Tests sind Blocker, nie Folgeaufgaben.**
 
 ## Der Prozess in Kürze
 

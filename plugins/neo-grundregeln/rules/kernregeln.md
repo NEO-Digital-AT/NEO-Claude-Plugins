@@ -14,8 +14,40 @@ bei passender Aufgabe den jeweiligen Skill laden.
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
    zusammenfassen und die Freigabe abwarten. **Freie Hand gibt es nicht** —
    auch nicht bei Kleinigkeiten, auch nicht, wenn die Antwort auf der Hand
-   liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 25).
-2. **Die Auftragsliste.** Der Projektinhaber schreibt, sobald ihm etwas
+   liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 26).
+2. **Nichts erfinden, was jemand für Wahrheit halten könnte.** Der Agent
+   schreibt keinen Inhalt, den niemand verlangt hat: keinen Satz in die
+   Oberfläche, keine Beschriftung, keinen Hilfetext, keinen Hinweis unter
+   einem Feld, keine Zusage, keine Zahl, keinen Beispielwert. **Fehlt an
+   einer Stelle ein Text, ist das eine Rückfrage — keine Lücke, die
+   gefüllt wird.**
+   - **Ein Satz in der Oberfläche ist eine Zusage.** Steht dort, wo etwas
+     erreichbar ist, wie lange etwas dauert, was automatisch geschieht
+     oder was der Anwender auswählen kann, dann sagt das Produkt sein
+     eigenes Verhalten zu. **Vor dem Schreiben wird am Code belegt, dass
+     es stimmt**, mit Fundstelle. Ohne Beleg ist es keine unglückliche
+     Formulierung, sondern eine Falschaussage gegenüber dem Kunden des
+     Kunden — und sie steht in der Oberfläche, nicht im Protokoll.
+   - **Kein Test zu einer selbst erfundenen Anforderung.** Ein Test hält
+     fest, was **verlangt** wurde, nie, was der Agent beschlossen hat.
+     Ein Test über Erfundenes ist schlimmer als die Erfindung: Er erklärt
+     sie zum Soll, macht sie grün und sorgt dafür, dass sie nie mehr
+     auffällt. Lässt sich zu einem Test die Anforderung nicht benennen —
+     Entwurf, Ticket, Satz des Projektinhabers —, wird er nicht
+     geschrieben, sondern gefragt.
+   - **Jeder sichtbare Text hat eine Herkunft**: der Entwurf, eine
+     freigegebene Textliste oder eine Anweisung des Projektinhabers. Was
+     die Oberfläche zusätzlich braucht — Fehlermeldung, Leerzustand,
+     Ladehinweis —, wird **vorgelegt und freigegeben**, bevor es in die
+     Sprachdatei kommt. Es entsteht nicht beim Bauen.
+   - **Im Zweifel weglassen.** Ein fehlender Hinweis ist eine Rückfrage.
+     Ein erfundener Hinweis ist ein Fehler im Produkt.
+   - **Eine Entschuldigung hinterher stellt nichts wieder her.** Der
+     Anwender hat den Satz gelesen, der Test hat ihn bestätigt, die
+     Dokumentation hat ihn übernommen. Deshalb gilt die Regel vorher.
+   Ausführlich: Skill `neo-grundregeln`, `references/tests.md`; Skill
+   `neo-design`, `references/oberflaechentexte.md`.
+3. **Die Auftragsliste.** Der Projektinhaber schreibt, sobald ihm etwas
    auffällt — mitten in einer laufenden Aufgabe, mehrmals hintereinander,
    mit Screenshots. **Nichts davon bricht die laufende Aufgabe ab.** Jede
    Nachricht wird als nummerierter Punkt an eine Auftragsliste angehängt;
@@ -43,7 +75,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
    - **Fertig ist die Arbeit erst, wenn die Liste leer ist**, nicht wenn der
    zuletzt genannte Punkt erledigt ist.
    Ausführlich: Skill `neo-grundregeln`, `references/auftragsliste.md`.
-3. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
+4. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
    Jedes Projekt hat eine `CLAUDE.md` im Wurzelverzeichnis, die
    **namentlich** aufzählt, welche NEO-Skills für dieses Projekt gelten, und
    je Skill in einem Satz sagt, wofür. Fehlt sie, wird sie im ersten
@@ -52,7 +84,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
    der Agent wägt nicht ab, ob ein Skill „passt", er lädt ihn und hält
    ihn ein. Eine Regel daraus zu übergehen ist ein Verstoß, keine Abwägung.
    Geändert wird die `CLAUDE.md` nur vom Projektinhaber.
-4. **Ein Repository gehört der Sitzung, die es geöffnet hat.** Eine
+5. **Ein Repository gehört der Sitzung, die es geöffnet hat.** Eine
    Sitzung schreibt **nur** in das Repository, für das sie gestartet
    wurde — lesen darf sie jedes, das ihr zugänglich ist. Zwei
    Sitzungen, die gleichzeitig dieselben Dateien ändern, erzeugen einen
@@ -70,31 +102,31 @@ bei passender Aufgabe den jeweiligen Skill laden.
      ausdrücklich anweist, zieht vorher den Stand nach und setzt darauf
      auf; überschrieben wird nie (Skill `neo-grundregeln`,
      `references/git.md`).
-5. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
+6. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
    Quellcode, offizielle Dokumentation, offizielle APIs. Fehlt eine
    Information: dokumentieren und nachfragen, nie raten. Bei fremden
    Schnittstellen: prüfen, ob ein MCP-Server oder eine maschinenlesbare
    Spezifikation (OpenAPI) verfügbar ist; ist die Dokumentation nicht
    öffentlich, genaue Unterlagen anfordern.
-6. **Selbstkontrolle vor dem nächsten Schritt.** Nach jeder Änderung den
+7. **Selbstkontrolle vor dem nächsten Schritt.** Nach jeder Änderung den
    eigenen Code kontrollieren und prüfen, welche anderen Programmteile,
    Verträge, Tests und Dokumente betroffen sind. Grüne Tests allein sind
    kein Beweis für korrektes Laufzeitverhalten. Rote Tests sind Blocker,
    nie Folgeaufgaben.
-7. **Frameworktreue.** Nie selbst bauen, was Framework, Bibliothek oder
+8. **Frameworktreue.** Nie selbst bauen, was Framework, Bibliothek oder
    CMS liefern. Keine neuen Bibliotheken ohne Prüfung des Bestands und
    ohne Freigabe. Bestehende Muster zuerst studieren und fortsetzen.
-8. **Komponenten-Grundsatz.** Views rufen nur die Wrapper-Komponenten der
+9. **Komponenten-Grundsatz.** Views rufen nur die Wrapper-Komponenten der
    Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex) und
    kennen das Designframework nicht. Größe, Farbe für Hell und Dunkel,
    Beschriftung und Übersetzung leben in der Komponente; Views liefern
    nur Inhalt, Ziel und Funktion. Bestehende Komponentenbibliotheken nie
    ohne Freigabe umschreiben.
-9. **Entwurf vor Oberflächenbau.** Kein Screen, kein Dialog, kein
-   Layoutumbau ohne freigegebenen Entwurf: mehrere Vorschläge, als Skizze
-   oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche Freigabe —
-   erst dann bauen.
-10. **Das Designsystem gibt vor, der Agent setzt um — der Agent gestaltet
+10. **Entwurf vor Oberflächenbau.** Kein Screen, kein Dialog, kein
+    Layoutumbau ohne freigegebenen Entwurf: mehrere Vorschläge, als Skizze
+    oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche Freigabe —
+    erst dann bauen.
+11. **Das Designsystem gibt vor, der Agent setzt um — der Agent gestaltet
     nicht.** Liegt ein Entwurf vor — Artboard aus Claude Design,
     Design-Set, freigegebener Klickprototyp —, ist er **Bauvorgabe und
     Abnahmegrundlage**. Der Agent trifft **keine** Gestaltungsentscheidung:
@@ -111,12 +143,12 @@ bei passender Aufgabe den jeweiligen Skill laden.
     (Layout-, Stil-, Bildabgleich, je Fassung). **Fertig heißt gemessen**,
     nicht behauptet — und die letzte Zeile jeder Fertigmeldung lautet
     „Eigene Gestaltungsentscheidungen: 0".
-11. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
+12. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
     falsch bedienen". Ein Freitextfeld ist die letzte Wahl: ist die Menge
     der gültigen Werte bekannt oder abfragbar, wird ausgewählt, nicht
     getippt. Eingabemasken führen beim Tippen; geprüft wird beim Tippen,
     nicht erst beim Speichern.
-12. **Barrierefreiheit und Größen.** WCAG 2.2 AA ist hart: Text
+13. **Barrierefreiheit und Größen.** WCAG 2.2 AA ist hart: Text
     mindestens 4,5:1, Bedienelemente und Grafik mindestens 3:1 — gegen den
     tatsächlichen Untergrund, in Hell und Dunkel, in **jedem** Zustand
     einschließlich Hover. Kontrast wird gerechnet, nicht geschätzt. Jeder
@@ -126,18 +158,18 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Practices und SEO 100, agentisches Browsen 3/3, Leistung und
     Barrierefreiheit mindestens 95 — der Lighthouse-Wert ersetzt die
     Prüfung nicht.
-13. **Rechtliche Pflichtbausteine.** Impressum, Datenschutzerklärung und
+14. **Rechtliche Pflichtbausteine.** Impressum, Datenschutzerklärung und
     Barrierefreiheitserklärung sind eigene, immer erreichbare Seiten nach
     österreichischem Recht. Vor der Einwilligung lädt nichts von Dritten —
     auch kein eingebettetes Video. Schriften werden immer selbst
     ausgeliefert. Für Anwendungen und Portale gilt zusätzlich der EU
     Cyber Resilience Act samt Dokumentenpaket und Meldeweg.
-14. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
+15. **Dokumentation ist Teil der Änderung.** Sie beschreibt den
     IST-Zustand und zieht im selben Schritt nach, ohne Marketingsprache.
     Struktur: `docs/[frontend|backend]/<sprache>/…`, je Ordner eine
     `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
     markierten Screenshots im Repository. Geplantes liegt unter /plan.
-15. **Das System spricht englisch, der Mensch deutsch.** Bezeichner,
+16. **Das System spricht englisch, der Mensch deutsch.** Bezeichner,
     Kommentare, Protokolle, technische Fehlermeldungen, Fehlercodes,
     Konfigurationsschlüssel, Übersetzungsschlüssel, Tabellen, Spalten,
     Aufzählungswerte, Schnittstellen und Backend-Oberflächen sind
@@ -148,34 +180,34 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Oberflächentexte eines deutschen Produkts, Projektdokumentation,
     Commit-Nachrichten. Deutsche Fachbegriffe ohne englische Entsprechung
     bleiben deutsch und werden einmal erklärt.
-16. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
+17. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
     ausgelieferten Sprache eine Übersetzung — **gemessen, nicht
     angenommen** (`translations.py`). Null fehlende Schlüssel, null
     leere Werte, null abweichende Platzhalter. Ein Schlüssel mitten in
     der Oberfläche ist der sichtbarste Mangel, den ein Produkt haben
     kann. Keine harte Zeichenkette in der Oberfläche, kein Satz aus
     Teilschlüsseln zusammengesetzt.
-17. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
+18. **Deutsche Texte mit echten Umlauten** (ä ö ü ß), nie ue/ae/oe/ss.
     Das gilt für **jeden** deutschen Text, einschließlich
     Commit-Nachrichten, Pull-Request-Titeln und -Texten und Meldungen im
     Terminal. Ausnahmen nur Slugs, URLs, Dateinamen, Code und englische
     Bezeichner. Keine Emojis in Dokumentation, Commits und Oberflächen.
-18. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
+19. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-19. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
+20. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
     pushen — beide nehmen nur Merges über Pull Requests. Arbeitszweige
     gehen von `dev` aus; `main` nimmt ausschließlich `dev`. Ausgerollt
     wird nur, was grüne Tests hat. Keine Prüfung abschalten, um einen
     Merge oder ein Deployment durchzubekommen.
-20. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
+21. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
     Erweiterungen bleiben unangetastet. Bildkompression und Imagesets nur
     über Contao, Styles ausnahmslos in SCSS und im Layout gewählt, jede
     Seite liefert nur, was sie braucht. Eigene Erweiterung erst, wenn es
     keine marktreife gibt.
-21. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
+22. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
     Vorgaben des jeweiligen Stacks**: klare Schichtgrenzen mit
@@ -183,7 +215,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
     Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
     gewinnt immer Letzteres.
-22. **Sauber heißt nicht abstrakt.** Der Code muss von jemandem lesbar
+23. **Sauber heißt nicht abstrakt.** Der Code muss von jemandem lesbar
     sein, der programmieren kann und von objektorientierter Programmierung
     nur die Grundlagen hat: von der Fehlermeldung zur Datei zur Ursache,
     **in höchstens drei Sprüngen**. Eine eigene Funktion entsteht ab der
@@ -194,13 +226,13 @@ bei passender Aufgabe den jeweiligen Skill laden.
     werden in einer gemeinsamen Schicht zusammengelegt, nachdem geklärt
     ist, warum sie sich unterschieden. Was sich aus **verschiedenen
     Gründen** ändert, bleibt getrennt.
-23. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+24. **Schnittstellen.** Wird an einer API entwickelt, ist ein
     OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
     geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-24. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+25. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
     Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
     Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
     automatisch gelöscht oder anonymisiert — was von Hand gelöscht
@@ -208,7 +240,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell.
-25. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+26. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte Änderung braucht vorher eine Rückfrage. Das gilt
     ausdrücklich für **Umbenennen** von Dateien, Symbolen, Schaltern oder
     Feldern, den **Wechsel eines Daten- oder Dateiformats**, das

@@ -239,6 +239,35 @@ zu schmale Bereiche und mitwachsende Schriftgrößen:
 
 ## 8. Texte in der Oberfläche
 
+> **Jeder sichtbare Text hat eine Herkunft: der Entwurf, eine freigegebene
+> Textliste oder eine Anweisung des Projektinhabers.**
+
+**Der Agent denkt sich keinen Text aus** — keine Beschriftung, keinen
+Hinweis unter einem Feld, keine Zusage, keine Zahl (Kernregel 2). Was die
+Oberfläche zusätzlich braucht — Fehlermeldung, Leerzustand,
+Ladehinweis —, wird **vorgelegt und freigegeben**, bevor es in die
+Sprachdatei kommt; es entsteht nicht beim Bauen. **Im Zweifel
+weglassen:** Ein fehlender Hinweis ist eine Rückfrage, ein erfundener
+Hinweis ein Fehler im Produkt.
+
+**Ein Satz, der sagt, was das System tut, ist eine Zusage** —
+„erreichbar unter", „wird automatisch", „innerhalb von", „Sie können
+wählen". Er wird **am Code belegt, bevor er geschrieben wird**, mit
+Fundstelle. Wird eine
+Kennung erzeugt (GUID, Zufallsschlüssel), ist sie nicht wählbar, und kein
+Text darf das Gegenteil nahelegen.
+
+Gemessen wird auch das:
+
+```
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/ui-text-check.py lang/de.json \
+        --design design/b28.html
+```
+
+Das Werkzeug meldet jeden Text ohne Herkunft und listet die Sätze, die
+etwas zusagen. Herkunft und Zusagen im Einzelnen:
+`references/oberflaechentexte.md`.
+
 Beschriftungen sagen, was passiert („Auftrag anlegen", nicht „OK").
 Fehlermeldungen benennen Ursache und nächsten Schritt, nie einen Code
 allein. Hilfetexte stehen am Feld, nicht im Handbuch. Sentence case,

@@ -15,7 +15,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
 | `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers; lokale Daten mit Schemaversion, Migrationstest und unveränderlichen Aufzeichnungen; Betriebsgeräte: Vollbild/Kiosk, Scanner als Tastatur, Drucker und Lade, Offline als Normalfall | Skill mit vier Referenzdateien (Material 3 in Flutter, lokale Daten und Migrationen, Geräte und Peripherie, Abnahmeliste), lädt bei App-Arbeit |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit dreizehn Referenzdateien, neun Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit dreizehn Referenzdateien, zehn Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
@@ -271,7 +271,7 @@ noch `claude plugin update`, dass etwas nachzuziehen ist.
 
 Alle neunzehn global zu aktivieren heißt nur, dass sie **geladen werden
 können**. Welche in einem Projekt **gelten**, sagt dessen `CLAUDE.md`,
-namentlich und als Vorgabe (Kernregel 3). Ein Contao-Projekt schleppt so
+namentlich und als Vorgabe (Kernregel 4). Ein Contao-Projekt schleppt so
 die Flutter-Regeln nicht mit, ohne dass jemand am globalen Schalter
 drehen muss.
 
@@ -296,6 +296,7 @@ Tor in der CI.
 | `image-diff.py` | `plugins/neo-design/scripts/` | Vergleicht zwei PNG-Aufnahmen — Entwurf gegen gebaute Oberfläche — nennt die Abweichung in Prozent und schreibt ein Unterschiedsbild, das jede abweichende Stelle magenta markiert. Bereiche mit veränderlichem Inhalt lassen sich ausnehmen. Ohne Abhängigkeiten. |
 | `style-audit.js` | `plugins/neo-design/scripts/` | Liest die berechneten Stile der laufenden Oberfläche und meldet jede Farbe, jeden Radius, jede Schriftgröße und jeden Schatten, der nicht aus den Tokens stammt. Arbeitet am fertigen DOM und damit unabhängig vom Framework. |
 | `md3-token-check.py` | `plugins/neo-design/scripts/` | Vergleicht die Tokens eines Projekts mit den **Originalwerten von Material 3** — Eckenradien, Höhenstufen und Zustandsdeckschichten — und meldet jede Abweichung als Zahl. Deckt den Fall ab, dass ein Entwurfswerkzeug das Designsystem nur nachzeichnet: 24 dp statt 28, Stufe 2 statt Stufe 1. Liest JSON, CSS, SCSS, Dart und Kotlin; bewusste Abweichungen brauchen einen Grund. Ohne Abhängigkeiten. |
+| `ui-text-check.py` | `plugins/neo-design/scripts/` | Prüft, woher die Texte einer Oberfläche kommen: Jeder sichtbare Text muss im Entwurf, in einer freigegebenen Textliste oder in einer Anweisung stehen — was keine Herkunft hat, ist erfunden. Meldet zusätzlich die Sätze, die etwas über das Verhalten zusagen (erreichbar unter, wird automatisch, innerhalb von, Sie können wählen), damit sie am Code belegt werden statt geglaubt. Liest JSON, ARB, PHP, YAML und den HTML-Export des Entwurfs; erkennt Platzhalter. Ohne Abhängigkeiten. |
 | `comparison.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
 | `gold-run.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
 | `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
@@ -317,7 +318,7 @@ Tor in der CI.
   Sicherheitsarbeit). Die Referenzdateien unter `references/` liest der
   Agent erst, wenn er sie braucht — so bleibt die Kernfassung kurz.
 - **Jedes Projekt hat eine `CLAUDE.md`**, die die geltenden Skills
-  namentlich aufzählt (Kernregel 3). Was dort steht, ist Vorgabe, keine
+  namentlich aufzählt (Kernregel 4). Was dort steht, ist Vorgabe, keine
   Empfehlung — der Agent entscheidet nicht, ob ein Skill „passt".
 - Projektspezifische Regelwerke (z. B. NEOcash CLAUDE.md, LeoFlex
   AGENTS.md) bleiben führend, wo sie konkreter
@@ -337,7 +338,7 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 19, Skill `neo-deployment`). Dieses
+- **Kein `dev`-Zweig** (Kernregel 20, Skill `neo-deployment`). Dieses
   Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
