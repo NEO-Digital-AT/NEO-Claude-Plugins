@@ -8,7 +8,10 @@ description: >
   Datenzugriff mit Entity Framework Core einschließlich Migrationen und
   Mandantentrennung, bei Authentifizierung und Autorisierung, bei
   Protokollen, Health-Endpunkten und Beobachtbarkeit sowie bei
-  Integrationstests gegen eine echte Datenbank.
+  Integrationstests gegen eine echte Datenbank. Ebenso beim Aufsetzen des
+  Baus (Analyse als Blocker, zentrale Paketverwaltung, Sperrdatei,
+  Architekturtests), bei Leistungsfragen mit Zeitbudget und Lasttest und
+  bei der Härtung der Anwendung.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, Stand 2026-08
 ---
@@ -33,7 +36,23 @@ Projektinhabers** und steht als Entscheidungsakte fest (Skill
 `neo-doku`); ein Sprung auf eine neue Hauptfassung ist eine Änderung mit
 Auswirkung, kein Nebenbei.
 
-## 1. Endpunkte bleiben dünn
+## 1. Der Bau ist streng
+
+Einzelheiten: `references/bau.md`.
+
+- **Die Strenge steht in `Directory.Build.props`**, einmal für die ganze
+  Mappe: `Nullable`, `TreatWarningsAsErrors`, hohe Analysestufe,
+  `EnforceCodeStyleInBuild`. In einer einzelnen Projektdatei wird sie
+  beim nächsten neuen Projekt vergessen.
+- **Zentrale Paketverwaltung und eingecheckte Sperrdatei**, in der CI
+  wiederhergestellt mit `--locked-mode`. Zwei Fassungen desselben Pakets
+  in zwei Projekten sind sonst der Normalfall.
+- **Die Schichtgrenze wird gemessen, nicht behauptet**: ein
+  Architekturtest, sobald es mehr als ein Projekt gibt. `Domain` verweist
+  auf nichts — und ein Test beweist es.
+- **Der Bau ist reproduzierbar.** Feste SDK-Fassung, frischer Container.
+
+## 2. Endpunkte bleiben dünn
 
 - **Annehmen, prüfen, an einen Dienst geben, antworten.** Mehr steht in
   keinem Endpunkt — weder in einem Controller noch in einer Minimal API.
@@ -44,7 +63,7 @@ Auswirkung, kein Nebenbei.
 - **Eingaben werden am Rand geprüft** und als eigener Typ
   weitergereicht, nicht als loses Wörterbuch.
 
-## 2. Konfiguration und Geheimnisse
+## 3. Konfiguration und Geheimnisse
 
 - **Options-Muster** statt Zugriff auf die Konfiguration im Fachcode;
   die Optionen werden **beim Start geprüft** — eine Anwendung mit
@@ -55,7 +74,7 @@ Auswirkung, kein Nebenbei.
 - **Verbindungszeichenfolgen sind Geheimnisse**, auch die zur
   Testdatenbank.
 
-## 3. Datenzugriff
+## 4. Datenzugriff
 
 Einzelheiten und Fallstricke: `references/efcore.md`.
 
@@ -69,7 +88,7 @@ Einzelheiten und Fallstricke: `references/efcore.md`.
   nullbar oder mit Vorgabewert, geprüft gegen eine **Kopie eines echten
   Bestands**.
 
-## 4. Asynchron durchgehend
+## 5. Asynchron durchgehend
 
 - **`async` vom Endpunkt bis zur Datenbank**, ohne Bruch.
 - **`CancellationToken` wird durchgereicht** — bricht der Aufrufer ab,
@@ -79,8 +98,11 @@ Einzelheiten und Fallstricke: `references/efcore.md`.
 - **Lange Arbeit gehört nicht in eine Anfrage**, sondern in einen
   Hintergrunddienst oder eine Warteschlange — **idempotent**, weil sie
   wiederholt wird.
+- **Die Zeit kommt aus `TimeProvider`**, nicht aus `DateTime.Now`: im
+  Container stimmt die Zeitzone sonst nicht, und kein Test kann die Uhr
+  stellen. Gespeichert wird UTC.
 
-## 5. Fehler und Antworten
+## 6. Fehler und Antworten
 
 - **Eine Fehlerhülle für alle Fehlerantworten** (`ProblemDetails`),
   gestaltet nach Skill `neo-api`.
@@ -90,7 +112,7 @@ Einzelheiten und Fallstricke: `references/efcore.md`.
   SQL, kein Dateipfad in einer Antwort — im Protokoll steht das Ganze,
   in der Antwort eine Kennung.
 
-## 6. Beobachtbarkeit
+## 7. Beobachtbarkeit
 
 - **Strukturierte Protokolle** mit Feldern statt zusammengesetzter
   Sätze; **keine Geheimnisse, keine Personendaten** im Protokoll (Skill
@@ -99,7 +121,32 @@ Einzelheiten und Fallstricke: `references/efcore.md`.
 - **Health-Endpunkte** trennen „lebt" von „bereit"; der ausführliche
   Zustand ist **abgesichert**, nicht öffentlich.
 
-## 7. Tests
+## 8. Leistung und Härtung
+
+**Leistung ohne Zahl ist eine Meinung** — `references/leistung.md`:
+
+- **Jeder Endpunkt hat ein Zeitbudget**, vor dem Bau festgelegt, gegen
+  einen realistischen Bestand gemessen, mit Zahl berichtet.
+- **Keine Abfrage ohne Obergrenze**, die Abfragezahl je Endpunkt wird
+  gemessen und im Test festgehalten.
+- **Ausgehende Aufrufe über `IHttpClientFactory`**, jeder mit
+  Zeitgrenze; ein fremder Dienst darf ausfallen, ohne die eigene
+  Anwendung mitzunehmen.
+- **Zuerst die Abfrage reparieren, dann zwischenspeichern.**
+
+**Deny-by-default ist eine Zeile im Start**, nicht ein Vorsatz —
+`references/haertung.md`:
+
+- **Globale Rückfallregel** verlangt auf jedem Endpunkt einen
+  authentifizierten Aufrufer; was öffentlich ist, wird einzeln
+  freigegeben und **gezählt**.
+- **Ratenbegrenzung nach dem authentifizierten Aufrufer**, engere Grenze
+  für Anmeldung und kostenauslösende Endpunkte.
+- **Grenzen für Rumpf, Uploads und Deserialisierung** sind gesetzt.
+- **Eigene Ein- und Ausgabetypen je Endpunkt** — keine Entität am Rand,
+  sonst setzt eine Anfrage ein Feld, das niemand gemeint hat.
+
+## 9. Tests
 
 Es gilt Skill `neo-grundregeln`, `references/tests.md`. Zusätzlich:
 
@@ -112,16 +159,26 @@ Es gilt Skill `neo-grundregeln`, `references/tests.md`. Zusätzlich:
 - **Sechs Pflichttestfälle je Endpunkt** nach Skill `neo-api`.
 - **Ein Migrationslauf gegen eine Bestandskopie** gehört zur Abnahme.
 
-## 8. Ausrollung
+## 10. Ausrollung
 
 Zweigmodell, Schutzregeln und Pflichtprüfungen: Skill `neo-deployment`.
 Eine Anwendung, die sich nicht **reproduzierbar** bauen und ausrollen
 lässt, gilt als nicht fertig.
 
-## 9. Abnahme
+## 11. Abnahme
 
 Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und das
 Ergebnis mit Zahlen berichten. Nicht Geprüftes gilt als nicht erfüllt.
+Die Abschnitte zu Bau, Leistung und Härtung tragen jeweils eine eigene
+Abnahmeliste am Ende ihrer Referenzdatei.
+
+| Bereich | Referenz |
+| --- | --- |
+| Bau, Analyse, Pakete, Architekturtests | `references/bau.md` |
+| Zeitbudget, Abfragezahl, ausgehende Aufrufe, Lasttest | `references/leistung.md` |
+| Rückfallregel, Ratenbegrenzung, Grenzen, Zeit | `references/haertung.md` |
+| EF Core, Migrationen, Mandantentrennung | `references/efcore.md` |
+| Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 
 Zugehörige Skills: `neo-code` (Sprache, Schichten), `neo-api`
 (Verträge, Fehlerhülle, Autorisierung), `neo-sicherheit` (Geheimnisse,

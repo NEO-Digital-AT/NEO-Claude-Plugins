@@ -9,6 +9,19 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
       nachgeschlagen, nicht erinnert.
 - [ ] Die Fassung ist als Entscheidungsakte festgehalten.
 
+## Bau
+
+Einzelheiten: `bau.md`.
+
+- [ ] `Directory.Build.props` mit `Nullable`, `TreatWarningsAsErrors`,
+      hoher Analysestufe und `EnforceCodeStyleInBuild`.
+- [ ] Unterdrückungen gezählt, jede mit Begründung.
+- [ ] Zentrale Paketverwaltung; `packages.lock.json` eingecheckt, CI mit
+      `--locked-mode`.
+- [ ] Quellenzuordnung gesetzt, `NuGetAudit` an, **null** offene
+      Schwachstellen.
+- [ ] Architekturtest vorhanden und grün, geprüfte Regeln benannt.
+
 ## Aufbau
 
 - [ ] Endpunkte dünn: annehmen, prüfen, an einen Dienst geben, antworten.
@@ -39,6 +52,34 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] Kein `.Result`, kein `.Wait()`.
 - [ ] Lange Arbeit im Hintergrunddienst oder in der Warteschlange,
       **idempotent**.
+
+## Leistung
+
+Einzelheiten: `leistung.md`.
+
+- [ ] Je Endpunkt ein **Zeitbudget** benannt und gemessen, mit Zahl
+      berichtet.
+- [ ] Keine Abfrage ohne Obergrenze.
+- [ ] Ausgehende Aufrufe über `IHttpClientFactory`, jeder mit Zeitgrenze;
+      Verhalten beim endgültigen Fehlschlag benannt.
+- [ ] Zwischenspeicher mit Schlüsselschema und Verfallszeit.
+- [ ] Lasttest gegen einen realistischen Bestand: p50, p95, Fehlerquote,
+      Abfragezahl berichtet.
+
+## Härtung
+
+Einzelheiten: `haertung.md`.
+
+- [ ] Globale Rückfallregel setzt Authentifizierung durch; öffentliche
+      Endpunkte einzeln benannt und **gezählt**.
+- [ ] Test belegt: unangemeldeter Aufruf → 401.
+- [ ] Ratenbegrenzung nach dem authentifizierten Aufrufer; 429 mit
+      `Retry-After` in der Fehlerhülle.
+- [ ] Grenzen für Rumpf, Uploads und Deserialisierung gesetzt.
+- [ ] Eigene Ein- und Ausgabetypen je Endpunkt; keine Entität am Rand.
+- [ ] CORS mit benannten Ursprüngen.
+- [ ] Kein `DateTime.Now` im Fachcode; Zeit über `TimeProvider`, UTC
+      gespeichert.
 
 ## Antworten
 
