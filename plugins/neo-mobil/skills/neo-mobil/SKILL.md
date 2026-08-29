@@ -64,6 +64,14 @@ stammt oft aus einer Fassung, die es im Projekt nicht gibt (Skill
 
 - **Material 3 als System**, nicht als Farbtopf: Farbrollen,
   Typografiestufen, Formstufen, Höhenstufen, Zustandsdeckschichten.
+- **Die Farbrollen werden gesetzt, nicht gerechnet.** Material 3 ist
+  zweierlei: ein Komponentensystem **und** ein Farbsystem, das aus einer
+  Saatfarbe Tonpaletten erzeugt. Das zweite ist **nicht verpflichtend**:
+  `ColorScheme(...)` nimmt jede Rolle einzeln. Wo eine Markenfarbe exakt
+  gelten muss — eine kräftige, gesättigte zumal —, wird sie **gesetzt**;
+  die Erzeugung aus einer Saatfarbe würde sie harmonisieren und dämpfen.
+  Ob gesetzt oder gerechnet, ist eine **Entscheidung des
+  Projektinhabers** und gehört in die Entscheidungsakte.
 - **Das Theme kommt aus Tokens**, hell und dunkel, an einer Stelle. Keine
   Farbe, kein Maß und kein Radius im Widget-Code.
 - **Wo das Designsystem von Material abweicht, gewinnt das
@@ -159,9 +167,16 @@ Es gilt Skill `neo-grundregeln`, `references/tests.md`. Zusätzlich:
 - **Integrationstests** für die Abläufe, mit dem Oberflächendurchlauf
   über jedes Bedienelement an **jeder** Stelle (Skill `neo-grundregeln`,
   `references/durchlauf.md`).
-- **Goldene Aufnahmen** für Layouts, die sich nicht ändern sollen — mit
-  demselben Vorbehalt wie beim Bildabgleich: sie schlagen bei
-  abweichendem Inhalt an, nicht nur bei abweichendem Aussehen.
+- **Goldene Aufnahmen je Bildschirm — gelegt aus dem Entwurf, nicht aus
+  dem eigenen Bau.** Das ist die Brücke vom Designset in die App: Der
+  Test ist rot, solange der Bildschirm dem Entwurf nicht entspricht.
+  Bedingungen (Gerätegröße, Bildmaßstab, Farbschema, geladene Schriften,
+  abgeschaltete Bewegung, feste Testdaten) sind in Entwurf und Test
+  dieselben, die Toleranz ist benannt. Wer die Aufnahme aus dem eigenen
+  Bau erzeugt, hat sich selbst bestätigt und nichts gemessen (Skill
+  `neo-design`, `references/entwurfsbruecke.md`).
+- Derselbe Vorbehalt wie beim Bildabgleich: Bereiche mit veränderlichem
+  Inhalt werden ausgenommen, und die Ausnahme wird benannt.
 - **Auf beiden Plattformen geprüft**, nicht nur auf der des Entwicklers.
 
 ## 11. Abnahme

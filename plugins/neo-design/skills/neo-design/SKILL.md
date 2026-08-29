@@ -292,6 +292,12 @@ Schluss der Durchgang über die ganze Seite, auch als Gesamteindruck.
 
 | Prüfung | Werkzeug | Antwort | Erlaubt |
 | --- | --- | --- | --- |
+**Das gilt für den Browser.** Ist das Ziel kein Browser — Flutter,
+Compose, SwiftUI —, misst dort die goldene Aufnahme, und sie wird **aus
+dem Entwurf** gelegt, nicht aus dem eigenen Bau. Warum eine Webseite nach
+dem Entwurf aussieht und eine Anwendung nicht, und was die Lücke schließt:
+`references/entwurfsbruecke.md`.
+
 | **1. Layout** | `scripts/layout-diff.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
 | **2. Stil** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
 | **3. Bild** | `scripts/image-diff.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |

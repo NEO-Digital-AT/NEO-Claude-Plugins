@@ -151,6 +151,20 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
 - [ ] Klar benannt, dass der Barrierefreiheitswert ein Teilcheck ist —
       die Prüfung oben ersetzt er nicht.
 
+## Brücke vom Entwurf in die Anwendung
+
+Gilt, sobald das Ziel kein Browser ist (`entwurfsbruecke.md`).
+
+- [ ] **Eine** Tokenquelle; die erzeugte Datei ist eingecheckt, der
+      Erzeugungsschritt läuft in der CI und ist bei Abweichung rot.
+- [ ] Kein Zahlenwert, keine Farbe in einer View. **Bedienhöhen sind
+      Tokens.**
+- [ ] Je Bildschirm eine goldene Aufnahme, **aus dem Entwurf** gelegt —
+      nicht aus dem eigenen Bau.
+- [ ] Aufnahmebedingungen in Entwurf und Test dieselben; Toleranz
+      benannt; ausgenommene Bereiche benannt und begründet.
+- [ ] Die Abweichung ist als **Zahl** berichtet.
+
 ## Größe und Gerät
 
 Maschinell geprüft mit `overflow.js` auf 320, 390, 768, 1024, 1280,

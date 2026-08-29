@@ -99,3 +99,8 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] **Auf beiden Plattformen** geprüft, nicht nur auf der des
       Entwicklers.
 - [ ] Goldene Aufnahmen nur dort, wo der Inhalt stabil ist.
+- [ ] **Je Bildschirm eine goldene Aufnahme, aus dem Entwurf gelegt**,
+      nicht aus dem eigenen Bau; Bedingungen gleich, Toleranz benannt
+      (Skill `neo-design`, `references/entwurfsbruecke.md`).
+- [ ] Farbrollen **gesetzt statt gerechnet**, wo eine Markenfarbe exakt
+      gelten muss; die Entscheidung steht in der Entscheidungsakte.

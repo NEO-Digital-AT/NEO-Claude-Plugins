@@ -260,7 +260,7 @@ Menü, Datumswähler, Kontextmenü, Tooltip, Sprechblase.
 - **Nicht selbst rechnen.** Die Plattform kann das: die Popover-API mit
   CSS-Anker-Positionierung, oder die Umklapp-Funktion der eingesetzten
   Komponentenbibliothek. Eine handgeschriebene Positionsrechnung ist ein
-  Befund, kein Fleiß (Kernregel 6).
+  Befund, kein Fleiß (Kernregel 7).
 - **Die Umklapplogik lebt in der Wrapper-Komponente**, einmal, nicht in
   jeder View (Skill `neo-komponenten`).
 

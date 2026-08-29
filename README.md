@@ -15,7 +15,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
 | `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers; lokale Daten mit Schemaversion, Migrationstest und unveränderlichen Aufzeichnungen; Betriebsgeräte: Vollbild/Kiosk, Scanner als Tastatur, Drucker und Lade, Offline als Normalfall | Skill mit vier Referenzdateien (Material 3 in Flutter, lokale Daten und Migrationen, Geräte und Peripherie, Abnahmeliste), lädt bei App-Arbeit |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit zwölf Referenzdateien, acht Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte | Skill mit dreizehn Referenzdateien, acht Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
@@ -333,7 +333,7 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 18, Skill `neo-deployment`). Dieses
+- **Kein `dev`-Zweig** (Kernregel 19, Skill `neo-deployment`). Dieses
   Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
   ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
   Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
