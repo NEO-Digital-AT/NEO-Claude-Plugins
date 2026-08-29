@@ -14,14 +14,32 @@ metadata:
 
 # NEO-Zweigmodell und Auslieferung
 
-## Die zwei geschützten Zweige
+## Welches Modell gilt, sagt das Projekt
+
+**Dieser Skill beschreibt das Modell `dev`** — den Regelfall bei NEO und
+LeoFlex. Es gilt **nicht überall**: Manche Projekte haben kein `dev`,
+und ein Regelwerk-Repository liefert nichts aus. Welches der drei
+Modelle gilt, steht in der `CLAUDE.md` des Projekts (Kernregel 20):
+
+| Modell | Weg | Wo |
+| --- | --- | --- |
+| **`dev`** | Arbeitszweig → `dev` → `main` | Regelfall, alles mit Ausrollung |
+| **`main` mit Arbeitszweig** | Arbeitszweig → `main` | Projekte ohne `dev` |
+| **`main` direkt** | Push auf `main` | nur mit ausdrücklicher Festlegung |
+
+**Fehlt der Eintrag, gilt das strengste Modell** und es wird
+nachgefragt. Alles Weitere in diesem Skill setzt Modell `dev` voraus;
+im Modell `main` mit Arbeitszweig gelten dieselben Regeln, nur ohne die
+Zwischenstufe.
+
+## Die zwei geschützten Zweige (Modell `dev`)
 
 | Zweig | Bedeutung | Wird ausgerollt nach | Nimmt entgegen |
 | --- | --- | --- | --- |
 | `main` | Live. Was hier liegt, läuft beim Kunden. | Produktion | **ausschließlich** Merges aus `dev` |
 | `dev` | Integrationsstand. | Entwicklungsumgebung | Merges aus Arbeitszweigen |
 
-Arbeitszweige gehen **immer von `dev`** aus, nie von `main` und nie
+Arbeitszweige gehen hier **immer von `dev`** aus, nie von `main` und nie
 voneinander.
 
 ```
@@ -31,7 +49,7 @@ voneinander.
                         └──► Entwicklungsumgebung
 ```
 
-## Die harten Regeln
+## Die harten Regeln (Modell `dev`)
 
 1. **Nie direkt auf `dev` oder `main` pushen.** Beide Zweige nehmen
    Änderungen ausschließlich über einen Pull Request entgegen. Kein

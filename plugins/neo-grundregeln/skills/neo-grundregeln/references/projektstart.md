@@ -25,7 +25,7 @@ Diese vier Punkte werden **erfragt**, nicht angenommen:
 | `CLAUDE.md` | **Pflicht.** Regeldatei für Agenten, siehe unten. Ohne sie beginnt keine Codeänderung |
 | `CHANGELOG.md` | Änderungsprotokoll ab dem ersten Eintrag |
 | `.env.example` | Jeder Konfigurationsschlüssel mit Bedeutung, ohne echten Wert |
-| `.gitignore` | Passend zum Stack; keine Erzeugnisse, keine Secrets, keine lokalen Ordner |
+| `.gitignore` | **Vor der ersten Datei, die nicht hineingehört** (Kernregel 21): Abhängigkeiten, Bau und Zwischenspeicher, Erzeugnisse der Werkzeuge, Lokales. Je Werkzeug im selben Schritt ergänzt, in dem es eingeführt wird (`git.md`) |
 | `LICENSE` bzw. Lizenzhinweis | Auch bei geschlossenen Projekten: `proprietary` steht ausdrücklich da |
 | `SECURITY.md` | Wie eine Schwachstelle gemeldet wird, an wen, mit welcher Reaktionszeit |
 
@@ -36,7 +36,10 @@ ist das der erste Punkt der Auftragsliste: anlegen, vorlegen, freigeben
 lassen.
 
 Sie zählt die geltenden NEO-Skills **namentlich** auf, je Skill ein Satz,
-wofür er in diesem Projekt gilt. **Das ist keine Empfehlung, sondern
+wofür er in diesem Projekt gilt. **Dazu drei Angaben, die kein
+Repository von selbst verrät** und die der Agent sonst rät: das
+**Zweigmodell**, die **Zielgruppe je Bereich** mit ihrer Sprachstufe
+(`zielgruppe.md`) und die **Betriebsart**. **Das ist keine Empfehlung, sondern
 Vorgabe**: Der Agent wägt nicht ab, ob ein Skill passt — er lädt ihn und
 hält ihn ein. Ein Skill, der nicht dort steht, gilt nicht; ein Skill, der
 dort steht, gilt ohne Ausnahme.
@@ -47,6 +50,17 @@ dort steht, gilt ohne Ausnahme.
 Betriebsart: Anwendung | Portal | Webseite
 Stack: <Sprache/Framework, Fassung>
 Sprachen: <ausgeliefert>, Leitsprache <…>
+Zweigmodell: dev | main mit Arbeitszweig | main direkt
+
+## Zielgruppen und Sprachstufen
+
+| Bereich | Wer bedient es | Stufe |
+| --- | --- | --- |
+| <Oberfläche> | <Kassier, Kellner> | 1 — ohne Vorkenntnisse |
+| <Einstellungen> | <Betreiber> | 2 — kundig |
+| <Verwaltung, API> | <Administrator> | 3 — technisch |
+
+Wortliste: <docs/wortliste.md>
 
 ## Geltende Regeln
 
@@ -103,9 +117,12 @@ Produktfamilie und der Wächter-Test (Skill `neo-komponenten`).
 
 ## Zweige und Ausrollung
 
-- `dev` und `main` angelegt, beide geschützt, Rulesets gesetzt
-  (Skill `neo-deployment`). Ohne Ausrollung: die Ausnahme wird begründet
-  und im README festgehalten.
+- **Das Zweigmodell wird festgelegt und in die `CLAUDE.md` geschrieben**,
+  bevor der erste Zweig entsteht — nicht abgeleitet aus dem, was zuletzt
+  woanders galt (`git.md`, Kernregel 20).
+- Im Modell `dev`: `dev` und `main` angelegt, beide geschützt, Rulesets
+  gesetzt (Skill `neo-deployment`). Ohne Ausrollung: die Ausnahme wird
+  begründet und im README festgehalten.
 - Umgebungen mit Zweigrichtlinie, Secrets an der Umgebung.
 - Pflichtprüfungen eingetragen, nachdem die Workflows einmal gelaufen
   sind.

@@ -57,12 +57,21 @@ Bedingungen statt Andeutungen.**
 
 ## Fachwörter
 
+**Wie technisch die Doku sein darf, bestimmt der Bereich, den sie
+beschreibt** — nicht der, der sie schreibt. Ein Handbuch für die
+Kassenoberfläche ist Stufe 1, die Anleitung zum Hinterlegen der
+Registrierkasse Stufe 2, die Schnittstellenbeschreibung Stufe 3. Welche
+Stufe wo gilt, steht in der `CLAUDE.md` des Projekts; fehlt der Eintrag,
+wird gefragt (Skill `neo-grundregeln`, `references/zielgruppe.md`).
+
 - **Beim ersten Auftreten erklären.** Die Doku richtet sich nicht nur an
   Programmierer.
 - **Ein Begriff je Sache**, im ganzen Projekt. Nicht „Lauf", „Job"
   und „Auftrag" für dasselbe.
 - Wo Synonyme im Umlauf sind, werden sie einmal in einer Begriffsliste
-  zugeordnet und dann nicht mehr verwendet.
+  zugeordnet und dann nicht mehr verwendet. Diese Liste ist die
+  **Wortliste des Projekts** und gilt für Oberfläche und Doku
+  gleichermaßen (`zielgruppe.md`).
 - Englische Fachwörter nur, wo es kein etabliertes deutsches gibt.
   „Commit" bleibt Commit, „Deployment" heißt Ausrollung.
 

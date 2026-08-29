@@ -1,7 +1,7 @@
 {
   "name": "neo-doku",
   "displayName": "NEO Dokumentation",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Dokumentationsregeln der NEO Digital: verbindliche Struktur unter docs (frontend/backend, danach Sprachordner, Inhaltsverzeichnis als README.md je Ordner), trockene Sprache mit Verbotslisten und Zahlen statt Adjektiven, immer IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots im Repository, Entscheidungsakten (ADR) mit dem Abschnitt „Was dabei schiefging“, Vorlagen für Bedienungsseite, Entwicklerseite, Änderungsprotokoll und Übergabe, Aufbau auch für generative Agenten lesbar, /plan für Geplantes, echte Umlaute, Abnahmeliste.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

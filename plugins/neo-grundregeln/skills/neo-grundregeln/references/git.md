@@ -72,18 +72,98 @@ Commit-Paket.** Nicht ein Tag Arbeit, nicht eine Datei.
 das Projekt es so festlegt.** Ein Commit ohne diese Grundlage ist ein
 Regelverstoß, auch wenn die Arbeit fertig ist.
 
-## Zweige
+## Zweige: drei Modelle, das Projekt sagt welches
 
-- **Nie direkt auf `dev` oder `main` pushen.** Beide nehmen Änderungen
-  ausschließlich über einen Pull Request entgegen.
-- Arbeitszweige gehen von `dev` aus. `main` nimmt ausschließlich Merges
-  aus `dev`.
+> **Das Zweigmodell des letzten Projekts gilt hier nicht.** Es steht in
+> der `CLAUDE.md`; fehlt der Eintrag, gilt das strengste Modell und es
+> wird nachgefragt.
+
+### Modell `dev` — der Regelfall bei NEO und LeoFlex
+
+```
+main    ←── nur von dev
+ ↑
+dev     ←── nur von Arbeitszweigen
+ ↑
+fix/…, feature/…   ←── von dev abgezweigt
+```
+
+- **Kein direkter Push auf `dev`.** Auch keine „winzige Korrektur".
+- **Kein Arbeitszweig direkt nach `main`.** `main` nimmt nur `dev`.
+- **Kein Merge nach `main` aus irgendetwas anderem als `dev`** — kein
+  Hotfix-Zweig, keine Ausnahme für Eiliges. Ein Fehler in der Produktion
+  geht denselben Weg: Zweig von `dev`, nach `dev`, dann `dev` → `main`.
+- Beide Zweige sind geschützt, beide nehmen nur Pull Requests.
+
+### Modell `main` mit Arbeitszweig — Projekte ohne `dev`
+
+```
+main    ←── nur von Arbeitszweigen
+ ↑
+claude/…, fix/…    ←── von main abgezweigt
+```
+
+- **Kein direkter Push auf `main`**, auch hier nicht.
+- Der Arbeitszweig wird nach `main` zusammengeführt, sonst nichts.
+
+### Modell `main` direkt
+
+- **Nur, wo der Projektinhaber es ausdrücklich festgelegt hat**, und nur
+  für dieses Projekt. Es ist keine Bequemlichkeitsstufe, die man wählt,
+  wenn es schnell gehen soll.
+
+### Für alle Modelle
+
 - **Nie Historie umschreiben auf einem Zweig, an dem jemand anderes
   arbeitet** — kein Rebase, kein Amend, kein Force-Push. Auf einem
   eigenen Zweig nur mit `--force-with-lease` und nur, wenn der
   Projektinhaber es weiß.
-- Zweigmodell, Schutzregeln, Pflichtprüfungen und Ausrollung:
-  Skill `neo-deployment`.
+- **Ein Zweig hat eine Aufgabe.** Zwei Themen in einem Zweig ergeben
+  einen Pull Request, den niemand prüfen kann.
+- Schutzregeln, Pflichtprüfungen und Ausrollung: Skill `neo-deployment`.
+
+## Die .gitignore
+
+> **Sie gehört zum ersten Commit, nicht zum Aufräumen** (Kernregel 21).
+
+Was einmal eingecheckt ist, bleibt im Verlauf. Ein nachträglicher Eintrag
+in der `.gitignore` entfernt nichts — er verhindert nur die nächste
+Datei. Deshalb entsteht sie **vor** der ersten Datei, die nicht
+hineingehört.
+
+**Vier Gruppen, in jedem Projekt:**
+
+| Gruppe | Beispiele |
+| --- | --- |
+| Abhängigkeiten | `node_modules/`, `vendor/`, `.venv/`, `Pods/` |
+| Bau und Zwischenspeicher | `dist/`, `build/`, `bin/`, `obj/`, `__pycache__/`, `*.pyc`, `.gradle/`, `.dart_tool/` |
+| Erzeugnisse der Werkzeuge | Aufnahmen, Unterschiedsbilder, Prüfberichte, Protokolle, Abdeckungsberichte |
+| Lokales | `.env*` (außer `.env.example`), `.idea/`, `.vscode/`, `.DS_Store`, `Thumbs.db` |
+
+**Die dritte Gruppe wird am häufigsten vergessen** — und sie ist die, die
+tausend Dateien auf einmal erzeugt. Jedes Werkzeug, das schreibt, wird im
+selben Schritt eingetragen, in dem es eingeführt wird: der Bildabgleich
+schreibt Unterschiedsbilder, der Testlauf schreibt Berichte, der
+Übersetzer schreibt Zwischenstände.
+
+- **Erzeugte Dateien, die eingecheckt gehören, sind die Ausnahme** und
+  tragen einen Kopf „nicht von Hand ändern" — etwa eine Tokendatei aus
+  dem Erzeugungsschritt (Skill `neo-design`).
+- **Kein `*` mit Ausnahmenliste.** Eine `.gitignore`, die alles sperrt
+  und einzeln wieder freigibt, versteht nach drei Monaten niemand.
+- **Vor jedem Commit die Liste der Dateien ansehen**, nicht nur die
+  Nachricht schreiben:
+
+```
+git status --short
+git diff --cached --stat
+```
+
+  Fällt dabei etwas auf, das nicht hineingehört: Muster eintragen,
+  `git rm --cached` für das bereits Aufgenommene, dann committen.
+- **`git add -f` nur mit Grund und Vermerk.**
+- Ein Geheimnis, das einmal im Verlauf steht, gilt als kompromittiert und
+  wird gewechselt (Kernregel 19, Skill `neo-sicherheit`).
 
 ## Was nie ins Repository gehört
 

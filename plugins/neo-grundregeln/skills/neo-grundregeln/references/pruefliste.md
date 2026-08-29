@@ -22,6 +22,11 @@ aktuellen Arbeitsstand durch.
 
 - [ ] Eine `CLAUDE.md` liegt vor, zählt die geltenden Skills namentlich
       auf und wurde eingehalten.
+- [ ] **Zweigmodell, Zielgruppe je Bereich und Betriebsart stehen dort** —
+      und wurden eingehalten, nicht aus einem anderen Projekt übernommen
+      (Kernregeln 4, 16, 20).
+- [ ] **Die Sprachstufe des Bereichs wurde eingehalten**, in dem gearbeitet
+      wurde; die Wortliste ebenfalls (`zielgruppe.md`).
 - [ ] Die Regelwerke des Projekts wurden gelesen, nicht nur die README.
 - [ ] Umfang und Nicht-Umfang wurden benannt.
 - [ ] Die Abhängigkeiten wurden **vor** der Umsetzung erhoben.
@@ -72,6 +77,13 @@ aktuellen Arbeitsstand durch.
 
 ## Hygiene
 
+- [ ] **Die Liste der Dateien im Commit wurde angesehen**, nicht nur die
+      Nachricht geschrieben (`git status --short`).
+- [ ] **Kein Erzeugnis im Diff** — keine Bau-Ausgabe, kein
+      Zwischenspeicher, keine Aufnahme, kein Bericht. Was neu entstanden
+      ist, steht in der `.gitignore` (Kernregel 21).
+- [ ] **Jedes neu eingeführte Werkzeug hat sein Muster in der
+      `.gitignore`**, im selben Schritt eingetragen.
 - [ ] Keine TODOs, keine temporären Dateien, kein auskommentierter Code.
 - [ ] Keine Secrets im Diff.
 - [ ] Deutsche Texte mit echten Umlauten — **auch die

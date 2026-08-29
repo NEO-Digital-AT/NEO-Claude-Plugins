@@ -53,6 +53,35 @@ Freigabe, dann in die Sprachdatei. **Nicht: beim Bauen ausformulieren.**
 - **Kein Beispielwert, keine erfundene Zahl, keine erfundene Adresse.**
   Ein Platzhalter im Entwurf ist ein Platzhalter, kein Inhalt.
 
+## Wie technisch, bestimmt der Bereich
+
+**Nicht das Projekt hat eine Sprachstufe, sondern der Bereich.** Ein
+Kassensystem spricht am Tresen mit Kellnern und in den Einstellungen mit
+dem Betreiber, der eine Registrierkasse hinterlegt — dieselbe Anwendung,
+zwei Stufen:
+
+| Stufe | Wer liest | Erlaubt |
+| --- | --- | --- |
+| **1 ohne Vorkenntnisse** | Kassier, Kellner, Endkunde | Sprache des Berufs; keine Technik, keine Abkürzungen |
+| **2 kundig** | Betreiber, Buchhaltung | Fachbegriffe der Sache; Technik nur unvermeidbar, dort erklärt |
+| **3 technisch** | Administrator, Entwickler | Fachausdrücke ohne Erklärung |
+
+Welche Stufe wo gilt, steht in der `CLAUDE.md`. **Fehlt der Eintrag,
+wird gefragt**, nicht geschätzt; bis zur Antwort gilt die niedrigste.
+
+- **Ein technischer Satz in einem Bereich der Stufe 1 ist ein Fehler**,
+  auch wenn er stimmt. „Die Synchronisierung ist fehlgeschlagen" hilft
+  einem Administrator und lässt einen Kellner im Service stehen.
+- **Fehlermeldungen der Stufe 1 nennen die nächste Handlung**, nicht das,
+  was das System nicht konnte. Eine Kennung darf als benannter Zusatz für
+  den Support danebenstehen, nie als einzige Auskunft.
+- **Ein Begriff je Sache**, aus der Wortliste des Projekts. Nicht
+  „Bestellung", „Order" und „Auftrag" für dasselbe. Neue Begriffe
+  kommen über eine Rückfrage dazu, nicht beim Bauen.
+
+Stufen, Wortliste und der Eintrag in der `CLAUDE.md`: Skill
+`neo-grundregeln`, `references/zielgruppe.md`.
+
 ## Ein Satz in der Oberfläche ist eine Zusage
 
 Sobald ein Text sagt, **was das System tut**, ist er kein Text mehr,

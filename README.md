@@ -8,7 +8,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit neun Referenzdateien, einem Werkzeug; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit zehn Referenzdateien, einem Werkzeug; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sieben Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-dotnet` | ASP.NET Core: **strenger, zentraler Bau** (Warnungen als Fehler, zentrale Paketverwaltung, Sperrdatei, **Architekturtest** für die Schichtgrenze), dünne Endpunkte, Options-Muster mit Startprüfung, EF Core ohne N+1, Mandantentrennung im Datenzugriff, Migrationen gegen eine Bestandskopie, async durchgehend, **Zeitbudget je Endpunkt und Lasttest**, **deny-by-default über die Rückfallregel**, Ratenbegrenzung, Grenzen für Rumpf und Uploads, Zeit über `TimeProvider` | Skill mit fünf Referenzdateien (Bau, Leistung, Härtung, EF Core, Abnahmeliste), lädt bei Backend-Arbeit |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
@@ -338,11 +338,13 @@ ein eigener Ordner.
 Die Regeln dieses Repos gelten auch für dieses Repo — mit einer
 festgehaltenen Ausnahme:
 
-- **Kein `dev`-Zweig** (Kernregel 20, Skill `neo-deployment`). Dieses
-  Repo rollt nichts aus und hält nur Regeltexte; ein Integrationszweig
-  ohne Ausrollung brächte einen Schritt ohne Nutzen. Entschieden vom
-  Projektinhaber am 26.08.2026. Arbeit läuft weiterhin über Zweige und
-  Pull Requests gegen `main`.
+- **Zweigmodell `main` mit Arbeitszweig**, kein `dev` (Kernregel 20,
+  Skill `neo-deployment`). Dieses Repo rollt nichts aus und hält nur
+  Regeltexte; ein Integrationszweig ohne Ausrollung brächte einen Schritt
+  ohne Nutzen. Entschieden vom Projektinhaber am 26.08.2026. Arbeit läuft
+  weiterhin über Zweige gegen `main`, nicht direkt auf `main`. Das ist
+  keine Ausnahme mehr, sondern eines der drei Modelle — welches gilt,
+  legt jedes Projekt in seiner `CLAUDE.md` fest.
 
 ## Aufbau der Plugins
 

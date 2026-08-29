@@ -14,7 +14,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
    zusammenfassen und die Freigabe abwarten. **Freie Hand gibt es nicht** —
    auch nicht bei Kleinigkeiten, auch nicht, wenn die Antwort auf der Hand
-   liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 26).
+   liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 27).
 2. **Nichts erfinden, was jemand für Wahrheit halten könnte.** Der Agent
    schreibt keinen Inhalt, den niemand verlangt hat: keinen Satz in die
    Oberfläche, keine Beschriftung, keinen Hilfetext, keinen Hinweis unter
@@ -84,6 +84,11 @@ bei passender Aufgabe den jeweiligen Skill laden.
    der Agent wägt nicht ab, ob ein Skill „passt", er lädt ihn und hält
    ihn ein. Eine Regel daraus zu übergehen ist ein Verstoß, keine Abwägung.
    Geändert wird die `CLAUDE.md` nur vom Projektinhaber.
+   - **Drei Dinge stehen dort zusätzlich, weil kein Repository sie von
+     selbst verrät:** das **Zweigmodell** (Regel 20), die **Zielgruppe je
+     Bereich** mit ihrer Sprachstufe (Regel 16) und die **Betriebsart**.
+     Ohne sie rät der Agent — und er rät jedes Mal anders.
+   - **Was dort nicht steht, wird erfragt, nicht angenommen** (Regel 2).
 5. **Ein Repository gehört der Sitzung, die es geöffnet hat.** Eine
    Sitzung schreibt **nur** in das Repository, für das sie gestartet
    wurde — lesen darf sie jedes, das ihr zugänglich ist. Zwei
@@ -180,6 +185,17 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Oberflächentexte eines deutschen Produkts, Projektdokumentation,
     Commit-Nachrichten. Deutsche Fachbegriffe ohne englische Entsprechung
     bleiben deutsch und werden einmal erklärt.
+   - **Wie technisch der Mensch angesprochen wird, bestimmt das Projekt —
+     je Bereich, nicht je Projekt.** Ein Kassensystem spricht am Tresen
+     mit Kellnern und in den Einstellungen mit dem Betreiber, der eine
+     Registrierkasse hinterlegt. Drei Stufen: **1 ohne Vorkenntnisse**
+     (keine Technik, keine Abkürzungen, Sprache des Berufs), **2 kundig**
+     (Fachbegriffe der Sache ja, Technik nur wo unvermeidbar und dort
+     erklärt), **3 technisch** (Fachausdrücke ohne Erklärung). Welche
+     Stufe wo gilt, steht in der `CLAUDE.md`; **fehlt der Eintrag, wird
+     gefragt**. Im Zweifel die niedrigere. Ein technischer Satz in einem
+     Bereich der Stufe 1 ist ein Fehler, auch wenn er stimmt.
+     Ausführlich: Skill `neo-grundregeln`, `references/zielgruppe.md`.
 17. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
     ausgelieferten Sprache eine Übersetzung — **gemessen, nicht
     angenommen** (`translations.py`). Null fehlende Schlüssel, null
@@ -195,19 +211,49 @@ bei passender Aufgabe den jeweiligen Skill laden.
 19. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-20. **Zweige und Auslieferung.** Nie direkt auf `dev` oder `main`
-    pushen — beide nehmen nur Merges über Pull Requests. Arbeitszweige
-    gehen von `dev` aus; `main` nimmt ausschließlich `dev`. Ausgerollt
-    wird nur, was grüne Tests hat. Keine Prüfung abschalten, um einen
-    Merge oder ein Deployment durchzubekommen.
-21. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
+20. **Zweige und Auslieferung — welches Modell gilt, sagt das Projekt.**
+    Es steht in der `CLAUDE.md` (Regel 4). **Fehlt der Eintrag, gilt das
+    strengste Modell**, und es wird nachgefragt — nicht angenommen, dass
+    das Modell des letzten Projekts auch hier gilt.
+    - **Modell `dev`** — der Regelfall bei NEO und LeoFlex: Ein
+      Arbeitszweig geht von `dev` aus und wird **nach `dev` gemerged**;
+      `main` nimmt **ausschließlich** `dev`. Kein direkter Push auf
+      `dev`, kein Merge nach `main` aus irgendetwas anderem als `dev`,
+      kein Arbeitszweig direkt nach `main`.
+    - **Modell `main` mit Arbeitszweig** — Projekte ohne `dev`: Der
+      Arbeitszweig geht von `main` aus und wird nach `main` gemerged.
+      Kein direkter Push auf `main`.
+    - **Modell `main` direkt** — nur, wo der Projektinhaber es
+      ausdrücklich festgelegt hat, und nur für dieses Projekt.
+    - **Ausgerollt wird nur, was grüne Tests hat.** Keine Prüfung
+      abschalten, um einen Merge oder ein Deployment durchzubekommen.
+    - **Historie eines fremden Zweigs wird nie umgeschrieben** — kein
+      Rebase, kein Amend, kein Force-Push.
+21. **Eine `.gitignore` gehört zum ersten Commit, nicht zum Aufräumen.**
+    Jedes Repository hat eine, **bevor** die erste Datei entsteht, die
+    nicht hineingehört: Abhängigkeiten, Bau-Ausgaben, Zwischenspeicher,
+    Aufnahmen und Berichte aus Werkzeugen, Editor- und
+    Betriebssystemreste, alles Lokale.
+    - **Das Muster wird eingetragen, bevor die Datei entsteht.** Wer ein
+      Werkzeug einführt, das schreibt, trägt im selben Schritt ein, was
+      es schreibt. Sonst liegen nach dem nächsten Lauf tausend Dateien im
+      Verlauf, und niemand sieht mehr, was die Änderung war.
+    - **Nachträglich eintragen entfernt nichts.** Was einmal eingecheckt
+      ist, steht im Verlauf; es muss zusätzlich aus der Verwaltung
+      genommen werden (`git rm --cached`), und ein Geheimnis gilt ab dann
+      als kompromittiert (Regel 19).
+    - **Vor jedem Commit wird die Liste der Dateien angesehen**, nicht nur
+      die Nachricht geschrieben. `git add -A` ohne diesen Blick ist der
+      Weg, auf dem Erzeugnisse hineinkommen.
+    - **`git add -f` nur mit Grund und Vermerk.**
+22. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
     Erweiterungen bleiben unangetastet. Bildkompression und Imagesets nur
     über Contao, Styles ausnahmslos in SCSS und im Layout gewählt, jede
     Seite liefert nur, was sie braucht. Eigene Erweiterung erst, wenn es
     keine marktreife gibt.
-22. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
+23. **Qualität vor Geschwindigkeit.** Kein Quick-and-Dirty, keine
     Provisorien, keine TODOs im committeten Code, kein Copy-Paste ohne
     vollständiges Verstehen. Saubere Codestruktur nach den **offiziellen
     Vorgaben des jeweiligen Stacks**: klare Schichtgrenzen mit
@@ -215,7 +261,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Formatierung, Lint und Analyse laufen maschinell als Blocker. Bei
     Konflikt zwischen Geschwindigkeit und Korrektheit oder Sicherheit
     gewinnt immer Letzteres.
-23. **Sauber heißt nicht abstrakt.** Der Code muss von jemandem lesbar
+24. **Sauber heißt nicht abstrakt.** Der Code muss von jemandem lesbar
     sein, der programmieren kann und von objektorientierter Programmierung
     nur die Grundlagen hat: von der Fehlermeldung zur Datei zur Ursache,
     **in höchstens drei Sprüngen**. Eine eigene Funktion entsteht ab der
@@ -226,13 +272,13 @@ bei passender Aufgabe den jeweiligen Skill laden.
     werden in einer gemeinsamen Schicht zusammengelegt, nachdem geklärt
     ist, warum sie sich unterschieden. Was sich aus **verschiedenen
     Gründen** ändert, bleibt getrennt.
-24. **Schnittstellen.** Wird an einer API entwickelt, ist ein
+25. **Schnittstellen.** Wird an einer API entwickelt, ist ein
     OpenAPI-Dokument Pflicht, erzeugt aus dem Code und je Fachbereich
     geschnitten. Stabile Fassungen brechen nie; Brechendes bekommt eine
     neue Version oder die Vorschaufläche. Jede Fehlerantwort hat dieselbe
     Hülle, auch 401, 403 und 404. Autorisierung ist deny-by-default,
     Mandantenkontext kommt nur aus authentifizierten Ansprüchen.
-25. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
+26. **Daten und KI.** Eine Sicherung gilt erst als Sicherung, wenn eine
     Wiederherstellung nachweislich gelungen und protokolliert ist. Jede
     Datenart hat eine Aufbewahrungsfrist mit Auslöser und wird danach
     automatisch gelöscht oder anonymisiert — was von Hand gelöscht
@@ -240,7 +286,7 @@ bei passender Aufgabe den jeweiligen Skill laden.
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell.
-26. **Nur harte Sicherheitslücken sofort beheben** — jede andere
+27. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte Änderung braucht vorher eine Rückfrage. Das gilt
     ausdrücklich für **Umbenennen** von Dateien, Symbolen, Schaltern oder
     Feldern, den **Wechsel eines Daten- oder Dateiformats**, das

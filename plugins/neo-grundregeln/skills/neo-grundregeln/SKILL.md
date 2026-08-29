@@ -121,7 +121,8 @@ Umsetzungsplan enthält: `references/prozess.md`.
 | Belegpflicht, Quellen, fremde APIs, MCP-Rollen, verteilte Systeme | `references/belegpflicht.md` |
 | Selbstkontrolle, Auswirkungsanalyse, Debugging, Laufzeitverifikation | `references/selbstkontrolle.md` |
 | Tests: Arten, Oberflächen-Funktionstests, fake-grüne Tests, Mocks | `references/tests.md` |
-| Git, Commits, Commit-Nachrichten, Zweige, Hygiene | `references/git.md` |
+| Git, Commits, Zweigmodelle, `.gitignore`, Hygiene | `references/git.md` |
+| Zielgruppe je Bereich, die drei Sprachstufen, die Wortliste | `references/zielgruppe.md` |
 | Was ein neues Repository am ersten Tag mitbringt | `references/projektstart.md` |
 | Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 

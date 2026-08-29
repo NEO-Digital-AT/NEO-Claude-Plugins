@@ -3,6 +3,19 @@
 Betriebsart: Regelwerk (Claude-Code-Marktplatz), kein ausgeliefertes Produkt
 Stack: Markdown, Python 3 (Standardbibliothek), reines Browser-JavaScript
 Sprachen: Regeln deutsch, Werkzeuge englisch — siehe unten
+Zweigmodell: main mit Arbeitszweig (kein `dev`, siehe unten)
+
+## Zielgruppen und Sprachstufen
+
+| Bereich | Wer liest es | Stufe |
+| --- | --- | --- |
+| Regeltexte (`SKILL.md`, `references/`, `kernregeln.md`) | Projektinhaber und Agenten | 2 — kundig |
+| Werkzeuge und ihre Meldungen (`scripts/`) | wer sie in einer CI einsetzt | 3 — technisch |
+| README | wer das Regelwerk einbindet | 2 — kundig |
+
+Stufe 2 heißt hier: Fachbegriffe der Sache ja (Token, Merge, Pull
+Request), Werkzeugtechnik nur, wo sie gebraucht wird, und dort erklärt.
+Kein Absatz setzt voraus, dass jemand programmiert.
 
 ## Geltende Regeln
 
@@ -36,9 +49,13 @@ arbeitet, liest den betroffenen Skill trotzdem, bevor er dessen Regeln
 - **Ein Werkzeug gilt erst als fertig, wenn es gegen eine absichtlich
   kaputte und eine saubere Vorlage geprüft wurde** und beide das erwartete
   Ergebnis liefern. Behauptet, nicht gemessen, zählt nicht.
-- **Zweigmodell:** kein `dev`. Gearbeitet wird auf
-  `claude/neo-plugins-design-system-yjuojp`, von dort mit
-  Fast-Forward nach `main`.
+- **Zweigmodell: `main` mit Arbeitszweig** (Kernregel 20). Kein `dev` —
+  dieses Repository rollt nichts aus. Gearbeitet wird auf
+  `claude/neo-plugins-design-system-yjuojp`, von dort mit Fast-Forward
+  nach `main`. Kein direkter Push auf `main`.
+- **Die `.gitignore` deckt ab, was die Werkzeuge beim Prüfen erzeugen**
+  (Kernregel 21). Wer ein Werkzeug hinzufügt, das schreibt, trägt im
+  selben Schritt ein, was es schreibt.
 - **Versionen:** Wer eine Regel ändert, hebt die Fassung des betroffenen
   Plugins in dessen `.claude-plugin/plugin.json`. Umbenannte Dateien oder
   geänderte Schalter sind eine Nebenversion, keine Fehlerkorrektur.
