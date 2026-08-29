@@ -2,7 +2,7 @@
  * neoOverflow — measures what does not fit on the screen at a given width.
  *
  * Injected into the running page before the measurement and called once per
- * test width. Six things are checked:
+ * test width. Seven things are checked:
  *
  *   1. Page overflow   — the body scrolls horizontally
  *   2. Past the edge   — an element sticks out of the visible area
@@ -10,10 +10,16 @@
  *   4. Tables          — a table does not use the width of the content area
  *   5. Touch targets   — a button is too small for a finger
  *   6. Gaps            — a wrapped row leaves a hole
+ *   7. Overlays        — an opened layer leaves the visible area
  *
  * The sixth is the one no standard tool checks: three cards that wrap onto
  * two columns leave half of the second row empty. The rule against it:
  * either one column, or the last element fills the row.
+ *
+ * The seventh only shows with the overlay OPEN. A picker near the bottom
+ * edge that opens downwards covers its own options; it has to open upwards
+ * instead. So the test opens every overlay and measures it — a closed page
+ * proves nothing about them.
  *
  * Usage (Playwright):
  *   await page.addScriptTag({ path: 'tools/overflow.js' })
@@ -45,6 +51,11 @@
     '[role="link"],[role="checkbox"],[role="radio"],[role="switch"],[role="tab"],' +
     '[role="menuitem"],[tabindex]:not([tabindex="-1"])'
 
+  // Layers that open on top of the page: pickers, menus, dialogs, tooltips.
+  // Whatever a framework names differently a project marks with data-overlay.
+  var OVERLAY = '[role="listbox"],[role="menu"],[role="menubar"],[role="dialog"],' +
+    '[role="alertdialog"],[role="tooltip"],[popover],[data-overlay]'
+
   // --------------------------------------------------------------- Helpers
 
   function visible (el) {
@@ -72,7 +83,8 @@
   }
 
   function label (el) {
-    var t = (el.getAttribute('aria-label') || el.textContent || '').trim()
+    var t = (el.getAttribute('aria-label') || el.textContent || '')
+      .replace(/\s+/g, ' ').trim()
     return t.length > 40 ? t.slice(0, 40) + '…' : t
   }
 
@@ -86,6 +98,17 @@
       if (scrollable(n)) return true
     }
     return false
+  }
+
+  /** The nearest ancestor that cuts off whatever sticks out of it. */
+  function clippingParent (el, root) {
+    var cuts = /^(hidden|clip|auto|scroll)$/
+    for (var n = el.parentElement; n && n !== root.parentElement; n = n.parentElement) {
+      var s = getComputedStyle(n)
+      if (s.position === 'fixed') return null
+      if (cuts.test(s.overflowX) || cuts.test(s.overflowY)) return n
+    }
+    return null
   }
 
   function innerWidth (el) {
@@ -263,11 +286,75 @@
       }
     })
 
+    // 7. Overlays stay inside the visible area
+    //
+    // Only measurable with the overlay OPEN. A picker near the bottom edge
+    // that opens downwards covers its own options — it has to flip. The
+    // finding names the free space on the opposite side, because that is
+    // the space the flip would use.
+    var height = document.documentElement.clientHeight
+    Array.prototype.forEach.call(root.querySelectorAll(OVERLAY), function (el) {
+      if (!visible(el)) return
+      var r = el.getBoundingClientRect()
+
+      // The free space is only what is really on the screen, never the
+      // part of the page that lies outside it.
+      function free (space) { return Math.round(Math.max(0, Math.min(space, height))) }
+      var sides = [
+        ['bottom', r.bottom - height, 'upwards', free(r.top)],
+        ['top', -r.top, 'downwards', free(height - r.bottom)],
+        ['right', r.right - width, 'to the left', free(r.left)],
+        ['left', -r.left, 'to the right', free(width - r.right)]
+      ]
+      sides.forEach(function (side) {
+        var name = side[0], over = side[1], flip = side[2], free = side[3]
+        if (over <= o.tolerance) return
+        findings.push({
+          kind: 'overlay-outside',
+          what: 'reaches ' + Math.round(over) + 'px past the ' + name +
+                ' edge — ' + free + 'px free on the other side, so it has ' +
+                'to open ' + flip,
+          where: selector(el), text: label(el)
+        })
+      })
+
+      // Higher than the screen without a scroll area of its own: the lower
+      // part cannot be reached at all, and flipping does not help.
+      var s = getComputedStyle(el)
+      if (r.height > height + o.tolerance &&
+          !/^(auto|scroll)$/.test(s.overflowY)) {
+        findings.push({
+          kind: 'overlay-unreachable',
+          what: Math.round(r.height) + 'px high on a screen of ' + height +
+                'px, without overflow-y — the lower part cannot be reached',
+          where: selector(el), text: label(el)
+        })
+      }
+
+      // Cut off by an ancestor: the classic picker inside a card with
+      // overflow: hidden. Flipping does not help there either.
+      var parent = clippingParent(el, root)
+      if (parent) {
+        var p = parent.getBoundingClientRect()
+        var out = Math.max(r.bottom - p.bottom, p.top - r.top,
+                           r.right - p.right, p.left - r.left)
+        if (out > o.tolerance) {
+          findings.push({
+            kind: 'overlay-clipped',
+            what: 'is cut off ' + Math.round(out) + 'px by ' + selector(parent) +
+                  ' — that ancestor clips its overflow',
+            where: selector(el), text: label(el)
+          })
+        }
+      }
+    })
+
     return {
       width: width,
       target: target,
       findings: findings,
       interactive: root.querySelectorAll(INTERACTIVE).length,
+      overlays: root.querySelectorAll(OVERLAY).length,
       elements: all.length
     }
   }
@@ -282,10 +369,14 @@
     'table-too-narrow': 'Table does not use the width',
     'table-too-wide': 'Table wider than the content area',
     'target-too-small': 'Touch target too small',
-    'row-gap': 'Hole in the wrapped row'
+    'row-gap': 'Hole in the wrapped row',
+    'overlay-outside': 'Opened layer leaves the visible area',
+    'overlay-unreachable': 'Opened layer higher than the screen',
+    'overlay-clipped': 'Opened layer cut off by an ancestor'
   }
 
-  var ORDER = ['page-overflow', 'past-edge', 'overflow-hidden',
+  var ORDER = ['page-overflow', 'overlay-outside', 'overlay-clipped',
+    'overlay-unreachable', 'past-edge', 'overflow-hidden',
     'content-too-wide', 'table-too-wide', 'table-too-narrow',
     'row-gap', 'target-too-small']
 
@@ -294,9 +385,10 @@
     var limit = maxPerKind || DEFAULTS.maxPerKind
     var lines = ['Overflow check at ' + result.width + 'px, touch target ' +
       result.target + 'px — ' + result.elements + ' elements, ' +
-      result.interactive + ' interactive']
+      result.interactive + ' interactive, ' + result.overlays + ' open layers']
     if (!result.findings.length) {
-      lines.push('Passed. Nothing sticks out, no gap, no target too small.')
+      lines.push('Passed. Nothing sticks out, no gap, no target too small, ' +
+        'every open layer inside the visible area.')
       return lines.join('\n')
     }
     lines.push('')

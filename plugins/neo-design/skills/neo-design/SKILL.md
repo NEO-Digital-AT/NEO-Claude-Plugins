@@ -189,7 +189,7 @@ wird". Der Funktionsumfang darf auf schmalen Geräten kleiner sein — **das
 Aussehen nie**. Was weggelassen wird, entscheidet der Projektinhaber,
 nicht der Umbruchpunkt.
 
-Fünf harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
+Sechs harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
 `scripts/overflow.js`, erlaubt sind **null Befunde**:
 
 1. **Kein waagrechtes Scrollen des Seitenkörpers** — auf keiner Breite,
@@ -205,7 +205,12 @@ Fünf harte Regeln, alle **maschinell geprüft** auf acht Breiten mit
 5. **Bedienziele wachsen zum schmalen Gerät hin**: bis 768 px mindestens
    44 × 44 px, darüber 24 × 24 px. Symbolknöpfe in Tabellenzeilen sind
    der häufigste Verstoß.
-6. **Kein Text verschwindet** — und wo er nicht ganz passt, ist
+6. **Was aufklappt, klappt dorthin auf, wo Platz ist.** Eine Auswahl am
+   unteren Rand geht nach oben auf, nicht nach unten — sonst verdeckt sie
+   ihre eigenen Einträge. Entschieden wird beim Öffnen, nicht im
+   Template. Gemessen wird im **geöffneten** Zustand; eine geschlossene
+   Seite beweist darüber nichts.
+7. **Kein Text verschwindet** — und wo er nicht ganz passt, ist
    entschieden, wie. Nichts abgeschnitten, nichts überlappt, kein Bereich
    unter acht Zeichen je Zeile, kein Bruch mitten im Wort.
 

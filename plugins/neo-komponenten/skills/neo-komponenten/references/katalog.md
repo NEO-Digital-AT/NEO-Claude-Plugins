@@ -74,6 +74,13 @@ Frameworkwechsel später eine Woche oder ein Quartal kostet.
 - **Kein Durchreichen unbekannter Attribute.** Wer alle Attribute
   weiterleitet, hat die Kapselung aufgegeben: dann steht die Farbe eben
   doch in der View.
+- **Was aufklappt, klappt in der Komponente um.** Auswahl, Menü,
+  Datumswähler und Tooltip entscheiden **selbst** beim Öffnen, ob nach
+  oben oder unten, nach links oder rechts Platz ist, und sie tragen ihren
+  eigenen Scrollbereich, wenn keine Richtung reicht. Die View gibt nur
+  Inhalt und Ziel. Steht die Richtung in der View, gibt es sie so oft, wie
+  die Komponente benutzt wird — und falsch ist sie dann überall dort, wo
+  niemand hingesehen hat (Skill `neo-design`, `references/responsiv.md`).
 - **Kein Slot, der rohes Markup erwartet.** Slots nehmen Inhalt oder
   andere Komponenten der Familie.
 - **Ereignisse in der Sprache der Fachlichkeit**: `bestaetigt`,

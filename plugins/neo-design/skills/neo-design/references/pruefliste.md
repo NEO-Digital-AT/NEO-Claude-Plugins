@@ -162,6 +162,16 @@ und Dunkel.
 - [ ] **Nichts ragt über den sichtbaren Rand** — auch kein geöffnetes
       Menü, kein Dialog, kein klebender Kopf. Geöffnete Zustände wurden
       mitgemessen.
+- [ ] **Jede Überlagerung wurde geöffnet und gemessen** — Auswahl, Menü,
+      Datumswähler, Tooltip, Kontextmenü. Eine geschlossene Seite beweist
+      über sie nichts.
+- [ ] **Die Aufklapprichtung folgt dem Platz**: unten nach oben, oben
+      nach unten, rechts nach links, links nach rechts. Entschieden wird
+      beim Öffnen, nicht im Template.
+- [ ] **Kein Vorfahre schneidet eine Überlagerung ab** (`overflow: hidden`
+      an der Karte). Sonst gehört sie in eine eigene Ebene.
+- [ ] **Keine Überlagerung höher als der Bildschirm** ohne eigenen
+      Scrollbereich; auch bei **kleiner Höhe** geprüft (Telefon quer).
 - [ ] **Tabellen nutzen 100 % des Inhaltsbereichs**, nie schmaler;
       breiter nur in einem ausdrücklichen Scrollbereich.
 - [ ] **Keine Löcher in umgebrochenen Reihen** — entweder einspaltig oder

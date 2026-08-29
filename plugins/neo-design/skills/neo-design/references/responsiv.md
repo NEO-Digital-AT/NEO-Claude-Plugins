@@ -230,6 +230,71 @@ Bedienelemente größer als am Schreibtisch, nicht kleiner.**
 - Der **geschlossene** Zustand ist der Ausgangszustand. Ein Menü, das
   beim Laden offen steht und dann zuklappt, springt.
 
+## Aufklappen: die Richtung folgt dem Platz
+
+**Was aufklappt, klappt dorthin auf, wo Platz ist.** Ein Sprachwähler am
+unteren Seitenrand, der nach unten aufgeht, verdeckt seine eigene
+Auswahl — der Anwender sieht drei von zwölf Sprachen und hält das für
+alle.
+
+Die Regel ist mechanisch und gilt für **jede** Überlagerung: Auswahl,
+Menü, Datumswähler, Kontextmenü, Tooltip, Sprechblase.
+
+| Steht das Element … | klappt es auf … |
+| --- | --- |
+| unten, ohne Platz darunter | **nach oben** |
+| oben, ohne Platz darüber | **nach unten** |
+| rechts, ohne Platz daneben | **nach links** |
+| links, ohne Platz daneben | **nach rechts** |
+
+- **Entschieden wird beim Öffnen, nicht beim Bauen.** Die Richtung hängt
+  von der Bildlaufstellung ab, nicht von der Zeile im Template. Fest
+  verdrahtetes „geht nach unten auf" ist der Fehler selbst.
+- **Reicht keine Richtung, wird die Überlagerung kleiner** und scrollt in
+  sich (`max-height` plus `overflow-y: auto`). Eine Liste, die höher ist
+  als der Bildschirm, ist auch nach dem Umklappen unbrauchbar.
+- **Kein Vorfahre schneidet ab.** Eine Auswahl in einer Karte mit
+  `overflow: hidden` wird abgeschnitten, egal wohin sie aufklappt. Die
+  Überlagerung gehört dann in eine eigene Ebene — `teleport`, Portal,
+  `popover` oder das, was das Rahmenwerk dafür vorsieht.
+- **Nicht selbst rechnen.** Die Plattform kann das: die Popover-API mit
+  CSS-Anker-Positionierung, oder die Umklapp-Funktion der eingesetzten
+  Komponentenbibliothek. Eine handgeschriebene Positionsrechnung ist ein
+  Befund, kein Fleiß (Kernregel 6).
+- **Die Umklapplogik lebt in der Wrapper-Komponente**, einmal, nicht in
+  jeder View (Skill `neo-komponenten`).
+
+### Maschinell prüfen
+
+`overflow.js` misst das — aber **nur im geöffneten Zustand**. Eine
+geschlossene Seite beweist über eine Auswahl gar nichts:
+
+```js
+await page.getByRole('button', { name: 'Sprache' }).scrollIntoViewIfNeeded()
+await page.getByRole('button', { name: 'Sprache' }).click()
+const e = await page.evaluate(() => neoOverflow.check())
+expect(e.findings, await page.evaluate((x) => neoOverflow.report(x), e))
+  .toHaveLength(0)
+```
+
+Erkannt werden Überlagerungen an `role="listbox"`, `role="menu"`,
+`role="dialog"`, `role="tooltip"` und am `popover`-Attribut; was das
+Rahmenwerk anders benennt, bekommt `data-overlay`. Drei Befundarten:
+
+| Befund | Bedeutung |
+| --- | --- |
+| Überlagerung ragt hinaus | Sie hätte in die andere Richtung aufklappen müssen; der Befund nennt, wie viel Platz dort frei war |
+| Überlagerung abgeschnitten | Ein Vorfahre schneidet sie ab — Umklappen hilft nicht |
+| Überlagerung höher als der Bildschirm | Ohne eigenen Scrollbereich ist der untere Teil unerreichbar |
+
+**Das Bedienelement wird vorher in den sichtbaren Bereich gescrollt**
+(`scrollIntoViewIfNeeded`), sonst misst man die Bildlaufstellung statt
+der Aufklapprichtung.
+
+Geprüft wird auf **jeder** Prüfbreite und zusätzlich bei **kleiner Höhe**
+— ein Telefon quer hat rund 400 px, und dort klappt fast alles falsch
+auf, was am Schreibtisch passt.
+
 ## Höchstbreiten
 
 Auf großen Bildschirmen sind Höchstbreiten kein Feinschliff, sondern

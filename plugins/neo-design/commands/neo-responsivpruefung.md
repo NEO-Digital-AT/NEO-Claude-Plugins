@@ -44,7 +44,29 @@ andere, was innen nicht passt — und nur der erste erzeugt einen
 Scrollbalken. Ein Layout, das nur den ersten besteht, kann abgeschnittenen
 Text, zweizeichenbreite Spalten und Brüche mitten im Wort enthalten.
 
-Der Überlaufprüfer meldet sechs Arten:
+### Überlagerungen einzeln öffnen
+
+Der Durchlauf oben misst die Seite, wie sie daliegt. **Über eine Auswahl,
+ein Menü oder einen Datumswähler beweist er nichts** — die sind zu.
+Deshalb je Überlagerung ein eigener Durchgang:
+
+```js
+for (const ausloeser of await page.getByRole('button', { expanded: false }).all()) {
+  await ausloeser.scrollIntoViewIfNeeded()
+  await ausloeser.click()
+  const e = await page.evaluate(() => neoOverflow.check())
+  expect(e.findings, await page.evaluate((x) => neoOverflow.report(x), e))
+    .toHaveLength(0)
+  await page.keyboard.press('Escape')
+}
+```
+
+**Vorher in den sichtbaren Bereich scrollen**, sonst misst man die
+Bildlaufstellung statt der Aufklapprichtung. Zusätzlich bei **kleiner
+Höhe** (400 px, Telefon quer) — dort klappt fast alles falsch auf, was am
+Schreibtisch passt.
+
+Der Überlaufprüfer meldet neun Arten:
 
 | Art | Bedeutung |
 | --- | --- |
@@ -55,6 +77,9 @@ Der Überlaufprüfer meldet sechs Arten:
 | Tabelle nutzt die Breite nicht / zu breit | Tabellen füllen den Inhaltsbereich |
 | Loch in der umgebrochenen Reihe | Eine halbe Reihe steht leer |
 | Bedienziel zu klein | Unter 44 px auf schmal, unter 24 px darüber |
+| Überlagerung ragt hinaus | Hätte in die andere Richtung aufklappen müssen; der Befund nennt den freien Platz dort |
+| Überlagerung abgeschnitten | Ein Vorfahre schneidet sie ab — Umklappen hilft nicht, sie gehört in eine eigene Ebene |
+| Überlagerung höher als der Bildschirm | Ohne eigenen Scrollbereich ist der untere Teil unerreichbar |
 
 Der Textpassungsprüfer meldet neun Arten:
 
