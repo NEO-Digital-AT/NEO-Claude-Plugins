@@ -31,12 +31,42 @@ nebeneinander gibt es nicht.
 ## Skalen sind geschlossen
 
 - **Symbolgrößen** nur 20 / 24 / 32 / 40.
-- **Eckenradien** nur 4 / 8 / 12 / 16 / 28 / voll.
+- **Eckenradien** nur 0 / 4 / 8 / 12 / 16 / 28 / voll — die Baseline.
+  Die erhöhten Stufen 20, 32 und 48 gehören zur Expressive-Ausbaustufe
+  und gelten nur, wenn das Projekt sie ausdrücklich führt.
+- **Höhenstufen** nur 0 / 1 / 3 / 6 / 8 / 12 dp. Die Stufe ist der
+  Schatten: „sieht anders aus" ist fast immer die falsche Stufe, nicht
+  die falsche Weichzeichnung.
+- **Zustandsdeckschichten** nur 8 % (Überfahren), 10 % (Fokus), 10 %
+  (Gedrückt), 16 % (Gezogen).
 - **Textrollen** nur aus der Typoskala; eine eigene Größe gibt es nicht.
 - **Karten, Textfelder, Dialoge**: die Flutter-Vorgaben SIND das
   Original — nicht überschreiben.
 
 Eine Zahl außerhalb dieser Skalen ist ein Fehler, kein Feinschliff.
+
+Die Zahlen stammen aus `androidx.compose.material3.tokens`
+(`ShapeTokens.kt`, `ElevationTokens.kt`, `StateTokens.kt`,
+<https://android.googlesource.com/platform/frameworks/support/>, geprüft
+2026-08-29) — der von Google aus dem Tokensatz erzeugten
+Referenzumsetzung. Ein Beispiel aus einer Anleitung ist keine Skala:
+Googles eigene Compose-Anleitung zeigt ein Beispielschema mit 24 dp für
+`extraLarge`, der Token ist 28 dp.
+
+**Flutter führt diese Skalen nicht als Schnittstelle.** In der
+Material-Bibliothek gibt es `Durations` und `Easing`, aber keine Formen-
+und keine Höhenskala (api.flutter.dev, geprüft 2026-08-29); die Werte
+stecken in den Vorgaben der einzelnen Widgets. **Was das Ziel nicht
+führt, führt das Projekt** — als Tokendatei aus dem Erzeugungsschritt,
+nie als Zahl im Widget. Geprüft wird sie maschinell:
+
+```
+python3 plugins/neo-design/scripts/md3-token-check.py lib/theme/ \
+        --scale baseline
+```
+
+Null Befunde, sonst ist der Bau rot (Skill `neo-design`,
+`references/entwurfsbruecke.md`, Abschnitt 2).
 
 ## Das Theme ist der einzige Ort
 

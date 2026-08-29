@@ -65,6 +65,16 @@ Klickprototyp vorliegt. Verfahren: `claude-design.md`.
 - [ ] Statische Oberflächentexte nur mitverglichen, wenn der
       Projektinhaber es verlangt hat.
 - [ ] Tokens wurden übernommen, nicht abgetippt.
+- [ ] **Radien, Höhenstufen und Zustandsdeckschichten stammen aus dem
+      Designsystem**, nicht aus dem Entwurf abgemessen —
+      `md3-token-check.py` meldet **null Befunde**, die geprüfte Fassung
+      des Systems ist benannt.
+- [ ] Wo Entwurf und System auseinandergehen, wurde die Abweichung mit
+      Zahlen **vorgelegt** und entschieden — nicht still übernommen und
+      nicht still berichtigt.
+- [ ] Bewusste Abweichungen stehen mit **Grund** in der Ausnahmedatei;
+      ein Eintrag ohne Grund gilt nicht.
+- [ ] Die goldene Aufnahme entstand **nach** dem Systemabgleich.
 - [ ] Kein Code aus dem Designsystem in ein anderes Framework kopiert.
 
 ## Komponenten
@@ -157,6 +167,8 @@ Gilt, sobald das Ziel kein Browser ist (`entwurfsbruecke.md`).
 
 - [ ] **Eine** Tokenquelle; die erzeugte Datei ist eingecheckt, der
       Erzeugungsschritt läuft in der CI und ist bei Abweichung rot.
+- [ ] Der Erzeugungsschritt hat **zwei Eingänge**: die Werte des
+      Entwurfs und die des Designsystems.
 - [ ] Kein Zahlenwert, keine Farbe in einer View. **Bedienhöhen sind
       Tokens.**
 - [ ] Je Bildschirm eine goldene Aufnahme, **aus dem Entwurf** gelegt —

@@ -74,6 +74,10 @@ stammt oft aus einer Fassung, die es im Projekt nicht gibt (Skill
   Projektinhabers** und gehört in die Entscheidungsakte.
 - **Das Theme kommt aus Tokens**, hell und dunkel, an einer Stelle. Keine
   Farbe, kein Maß und kein Radius im Widget-Code.
+- **Radien, Höhenstufen und Zustandsdeckschichten sind die des Systems**,
+  nicht die aus dem Entwurfswerkzeug abgemessenen. Flutter führt diese
+  Skalen nicht als Schnittstelle — das Projekt führt sie als Tokens und
+  prüft sie maschinell (`md3-token-check.py`, Skill `neo-design`).
 - **Wo das Designsystem von Material abweicht, gewinnt das
   Designsystem** — und die Abweichung ist eine **Rückfrage** (Skill
   `neo-design`, `references/claude-design.md`).

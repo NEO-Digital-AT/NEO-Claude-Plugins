@@ -292,21 +292,40 @@ Schluss der Durchgang über die ganze Seite, auch als Gesamteindruck.
 
 | Prüfung | Werkzeug | Antwort | Erlaubt |
 | --- | --- | --- | --- |
+| **1. Layout** | `scripts/layout-diff.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
+| **2. Stil** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
+| **3. Bild** | `scripts/image-diff.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
+
 **Das gilt für den Browser.** Ist das Ziel kein Browser — Flutter,
 Compose, SwiftUI —, misst dort die goldene Aufnahme, und sie wird **aus
 dem Entwurf** gelegt, nicht aus dem eigenen Bau. Warum eine Webseite nach
 dem Entwurf aussieht und eine Anwendung nicht, und was die Lücke schließt:
 `references/entwurfsbruecke.md`.
 
-| **1. Layout** | `scripts/layout-diff.js` | Sind Maße, Lage und Abstände gleich? | 0 Abweichungen bei 1 px |
-| **2. Stil** | `scripts/style-audit.js` | Stammt jeder Wert aus den Tokens? | 0 Funde |
-| **3. Bild** | `scripts/image-diff.py` | Sieht es gleich aus? | 0,5 % auf dem Bausteine-Artboard |
-
 Der Layoutabgleich ist der wichtigste: er misst das **Aussehen** und
 liest die Feldinhalte nicht. Der Bildabgleich ist der schwächste — er
 schlägt bei abweichenden Feldwerten an, und das ist kein Befund, sondern
 ein falsch angesetztes Werkzeug. Gemessen wird je Fassung und Zustand:
 hell, dunkel, mobil; Ruhe, Hover, Fokus, Deaktiviert, Fehler.
+
+**Das Entwurfswerkzeug zeichnet das Designsystem nach — es setzt es
+nicht um.** Was aus Claude Design kommt, sieht aus wie Material 3, ist
+aber nicht Material 3: Radien, Schatten und Deckschichten liegen nahe an
+der Vorlage und nicht auf ihr. Deshalb gilt eine Teilung: **Der Entwurf
+bestimmt, welche Komponente wo steht und welche Farbe sie trägt; das
+Designsystem bestimmt, wie sie aussieht** — Radien, Höhenstufen mit ihren
+Schatten, Zustandsdeckschichten, Größenklassen, Bewegung und Typoskala
+kommen aus dessen Quelle, nicht aus dem Export. Diese Werte werden
+gemessen, nicht eingehalten:
+
+```
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/md3-token-check.py tokens/
+```
+
+Geht der Entwurf vom System ab, ist das eine **Rückfrage** — und die
+goldene Aufnahme entsteht erst danach, sonst wird gegen ein falsches
+Lineal gemessen. Eigentümer je Wert, die geprüften Originalzahlen und
+das Verfahren: `references/entwurfsbruecke.md`, Abschnitt 2.
 
 **Das Designsystem ist Quelle für Aussehen und Werte, nicht für Code.**
 Claude Design liefert React-nahes HTML; dieser Code wird nie in ein Vue-,

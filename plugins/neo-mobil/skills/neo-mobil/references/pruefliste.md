@@ -104,3 +104,7 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
       (Skill `neo-design`, `references/entwurfsbruecke.md`).
 - [ ] Farbrollen **gesetzt statt gerechnet**, wo eine Markenfarbe exakt
       gelten muss; die Entscheidung steht in der Entscheidungsakte.
+- [ ] **Radien, Höhenstufen und Deckschichten sind die des Systems** —
+      `md3-token-check.py --scale baseline` meldet null Befunde. Flutter
+      führt diese Skalen nicht selbst; das Projekt führt sie
+      (`references/material3.md`).
