@@ -90,6 +90,11 @@ aktuellen Arbeitsstand durch.
       Commit-Nachricht**.
 - [ ] Keine Emojis in Doku, Commits und Oberflächen.
 - [ ] Keine leeren Ordner nach Refactorings.
+- [ ] **Was in dieser Sitzung zum Ausprobieren entstand, ist weg** —
+      Probeskripte, Zwischenstände, Aufnahmen, Protokolle
+      (`altlasten.md`).
+- [ ] Bei einer Durchsicht: `repo-hygiene.py` gelaufen, Geheimnisse und
+      Reste **null**, die Vorschläge beantwortet statt übergangen.
 
 ## Abschluss
 

@@ -229,11 +229,15 @@ bei passender Aufgabe den jeweiligen Skill laden.
       abschalten, um einen Merge oder ein Deployment durchzubekommen.
     - **Historie eines fremden Zweigs wird nie umgeschrieben** — kein
       Rebase, kein Amend, kein Force-Push.
-21. **Eine `.gitignore` gehört zum ersten Commit, nicht zum Aufräumen.**
-    Jedes Repository hat eine, **bevor** die erste Datei entsteht, die
-    nicht hineingehört: Abhängigkeiten, Bau-Ausgaben, Zwischenspeicher,
-    Aufnahmen und Berichte aus Werkzeugen, Editor- und
-    Betriebssystemreste, alles Lokale.
+21. **Das Repository bleibt sauber: die `.gitignore` davor, der Rückbau
+    danach.** Ein Repository ist ein Werkzeug, kein Archiv. Jede Datei
+    darin kostet Aufmerksamkeit — jemand liest sie, jemand hält sie für
+    aktuell, jemand pflegt sie mit.
+    - **Die `.gitignore` gehört zum ersten Commit**, nicht zum
+      Aufräumen: **bevor** die erste Datei entsteht, die nicht
+      hineingehört — Abhängigkeiten, Bau-Ausgaben, Zwischenspeicher,
+      Aufnahmen und Berichte aus Werkzeugen, Editor- und
+      Betriebssystemreste, alles Lokale.
     - **Das Muster wird eingetragen, bevor die Datei entsteht.** Wer ein
       Werkzeug einführt, das schreibt, trägt im selben Schritt ein, was
       es schreibt. Sonst liegen nach dem nächsten Lauf tausend Dateien im
@@ -246,6 +250,23 @@ bei passender Aufgabe den jeweiligen Skill laden.
       die Nachricht geschrieben. `git add -A` ohne diesen Blick ist der
       Weg, auf dem Erzeugnisse hineinkommen.
     - **`git add -f` nur mit Grund und Vermerk.**
+    - **Jede Änderung nimmt ihre Rückstände mit.** Was der Agent anlegt,
+      um etwas herauszufinden — Probeskript, Zwischenstand, Aufnahme,
+      Protokoll —, räumt er im selben Schritt weg; es taucht gar nicht
+      erst im Commit auf. Vorübergehendes entsteht **außerhalb** des
+      Repositories.
+    - **Von Zeit zu Zeit die Durchsicht**, Datei für Datei mit einer
+      Frage: Wird das noch gebraucht? Reste, Screenshots, einmal
+      benutzte Skripte und **abgeschlossene Planungen** gehen; was daran
+      wissenswert war, wird eine Entscheidungsakte. **Gelöscht wird nach
+      Freigabe** — der Agent legt die Liste vor, mit Grund je Datei
+      (Regel 1). Ausgenommen ist nur, was er selbst zum Ausprobieren
+      angelegt hat.
+    - **Was aussieht wie Müll und keiner ist:** Sperrdateien der
+      Abhängigkeiten (`package-lock.json`, `composer.lock`,
+      `packages.lock.json`) gehören eingecheckt, ebenso die
+      Dokumentation fremder Schnittstellen und Entscheidungsakten.
+    Ausführlich: Skill `neo-grundregeln`, `references/altlasten.md`.
 22. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde
