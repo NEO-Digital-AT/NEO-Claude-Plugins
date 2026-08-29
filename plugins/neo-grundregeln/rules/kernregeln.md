@@ -4,7 +4,8 @@ Die ausführlichen Fassungen liegen in den Skills
 `neo-grundregeln`, `neo-angular`, `neo-api`, `neo-assistent`,
 `neo-betrieb`, `neo-code`, `neo-contao`, `neo-deployment`,
 `neo-design`, `neo-doku`, `neo-dotnet`, `neo-ki`, `neo-komponenten`,
-`neo-mobil`, `neo-php`, `neo-recht`, `neo-sicherheit` und `neo-vue` —
+`neo-mobil`, `neo-php`, `neo-recht`, `neo-sicherheit`,
+`neo-technologiewahl` und `neo-vue` —
 bei passender Aufgabe den jeweiligen Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,

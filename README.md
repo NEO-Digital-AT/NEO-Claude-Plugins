@@ -19,6 +19,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
+| `neo-technologiewahl` | Systementscheidungen: erst die sechs Fragen stellen, deren Antworten nicht im Repository stehen (Zielplattformen in 24 Monaten, Verbindlichkeit des Designsystems, Hardware, Lebensdauer, wer wartet es, was ist entschieden), dann Kriterien in fester Reihenfolge, Belege mit Fundstelle und Datum, **gezählte** Wechselkosten, der günstigste Schnitt vor der teuersten Strecke, und ein **Nachbau statt einer Debatte** | Skill mit drei Referenzdateien, Befehl `/neo-technologiewahl:neo-technologiewahl`, lädt bei jeder Technologie- oder Rahmenwerksfrage |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit fünf Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
 | `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle und Härtefälle, Modellzugang über Requesty, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit zehn Referenzdateien, drei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung`, `/neo-assistent:neo-goldlauf` und `/neo-assistent:neo-haertefaelle` |
@@ -153,6 +154,7 @@ Schneller geht es, die Datei direkt zu schreiben —
   },
   "enabledPlugins": {
     "neo-grundregeln@neo-claude-plugins": true,
+    "neo-technologiewahl@neo-claude-plugins": true,
     "neo-code@neo-claude-plugins": true,
     "neo-dotnet@neo-claude-plugins": true,
     "neo-php@neo-claude-plugins": true,
@@ -226,7 +228,7 @@ Wer nur wissen will, ob etwas offen ist, ohne dass sich etwas ändert:
 python3 <plugin>/scripts/rules-update.py --check
 ```
 
-**Von Hand, Weg A** — kürzer als achtzehn Befehle:
+**Von Hand, Weg A** — kürzer als neunzehn Befehle:
 
 ```
 claude plugin marketplace update
@@ -241,7 +243,8 @@ angeheftet ist. Was installiert sein soll, steht in `settings.json`.
 kein `--all`, also eine Schleife (Git Bash):
 
 ```bash
-for p in neo-grundregeln neo-code neo-doku neo-design neo-komponenten \
+for p in neo-grundregeln neo-technologiewahl neo-code neo-doku neo-design \
+         neo-komponenten \
          neo-api neo-dotnet neo-php neo-vue neo-angular neo-mobil neo-contao \
          neo-assistent neo-ki neo-recht neo-sicherheit neo-deployment neo-betrieb; do
   claude plugin update $p@neo-claude-plugins -y
@@ -266,7 +269,7 @@ noch `claude plugin update`, dass etwas nachzuziehen ist.
 
 ### Global heißt verfügbar, nicht verbindlich
 
-Alle achtzehn global zu aktivieren heißt nur, dass sie **geladen werden
+Alle neunzehn global zu aktivieren heißt nur, dass sie **geladen werden
 können**. Welche in einem Projekt **gelten**, sagt dessen `CLAUDE.md`,
 namentlich und als Vorgabe (Kernregel 3). Ein Contao-Projekt schleppt so
 die Flutter-Regeln nicht mit, ohne dass jemand am globalen Schalter
@@ -341,7 +344,7 @@ festgehaltenen Ausnahme:
 
 ## Aufbau der Plugins
 
-Alle achtzehn folgen demselben Muster:
+Alle neunzehn folgen demselben Muster:
 
 - **`SKILL.md`** — Wegweiser: die Lesekonvention, die harten Regeln, eine
   Tabelle der Bereiche. 100 bis 180 Zeilen, damit sie ganz gelesen wird.

@@ -6,49 +6,9 @@
   "description": "Projektübergreifende Arbeitsregeln der NEO Digital für Claude Code: Grundregeln, Codeaufbau, Design und Barrierefreiheit, Komponenten-Grundsatz, API, Dokumentation, rechtliche Pflichten, KI im Produkt, Betrieb, Zweige und Auslieferung, Contao, Sicherheit (EU-CRA-orientiert)",
   "plugins": [
     {
-      "name": "neo-grundregeln",
-      "source": "./plugins/neo-grundregeln",
-      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, der Prozess in neun Schritten mit abgewarteter Freigabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, das Designsystem gibt vor und der Agent gestaltet nicht, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs vor Hypothese, Testpflichten einschließlich Oberflächendurchlauf über jedes Bedienelement an jeder Stelle und Rauchtest je Route, Git-Hygiene und Commit-Nachrichten, Projektstart-Gerüst, Abnahmeliste. Enthält Always-on-Kernregeln (SessionStart-Hook) und die Befehle /neo-grundregeln:neo-selbstkontrolle und /neo-grundregeln:neo-projektstart. Das System spricht englisch, der Mensch deutsch; mehrsprachig heißt vollständig."
-    },
-    {
-      "name": "neo-code",
-      "source": "./plugins/neo-code",
-      "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit. Das System spricht englisch: Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen, Tabellen und Aufzählungswerte ausnahmslos — deutsch bleibt, was ein deutschsprachiger Mensch liest. Sauber heißt nicht abstrakt: Überbau ist der häufigste Fehler in maschinell geschriebenem Code — eine Funktion ab der dritten Wiederholung, kein Muster ohne Anlass, und von der Fehlermeldung in drei Sprüngen zur Ursache."
-    },
-    {
-      "name": "neo-dotnet",
-      "source": "./plugins/neo-dotnet",
-      "description": "ASP.NET-Core-Regeln der NEO Digital für Serveranwendungen. Die API wird nachgeschlagen, nicht erinnert — über die offizielle Doku der eingesetzten Fassung, und die Fassung ist eine LTS-Entscheidung des Projektinhabers. Endpunkte bleiben dünn: annehmen, prüfen, an einen Dienst geben, antworten; Fachlogik liegt nie im Endpunkt. Konfiguration über das Options-Muster mit Prüfung beim Start, Geheimnisse niemals in appsettings. Datenzugriff mit EF Core ohne N+1, mit AsNoTracking für Lesepfade, Mandantentrennung im Datenzugriff statt in der Abfrage des Aufrufers, Migrationen vorwärtsgerichtet ohne Datenverlust und gegen eine Kopie eines echten Bestands geprüft. Asynchron durchgehend, CancellationToken durchgereicht, kein sync-over-async. Fehlerantworten als ProblemDetails nach der Fehlerhülle des API-Skills, Ausnahmen sind kein Steuerfluss. Strukturierte Protokolle ohne Geheimnisse, Health-Endpunkte abgesichert. Integrationstests gegen die echte Datenbank statt gegen eine Attrappe. Der Bau ist streng und zentral: Directory.Build.props mit Nullable, Warnungen als Fehler und hoher Analysestufe, zentrale Paketverwaltung mit eingecheckter Sperrdatei und locked-mode in der CI, Quellenzuordnung und NuGetAudit, dazu ein Architekturtest, der die Schichtgrenze misst statt sie zu behaupten. Leistung ohne Zahl ist eine Meinung: je Endpunkt ein Zeitbudget vor dem Bau, gemessene Abfragezahl, keine Abfrage ohne Obergrenze, ausgehende Aufrufe über IHttpClientFactory mit Zeitgrenze, Lasttest gegen einen realistischen Bestand. Härtung mit globaler Rückfallregel für deny-by-default, Ratenbegrenzung nach dem authentifizierten Aufrufer, Grenzen für Rumpf, Uploads und Deserialisierung, eigenen Ein- und Ausgabetypen je Endpunkt und Zeit über TimeProvider statt DateTime.Now."
-    },
-    {
-      "name": "neo-php",
-      "source": "./plugins/neo-php",
-      "description": "PHP und Laravel: die API wird nachgeschlagen statt erinnert — über Laravel Boost, wo verfügbar. strict_types in jeder Datei, alles typisiert, Enums statt Zeichenketten, readonly und DateTimeImmutable. Laravel wie gemeint verwendet: Validierung in Formularanfragen, Rechte in Policies, Ausgabe in Ressourcen, dünne Controller, keine Fassaden im Fachcode. Kein N+1, und die Abfragezahl wird gemessen. Migrationen vorwärtsgerichtet ohne Datenverlust, Jobs idempotent, statische Analyse auf hoher Stufe als Blocker."
-    },
-    {
-      "name": "neo-vue",
-      "source": "./plugins/neo-vue",
-      "description": "Vue 3, Nuxt, Nuxt UI, Vuetify und Pinia: jede Bibliothek liefert eine llms.txt, und sie wird vor dem Schreiben gelesen. script setup mit TypeScript, typisierte Props und Emits, ref als Standard, computed statt watch, jedes Aufräumen erledigt. Bei Nuxt die harte Grenze zwischen Server und Browser — was im geteilten Code steht, landet im Bündel. Genau eine UI-Bibliothek je Projekt, hinter den Neo-Wrappern, Theme aus Tokens statt überschriebenem CSS."
-    },
-    {
       "name": "neo-angular",
       "source": "./plugins/neo-angular",
       "description": "Angular, Angular Material und Material Design 3: standalone, inject(), Signals für Zustand und RxJS für Ströme, OnPush überall, jedes Abonnement beendet, reaktive typisierte Formulare. Material-Komponenten hinter den Neo-Wrappern, Theme aus Tokens, kein ::ng-deep und kein !important. Material Design 3 wird als System übernommen, nicht als Sammlung einzelner Werte — und wo das Designsystem abweicht, gewinnt das Designsystem."
-    },
-    {
-      "name": "neo-mobil",
-      "source": "./plugins/neo-mobil",
-      "description": "Mobile Anwendungen mit Flutter und Material Design 3: kleine Widgets, const wo möglich, keine Fachlogik in build, jede Ressource freigegeben. Eine Zustandsverwaltung je Projekt. Größen auf Telefon und Tablet, hoch und quer, bei kleinster und größter Systemschrift — kein Überlauf, nichts ragt hinaus, kein abgeschnittener Text. Keine Geheimnisse im Paket, Berechtigungen sparsam und erklärt, Offline als Zustand statt als Fehler. Flutter oder nativ entscheidet der Projektinhaber."
-    },
-    {
-      "name": "neo-design",
-      "source": "./plugins/neo-design",
-      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K mit fünf maschinell geprüften Regeln (kein waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher beim Umbrechen, Bedienziele nach Gerät, kein Text abgeschnitten oder unleserlich schmal), Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Entwurf aus Claude Design vor, gibt er vor und der Agent setzt um: keine eigene Gestaltungsentscheidung, jede Abweichung ist eine Rückfrage mit Gegenüberstellungsbild, gebaut wird nach Inventar Element für Element und nach jedem Element gemessen — Layoutabgleich, Stilabgleich, Bildabgleich. Mit Kontrastrechner, Überlauf- und Textpassungsprüfer und den Befehlen /neo-design:neo-responsivpruefung, /neo-design:neo-designumsetzung, /neo-design:neo-designabgleich und /neo-design:neo-oberflaechenpruefung. Übersetzungen werden gemessen statt angenommen: null fehlende Schlüssel, null leere Werte, null abweichende Platzhalter, Rückfall auf Englisch statt auf einen Schlüssel."
-    },
-    {
-      "name": "neo-komponenten",
-      "source": "./plugins/neo-komponenten",
-      "description": "Komponenten-Grundsatz der NEO Digital für alle Oberflächen: Views rufen ausschließlich Wrapper-Komponenten der Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten wie NeoFormButtonDelete, der Vertrag einer Komponente, alle Zustände, Größen über eine benannte Skala, Farbe für Hell und Dunkel sowie Übersetzungen in der Komponente, Frameworktreue, Umgang mit bestehenden Bibliotheken und Frameworkwechsel, der Wächter-Test als maschinelle Durchsetzung, Abnahmeliste."
     },
     {
       "name": "neo-api",
@@ -56,29 +16,9 @@
       "description": "API-Regeln nach dem Muster von LeoFlex: Swagger und OpenAPI sind Pflicht, ein Dokument je Fachbereich mit stabiler und Vorschau-Fassung, Versionierung ohne Bruch, wiederverwendbare Verträge, eine einheitliche Fehlerhülle für alle Fehlerantworten, klare PUT- und PATCH-Semantik, Autorisierung deny-by-default, CORS und Cookies aus der Konfiguration, Webhooks nach dem Store-First-Modell, Rate Limiting nach authentifiziertem Aufrufer, Migrationen ohne Datenverlust, abgesicherter Statusendpunkt. Sechs Pflichttestfälle je Endpunkt, Antwort gegen den Vertrag geprüft, Abdeckung als Zahl."
     },
     {
-      "name": "neo-doku",
-      "source": "./plugins/neo-doku",
-      "description": "Dokumentationsregeln: verbindliche Struktur unter docs (frontend/backend, Sprachordner, README.md je Ordner), trockene Sprache mit Verbotslisten und Zahlen statt Adjektiven, immer IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots, Entscheidungsakten (ADR), Vorlagen für Bedienungsseite, Entwicklerseite, Änderungsprotokoll und Übergabe, Aufbau auch für generative Agenten, /plan für Geplantes, echte Umlaute, Abnahmeliste."
-    },
-    {
-      "name": "neo-recht",
-      "source": "./plugins/neo-recht",
-      "description": "Rechtliche Pflichtbausteine nach österreichischem Recht: Impressum (ECG, MedienG, UGB), Datenschutzerklärung mit Cookie-Auflistung und jederzeitigem Widerruf, Barrierefreiheitserklärung. Consent-first — vor der Einwilligung lädt nichts von Dritten, auch kein eingebettetes Video. Schriften immer selbst ausliefern. Für Anwendungen zusätzlich das CRA-Dokumentenpaket samt Meldeweg."
-    },
-    {
-      "name": "neo-ki",
-      "source": "./plugins/neo-ki",
-      "description": "KI im eigenen Produkt: Transparenzpflichten nach Artikel 50 der EU-KI-Verordnung (seit 02.08.2026), Offenlegung und Kennzeichnung, Einstufung und Rolle. Technisch: Anbieterzugriff serverseitig hinter einer gemeinsamen Abstraktion, Modell aus der Konfiguration, keine personenbezogenen Daten ohne Rechtsgrundlage an ein Modell, fremder Text ist Daten und nie Anweisung, Ausgaben werden geprüft statt geglaubt."
-    },
-    {
       "name": "neo-assistent",
       "source": "./plugins/neo-assistent",
       "description": "Bau von KI-Assistenten mit Werkzeugzugriff: fünf getrennte Schichten statt eines großen Prompts, Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeugbeschreibung als Routing und striktes Schema statt Prosa, Zustand und Vorbedingungen im Code. Eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen: Goldfälle und elf Pflichtklassen an Härtefällen — ungenaue Sprache, ganze Abläufe, Einmalgeheimnisse, Zahlung, Eskalation, Einschleusung — mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Modellzugang über Requesty und den EU-Router, Schlüssel nur aus der Umgebung. Mit Goldfall-Prüfer, Requesty-Adapter, Prompt-Inventar und den Befehlen /neo-assistent:neo-assistentpruefung, /neo-assistent:neo-goldlauf und /neo-assistent:neo-haertefaelle."
-    },
-    {
-      "name": "neo-deployment",
-      "source": "./plugins/neo-deployment",
-      "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."
     },
     {
       "name": "neo-betrieb",
@@ -86,14 +26,79 @@
       "description": "Betrieb: Sicherung mit nachgewiesener Wiederherstellung, hinnehmbarer Datenverlust und Wiederanlaufzeit je Projekt, Notfall und Bereitschaft mit Eskalationsstufen und Nachbereitung, E-Mail-Zustellbarkeit über SPF, DKIM und DMARC, Umzug und Neuauflage einer Website mit vollständigem Weiterleitungskonzept."
     },
     {
+      "name": "neo-code",
+      "source": "./plugins/neo-code",
+      "description": "Codeaufbau und Codestruktur: die offiziellen Vorgaben des jeweiligen Stacks gelten (C#/.NET-Konventionen, offizieller Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints), dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit. Das System spricht englisch: Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen, Tabellen und Aufzählungswerte ausnahmslos — deutsch bleibt, was ein deutschsprachiger Mensch liest. Sauber heißt nicht abstrakt: Überbau ist der häufigste Fehler in maschinell geschriebenem Code — eine Funktion ab der dritten Wiederholung, kein Muster ohne Anlass, und von der Fehlermeldung in drei Sprüngen zur Ursache."
+    },
+    {
       "name": "neo-contao",
       "source": "./plugins/neo-contao",
       "description": "Contao-Websites: alles in Contao verwaltbar, kein fester Text im Template, Bordmittel vor Eigenbau. Erweiterungsbau mit belegter Rangfolge — eine bestehende wird ergänzt statt eine zweite gebaut, und zwar so, dass jede Installation ohne Schaden aktualisieren kann; Migrationen defensiv, wiederholbar, ohne Datenverlust. Jedes Webdesign ist ein .cto-exportierbares Theme, anderswo ohne KI installierbar. Gestaltung aus Claude Design, Barrierefreiheit und PageSpeed ohne Abzug. Doku im Paket, englisch Pflicht."
     },
     {
+      "name": "neo-deployment",
+      "source": "./plugins/neo-deployment",
+      "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."
+    },
+    {
+      "name": "neo-design",
+      "source": "./plugins/neo-design",
+      "description": "Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal und Webseite): kein Bau ohne freigegebenen Entwurf, Eingaben führen statt abfragen, ein Farb- und Layoutsystem, geprüfte Zustände einschließlich Hover, Barrierefreiheit nach BaFG/WZG über EN 301 549 (WCAG 2.2 AA hart), 320 px bis 4K mit fünf maschinell geprüften Regeln (kein waagrechtes Scrollen, nichts ragt hinaus, Tabellen füllen, keine Löcher beim Umbrechen, Bedienziele nach Gerät, kein Text abgeschnitten oder unleserlich schmal), Webseiten dynamisch und ohne KI-Einheitslook, PageSpeed-Zielwerte mobil. Liegt ein Entwurf aus Claude Design vor, gibt er vor und der Agent setzt um: keine eigene Gestaltungsentscheidung, jede Abweichung ist eine Rückfrage mit Gegenüberstellungsbild, gebaut wird nach Inventar Element für Element und nach jedem Element gemessen — Layoutabgleich, Stilabgleich, Bildabgleich. Mit Kontrastrechner, Überlauf- und Textpassungsprüfer und den Befehlen /neo-design:neo-responsivpruefung, /neo-design:neo-designumsetzung, /neo-design:neo-designabgleich und /neo-design:neo-oberflaechenpruefung. Übersetzungen werden gemessen statt angenommen: null fehlende Schlüssel, null leere Werte, null abweichende Platzhalter, Rückfall auf Englisch statt auf einen Schlüssel."
+    },
+    {
+      "name": "neo-doku",
+      "source": "./plugins/neo-doku",
+      "description": "Dokumentationsregeln: verbindliche Struktur unter docs (frontend/backend, Sprachordner, README.md je Ordner), trockene Sprache mit Verbotslisten und Zahlen statt Adjektiven, immer IST-Zustand, Entwickler- und Anwenderdoku getrennt, dokumentierte Bedienung mit markierten Screenshots, Entscheidungsakten (ADR), Vorlagen für Bedienungsseite, Entwicklerseite, Änderungsprotokoll und Übergabe, Aufbau auch für generative Agenten, /plan für Geplantes, echte Umlaute, Abnahmeliste."
+    },
+    {
+      "name": "neo-dotnet",
+      "source": "./plugins/neo-dotnet",
+      "description": "ASP.NET-Core-Regeln der NEO Digital für Serveranwendungen. Die API wird nachgeschlagen, nicht erinnert — über die offizielle Doku der eingesetzten Fassung, und die Fassung ist eine LTS-Entscheidung des Projektinhabers. Endpunkte bleiben dünn: annehmen, prüfen, an einen Dienst geben, antworten; Fachlogik liegt nie im Endpunkt. Konfiguration über das Options-Muster mit Prüfung beim Start, Geheimnisse niemals in appsettings. Datenzugriff mit EF Core ohne N+1, mit AsNoTracking für Lesepfade, Mandantentrennung im Datenzugriff statt in der Abfrage des Aufrufers, Migrationen vorwärtsgerichtet ohne Datenverlust und gegen eine Kopie eines echten Bestands geprüft. Asynchron durchgehend, CancellationToken durchgereicht, kein sync-over-async. Fehlerantworten als ProblemDetails nach der Fehlerhülle des API-Skills, Ausnahmen sind kein Steuerfluss. Strukturierte Protokolle ohne Geheimnisse, Health-Endpunkte abgesichert. Integrationstests gegen die echte Datenbank statt gegen eine Attrappe. Der Bau ist streng und zentral: Directory.Build.props mit Nullable, Warnungen als Fehler und hoher Analysestufe, zentrale Paketverwaltung mit eingecheckter Sperrdatei und locked-mode in der CI, Quellenzuordnung und NuGetAudit, dazu ein Architekturtest, der die Schichtgrenze misst statt sie zu behaupten. Leistung ohne Zahl ist eine Meinung: je Endpunkt ein Zeitbudget vor dem Bau, gemessene Abfragezahl, keine Abfrage ohne Obergrenze, ausgehende Aufrufe über IHttpClientFactory mit Zeitgrenze, Lasttest gegen einen realistischen Bestand. Härtung mit globaler Rückfallregel für deny-by-default, Ratenbegrenzung nach dem authentifizierten Aufrufer, Grenzen für Rumpf, Uploads und Deserialisierung, eigenen Ein- und Ausgabetypen je Endpunkt und Zeit über TimeProvider statt DateTime.Now."
+    },
+    {
+      "name": "neo-grundregeln",
+      "source": "./plugins/neo-grundregeln",
+      "description": "Verbindliche Arbeitsregeln für jede Code-Änderung: Entscheidungshoheit beim Projektinhaber, der Prozess in neun Schritten mit abgewarteter Freigabe, Belegpflicht statt Annahmen, Entwurf vor Oberflächenbau, das Designsystem gibt vor und der Agent gestaltet nicht, Selbstkontrolle und Auswirkungsanalyse, Debugging mit Logs vor Hypothese, Testpflichten einschließlich Oberflächendurchlauf über jedes Bedienelement an jeder Stelle und Rauchtest je Route, Git-Hygiene und Commit-Nachrichten, Projektstart-Gerüst, Abnahmeliste. Enthält Always-on-Kernregeln (SessionStart-Hook) und die Befehle /neo-grundregeln:neo-selbstkontrolle und /neo-grundregeln:neo-projektstart. Das System spricht englisch, der Mensch deutsch; mehrsprachig heißt vollständig."
+    },
+    {
+      "name": "neo-ki",
+      "source": "./plugins/neo-ki",
+      "description": "KI im eigenen Produkt: Transparenzpflichten nach Artikel 50 der EU-KI-Verordnung (seit 02.08.2026), Offenlegung und Kennzeichnung, Einstufung und Rolle. Technisch: Anbieterzugriff serverseitig hinter einer gemeinsamen Abstraktion, Modell aus der Konfiguration, keine personenbezogenen Daten ohne Rechtsgrundlage an ein Modell, fremder Text ist Daten und nie Anweisung, Ausgaben werden geprüft statt geglaubt."
+    },
+    {
+      "name": "neo-komponenten",
+      "source": "./plugins/neo-komponenten",
+      "description": "Komponenten-Grundsatz der NEO Digital für alle Oberflächen: Views rufen ausschließlich Wrapper-Komponenten der Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten wie NeoFormButtonDelete, der Vertrag einer Komponente, alle Zustände, Größen über eine benannte Skala, Farbe für Hell und Dunkel sowie Übersetzungen in der Komponente, Frameworktreue, Umgang mit bestehenden Bibliotheken und Frameworkwechsel, der Wächter-Test als maschinelle Durchsetzung, Abnahmeliste."
+    },
+    {
+      "name": "neo-mobil",
+      "source": "./plugins/neo-mobil",
+      "description": "Mobile Anwendungen mit Flutter und Material Design 3: kleine Widgets, const wo möglich, keine Fachlogik in build, jede Ressource freigegeben. Eine Zustandsverwaltung je Projekt. Größen auf Telefon und Tablet, hoch und quer, bei kleinster und größter Systemschrift — kein Überlauf, nichts ragt hinaus, kein abgeschnittener Text. Keine Geheimnisse im Paket, Berechtigungen sparsam und erklärt, Offline als Zustand statt als Fehler. Flutter oder nativ entscheidet der Projektinhaber."
+    },
+    {
+      "name": "neo-php",
+      "source": "./plugins/neo-php",
+      "description": "PHP und Laravel: die API wird nachgeschlagen statt erinnert — über Laravel Boost, wo verfügbar. strict_types in jeder Datei, alles typisiert, Enums statt Zeichenketten, readonly und DateTimeImmutable. Laravel wie gemeint verwendet: Validierung in Formularanfragen, Rechte in Policies, Ausgabe in Ressourcen, dünne Controller, keine Fassaden im Fachcode. Kein N+1, und die Abfragezahl wird gemessen. Migrationen vorwärtsgerichtet ohne Datenverlust, Jobs idempotent, statische Analyse auf hoher Stufe als Blocker."
+    },
+    {
+      "name": "neo-recht",
+      "source": "./plugins/neo-recht",
+      "description": "Rechtliche Pflichtbausteine nach österreichischem Recht: Impressum (ECG, MedienG, UGB), Datenschutzerklärung mit Cookie-Auflistung und jederzeitigem Widerruf, Barrierefreiheitserklärung. Consent-first — vor der Einwilligung lädt nichts von Dritten, auch kein eingebettetes Video. Schriften immer selbst ausliefern. Für Anwendungen zusätzlich das CRA-Dokumentenpaket samt Meldeweg."
+    },
+    {
       "name": "neo-sicherheit",
       "source": "./plugins/neo-sicherheit",
       "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: zehn harte Verbote ohne Freigabeweg, Security by Design, Identität und Autorisierung mit objektbezogener Prüfung, Mandantentrennung mit Nachweistest, Sessions und Tokens, Secrets und Rotation, Protokollierung ohne personenbezogene Daten, Audit, hochsensible Daten mit Redaktionstests über alle Ausgabekanäle, Frontend-, Kopfzeilen-, Container- und Netzhärtung, Lieferkette und CI-Tore, Release-Evidenz, Schwachstellenmeldungen, Schatten- und Paritätsbetrieb bei riskanten Umbauten, Abnahmeliste. Meldeweg und CRA-Dokumente im Skill neo-recht."
+    },
+    {
+      "name": "neo-technologiewahl",
+      "source": "./plugins/neo-technologiewahl",
+      "description": "Regeln der NEO Digital für Systementscheidungen: welche Sprache, welches Rahmenwerk, welches Designsystem, welche Datenbank, welcher Anbieter. Eine Systementscheidung wird einmal getroffen und jahrelang bezahlt, deshalb ist sie ein Verfahren mit Belegen und keine Geschmacksfrage — und sie trifft ausnahmslos der Projektinhaber. Erst fragen, dann messen: Zielplattformen heute und in 24 Monaten, Verbindlichkeit des Designsystems, Hardware und Peripherie, Lebensdauer, wer es in zwei Jahren wartet, was bereits entschieden ist — diese Antworten stehen nicht im Repository und drehen jede Empfehlung. Kriterien in fester Reihenfolge, vom Ausschluss über die Zielplattformen und die Frage, ob das Rahmenwerk das Designsystem trägt, bis zu Lizenz und Ausstiegskosten. Belege mit Fundstelle und Datum statt Vergleichsartikeln; Aussagen über die Zukunft nur als Zitat des Anbieters. Wechselkosten gezählt statt geschätzt, getrennt nach portiert, neu, bleibt und wandert mit, mit der Regel, dass der günstigste Schnitt vor der teuersten Strecke liegt. Der Nachweis schlägt die Debatte: ein kleiner echter Nachbau des schwierigsten Bildschirms auf dem Zielgerät, mit Frist und vorher festgelegtem Maßstab. Entscheidungsakte mit verworfenen Alternativen, dem Abschnitt „Was dabei schiefging\" und der Bedingung für eine Neuprüfung. Mit Abnahmeliste und dem Befehl /neo-technologiewahl:neo-technologiewahl."
+    },
+    {
+      "name": "neo-vue",
+      "source": "./plugins/neo-vue",
+      "description": "Vue 3, Nuxt, Nuxt UI, Vuetify und Pinia: jede Bibliothek liefert eine llms.txt, und sie wird vor dem Schreiben gelesen. script setup mit TypeScript, typisierte Props und Emits, ref als Standard, computed statt watch, jedes Aufräumen erledigt. Bei Nuxt die harte Grenze zwischen Server und Browser — was im geteilten Code steht, landet im Bündel. Genau eine UI-Bibliothek je Projekt, hinter den Neo-Wrappern, Theme aus Tokens statt überschriebenem CSS."
     }
   ]
 }
