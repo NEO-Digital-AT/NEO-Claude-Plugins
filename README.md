@@ -226,7 +226,7 @@ Wer nur wissen will, ob etwas offen ist, ohne dass sich etwas ändert:
 python3 <plugin>/scripts/rules-update.py --check
 ```
 
-**Von Hand, Weg A** — kürzer als siebzehn Befehle:
+**Von Hand, Weg A** — kürzer als achtzehn Befehle:
 
 ```
 claude plugin marketplace update
@@ -266,7 +266,7 @@ noch `claude plugin update`, dass etwas nachzuziehen ist.
 
 ### Global heißt verfügbar, nicht verbindlich
 
-Alle siebzehn global zu aktivieren heißt nur, dass sie **geladen werden
+Alle achtzehn global zu aktivieren heißt nur, dass sie **geladen werden
 können**. Welche in einem Projekt **gelten**, sagt dessen `CLAUDE.md`,
 namentlich und als Vorgabe (Kernregel 3). Ein Contao-Projekt schleppt so
 die Flutter-Regeln nicht mit, ohne dass jemand am globalen Schalter
@@ -341,7 +341,7 @@ festgehaltenen Ausnahme:
 
 ## Aufbau der Plugins
 
-Alle siebzehn folgen demselben Muster:
+Alle achtzehn folgen demselben Muster:
 
 - **`SKILL.md`** — Wegweiser: die Lesekonvention, die harten Regeln, eine
   Tabelle der Bereiche. 100 bis 180 Zeilen, damit sie ganz gelesen wird.

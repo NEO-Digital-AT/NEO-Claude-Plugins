@@ -1,10 +1,11 @@
 # NEO-Kernregeln (gelten immer, in jedem Projekt)
 
-Die ausführlichen Fassungen liegen in den Skills `neo-grundregeln`,
-`neo-design`, `neo-komponenten`, `neo-doku`, `neo-deployment`,
-`neo-contao`, `neo-recht`, `neo-api`, `neo-code`, `neo-betrieb`,
-`neo-ki`, `neo-assistent` und `neo-sicherheit` — bei passender Aufgabe
-den jeweiligen Skill laden.
+Die ausführlichen Fassungen liegen in den Skills
+`neo-grundregeln`, `neo-angular`, `neo-api`, `neo-assistent`,
+`neo-betrieb`, `neo-code`, `neo-contao`, `neo-deployment`,
+`neo-design`, `neo-doku`, `neo-dotnet`, `neo-ki`, `neo-komponenten`,
+`neo-mobil`, `neo-php`, `neo-recht`, `neo-sicherheit` und `neo-vue` —
+bei passender Aufgabe den jeweiligen Skill laden.
 
 1. **Entscheidungshoheit.** Keine freie Entscheidung über Technologie,
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und
