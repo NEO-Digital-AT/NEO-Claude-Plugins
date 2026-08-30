@@ -1,7 +1,7 @@
 {
   "name": "neo-recht",
   "displayName": "NEO Rechtliche Pflichten",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Rechtliche Pflichtbausteine jeder NEO-Seite und -Anwendung nach österreichischem Recht: Impressum (ECG, MedienG, UGB), Datenschutzerklärung mit Cookie-Auflistung und jederzeitigem Widerruf, Barrierefreiheitserklärung. Consent-first — vor der Einwilligung lädt nichts von Dritten, auch kein eingebettetes Video. Schriften immer selbst ausliefern. Barrierefreiheits-Werkzeug als Bonus, nie als Ersatz für eine barrierefreie Seite. Löschkonzept mit Aufbewahrungsfristen je Datenart und technisch bedienbaren Betroffenenrechten. Für Anwendungen und Portale zusätzlich das CRA-Dokumentenpaket samt Meldeweg; bei KI-Funktionen die Transparenzpflichten der EU-KI-Verordnung.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

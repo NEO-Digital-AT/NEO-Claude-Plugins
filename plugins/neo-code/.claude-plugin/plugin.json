@@ -1,7 +1,7 @@
 {
   "name": "neo-code",
   "displayName": "NEO Codeaufbau",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Aufbau und Struktur des Codes bei der NEO Digital. Grundsatz: die offiziellen Vorgaben des jeweiligen Stacks gelten, damit sich ein fremder Entwickler sofort zurechtfindet — C#- und .NET-Konventionen, der offizielle Vue-Stilleitfaden mit Composition API, Effective Dart und flutter_lints. Dazu Schichtgrenzen mit festgelegter Importrichtung, eine Verantwortung je Einheit, englische Bezeichner bei deutschen Oberflächentexten, maschinell erzwungene Formatierung und Analyse als CI-Blocker ein Datenmodell mit Mandantentrennung und bewusster Löschart sowie Querschnittsregeln für Zeit, Geld, Kennungen, Fehler, Protokollierung und Nebenläufigkeit. Das System spricht englisch: Bezeichner, Kommentare, Protokolle, technische Fehlermeldungen, Fehlercodes, Tabellen, Spalten und Aufzählungswerte ausnahmslos, auch im rein deutschsprachigen Team — eine englische Fehlermeldung ist besser als eine deutsche, die es nur auf Deutsch gibt. Deutsch bleibt, was ein deutschsprachiger Mensch liest. Sauber heißt nicht abstrakt: der häufigste Fehler in maschinell geschriebenem Code ist Überbau, nicht Schlamperei. Maßstab ist ein Entwickler mit Grundlagenwissen, der von der Fehlermeldung in höchstens drei Sprüngen zur Ursache kommt. Eine eigene Funktion ab der dritten Wiederholung, nicht für jedes if; kein Interface für eine Umsetzung, keine Fabrik für einen Typ. Zwei Funktionen, die dasselbe tun, sind eine zu viel und werden zusammengelegt — was sich aus verschiedenen Gründen ändert, bleibt getrennt.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

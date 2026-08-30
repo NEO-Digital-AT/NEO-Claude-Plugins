@@ -30,6 +30,13 @@ aktuellen Arbeitsstand durch.
 - [ ] Die Regelwerke des Projekts wurden gelesen, nicht nur die README.
 - [ ] Umfang und Nicht-Umfang wurden benannt.
 - [ ] Die Abhängigkeiten wurden **vor** der Umsetzung erhoben.
+- [ ] **Jede Fachaufgabe lief über ihren Fachagenten**, nicht nebenbei in
+      der Weiche (`orchestrierung.md`).
+- [ ] **Die Konfiguration wurde gelesen**, nicht angenommen — `.env`,
+      Konfigurationsdateien, `CLAUDE.md`. Keine Aussage über einen
+      Schlüssel ohne die vier Schritte davor (`belegpflicht.md`).
+- [ ] **Offene Zweige berichtet**, Zahl und Namen; gemergte gelöscht
+      (`branch-check.py`, `git.md`).
 - [ ] Zusammengefasst und die Freigabe **abgewartet**.
 - [ ] Bei Oberflächen: Entwurf vorgelegt und freigegeben
       (Skill `neo-design`).

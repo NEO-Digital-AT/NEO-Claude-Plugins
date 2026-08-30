@@ -1,7 +1,7 @@
 {
   "name": "neo-mobil",
   "displayName": "NEO Mobile Anwendungen",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Regeln der NEO Digital für mobile Anwendungen mit Flutter und Material Design 3. Die API wird nachgeschlagen, nicht erinnert — über die llms.txt von Flutter und die Doku der eingesetzten Paketfassungen. Widgets bleiben klein, const wo möglich, keine Fachlogik in build, und jede Ressource wird freigegeben: Controller, Zuhörer, Ströme, Zeitgeber sind die häufigste Ursache für Speicherlecks. Eine Zustandsverwaltung je Projekt, als Entscheidungsakte festgehalten. Material 3 als System statt als Farbtopf, Theme aus Tokens, und wo das Designsystem abweicht, gewinnt das Designsystem. Größen werden auf Telefon und Tablet, hoch und quer, bei kleinster und größter Systemschrift geprüft: kein Überlauf, nichts ragt hinaus, kein abgeschnittener Text. Keine Geheimnisse im Paket, Berechtigungen sparsam und erklärt, Offline als Zustand statt als Fehler. Ob Flutter oder nativ gebaut wird, entscheidet der Projektinhaber, nicht der Agent. Dazu lokale Datenhaltung mit Schemaversionen, Migrationstests und unveränderlichen Aufzeichnungen sowie Betriebsgeräte und Peripherie: Vollbild und Kiosk, Scanner und Kartenleser als Tastatur, Drucker und Lade hinter einer Schnittstelle, Kamera und Biometrie, Offline als Normalfall.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

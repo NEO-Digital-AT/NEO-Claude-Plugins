@@ -1,7 +1,7 @@
 {
   "name": "neo-komponenten",
   "displayName": "NEO Komponenten-Grundsatz",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Komponenten-Grundsatz der NEO Digital für alle Oberflächen: Views rufen ausschließlich Wrapper-Komponenten der Produktfamilie auf (Neo* bei NEO Digital, LeoFlex* bei LeoFlex) und kennen das Designframework nicht. Benennung, Pflichtkatalog, handlungsspezifische Komponenten wie NeoFormButtonDelete, der Vertrag einer Komponente, alle Zustände, Größen über eine benannte Skala, Farbe für Hell und Dunkel sowie Übersetzungen in der Komponente, Frameworktreue, Umgang mit bestehenden Bibliotheken und Frameworkwechsel, der Wächter-Test als maschinelle Durchsetzung, Abnahmeliste.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

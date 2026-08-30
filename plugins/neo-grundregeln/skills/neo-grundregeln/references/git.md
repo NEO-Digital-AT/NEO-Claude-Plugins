@@ -78,6 +78,37 @@ Regelverstoß, auch wenn die Arbeit fertig ist.
 > der `CLAUDE.md`; fehlt der Eintrag, gilt das strengste Modell und es
 > wird nachgefragt.
 
+### Ein Auftrag, ein Zweig — und erst mergen, dann der nächste
+
+> **Kein zweiter Zweig, solange der erste offen ist.**
+
+```
+öffnen  →  fertigstellen  →  mergen  →  Zweig weg  →  nächster Zweig
+```
+
+- **Ein Zweig ohne Merge ist eine unfertige Aufgabe**, kein Zwischenstand
+  zum Liegenlassen. Er gehört auf die Auftragsliste (Kernregel 3), bis er
+  durch ist.
+- **Neue Arbeit zweigt nie von einem offenen Zweig ab.** Wer das tut,
+  hängt zwei unfertige Dinge aneinander; geht das erste nicht durch, ist
+  das zweite mit blockiert.
+- **Ein gemergter Zweig wird gelöscht.** Fehlt das Recht dazu, wird er
+  trotzdem nicht weiterverwendet und in der Fertigmeldung als erledigt
+  genannt.
+- **Vor jeder Fertigmeldung werden die offenen Zweige berichtet** — Zahl
+  und Namen:
+
+```
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/branch-check.py --into dev
+```
+
+**Warum das so hart ist:** Fünfzehn offene Zweige, auf denen teilweise
+schon dieselben Dateien geändert wurden, lassen sich nicht mehr
+zusammenführen — sie lassen sich nur noch einzeln herauspicken
+(`cherry-pick`). Danach weiß niemand mehr sicher, was im Baum steht, und
+jede Prüfung fängt von vorne an. Der Aufwand dafür ist ein Vielfaches
+dessen, was das rechtzeitige Mergen gekostet hätte.
+
 ### Modell `dev` — der Regelfall bei NEO und LeoFlex
 
 ```

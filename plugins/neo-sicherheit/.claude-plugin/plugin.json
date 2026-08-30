@@ -1,7 +1,7 @@
 {
   "name": "neo-sicherheit",
   "displayName": "NEO Sicherheit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: zehn harte Verbote ohne Freigabeweg, Security by Design, Identität und Autorisierung mit objektbezogener Prüfung, Mandantentrennung mit Nachweistest, Sessions und Tokens, Secrets und Rotation, Protokollierung ohne personenbezogene Daten, Audit, hochsensible Daten mit Redaktionstests über alle Ausgabekanäle, Frontend-, Kopfzeilen-, Container- und Netzhärtung, Lieferkette und CI-Tore, Release-Evidenz, Schwachstellenmeldungen, Schatten- und Paritätsbetrieb bei riskanten Umbauten, Abnahmeliste. Meldeweg und CRA-Dokumente im Skill neo-recht.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

@@ -1,7 +1,7 @@
 {
   "name": "neo-api",
   "displayName": "NEO API",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "API-Regeln der NEO Digital nach dem Muster von LeoFlex: Swagger und OpenAPI sind Pflicht, ein eigenes Dokument je Fachbereich und Modul mit stabiler und Vorschau-Fassung, Versionierung ohne Bruch, wiederverwendbare Verträge, eine einheitliche Fehlerhülle für alle Fehlerantworten, klare PUT- und PATCH-Semantik, Autorisierung deny-by-default mit getrennten Sitzungs- und Token-Wegen, CORS und Cookies ausschließlich aus der Konfiguration, Webhooks nach dem Store-First-Modell, Rate Limiting nach authentifiziertem Aufrufer, Migrationen ohne Datenverlust, ein abgesicherter Statusendpunkt für externe Überwachung. Jeder Endpunkt wird getestet, und zwar auf das, was er liefert: sechs Pflichtfälle je Endpunkt — Gutfall mit Gestalt und Bedeutung jedes Feldes, ungültige Eingabe, nicht angemeldet, fremdes Objekt, nicht vorhanden, gelesene Wirkung nach dem Schreiben —, die Antwort gegen das OpenAPI-Schema geprüft und die Abdeckung als Zahl berichtet.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

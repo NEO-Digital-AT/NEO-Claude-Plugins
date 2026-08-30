@@ -53,6 +53,53 @@ offizielle Dokumentation gelesen.
 antwortet, kann morgen weg sein; eine, die es nicht gibt, kann dazukommen.
 Wer eine neue findet, trägt sie mit Prüfdatum ein.
 
+## Konfiguration wird gelesen, nicht geraten
+
+> **Der Wert steht in der Datei. Es gibt keinen Grund, ihn zu erfinden.**
+
+Vor **jeder** Aussage über eine Einstellung wird die Einstellung gelesen:
+
+```
+.env  und  .env.example        Endpunkte, Schlüssel, Regionen, Modelle
+config/, appsettings*.json     Fassungen, Grenzwerte, Zeitzonen
+CLAUDE.md                      was das Projekt festgelegt hat
+```
+
+- **Was dort steht, gilt.** Endpunkt, Router, Modellname, Region,
+  Zeitzone, Grenzwert. Ein aus dem Gedächtnis ergänzter Wert ist ein
+  erfundener Wert (Kernregel 2) — und er sieht richtig aus, das ist das
+  Gefährliche daran.
+- **Ein Standardwert des Anbieters ist nicht der Wert des Projekts.**
+  Wer einen Endpunkt aus der Anbieterdokumentation nimmt, obwohl in der
+  `.env` ein anderer steht, hat die Konfiguration übergangen.
+- **Der Modellname ist Konfiguration**, keine Erinnerung. Modelle werden
+  umbenannt, abgekündigt und regional getrennt.
+
+### „Funktioniert nicht" ist erst eine Aussage, wenn geprüft wurde
+
+Die Reihenfolge ist bindend, und sie endet **nicht** beim Schlüssel:
+
+```
+1  Steht der Wert in der Konfiguration?        lesen, nicht annehmen
+2  Wird er vom Code gelesen?                   die Stelle zeigen
+3  Kommt er beim Aufruf an?                    ausgeben, maskiert
+4  Stimmt das Ziel?                            Endpunkt, Region, Modell
+5  Erst dann: liegt es an den Zugangsdaten?
+```
+
+**Nie zum Wechseln eines Schlüssels raten, bevor Schritt 4 erledigt
+ist.** Ein Schlüssel wird gesperrt, neu erzeugt, überall nachgetragen —
+das kostet den Projektinhaber eine halbe Stunde für einen Fehler, der
+woanders liegt.
+
+**Der Fall, aus dem diese Regel entstanden ist:** Ein Aufruf schlug fehl.
+Gemeldet wurde „der API-Schlüssel funktioniert nicht". Tatsächlich waren
+zwei andere Dinge falsch — ein Modellname, den es unter diesem Anbieter
+nicht gab, und ein Endpunkt, der **erraten** statt aus der `.env` gelesen
+wurde; dort stand der regionale Router, den das Projekt bewusst benutzt.
+Der Schlüssel war die ganze Zeit gültig. Er wurde trotzdem gewechselt,
+und danach ging es immer noch nicht — weil der Fehler nie dort lag.
+
 ## Wenn eine Information fehlt
 
 1. **Dokumentieren, dass sie fehlt** — an der Stelle, an der sie

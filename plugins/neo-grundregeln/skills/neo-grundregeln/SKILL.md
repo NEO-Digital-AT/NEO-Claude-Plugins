@@ -123,7 +123,9 @@ Umsetzungsplan enthält: `references/prozess.md`.
 | Tests: Arten, Oberflächen-Funktionstests, fake-grüne Tests, Mocks | `references/tests.md` |
 | Git, Commits, Zweigmodelle, `.gitignore`, Hygiene | `references/git.md` |
 | Zielgruppe je Bereich, die drei Sprachstufen, die Wortliste | `references/zielgruppe.md` |
+| Die Weiche und die Fachagenten: wer was trägt, welche Aufgabe an wen | `references/orchestrierung.md` |
 | Altlasten: was liegen bleibt, was geht, was bleiben muss | `references/altlasten.md` |
+| Werkzeug `scripts/branch-check.py`: offene und liegen gebliebene Zweige | — |
 | Werkzeug `scripts/repo-hygiene.py`: findet Geheimnisse, Reste, nirgends Erwähntes und liegen gebliebene Planungen | — |
 | Was ein neues Repository am ersten Tag mitbringt | `references/projektstart.md` |
 | Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |

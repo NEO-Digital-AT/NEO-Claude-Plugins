@@ -8,7 +8,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit elf Referenzdateien, zwei Werkzeugen; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit zwölf Referenzdateien, drei Werkzeugen; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sieben Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-dotnet` | ASP.NET Core: **strenger, zentraler Bau** (Warnungen als Fehler, zentrale Paketverwaltung, Sperrdatei, **Architekturtest** für die Schichtgrenze), dünne Endpunkte, Options-Muster mit Startprüfung, EF Core ohne N+1, Mandantentrennung im Datenzugriff, Migrationen gegen eine Bestandskopie, async durchgehend, **Zeitbudget je Endpunkt und Lasttest**, **deny-by-default über die Rückfallregel**, Ratenbegrenzung, Grenzen für Rumpf und Uploads, Zeit über `TimeProvider` | Skill mit fünf Referenzdateien (Bau, Leistung, Härtung, EF Core, Abnahmeliste), lädt bei Backend-Arbeit |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
@@ -288,6 +288,7 @@ Tor in der CI.
 
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
+| `branch-check.py` | `plugins/neo-grundregeln/scripts/` | Nennt die Zweige, die geöffnet und nie gemergt wurden, ihr Alter und die, die schon gemergt sind und nur noch gelöscht gehören. Ein Auftrag, ein Zweig: Wer neue Zweige auf halbfertigen stapelt, endet bei Cherry-Picks. Ohne Abhängigkeiten außer git. |
 | `repo-hygiene.py` | `plugins/neo-grundregeln/scripts/` | Sieht die verfolgten Dateien eines Repositories durch und meldet vier Gruppen: Geheimnisse, Reste (Protokolle, Bau-Ausgaben, Zwischenspeicher, Screenshots aus einer Sitzung), nirgends Erwähntes und liegen gebliebene Planungen. **Löscht nichts** — die letzten beiden Gruppen sind Vorschläge, keine Urteile. Kennt die Ausnahmen: Sperrdateien der Abhängigkeiten, Dokumentation fremder Schnittstellen und Entscheidungsakten bleiben. Ohne Abhängigkeiten außer git. |
 | `contrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |
 | `layout-diff.js` | `plugins/neo-design/scripts/` | Misst Geometrie und Aussehen jedes markierten Elements — Breite, Höhe, Position, Polster, Randstärken, Lücken, Radien, Schriftmaße — und vergleicht Entwurf gegen gebaute Ansicht. **Liest den Inhalt der Felder nicht**, ist also blind für dynamische Werte. Statische Texte auf Ansage zuschaltbar. |
@@ -346,6 +347,38 @@ festgehaltenen Ausnahme:
   weiterhin über Zweige gegen `main`, nicht direkt auf `main`. Das ist
   keine Ausnahme mehr, sondern eines der drei Modelle — welches gilt,
   legt jedes Projekt in seiner `CLAUDE.md` fest.
+
+## Die Weiche und die Fachagenten
+
+Ein Agent, der alle Regeln gleichzeitig tragen soll, trägt keine davon
+zuverlässig. Je mehr Regeln in einem Kontext liegen, desto weniger Gewicht
+hat jede einzelne — man merkt es daran, dass eine frisch geschärfte Regel
+greift und gleichzeitig eine alte durchrutscht. Nachschärfen macht das
+schlimmer.
+
+Deshalb liefert jedes Plugin neben seinem Skill einen **Fachagenten**
+unter `agents/`:
+
+- **Die Hauptsitzung ist die Weiche.** Sie trägt die Kernregeln, die
+  Auftragsliste, die Freigaben und Git — und leitet die fachliche Arbeit
+  weiter.
+- **Der Fachagent trägt genau einen Skill**, vollständig. Er läuft in
+  einem **eigenen Kontextfenster**; sein Skill wird über `skills:` beim
+  Start geladen. Damit sind seine Regeln nicht ein Zwanzigstel des
+  Kontexts, sondern der Kontext.
+
+| Aufgabe | Fachagent |
+| --- | --- |
+| Oberfläche, Zustände, Barrierefreiheit, Oberflächentexte | `neo-design:oberflaeche` |
+| Komponenten der Produktfamilie | `neo-komponenten:komponenten` |
+| Vue, Angular, PHP, .NET, Flutter | `neo-vue:vue`, `neo-angular:angular`, `neo-php:php`, `neo-dotnet:dotnet`, `neo-mobil:mobil` |
+| API, Contao, Sicherheit, Ausrollung, Betrieb | `neo-api:api`, `neo-contao:contao`, `neo-sicherheit:sicherheit`, `neo-deployment:deployment`, `neo-betrieb:betrieb` |
+| Doku, Recht, Daten und KI, Assistenten | `neo-doku:doku`, `neo-recht:recht`, `neo-ki:ki`, `neo-assistent:assistent` |
+| Systementscheidungen | `neo-technologiewahl:technologiewahl` |
+
+Die vollständige Weiche, was die Hauptsitzung **nicht** tut, und die
+Grenzen des Verfahrens: Skill `neo-grundregeln`,
+`references/orchestrierung.md`.
 
 ## Aufbau der Plugins
 

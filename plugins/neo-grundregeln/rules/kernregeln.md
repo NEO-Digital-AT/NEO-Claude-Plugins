@@ -1,5 +1,19 @@
 # NEO-Kernregeln (gelten immer, in jedem Projekt)
 
+> **Die erste Anweisung: Was in den geladenen Skills steht, ist Vorgabe.**
+> Nicht Empfehlung, nicht Anregung, nicht „im Sinne von". Ein Skill, der
+> für dieses Projekt gilt, wird **gelesen und eingehalten** — auch wenn
+> die Aufgabe klein wirkt, auch wenn eine andere Lösung schneller wäre.
+> Wer eine Regel nicht einhalten kann, sagt das, bevor er handelt.
+
+> **Die zweite Anweisung: Fachliches gehört an den Fachagenten.** Diese
+> Datei trägt, was immer gilt. Die Regeln eines Fachs stehen im Skill des
+> Fachs und werden dort vollständig gelesen — nicht aus dem Gedächtnis
+> zusammengesetzt. Wer eine Fachaufgabe selbst übernimmt, statt sie zu
+> übergeben, arbeitet mit einem Bruchteil der Regeln.
+> Weiche und Fachagenten: Skill `neo-grundregeln`,
+> `references/orchestrierung.md`.
+
 Die ausführlichen Fassungen liegen in den Skills
 `neo-grundregeln`, `neo-angular`, `neo-api`, `neo-assistent`,
 `neo-betrieb`, `neo-code`, `neo-contao`, `neo-deployment`,
@@ -15,66 +29,31 @@ bei passender Aufgabe den jeweiligen Skill laden.
    zusammenfassen und die Freigabe abwarten. **Freie Hand gibt es nicht** —
    auch nicht bei Kleinigkeiten, auch nicht, wenn die Antwort auf der Hand
    liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 27).
-2. **Nichts erfinden, was jemand für Wahrheit halten könnte.** Der Agent
-   schreibt keinen Inhalt, den niemand verlangt hat: keinen Satz in die
-   Oberfläche, keine Beschriftung, keinen Hilfetext, keinen Hinweis unter
-   einem Feld, keine Zusage, keine Zahl, keinen Beispielwert. **Fehlt an
-   einer Stelle ein Text, ist das eine Rückfrage — keine Lücke, die
-   gefüllt wird.**
-   - **Ein Satz in der Oberfläche ist eine Zusage.** Steht dort, wo etwas
-     erreichbar ist, wie lange etwas dauert, was automatisch geschieht
-     oder was der Anwender auswählen kann, dann sagt das Produkt sein
-     eigenes Verhalten zu. **Vor dem Schreiben wird am Code belegt, dass
-     es stimmt**, mit Fundstelle. Ohne Beleg ist es keine unglückliche
-     Formulierung, sondern eine Falschaussage gegenüber dem Kunden des
-     Kunden — und sie steht in der Oberfläche, nicht im Protokoll.
-   - **Kein Test zu einer selbst erfundenen Anforderung.** Ein Test hält
-     fest, was **verlangt** wurde, nie, was der Agent beschlossen hat.
-     Ein Test über Erfundenes ist schlimmer als die Erfindung: Er erklärt
-     sie zum Soll, macht sie grün und sorgt dafür, dass sie nie mehr
-     auffällt. Lässt sich zu einem Test die Anforderung nicht benennen —
-     Entwurf, Ticket, Satz des Projektinhabers —, wird er nicht
-     geschrieben, sondern gefragt.
-   - **Jeder sichtbare Text hat eine Herkunft**: der Entwurf, eine
-     freigegebene Textliste oder eine Anweisung des Projektinhabers. Was
-     die Oberfläche zusätzlich braucht — Fehlermeldung, Leerzustand,
-     Ladehinweis —, wird **vorgelegt und freigegeben**, bevor es in die
-     Sprachdatei kommt. Es entsteht nicht beim Bauen.
-   - **Im Zweifel weglassen.** Ein fehlender Hinweis ist eine Rückfrage.
-     Ein erfundener Hinweis ist ein Fehler im Produkt.
-   - **Eine Entschuldigung hinterher stellt nichts wieder her.** Der
-     Anwender hat den Satz gelesen, der Test hat ihn bestätigt, die
-     Dokumentation hat ihn übernommen. Deshalb gilt die Regel vorher.
-   Ausführlich: Skill `neo-grundregeln`, `references/tests.md`; Skill
-   `neo-design`, `references/oberflaechentexte.md`.
-3. **Die Auftragsliste.** Der Projektinhaber schreibt, sobald ihm etwas
-   auffällt — mitten in einer laufenden Aufgabe, mehrmals hintereinander,
-   mit Screenshots. **Nichts davon bricht die laufende Aufgabe ab.** Jede
-   Nachricht wird als nummerierter Punkt an eine Auftragsliste angehängt;
-   die laufende Aufgabe wird zuerst zu Ende gebracht, dann folgt der nächste
-   Punkt in der Reihenfolge des Eingangs, Punkt für Punkt, mit den
-   Rückfragen, die zu ihm gehören.
-   - **Erlaubt ist eine kurze Bestätigung** („aufgenommen als Punkt 4"),
-   sonst nichts. Keine Rückfrage, die den laufenden Punkt anhält, kein
-   Themenwechsel, kein Vorziehen ohne Ansage.
-   - **Die Liste wird sichtbar geführt** und am Ende jeder Antwort
-   mitgeschrieben: erledigt, in Arbeit, offen. Was nicht auf der Liste
-   steht, gilt als vergessen.
-   - **Kein Punkt verfällt** — nicht durch eine neue Nachricht, nicht
-   durch einen Kontextwechsel, nicht dadurch, dass ein anderer Punkt
-   freigegeben wird. Ein Punkt verschwindet nur, wenn er erledigt ist
-   oder der Projektinhaber ihn streicht.
-   - **Zwei Nachrichten hintereinander sind oft eine.** Gehören sie
-   erkennbar zusammen — Nachtrag, Screenshot zur vorigen Zeile,
-   Korrektur eines Tippfehlers —, werden sie ein Punkt, nicht zwei.
-   - **Eine Anweisung wird ausgeführt, nicht bestätigt.** „Auf `dev`
-   mergen", „auf `main` durchstellen", „committen", „pushen" sind
-   Punkte wie jeder andere. Sie gelten erst als erledigt, wenn der
-   Merge, der Commit, der Push tatsächlich stattgefunden hat und das
-   mit dem Ergebnis belegt ist.
-   - **Fertig ist die Arbeit erst, wenn die Liste leer ist**, nicht wenn der
-   zuletzt genannte Punkt erledigt ist.
-   Ausführlich: Skill `neo-grundregeln`, `references/auftragsliste.md`.
+2. **Nichts erfinden, was jemand für Wahrheit halten könnte.** Kein
+   Text, keine Beschriftung, kein Hinweis, keine Zusage, keine Zahl, die
+   niemand verlangt hat. **Fehlt etwas, ist das eine Rückfrage — keine
+   Lücke, die gefüllt wird.**
+   - **Ein Satz in der Oberfläche ist eine Zusage** und wird vor dem
+     Schreiben am Code belegt, mit Fundstelle.
+   - **Kein Test zu einer selbst erfundenen Anforderung.** Ein Test über
+     Erfundenes macht die Erfindung zum Soll und sorgt dafür, dass sie
+     nie mehr auffällt.
+   - **Jeder sichtbare Text hat eine Herkunft**: Entwurf, freigegebene
+     Textliste oder Anweisung. Im Zweifel weglassen.
+   Ausführlich: `neo-grundregeln`, `references/tests.md`; `neo-design`,
+   `references/oberflaechentexte.md`.
+3. **Die Auftragsliste.** Eine Nachricht mitten in einer laufenden
+   Aufgabe **bricht sie nicht ab**: Sie wird ein nummerierter Punkt, die
+   laufende Aufgabe wird fertig, dann folgt der nächste Punkt in der
+   Reihenfolge des Eingangs.
+   - **Kein Punkt verfällt.** Er verschwindet nur, wenn er erledigt ist
+     oder gestrichen wird.
+   - **Eine Anweisung wird ausgeführt, nicht bestätigt.** „Mergen",
+     „pushen", „committen" gelten erst als erledigt, wenn es geschehen
+     und belegt ist.
+   - **Die Liste steht sichtbar in jeder Antwort**: erledigt, in Arbeit,
+     offen. **Fertig ist die Arbeit, wenn die Liste leer ist.**
+   Ausführlich: `neo-grundregeln`, `references/auftragsliste.md`.
 4. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
    Jedes Projekt hat eine `CLAUDE.md` im Wurzelverzeichnis, die
    **namentlich** aufzählt, welche NEO-Skills für dieses Projekt gelten, und
@@ -107,12 +86,23 @@ bei passender Aufgabe den jeweiligen Skill laden.
      ausdrücklich anweist, zieht vorher den Stand nach und setzt darauf
      auf; überschrieben wird nie (Skill `neo-grundregeln`,
      `references/git.md`).
-6. **Keine Annahmen.** Jede Feststellung muss belegbar sein: offizieller
-   Quellcode, offizielle Dokumentation, offizielle APIs. Fehlt eine
-   Information: dokumentieren und nachfragen, nie raten. Bei fremden
-   Schnittstellen: prüfen, ob ein MCP-Server oder eine maschinenlesbare
-   Spezifikation (OpenAPI) verfügbar ist; ist die Dokumentation nicht
-   öffentlich, genaue Unterlagen anfordern.
+6. **Keine Annahmen — und Konfiguration wird gelesen, nicht geraten.**
+   Jede Feststellung ist belegbar: offizieller Quellcode, offizielle
+   Dokumentation, offizielle APIs. Fehlt etwas: nachfragen, nie raten.
+   - **Vor jeder Aussage über eine Einstellung wird die Einstellung
+     gelesen** — `.env`, `.env.example`, die Konfigurationsdateien, die
+     `CLAUDE.md`. Endpunkt, Modellname, Region, Router, Zeitzone,
+     Grenzwert: **Was dort steht, gilt.** Ein aus dem Gedächtnis
+     ergänzter Endpunkt ist ein erfundener Wert (Regel 2).
+   - **„Funktioniert nicht" ist erst eine Aussage, wenn die Konfiguration
+     geprüft wurde.** Zuerst: Steht der Wert in der Datei? Wird er
+     gelesen? Kommt er an? Erst danach der Verdacht auf Zugangsdaten.
+     **Nie zum Wechseln eines Schlüssels raten, bevor das feststeht** —
+     das kostet den Projektinhaber Zeit für einen Fehler, der woanders
+     liegt.
+   - Bei fremden Schnittstellen prüfen, ob ein MCP-Server oder eine
+     maschinenlesbare Spezifikation (OpenAPI) vorliegt; ist die
+     Dokumentation nicht öffentlich, Unterlagen anfordern.
 7. **Selbstkontrolle vor dem nächsten Schritt.** Nach jeder Änderung den
    eigenen Code kontrollieren und prüfen, welche anderen Programmteile,
    Verträge, Tests und Dokumente betroffen sind. Grüne Tests allein sind
@@ -131,23 +121,17 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Layoutumbau ohne freigegebenen Entwurf: mehrere Vorschläge, als Skizze
     oder Screenshot vorgelegt, Änderungsrunden, ausdrückliche Freigabe —
     erst dann bauen.
-11. **Das Designsystem gibt vor, der Agent setzt um — der Agent gestaltet
-    nicht.** Liegt ein Entwurf vor — Artboard aus Claude Design,
-    Design-Set, freigegebener Klickprototyp —, ist er **Bauvorgabe und
-    Abnahmegrundlage**. Der Agent trifft **keine** Gestaltungsentscheidung:
-    nicht über Layout, Abstand, Polster, Radius, Schriftmaß, Farbe,
-    Bauteilwahl, Lage der Aktionen oder Umbruchverhalten. **Jede
-    Abweichung ist eine Rückfrage** — auch eine bessere, auch eine winzige,
-    auch eine offensichtliche. **Eine Rückfrage zu etwas Sichtbarem ist ein
-    Bild, kein Absatz Text**: Vorgabe links, Vorschlag rechts, beschriftet,
-    mit einem Satz dazu, was sich unterscheidet (`comparison.js`).
-    Empfehlen ja, entscheiden nie. Welche Felder ein Formular hat und
-    welche Werte in einer Auswahl stehen, bestimmt dagegen die
-    Fachlichkeit; sie darf abweichen. Gebaut wird nach
-    Inventar, Element für Element, nach jedem Element gemessen
-    (Layout-, Stil-, Bildabgleich, je Fassung). **Fertig heißt gemessen**,
-    nicht behauptet — und die letzte Zeile jeder Fertigmeldung lautet
+11. **Das Designsystem gibt vor, der Agent setzt um — der Agent
+    gestaltet nicht.** Liegt ein Entwurf vor, ist er Bauvorgabe und
+    Abnahmegrundlage. **Keine** Gestaltungsentscheidung: nicht über
+    Layout, Abstand, Radius, Schriftmaß, Farbe, Bauteilwahl oder
+    Umbruch. **Jede Abweichung ist eine Rückfrage** — und eine Rückfrage
+    zu etwas Sichtbarem ist ein Bild, kein Absatz Text. Welche Felder ein
+    Formular hat, bestimmt dagegen die Fachlichkeit. Gebaut wird nach
+    Inventar, Element für Element, nach jedem Element gemessen. **Fertig
+    heißt gemessen**, und die letzte Zeile jeder Fertigmeldung lautet
     „Eigene Gestaltungsentscheidungen: 0".
+    Ausführlich: `neo-design`, `references/claude-design.md`.
 12. **Eingaben führen, nicht abfragen.** Der Maßstab ist „lässt sich kaum
     falsch bedienen". Ein Freitextfeld ist die letzte Wahl: ist die Menge
     der gültigen Werte bekannt oder abfragbar, wird ausgewählt, nicht
@@ -175,27 +159,18 @@ bei passender Aufgabe den jeweiligen Skill laden.
     `README.md` als Inhaltsverzeichnis. Bedienung wird dokumentiert, mit
     markierten Screenshots im Repository. Geplantes liegt unter /plan.
 16. **Das System spricht englisch, der Mensch deutsch.** Bezeichner,
-    Kommentare, Protokolle, technische Fehlermeldungen, Fehlercodes,
-    Konfigurationsschlüssel, Übersetzungsschlüssel, Tabellen, Spalten,
-    Aufzählungswerte, Schnittstellen und Backend-Oberflächen sind
-    **englisch** — ausnahmslos, auch in einem rein deutschsprachigen
-    Team. **Eine englische Fehlermeldung ist besser als eine deutsche,
-    die es nur auf Deutsch gibt**: Englisch ist die Rückfallsprache jedes
-    Produkts. Deutsch bleibt, was ein deutschsprachiger Mensch liest:
-    Oberflächentexte eines deutschen Produkts, Projektdokumentation,
-    Commit-Nachrichten. Deutsche Fachbegriffe ohne englische Entsprechung
-    bleiben deutsch und werden einmal erklärt.
-   - **Wie technisch der Mensch angesprochen wird, bestimmt das Projekt —
-     je Bereich, nicht je Projekt.** Ein Kassensystem spricht am Tresen
-     mit Kellnern und in den Einstellungen mit dem Betreiber, der eine
-     Registrierkasse hinterlegt. Drei Stufen: **1 ohne Vorkenntnisse**
-     (keine Technik, keine Abkürzungen, Sprache des Berufs), **2 kundig**
-     (Fachbegriffe der Sache ja, Technik nur wo unvermeidbar und dort
-     erklärt), **3 technisch** (Fachausdrücke ohne Erklärung). Welche
-     Stufe wo gilt, steht in der `CLAUDE.md`; **fehlt der Eintrag, wird
-     gefragt**. Im Zweifel die niedrigere. Ein technischer Satz in einem
-     Bereich der Stufe 1 ist ein Fehler, auch wenn er stimmt.
-     Ausführlich: Skill `neo-grundregeln`, `references/zielgruppe.md`.
+    Kommentare, Protokolle, Fehlercodes, Konfigurations- und
+    Übersetzungsschlüssel, Tabellen, Spalten, Schnittstellen und
+    Backend-Oberflächen sind **englisch** — ausnahmslos. Deutsch bleibt,
+    was ein deutschsprachiger Mensch liest: Oberflächentexte,
+    Projektdokumentation, Commit-Nachrichten.
+    - **Wie technisch, bestimmt das Projekt — je Bereich, nicht je
+      Projekt.** Drei Stufen: **1** ohne Vorkenntnisse (keine Technik,
+      Sprache des Berufs), **2** kundig (Fachbegriffe der Sache, Technik
+      nur erklärt), **3** technisch. Welche Stufe wo gilt, steht in der
+      `CLAUDE.md`; fehlt der Eintrag, wird gefragt. Im Zweifel die
+      niedrigere.
+    Ausführlich: `neo-grundregeln`, `references/zielgruppe.md`.
 17. **Mehrsprachig heißt vollständig.** Jeder sichtbare Text hat in jeder
     ausgelieferten Sprache eine Übersetzung — **gemessen, nicht
     angenommen** (`translations.py`). Null fehlende Schlüssel, null
@@ -211,62 +186,41 @@ bei passender Aufgabe den jeweiligen Skill laden.
 19. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
     benennt. Verstecken ist kein Schutz.
-20. **Zweige und Auslieferung — welches Modell gilt, sagt das Projekt.**
-    Es steht in der `CLAUDE.md` (Regel 4). **Fehlt der Eintrag, gilt das
-    strengste Modell**, und es wird nachgefragt — nicht angenommen, dass
-    das Modell des letzten Projekts auch hier gilt.
-    - **Modell `dev`** — der Regelfall bei NEO und LeoFlex: Ein
-      Arbeitszweig geht von `dev` aus und wird **nach `dev` gemerged**;
-      `main` nimmt **ausschließlich** `dev`. Kein direkter Push auf
-      `dev`, kein Merge nach `main` aus irgendetwas anderem als `dev`,
-      kein Arbeitszweig direkt nach `main`.
-    - **Modell `main` mit Arbeitszweig** — Projekte ohne `dev`: Der
-      Arbeitszweig geht von `main` aus und wird nach `main` gemerged.
-      Kein direkter Push auf `main`.
-    - **Modell `main` direkt** — nur, wo der Projektinhaber es
-      ausdrücklich festgelegt hat, und nur für dieses Projekt.
-    - **Ausgerollt wird nur, was grüne Tests hat.** Keine Prüfung
-      abschalten, um einen Merge oder ein Deployment durchzubekommen.
-    - **Historie eines fremden Zweigs wird nie umgeschrieben** — kein
-      Rebase, kein Amend, kein Force-Push.
+20. **Zweige: ein Auftrag, ein Zweig — und erst mergen, dann den
+    nächsten.** Welches Modell gilt, steht in der `CLAUDE.md`; fehlt der
+    Eintrag, gilt das strengste und es wird gefragt. **Modell `dev`**
+    (Regelfall): Arbeitszweig → `dev` → `main`; `main` nimmt
+    ausschließlich `dev`. **Modell `main` mit Arbeitszweig**: kein `dev`,
+    aber auch kein direkter Push. **Modell `main` direkt**: nur mit
+    ausdrücklicher Festlegung.
+    - **Kein zweiter Zweig, solange der erste offen ist.** Ein Auftrag,
+      ein Zweig: öffnen, fertigstellen, mergen, Zweig weg. Erst dann der
+      nächste. Wer neue Zweige auf halbfertigen stapelt, endet bei
+      Cherry-Picks und weiß am Ende nicht, was drin ist.
+    - **Ein gemergter Zweig wird gelöscht.** Geht das nicht, wird er
+      trotzdem nicht weiterverwendet und in der Fertigmeldung als
+      erledigt genannt.
+    - **Offene Zweige werden vor der Fertigmeldung berichtet** — Zahl und
+      Namen. Keiner bleibt unbemerkt liegen.
+    - **Ausgerollt wird nur, was grüne Tests hat.** Historie fremder
+      Zweige wird nie umgeschrieben.
+    Ausführlich: `neo-grundregeln`, `references/git.md`.
 21. **Das Repository bleibt sauber: die `.gitignore` davor, der Rückbau
-    danach.** Ein Repository ist ein Werkzeug, kein Archiv. Jede Datei
-    darin kostet Aufmerksamkeit — jemand liest sie, jemand hält sie für
-    aktuell, jemand pflegt sie mit.
-    - **Die `.gitignore` gehört zum ersten Commit**, nicht zum
-      Aufräumen: **bevor** die erste Datei entsteht, die nicht
-      hineingehört — Abhängigkeiten, Bau-Ausgaben, Zwischenspeicher,
-      Aufnahmen und Berichte aus Werkzeugen, Editor- und
-      Betriebssystemreste, alles Lokale.
-    - **Das Muster wird eingetragen, bevor die Datei entsteht.** Wer ein
-      Werkzeug einführt, das schreibt, trägt im selben Schritt ein, was
-      es schreibt. Sonst liegen nach dem nächsten Lauf tausend Dateien im
-      Verlauf, und niemand sieht mehr, was die Änderung war.
-    - **Nachträglich eintragen entfernt nichts.** Was einmal eingecheckt
-      ist, steht im Verlauf; es muss zusätzlich aus der Verwaltung
-      genommen werden (`git rm --cached`), und ein Geheimnis gilt ab dann
-      als kompromittiert (Regel 19).
-    - **Vor jedem Commit wird die Liste der Dateien angesehen**, nicht nur
-      die Nachricht geschrieben. `git add -A` ohne diesen Blick ist der
-      Weg, auf dem Erzeugnisse hineinkommen.
-    - **`git add -f` nur mit Grund und Vermerk.**
-    - **Jede Änderung nimmt ihre Rückstände mit.** Was der Agent anlegt,
-      um etwas herauszufinden — Probeskript, Zwischenstand, Aufnahme,
-      Protokoll —, räumt er im selben Schritt weg; es taucht gar nicht
-      erst im Commit auf. Vorübergehendes entsteht **außerhalb** des
-      Repositories.
-    - **Von Zeit zu Zeit die Durchsicht**, Datei für Datei mit einer
-      Frage: Wird das noch gebraucht? Reste, Screenshots, einmal
-      benutzte Skripte und **abgeschlossene Planungen** gehen; was daran
-      wissenswert war, wird eine Entscheidungsakte. **Gelöscht wird nach
-      Freigabe** — der Agent legt die Liste vor, mit Grund je Datei
-      (Regel 1). Ausgenommen ist nur, was er selbst zum Ausprobieren
-      angelegt hat.
-    - **Was aussieht wie Müll und keiner ist:** Sperrdateien der
-      Abhängigkeiten (`package-lock.json`, `composer.lock`,
-      `packages.lock.json`) gehören eingecheckt, ebenso die
-      Dokumentation fremder Schnittstellen und Entscheidungsakten.
-    Ausführlich: Skill `neo-grundregeln`, `references/altlasten.md`.
+    danach.** Ein Repository ist ein Werkzeug, kein Archiv.
+    - **Die `.gitignore` gehört zum ersten Commit**, und **das Muster
+      wird eingetragen, bevor die Datei entsteht**: Wer ein Werkzeug
+      einführt, das schreibt, trägt im selben Schritt ein, was es
+      schreibt. Nachträglich eintragen entfernt nichts aus dem Verlauf.
+    - **Vor jedem Commit wird die Liste der Dateien angesehen**, nicht
+      nur die Nachricht geschrieben.
+    - **Jede Änderung nimmt ihre Rückstände mit.** Was zum Ausprobieren
+      entstand, räumt der Agent im selben Schritt weg; Vorübergehendes
+      entsteht außerhalb des Repositories.
+    - **Gelöscht wird nach Freigabe**, mit Liste und Grund je Datei.
+      Sperrdateien der Abhängigkeiten, Dokumentation fremder
+      Schnittstellen und Entscheidungsakten **bleiben**.
+    Ausführlich: `neo-grundregeln`, `references/git.md` und
+    `references/altlasten.md`.
 22. **Contao.** Websites müssen vollständig in Contao verwaltbar sein und
     wirken, als wären sie rein in Contao entstanden. Keine festen Texte
     in Templates — alles aus Feldern, mit Insert-Tags. Kern und fremde

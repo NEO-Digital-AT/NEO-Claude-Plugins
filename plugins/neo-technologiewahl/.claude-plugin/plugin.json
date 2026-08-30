@@ -1,7 +1,7 @@
 {
   "name": "neo-technologiewahl",
   "displayName": "NEO Technologiewahl",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Regeln der NEO Digital für Systementscheidungen: welche Sprache, welches Rahmenwerk, welches Designsystem, welche Datenbank, welcher Anbieter. Eine Systementscheidung wird einmal getroffen und jahrelang bezahlt, deshalb ist sie ein Verfahren mit Belegen und keine Geschmacksfrage — und sie trifft ausnahmslos der Projektinhaber. Erst fragen, dann messen: Zielplattformen heute und in 24 Monaten, Verbindlichkeit des Designsystems, Hardware und Peripherie, Lebensdauer, wer es in zwei Jahren wartet, was bereits entschieden ist — diese Antworten stehen nicht im Repository und drehen jede Empfehlung. Kriterien in fester Reihenfolge, vom Ausschluss über die Zielplattformen und die Frage, ob das Rahmenwerk das Designsystem trägt, bis zu Lizenz und Ausstiegskosten. Belege mit Fundstelle und Datum statt Vergleichsartikeln; Aussagen über die Zukunft nur als Zitat des Anbieters. Wechselkosten gezählt statt geschätzt, getrennt nach portiert, neu, bleibt und wandert mit, mit der Regel, dass der günstigste Schnitt vor der teuersten Strecke liegt. Der Nachweis schlägt die Debatte: ein kleiner echter Nachbau des schwierigsten Bildschirms auf dem Zielgerät, mit Frist und vorher festgelegtem Maßstab. Entscheidungsakte mit verworfenen Alternativen, dem Abschnitt „Was dabei schiefging\" und der Bedingung für eine Neuprüfung. Mit Abnahmeliste und dem Befehl /neo-technologiewahl:neo-technologiewahl.",
   "author": {
     "name": "NEO Digital (Erich Nigg)"

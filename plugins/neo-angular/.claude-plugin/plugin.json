@@ -1,7 +1,7 @@
 {
   "name": "neo-angular",
   "displayName": "NEO Angular und Material",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Regeln der NEO Digital für Angular, Angular Material und Material Design 3. Die API wird nachgeschlagen, nicht erinnert: Angular über seine llms.txt, Angular Material über die Doku der eingesetzten Fassung — dort gibt es keine llms.txt, und eine erinnerte Theme-Signatur ist fast immer die alte. Der moderne Weg ohne Mischbetrieb: standalone, inject(), eingebaute Ablaufsteuerung. Signals für Zustand, RxJS für Ströme, OnPush überall, jedes Abonnement beendet. Reaktive typisierte Formulare. Material-Komponenten nie direkt in einer View, sondern hinter den Neo-Wrappern; Theme aus Tokens, kein ::ng-deep und kein !important. Material Design 3 wird als System übernommen — Farbrollen, Typografie-, Form- und Höhenstufen —, nicht als Sammlung einzelner Werte, und wo das Designsystem abweicht, gewinnt das Designsystem. Kontraste und Bedienziele werden auch bei einer zugänglich gebauten Bibliothek gemessen statt angenommen.",
   "author": { "name": "NEO Digital (Erich Nigg)" }
 }
