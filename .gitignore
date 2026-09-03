@@ -2,3 +2,14 @@
 # enthält nur Regeln und Werkzeuge im Quelltext.
 __pycache__/
 *.pyc
+
+# Was die Google-Ads-Werkzeuge schreiben. Sie legen es normalerweise unter
+# ~/.config/neo-google-ads/ ab, also außerhalb des Repositorys — die Einträge
+# hier greifen nur, wenn jemand GOOGLE_ADS_HOME oder GOOGLE_ADS_CONFIG
+# hierher zeigen lässt. Die Datei enthält Refresh Token, Client-Geheimnis und
+# Developer Token: einmal eingecheckt gilt sie als kompromittiert. Die Pfade
+# sind bewusst auf die Wurzel verankert — ein Muster ohne Schrägstrich am
+# Anfang würde das Plugin-Verzeichnis gleichen Namens mitnehmen.
+/config.json
+/changes.jsonl
+/neo-google-ads/
