@@ -50,9 +50,11 @@ arbeitet, liest den betroffenen Skill trotzdem, bevor er dessen Regeln
   kaputte und eine saubere Vorlage geprüft wurde** und beide das erwartete
   Ergebnis liefern. Behauptet, nicht gemessen, zählt nicht.
 - **Zweigmodell: `main` mit Arbeitszweig** (Kernregel 20). Kein `dev` —
-  dieses Repository rollt nichts aus. Gearbeitet wird auf
-  `claude/neo-plugins-design-system-yjuojp`, von dort mit Fast-Forward
-  nach `main`. Kein direkter Push auf `main`.
+  dieses Repository rollt nichts aus. Gearbeitet wird auf einem
+  Arbeitszweig `claude/<thema>`, von dort mit Fast-Forward nach `main`.
+  Kein direkter Push auf `main`. Ein Arbeitszweig gehört zu einem Auftrag
+  und wird nach dem Merge gelöscht; welche offen liegen, sagt
+  `plugins/neo-grundregeln/scripts/branch-check.py`.
 - **Die `.gitignore` deckt ab, was die Werkzeuge beim Prüfen erzeugen**
   (Kernregel 21). Wer ein Werkzeug hinzufügt, das schreibt, trägt im
   selben Schritt ein, was es schreibt.
