@@ -21,6 +21,13 @@ Kläre, falls es nicht im Projekt steht:
    Breite.
 5. **Sollen die statischen Oberflächentexte mitverglichen werden?**
    Standard ist nein. Nur auf ausdrückliche Ansage des Projektinhabers ja.
+6. **Ist ein Gastsystem im Spiel?** Wird das Produkt in ein fremdes
+   System eingebettet oder unmittelbar daneben gestellt, konkurrieren
+   zwei Vorlagen. Dann liegt die **Rangfolge schriftlich vor**, bevor
+   gemessen wird — sonst ist die erste Zahl schon mehrdeutig. Liegt sie
+   nicht vor, ist das der erste Befund.
+7. **Ist der Prüfstand geprüft?** Laufende Uhr, Bühne mit der Prüfbreite,
+   Aufnahmeskript, das sich beendet (`references/pruefstand.md`).
 
 Fehlen Marker (`data-compare`) auf einer der beiden Seiten, ist das der
 erste Befund: ohne sie lässt sich nicht zuordnen, was mit was zu
@@ -91,6 +98,13 @@ Für jede nicht bestandene Zeile:
 **Nichts reparieren, solange der Umfang nicht freigegeben ist.** Ist die
 Behebung freigegeben: beheben, **erneut messen**, die neuen Zahlen
 nennen. So oft, bis alle Zustände und Fassungen bestehen.
+
+**Liegt ein Gastsystem vor**, stehen die Abweichungen **getrennt**: erst
+die, die aus einer entschiedenen Gastsystem-Regel folgen, dann die, die
+niemand entschieden hat. Nur die zweite Gruppe ist ein Mangel. **Eine
+Gesamtzahl, die beides vermengt, wird nicht genannt** — gelingt die
+Trennung an einer Stelle nicht sauber, wird das gesagt, statt eine
+mehrdeutige Zahl zu nennen.
 
 Am Ende eine Zeile:
 

@@ -78,6 +78,61 @@ nebeneinander). Für eine Ansicht mit echten Daten ist er entweder mit
 wegzulassen. Ein roter Bildabgleich wegen anderer Feldwerte ist kein
 Befund, sondern ein falsch angesetztes Werkzeug.
 
+## Liegt ein Gastsystem vor: zwei Vorlagen, keine einzelne Zahl
+
+Manche Produkte werden in ein fremdes System eingebettet oder stehen
+unmittelbar daneben — eine Erweiterung, ein eingebundenes Modul, eine
+Oberfläche, die sich in die eines Anbieters einfügen soll. Dann
+konkurrieren **zwei** Vorlagen: das Designset des eigenen Produkts und
+das Gastsystem.
+
+**Das Problem ist die eine Zahl.** Der Bildabgleich gegen das Designset
+liefert eine Prozentzahl. Sobald eine Entscheidung zugunsten des
+Gastsystems fällt — dessen Typografie, dessen Bedienelemente —, wird
+diese Zahl **schlechter**, obwohl das Ergebnis **richtiger** ist. Sie
+mischt damit „bewusst anders" mit „versehentlich anders" und verliert
+ihre Aussagekraft. Wer sie weiter als Fortschrittsmaß liest, arbeitet
+gegen die eigene Entscheidung.
+
+### Die Rangfolge steht vor der ersten Messung
+
+Sobald ein Gastsystem im Spiel ist, wird eine Rangfolge **festgelegt und
+schriftlich hinterlegt**, bevor gemessen wird. Bewährt hat sich diese
+Aufteilung:
+
+| Frage | Entscheidet |
+| --- | --- |
+| Was gibt es, wie ist es angeordnet? Aufbau, Reihenfolge, welche Bedienelemente vorkommen, Zustände | das **Designset** |
+| Wie liest und bedient es sich? Schriftgrößen, Zeilenhöhen, Schnitte, Maße der Bedienelemente, Trefferflächen | das **Gastsystem** |
+| Wofür das Gastsystem kein Gegenstück hat | das **Designset**, aber in der Typografie und mit den Bedienelementen des Gastsystems |
+| Beide schweigen | **Rückfrage** — nichts erfinden |
+
+Die Rückfrage in der letzten Zeile läuft wie jede andere: vier Teile,
+mit Gegenüberstellungsbild aus `scripts/comparison.js`
+(`claude-design.md`).
+
+### Berichtet wird getrennt
+
+- Der Bericht weist Abweichungen **getrennt** aus: solche, die aus einer
+  **entschiedenen** Gastsystem-Regel folgen, und solche, die **niemand
+  entschieden** hat. Nur die zweite Gruppe ist ein Mangel.
+- **Eine Gesamtzahl, die beides vermengt, wird nicht genannt.** Gelingt
+  die Trennung an einer Stelle nicht sauber, wird das gesagt, statt eine
+  mehrdeutige Zahl zu nennen.
+
+### Die Werte des Gastsystems werden gemessen
+
+Sie werden nicht schätzungsweise übernommen: echte Bildschirme des
+Gastsystems rendern und die **gerechneten** Stilwerte auslesen. Aus dem
+Stylesheet gelesene Werte reichen nicht, weil Vererbung,
+Überschreibungen und Vorgaben des Browsers erst im gerechneten Wert
+zusammenkommen.
+
+**Eine verbreitete Falle dabei:** Gastsysteme schreiben Zeilenhöhen oft
+**absolut** (etwa in `rem`), nicht als Verhältnis. Wer die Zahl ohne
+Einheit übernimmt, setzt den Text je nach Schriftgröße enger oder weiter
+als das Gastsystem.
+
 ## Marker: was mit was verglichen wird
 
 Der Layoutabgleich muss wissen, welches Element im Entwurf welchem im
@@ -131,6 +186,12 @@ fehlen sie im Artboard, ist das der erste Befund, nicht der letzte.
 
 ## Das Verfahren
 
+**Vor Schritt 1:** Liegt ein Gastsystem vor, steht dessen Rangfolge
+schriftlich fest — sonst misst man gegen eine Vorlage, die gar nicht
+gilt. Und der Prüfstand, in dem gemessen wird, ist selbst geprüft:
+laufende Uhr, mitwachsende Bühne, Aufnahmeskript, das sich beendet
+(`pruefstand.md`).
+
 1. **Marker setzen**, im Artboard und in der Anwendung.
 2. **Referenz messen und aufnehmen.** Festes Sichtfeld, fester
    Bildmaßstab, `reducedMotion: 'reduce'`, Farbschema, Sprache,
@@ -162,6 +223,7 @@ fehlen sie im Artboard, ist das der erste Befund, nicht der letzte.
 | Stilabgleich | jede Ansicht | **0 Funde** |
 | Bildabgleich | Bausteine-Artboard | **0,5 %** |
 | Bildabgleich | Ansicht mit echten Daten | nur mit ausgenommenen Inhaltsbereichen, sonst weglassen |
+| Bildabgleich | Ansicht neben einem Gastsystem | **keine Gesamtzahl** — getrennt nach entschieden und unentschieden |
 
 Die Toleranz von 1 px deckt Rundung ab, nicht Nachlässigkeit. Wer sie
 höher setzt, begründet es an Ort und Stelle.

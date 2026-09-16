@@ -21,6 +21,12 @@ Kläre, falls es nicht im Projekt steht:
    kurzen Daten hält, hält nicht.
 5. Welche Bereiche dürfen ausdrücklich waagrecht scrollen? Sie tragen
    `data-table-area` und `overflow-x: auto`.
+6. **Übernimmt die Bühne des Prüfstands die Prüfbreite?** Eine auf 1440 px
+   festgenagelte Bühne nimmt den Umbruchpunkt der Anwendung nicht mit —
+   dann sind die Zahlen unterhalb des Umbruchpunkts nur untereinander
+   vergleichbar und keine Aussage über die Anwendung. Läuft die Uhr des
+   Prüfstands? Beendet sich das Aufnahmeskript von selbst?
+   `references/pruefstand.md`.
 
 ## Messen
 
@@ -102,7 +108,13 @@ mit fester Kartenhöhe zuerst um: der Text wächst, die Karte nicht.
 
 ## Deuten
 
-In dieser Reihenfolge, weil jede Ursache die folgenden erzeugt:
+**Zuerst den Prüfstand ausschließen.** Koppeln die gemeldeten Paare
+ausnahmslos ein Element der einen Spalte mit einem der anderen, und
+überlappt **innerhalb** einer Spalte nichts, ist die Bühne zu breit und
+nicht die Anwendung zu eng (`references/pruefstand.md`). Ein Befund, der
+nur im Prüfstand auftritt, wird nicht gemeldet.
+
+Danach in dieser Reihenfolge, weil jede Ursache die folgenden erzeugt:
 
 1. **Ragt über den Rand** — die Wurzelursache. Meist eine feste
    Pixelbreite, eine lange Kennung ohne Umbruch, oder ein fehlendes

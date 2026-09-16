@@ -11,6 +11,24 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 - [ ] Der freigegebene Entwurf liegt unter `/plan`, die Entscheidung als
       Entscheidungsakte (ADR).
 
+## Prüfstand
+
+Gilt für jede Zahl in diesem Bericht: Sie ist so viel wert wie die Bühne,
+auf der sie entsteht (`pruefstand.md`).
+
+- [ ] Die Uhr des Prüfstands **läuft**; fest ist nur ihr Startpunkt. Kein
+      Urteil über Tastaturbedienung oder Barrierefreiheit aus einem
+      Prüfstand mit stehender Uhr.
+- [ ] Das Aufnahmeskript **beendet sich von selbst** — der Vorschauserver
+      läuft über die Programmierschnittstelle im selben Prozess, nicht
+      als Kindprozess.
+- [ ] Die Bühne **übernimmt die Prüfbreite**. Tut sie es nicht, ist
+      benannt, dass die Zahlen unterhalb des Umbruchpunkts nur
+      untereinander vergleichbar sind.
+- [ ] Jeder Befund auf schmaler Breite wurde daraufhin geprüft, ob er
+      ausnahmslos spaltenübergreifend ist — dann ist er die Bühne, nicht
+      die Anwendung.
+
 ## Aufbau
 
 - [ ] Die erste Bildschirmhöhe beantwortet: wo bin ich, welcher Zustand,
@@ -64,6 +82,15 @@ Klickprototyp vorliegt. Verfahren: `claude-design.md`.
       Listeneinträge sind dynamisch und werden nicht verglichen.
 - [ ] Statische Oberflächentexte nur mitverglichen, wenn der
       Projektinhaber es verlangt hat.
+- [ ] **Liegt ein Gastsystem vor**, stand dessen Rangfolge schriftlich
+      fest, **bevor** gemessen wurde.
+- [ ] Der Bericht weist **getrennt** aus, was aus einer entschiedenen
+      Gastsystem-Regel folgt und was niemand entschieden hat; nur das
+      Zweite ist als Mangel geführt. **Keine Gesamtzahl, die beides
+      vermengt.**
+- [ ] Die Werte des Gastsystems sind **gemessen** — echte Bildschirme
+      gerendert, gerechnete Stilwerte ausgelesen —, nicht aus dem
+      Stylesheet geschätzt. Zeilenhöhen mit ihrer Einheit übernommen.
 - [ ] Tokens wurden übernommen, nicht abgetippt.
 - [ ] **Radien, Höhenstufen und Zustandsdeckschichten stammen aus dem
       Designsystem**, nicht aus dem Entwurf abgemessen —

@@ -101,6 +101,14 @@ Aufbau liefert `--example`.
 - Tastaturkürzel aus einzelnen Buchstaben sind abschaltbar oder
   umbelegbar.
 
+> **Vorsicht bei der Messung: Ein Prüfstand mit eingefrorener Uhr misst
+> die Tastaturbedienung als tot.** Nagelt er `Date.now()` auf einen
+> festen Wert, fällt in Vue jeder Ereigniszuhörer aus, den ein Ereignis
+> nur über das Hochblubbern erreicht — Klicks auf Knöpfe bleiben
+> unauffällig, Listen- und Menünavigation nicht. Ein Befund nach 2.1.1
+> aus einem solchen Prüfstand ist keiner. Ursache, Erkennungsmerkmal und
+> Behebung: `pruefstand.md`.
+
 ## Ziele und Zeigergenauigkeit
 
 - Bedienziele mindestens **24 × 24 px** (2.5.8), auf Berührungsgeräten
@@ -160,7 +168,8 @@ Aufbau liefert `--example`.
 1. Kontrastrechnung für alle neuen Paare, **einschließlich Hover**, in
    beiden Themes — Ergebnis als Zahl berichten, nicht als Einschätzung.
 2. Ansicht ohne Maus vollständig bedienen, einmal durch, Fokus dabei
-   ansehen.
+   ansehen. **Nicht in einem Prüfstand mit stehender Uhr** — der misst
+   die Tastaturbedienung als tot (`pruefstand.md`).
 3. Ansicht in Graustufen ansehen: bleibt jeder Zustand unterscheidbar?
 4. Auf 400 % zoomen: entsteht horizontales Scrollen?
 5. Vorlesegerät über die Ansicht laufen lassen: hat jedes Bedienelement

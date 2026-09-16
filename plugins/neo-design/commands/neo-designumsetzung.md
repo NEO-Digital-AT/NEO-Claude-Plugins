@@ -21,6 +21,11 @@ Kläre, falls es nicht im Projekt steht:
 5. Gibt es die Ansicht bereits? Dann **nicht bauen**, sondern nach
    `references/claude-design.md`, Abschnitt „Wenn die Seite schon
    existiert", Wege vorlegen und warten.
+6. **Steht die Ansicht in oder neben einem Gastsystem?** Dann
+   konkurrieren zwei Vorlagen — Designset und Gastsystem —, und die
+   Rangfolge gehört **vor** die erste Messung, schriftlich. Liegt sie
+   nicht vor, ist das eine Rückfrage, keine Annahme
+   (`references/designsystem-abgleich.md`).
 
 Fehlt eine Fassung oder ein Zustand im Entwurf: **fragen**, nicht
 ableiten.

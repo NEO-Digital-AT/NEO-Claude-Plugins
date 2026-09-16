@@ -90,6 +90,16 @@ Der Prüfer meldet Seitenüberlauf, Elemente über dem Rand, Inhalt breiter
 als sein Platz, Tabellen unter der Inhaltsbreite, zu kleine Bedienziele
 und **Löcher in umgebrochenen Reihen**. Erlaubt sind **null Befunde**.
 
+**Die Bühne muss die Prüfbreite übernehmen.** Ein Prüfstand, dessen Bühne
+auf einer Breite festgenagelt ist — etwa 1440 px, damit Aufnahmen
+vergleichbar bleiben —, nimmt den Umbruchpunkt der Anwendung nicht mit:
+Bei 320 und 768 px bleibt ein dreispaltiges Raster dreispaltig, und der
+Prüfer meldet Überlappungen zwischen Spalten, die im Produkt
+untereinanderstehen. Erkennungsmerkmal: Die gemeldeten Paare koppeln
+ausnahmslos ein Element der einen Spalte mit einem der anderen. Solche
+Zahlen sind nur untereinander vergleichbar und keine Aussage über die
+Anwendung (`pruefstand.md`).
+
 Der Test läuft für **jede** Seite der Anwendung, in beiden Themes und in
 jeder ausgelieferten Sprache — deutsche Beschriftungen sind länger als
 englische, und genau daran bricht das Layout zuerst. Zusätzlich mit
