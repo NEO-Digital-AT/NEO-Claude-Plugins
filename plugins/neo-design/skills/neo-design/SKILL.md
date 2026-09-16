@@ -14,7 +14,9 @@ description: >
   Best Practices, SEO, agentisches Browsen). Zwingend, sobald ein Entwurf
   vorliegt und umgesetzt wird: Artboard aus Claude Design, Design-Set,
   Design-System, Klickprototyp — beim Bauen danach, beim Abgleichen
-  dagegen und bei jeder Abweichung davon.
+  dagegen und bei jeder Abweichung davon. Ebenso beim Bau eines
+  Prüfstands für diese Messungen und sobald ein Gastsystem im Spiel
+  ist, in das sich die Oberfläche einfügen soll.
 metadata:
   herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an bestehenden NEO-Projekten (Regeldateien, Entscheidungsakten zu Komponenten-Grundsatz und Logo/SVG, Token-Erzeugung), Stand 2026-08
 ---
@@ -178,6 +180,16 @@ Kontrast rechnen statt schätzen:
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/contrast.py "#5A6273" "#FFFFFF"
 ```
 
+**Gemessen wird in einem Prüfstand — und der kann die Tastaturbedienung
+tot aussehen lassen, ohne dass etwas kaputt ist.** Ein Prüfstand, der
+`Date.now()` auf einen festen Wert nagelt, unterdrückt in Vue jeden
+Ereigniszuhörer, den ein Ereignis nur über das Hochblubbern erreicht:
+Klicks auf Knöpfe bleiben unauffällig, Tastatur-, Listen- und
+Menünavigation werden als tot gemessen. **Ein solcher Prüfstand taugt
+nicht zur Beurteilung von Barrierefreiheit oder Tastaturbedienung.**
+Bevor ein Befund nach 2.1.1 gemeldet wird, ist er auszuschließen:
+`references/pruefstand.md`.
+
 Vollständige Anforderungen, Tastaturbedienung, Fokus, Vorlesegeräte,
 Bewegung und die Prüfliste: `references/barrierefreiheit.md`.
 
@@ -230,6 +242,16 @@ Volltext ist Datenverlust.
 Gemessen wird je Seite, je Sprache, in Hell und Dunkel, mit **langen
 Testdaten** und bei 200 % Textvergrößerung — ein Layout, das nur mit
 kurzen Daten hält, hält nicht.
+
+**Und auf einer Bühne, die die Prüfbreite übernimmt.** Eine
+Prüfstands-Bühne mit fester Breite — etwa 1440 px, damit Aufnahmen
+vergleichbar bleiben — nimmt den Umbruchpunkt der Anwendung nicht mit:
+Bei 320 und 768 px bleibt ein dreispaltiges Raster dreispaltig, und die
+Prüfer melden Überlappungen zwischen Spalten, die im Produkt
+untereinanderstehen. Erkennungsmerkmal: Die gemeldeten Paare koppeln
+ausnahmslos ein Element der einen Spalte mit einem der anderen. Solche
+Zahlen sind ein Artefakt der Bühne und kein Mangel der Anwendung —
+`references/pruefstand.md`.
 
 Umbruchpunkte, Tabellenrangfolge, Lückenregel mit Beispielcode,
 Höchstbreiten und Navigation: `references/responsiv.md`. Umbruch, Kürzen,
@@ -336,6 +358,28 @@ liest die Feldinhalte nicht. Der Bildabgleich ist der schwächste — er
 schlägt bei abweichenden Feldwerten an, und das ist kein Befund, sondern
 ein falsch angesetztes Werkzeug. Gemessen wird je Fassung und Zustand:
 hell, dunkel, mobil; Ruhe, Hover, Fokus, Deaktiviert, Fehler.
+
+**Der Prüfstand gehört zur Messung.** Eine Zahl ist so viel wert wie die
+Bühne, auf der sie entsteht. Drei Fallen kosten in jedem Projekt
+dieselbe Zeit und sehen im Ergebnis wie ein Mangel der geprüften
+Anwendung aus: eine eingefrorene Uhr — Tastatur und Menüs erscheinen tot;
+ein Aufnahmeskript, das den Vorschauserver als Kindprozess startet und
+sich nie beendet — die Kette läuft nie in den Vergleich; eine Bühne mit
+fester Breite — Überlappungen auf schmalen Breiten, die es nicht gibt.
+**Bevor ein Befund gemeldet wird, wird der Prüfstand ausgeschlossen:**
+`references/pruefstand.md`.
+
+**Liegt ein Gastsystem vor, ist eine einzelne Abgleichszahl mehrdeutig.**
+Wird ein Produkt in ein fremdes System eingebettet oder unmittelbar
+daneben gestellt, konkurrieren zwei Vorlagen: das eigene Designset und
+das Gastsystem. Jede Entscheidung zugunsten des Gastsystems macht die
+Zahl gegen das Designset **schlechter**, obwohl das Ergebnis
+**richtiger** ist. Deshalb wird **vor** der ersten Messung eine Rangfolge
+festgelegt und schriftlich hinterlegt, und der Bericht weist getrennt
+aus, was aus einer entschiedenen Gastsystem-Regel folgt und was niemand
+entschieden hat — nur das Zweite ist ein Mangel. **Eine Gesamtzahl, die
+beides vermengt, wird nicht genannt.** Rangfolge, Berichtsform und das
+Messen der Gastsystemwerte: `references/designsystem-abgleich.md`.
 
 **Das Entwurfswerkzeug zeichnet das Designsystem nach — es setzt es
 nicht um.** Was aus Claude Design kommt, sieht aus wie Material 3, ist

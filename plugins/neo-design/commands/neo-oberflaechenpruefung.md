@@ -48,6 +48,11 @@ mit einer Fundstelle (Datei und Zeile) oder einer Zahl:
    Wort? Bedienziele mindestens 24 × 24 px? Symbole mit Namen?
    Statusänderungen angesagt? Ziehen mit Tastaturalternative?
 
+   **Nicht in einem Prüfstand mit eingefrorener Uhr messen.** Er lässt
+   Tastatur-, Listen- und Menünavigation tot aussehen, während Klicks auf
+   Knöpfe unauffällig bleiben; ein Befund nach 2.1.1 aus einem solchen
+   Prüfstand ist keiner (`references/pruefstand.md`).
+
 7. **Größen.** Prüfe auf 320, 390, 768, 1024, 1280, 1920, 2560 und
    3840 px, ob der Seitenkörper waagrecht scrollt, und in jeder
    ausgelieferten Sprache. Nenne je Breite den Überstand in Pixeln.
