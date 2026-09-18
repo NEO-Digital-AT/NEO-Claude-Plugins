@@ -411,6 +411,15 @@ Agent **nie**, wie alt und neu zusammengeführt werden. Er legt die
 Unterschiede mit Maßen dar, zeigt mindestens zwei Wege mit
 Gegenüberstellung, empfiehlt — und wartet.
 
+**Wo der Entwurf nichts zeigt, ist das die Vorgabe.** Zeichnet das
+Designsystem einen Zustand nicht aus, lautet die Umsetzung: nicht
+auszeichnen. Keine Farbe, keine Fläche, kein Rahmen — auch keine
+dezente, auch keine aus den Tokens, auch dann nicht, wenn der Zustand
+fachlich sichtbar sein „müsste". Das ist eine **Rückfrage**, keine
+Erfindung. Wird eine solche Erfindung beanstandet, ist die Korrektur
+ihre **Entfernung**, nicht eine leisere Fassung. Ausführlich mit dem
+Fall, aus dem die Regel stammt: `references/claude-design.md`.
+
 **Selbstkontrolle ist Pflicht.** Nach jeder Korrektur erneut messen und
 die Zahl nennen; „sieht gut aus" ist keine Zahl. Die letzte Zeile jeder
 Fertigmeldung lautet: **„Eigene Gestaltungsentscheidungen: 0."** Steht

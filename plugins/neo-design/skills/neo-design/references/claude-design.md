@@ -78,9 +78,86 @@ Ausnahme, keine Abwägung. Jede einzelne davon ist eine Rückfrage:
     keinen anderen verlangt.
 12. Eine Zusammenführung zweier Entwürfe oder eines Entwurfs mit einer
     bestehenden Seite.
+13. Eine Auszeichnung für einen Zustand, den der Entwurf nicht
+    auszeichnet — siehe den nächsten Abschnitt.
 
 **Eine Empfehlung ist erlaubt. Eine Entscheidung nicht.** Der Agent darf
 sagen, was er für richtig hält — und muss dann warten.
+
+## Was der Entwurf nicht zeigt, ist auch eine Vorgabe
+
+> **Nichts ist keine Lücke. Nichts ist eine Angabe.**
+
+Die vorige Liste verbietet, etwas **anders** zu machen als im Entwurf.
+Dieser Abschnitt verbietet das Gegenstück: etwas **zusätzlich** zu
+machen, weil der Entwurf an einer Stelle schweigt.
+
+Wo der Entwurf ein Element schlicht nicht auszeichnet, lautet die
+Vorgabe: **nicht auszeichnen.** Das ist kein Versehen des
+Projektinhabers, das der Agent stillschweigend ausbessert. Es ist das
+Ergebnis.
+
+**Der Fall, aus dem diese Regel entstanden ist.** Das Designsystem gibt
+einer einzelnen Reaktion unter einer Nachricht keinerlei Auszeichnung:
+Emoji, Zähler, gemeinsame Pille, sonst nichts. Ob die Reaktion die
+eigene ist, sieht man dort nicht. Der Agent hat das zweimal ausgefüllt —
+erst mit einem Ring in der Akzentfarbe, nach der Beanstandung mit einer
+weichen Akzentfüllung. Beide Male erfunden. Der zweite Versuch war
+derselbe Verstoß, nur leiser.
+
+### Die drei Begründungen, die nicht gelten
+
+Jede davon klingt vernünftig. Keine davon ist eine Befugnis.
+
+1. **„Der Unterschied muss doch irgendwie sichtbar sein."** Eine
+   fachliche Notwendigkeit ist keine Gestaltungsbefugnis. Braucht ein
+   Zustand Sichtbarkeit und zeigt der Entwurf dafür kein Mittel, ist das
+   eine **Rückfrage** — nicht die Erlaubnis, eines zu erfinden.
+2. **„Die Farbe kommt aus den Tokens."** Ein Token ist eine Palette,
+   keine Genehmigung. Woher eine Farbe stammt, sagt nichts darüber, ob
+   sie an dieser Stelle stehen darf.
+3. **„Es ist doch dezent."** Lautstärke ist nicht das Maß. Das Maß ist:
+   steht es im Entwurf oder nicht. Etwas Erfundenes leiser zu machen,
+   macht es nicht richtig.
+
+### Korrigieren heißt entfernen, nicht verkleinern
+
+Wird eine erfundene Gestaltung beanstandet, ist die Korrektur ihre
+**Entfernung**. Sie abzuschwächen, umzufärben oder durch eine
+zurückhaltendere Variante zu ersetzen, ist keine Korrektur, sondern
+derselbe Verstoß ein zweites Mal — und er kostet den Projektinhaber eine
+zweite Beanstandung an derselben Stelle.
+
+Wer meint, die Stelle brauche wirklich etwas: **vorlegen und warten.**
+
+### Der Wächter-Test hält die Abwesenheit fest
+
+Ein Test, der eine erfundene Gestaltung festschreibt, verteidigt sie
+gegen ihre eigene Entfernung. Ein Wächter-Test an so einer Stelle prüft
+deshalb, dass **nichts** da ist:
+
+```js
+// Falsch — dieser Test verteidigt die Erfindung
+expect(rules).toContain('background: var(--akzent-weich)')
+
+// Richtig — gar keine Regel, oder eine ohne alles Sichtbare
+if (block !== null) {
+  const rules = block[1]
+  expect(rules).not.toContain('background')
+  expect(rules).not.toContain('box-shadow')
+  expect(rules).not.toContain('border')
+  expect(rules).not.toContain('outline')
+  expect(rules).not.toContain('filter')
+}
+```
+
+### Im Inventar mitschreiben
+
+Das Inventar (nächster Abschnitt) hält nicht nur fest, was da ist,
+sondern auch, **wo der Entwurf schweigt** — jede Stelle, an der ein
+Zustand fachlich existiert und der Entwurf ihn nicht zeigt. Diese
+Stellen bleiben unverändert oder gehen als Rückfrage hinaus. Eine
+dritte Möglichkeit gibt es nicht.
 
 ## Vor der ersten Zeile: das Inventar
 
@@ -235,6 +312,8 @@ Vor jeder Fertigmeldung. Ohne Zahlen ist keiner davon erfüllt:
   <x> %."
 - „Zustände geprüft: <Liste>, je Fassung hell und dunkel."
 - „Abweichungen vom Entwurf: <n> — alle vorgelegt und entschieden."
+- „Stellen, an denen der Entwurf nichts zeigt: <n> — alle unverändert
+  gelassen oder vorgelegt."
 - „Eigene Gestaltungsentscheidungen: **0**."
 
 **Die letzte Zeile ist die wichtigste.** Steht dort etwas anderes als
