@@ -56,6 +56,14 @@ Klickprototyp vorliegt. Verfahren: `claude-design.md`.
 - [ ] Jedes Element hat einzeln bestanden, bevor das nächste begann.
 - [ ] Kein Bauteil erfunden, wo der Entwurf keins zeigt; kein Bauteil des
       Entwurfs weggelassen.
+- [ ] **Keine Auszeichnung für einen Zustand, den der Entwurf nicht
+      auszeichnet** — keine Farbe, keine Fläche, kein Rahmen, auch keine
+      dezente und auch keine aus den Tokens.
+- [ ] Die Stellen, **an denen der Entwurf schweigt**, stehen im Inventar:
+      alle unverändert gelassen oder vorgelegt. Eine dritte Möglichkeit
+      gibt es nicht.
+- [ ] Eine beanstandete Erfindung wurde **entfernt**, nicht abgeschwächt,
+      umgefärbt oder durch eine zurückhaltendere Variante ersetzt.
 - [ ] Abweichungen wurden **vorgelegt**, nicht entschieden: zwei Bilder
       nebeneinander, Maße, Grund, mindestens zwei Wege, Empfehlung.
 - [ ] Bei einer bestehenden Seite wurde die Zusammenführung **vorgelegt**,
@@ -111,6 +119,9 @@ Klickprototyp vorliegt. Verfahren: `claude-design.md`.
 - [ ] Kein Farbliteral, kein `style`, keine erfundene Maßzahl in der View.
 - [ ] Keine neue lokale Variante einer bestehenden Komponente.
 - [ ] Der Wächter-Test läuft grün.
+- [ ] Wo der Entwurf schweigt, hält der Wächter-Test die **Abwesenheit**
+      fest, nicht die Erfindung — sonst verteidigt er sie gegen ihre
+      eigene Entfernung.
 
 ## Eingaben
 
