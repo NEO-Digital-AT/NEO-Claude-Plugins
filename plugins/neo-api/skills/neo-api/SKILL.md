@@ -153,7 +153,8 @@ Punkte in Kurzform:
   Angaben aus Query oder Route. Der Begrenzer läuft nach der
   Authentifizierung.
 - **CORS und Cookies kommen ausschließlich aus der Konfiguration.** Keine
-  Herkunft, keine Cookie-Domäne, keine Adresse fest im Code.
+  Herkunft, keine Cookie-Domäne, keine Adresse fest im Code. Was der
+  Browser an der Grenze prüft und wie es gemessen wird: Skill `neo-cors`.
 - **Ein abgesicherter Statusendpunkt** für die externe Überwachung, mit
   Geheimnis im Kopf statt in der Query, ohne Swagger-Eintrag, und nur
   gemappt, wenn das Geheimnis konfiguriert ist.

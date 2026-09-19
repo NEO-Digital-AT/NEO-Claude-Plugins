@@ -1,0 +1,9 @@
+{
+  "name": "neo-cors",
+  "displayName": "NEO CORS und Herkunftsgrenzen",
+  "version": "1.0.0",
+  "description": "Regeln für Herkunftsgrenzen im Browser: Die Freigabe wird geklärt, bevor gebaut wird, nicht wenn der Browser sie verweigert. Auslöser sind Bild, Video, Audio, Schrift, Symbolsatz, Textur, Karte, PDF und Download von einer fremden Adresse, jeder Aufruf mit fetch, XMLHttpRequest oder EventSource, Modul- und Worker-Skripte, Canvas, WebGL, three.js und Web-Audio, dazu jeder Vorschauserver, Prüfstand und CI-Lauf, der eine Seite lädt. Enthält die Wirkungsrichtung, an der man den Fall erkennt: Das Bild ist sichtbar und toDataURL wirft, die Schrift fällt stumm zurück, der Aufruf geht mit curl und im Browser nicht, GET geht und POST mit JSON nicht, es geht bis jemand sich anmeldet, es geht mal und mal nicht. Rangfolge der Lösungen: gleiche Herkunft herstellen schlägt jede Freigabe, dann benannte Herkünfte aus der Konfiguration, dann die Freigabe an der Quelle, sonst Rückfrage. Verbotene Abkürzungen: abgeschaltete Browsersicherheit, Kopfzeilen aus einer Erweiterung, öffentliche Weiterleitungsdienste, Access-Control-Allow-Origin mit Stern neben Anmeldedaten, ungeprüft gespiegelte Herkunft. Serverseite mit Vorabfrage, Vary, Anmeldedaten, sichtbaren Antwortkopfzeilen, Fehlerantworten, Zwischenspeicher und CDN. Fertig heißt gemessen: cors-check.py stellt Vorabfrage und echte Anfrage gegen die laufende Quelle und meldet, was der Browser abweisen wird; cors-scan.py liest den Quelltext, bevor etwas läuft, und trennt sichere Befunde von dem, was nachzusehen ist. Befehl /neo-cors:neo-corspruefung.",
+  "author": {
+    "name": "NEO Digital (Erich Nigg)"
+  }
+}

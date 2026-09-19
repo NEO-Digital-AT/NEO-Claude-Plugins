@@ -18,6 +18,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte, Prüfstand | Skill mit vierzehn Referenzdateien, zehn Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
+| `neo-cors` | Herkunftsgrenzen im Browser: die Freigabe **vor** dem Bauen geklärt, Wirkungsrichtung je Fehlerbild, Rangfolge (gleiche Herkunft schlägt jede Freigabe), verbotene Abkürzungen, Serverseite mit Vorabfrage und `Vary`, Prüfstand und Entwicklung | Skill mit vier Referenzdateien, zwei Werkzeugen, Befehl `/neo-cors:neo-corspruefung` |
 | `neo-doku` | Doku-Struktur, Zielgruppen, Bedienungsdoku mit markierten Screenshots, Entscheidungsakten, Sprache, Vorlagen, Agentenlesbarkeit | Skill mit sieben Referenzdateien und der Markierungsebene für Screenshots |
 | `neo-technologiewahl` | Systementscheidungen: erst die sechs Fragen stellen, deren Antworten nicht im Repository stehen (Zielplattformen in 24 Monaten, Verbindlichkeit des Designsystems, Hardware, Lebensdauer, wer wartet es, was ist entschieden), dann Kriterien in fester Reihenfolge, Belege mit Fundstelle und Datum, **gezählte** Wechselkosten, der günstigste Schnitt vor der teuersten Strecke, und ein **Nachbau statt einer Debatte** | Skill mit drei Referenzdateien, Befehl `/neo-technologiewahl:neo-technologiewahl`, lädt bei jeder Technologie- oder Rahmenwerksfrage |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit fünf Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
@@ -85,6 +86,14 @@ Werbekonten aus, und das ist eine andere Entscheidung beim Installieren.
   `text-fit.js`, was **innen** nicht passt — abgeschnittener Text,
   Spalten mit zwei Zeichen je Zeile, Umbrüche mitten im Wort. Nichts
   davon erzeugt einen Scrollbalken; alles davon sieht falsch aus.
+- **Bevor etwas von einer fremden Adresse geladen wird:** `neo-cors` —
+  Bild, Video, Schrift, Textur, Modul, API-Aufruf. Die Freigabe wird
+  geklärt, **bevor** gebaut wird. Sonst kommt der Fehler spät und sieht
+  nach etwas anderem aus: Das Bild ist sichtbar und `toDataURL` wirft,
+  die Schrift fällt stumm auf die Ersatzschrift zurück, der Aufruf geht
+  mit curl und im Browser nicht, `GET` geht und `POST` mit JSON nicht.
+  Gemessen mit `cors-check.py` gegen die laufende Quelle und
+  `cors-scan.py` im Quelltext — nicht vermutet.
 - **Wenn ein Knopf an zwei Stellen vorkommt:** `neo-grundregeln`,
   `references/durchlauf.md` — er wird an **beiden** geprüft. Ein Element,
   das auf Seite A getestet ist und auf Seite B nicht, bricht auf Seite B.
@@ -169,6 +178,7 @@ Schneller geht es, die Datei direkt zu schreiben —
     "neo-design@neo-claude-plugins": true,
     "neo-komponenten@neo-claude-plugins": true,
     "neo-api@neo-claude-plugins": true,
+    "neo-cors@neo-claude-plugins": true,
     "neo-doku@neo-claude-plugins": true,
     "neo-recht@neo-claude-plugins": true,
     "neo-ki@neo-claude-plugins": true,
@@ -250,7 +260,7 @@ kein `--all`, also eine Schleife (Git Bash):
 ```bash
 for p in neo-grundregeln neo-technologiewahl neo-code neo-doku neo-design \
          neo-komponenten \
-         neo-api neo-dotnet neo-php neo-vue neo-angular neo-mobil neo-contao \
+         neo-api neo-cors neo-dotnet neo-php neo-vue neo-angular neo-mobil neo-contao \
          neo-assistent neo-ki neo-recht neo-sicherheit neo-deployment neo-betrieb; do
   claude plugin update $p@neo-claude-plugins -y
 done
@@ -309,6 +319,8 @@ Tor in der CI.
 | `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
 | `prompt-inventory.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
 | `rules-update.py` | `plugins/neo-grundregeln/scripts/` | Hält die installierten Regel-Plugins auf dem Stand des Marktplatzes. Läuft aus dem SessionStart-Hook, frischt den Marktplatz auf und führt für jedes veraltete Plugin `claude plugin update` aus. Meldet sich nur, wenn sich etwas geändert hat; ohne Python, ohne Netz und bei unlesbarer Registrierung tut es nichts. Fremde Marktplätze bleiben unangetastet. |
+| `cors-check.py` | `plugins/neo-cors/scripts/` | Misst, ob ein Browser unter einer bestimmten Herkunft eine Quelle tatsächlich benutzen darf: stellt die Vorabfrage und die echte Anfrage, liest jede Freigabekopfzeile und meldet, was der Browser abweisen wird — fehlende Freigabe, Stern neben Anmeldedaten, gespiegelte Herkunft ohne `Vary`, eine Vorabfrage mit 401 aus der Anmeldeprüfung, nicht freigegebene Antwortkopfzeilen, blockierende Ressourcenrichtlinie bei Medien. Schickt von sich aus keine schreibende Anfrage ab. Rückgabewert ungleich null bei einem Blocker, also als Tor in der CI verwendbar. Ohne Abhängigkeiten. |
+| `cors-scan.py` | `plugins/neo-cors/scripts/` | Liest den Quelltext, bevor etwas läuft, und trennt zwei Gruppen: **sichere Befunde** (abgeschaltete Browsersicherheit, öffentlicher Weiterleitungsdienst, Stern neben Anmeldedaten, jede Herkunft gespiegelt, fremdes Worker-Skript, `file://`) und **was nachzusehen ist** (Canvas ohne `crossorigin`, fremde Schrift, fremdes Modul, Anmeldedaten). Die zweite Gruppe ist ausdrücklich kein Mangel — ein Prüfer, der Falsches meldet, wird ignoriert, und mit ihm der echte Befund. Nennt, was er nicht sehen kann. Ohne Abhängigkeiten. |
 | `annotate.js` | `plugins/neo-doku/scripts/` | Markierungsebene für Doku-Screenshots: Rahmen, Pfeile, Nummern, Infokästen, Textmarker, Scheinwerfer. Wird vor der Aufnahme in die Seite eingeblendet und mitfotografiert. |
 
 ## Wie die Regeln wirken

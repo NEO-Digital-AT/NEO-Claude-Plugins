@@ -36,6 +36,11 @@
       "description": "Contao-Websites: alles in Contao verwaltbar, kein fester Text im Template, Bordmittel vor Eigenbau. Erweiterungsbau mit belegter Rangfolge — eine bestehende wird ergänzt statt eine zweite gebaut, und zwar so, dass jede Installation ohne Schaden aktualisieren kann; Migrationen defensiv, wiederholbar, ohne Datenverlust. Jedes Webdesign ist ein .cto-exportierbares Theme, anderswo ohne KI installierbar. Gestaltung aus Claude Design, Barrierefreiheit und PageSpeed ohne Abzug. Doku im Paket, englisch Pflicht."
     },
     {
+      "name": "neo-cors",
+      "source": "./plugins/neo-cors",
+      "description": "Regeln für Herkunftsgrenzen im Browser: Die Freigabe wird geklärt, bevor gebaut wird, nicht wenn der Browser sie verweigert. Auslöser sind Medien, Schriften, Texturen und Downloads von fremder Adresse, jeder Aufruf mit fetch, Modul- und Worker-Skripte, Canvas, WebGL, three.js und Web-Audio, dazu jeder Prüfstand und CI-Lauf, der eine Seite lädt. Mit der Wirkungsrichtung, an der man den Fall erkennt: Das Bild ist sichtbar und toDataURL wirft, die Schrift fällt stumm zurück, der Aufruf geht mit curl und im Browser nicht, GET geht und POST mit JSON nicht, es geht bis jemand sich anmeldet. Rangfolge: gleiche Herkunft herstellen schlägt jede Freigabe. Verboten: abgeschaltete Browsersicherheit, öffentliche Weiterleitungsdienste, Stern neben Anmeldedaten, ungeprüft gespiegelte Herkunft. Gemessen mit cors-check.py gegen die laufende Quelle und cors-scan.py im Quelltext, bevor etwas läuft. Befehl /neo-cors:neo-corspruefung."
+    },
+    {
       "name": "neo-deployment",
       "source": "./plugins/neo-deployment",
       "description": "Zweigmodell und Auslieferung: main ist live, dev bespielt die Entwicklungsumgebung, beide geschützt. Kein Direkt-Push, Arbeitszweige gehen von dev aus, main nimmt nur dev. Nur grüne Tests werden ausgerollt. Mit GitHub-Einstellungen und Workflow-Gerüsten."

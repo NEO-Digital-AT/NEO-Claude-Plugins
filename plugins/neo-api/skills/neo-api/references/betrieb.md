@@ -70,6 +70,12 @@ Jede Browser-Herkunft, die Sitzungsendpoints aufruft, steht in der Liste
 der erlaubten Herkünfte — auch die Verwaltungsoberfläche, wenn sie direkt
 mit der API spricht.
 
+**Was der Browser daraus macht, ist eine eigene Regel** — Vorabfrage,
+`Vary: Origin`, sichtbare Antwortkopfzeilen, Freigabe auch an
+Fehlerantworten, und die Messung gegen die laufende Quelle: Skill
+`neo-cors`. Dort steht auch, warum die Grenze oft besser vermieden als
+geöffnet wird.
+
 ## Statusendpunkt für externe Überwachung
 
 Ein eigener Endpunkt für die Betriebs-Statusseite, getrennt von der

@@ -28,6 +28,13 @@ Anwendung.
 > Ein Befund, der nur im Prüfstand auftritt, ist ein Befund über den
 > Prüfstand.
 
+**Die vierte Falle liegt daneben und hat einen eigenen Skill:** Ein
+leeres Bild, eine stumm zurückgefallene Schrift, ein schwarzer
+Aufnahmeausschnitt oder ein `SecurityError` am Canvas ist zuerst eine
+Herkunftsgrenze und erst danach ein Mangel der Anwendung — besonders in
+einem Prüfstand, der über `file://` lädt und damit die Herkunft `null`
+hat. Skill `neo-cors`.
+
 ## 1. Die eingefrorene Uhr
 
 **Der Anlass ist richtig.** Ein Prüfstand nagelt `Date.now()` auf einen
