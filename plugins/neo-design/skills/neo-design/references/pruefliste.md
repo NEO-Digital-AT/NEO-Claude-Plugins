@@ -215,6 +215,37 @@ Gilt, sobald das Ziel kein Browser ist (`entwurfsbruecke.md`).
       benannt; ausgenommene Bereiche benannt und begründet.
 - [ ] Die Abweichung ist als **Zahl** berichtet.
 
+## Scrollgebundene Effekte
+
+Nur wenn es angeheftete Flächen, durchlaufenden Inhalt oder Stationen
+gibt (`scrolleffekte.md`).
+
+- [ ] Die **Phasen sind benannt** und als Scrollpositionen im Test
+      festgehalten: Einstieg, jede Station, jeder Übergang, Ende,
+      Ausstieg, Auslaufzone.
+- [ ] Je Phase **eine Aufnahme**, und die Aufnahme wurde abgesucht.
+- [ ] Je Phase `surface-edge.js`, `text-fit.js` und `overflow.js`:
+      **null Befunde**.
+- [ ] Gemessen auf 320, 360, 390, 412 hochkant, 768 × 1024, 844 × 390
+      quer, Desktop quer und **1500 × 600**.
+- [ ] **Jede deckende Fläche reicht an beide Fensterränder**; Vollbreite
+      über `border-image` mit `outset`, kein `100vw`, kein negativer Rand.
+- [ ] **Keine Deko über Text** — auch nicht in der Auslaufzone, auch
+      nicht während einer Animation.
+- [ ] Befundvergleich vorher/nachher: **null neue Befunde**.
+
+## Eigene Aufnahmen und Meldungen
+
+- [ ] **Jede eigene Aufnahme wurde vollständig abgesucht** — Ränder,
+      Ecken, Übergänge, Überlagerungen, Abgeschnittenes.
+- [ ] Jeder sichtbare Mangel ist **in derselben Antwort gemeldet**, auch
+      wenn er nicht zur Aufgabe gehört.
+- [ ] Ein gemeldeter Mangel wurde als **Befundklasse** behandelt: dieselbe
+      Ursache auf anderen Seiten, Enden und Breiten gesucht, alle
+      Fundstellen genannt.
+- [ ] Jede sichtbare Korrektur ist mit **Vorher-nachher-Bild** gemeldet,
+      die Stelle markiert.
+
 ## Größe und Gerät
 
 Maschinell geprüft mit `overflow.js` auf 320, 390, 768, 1024, 1280,

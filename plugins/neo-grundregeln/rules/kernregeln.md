@@ -68,6 +68,11 @@ bei passender Aufgabe den jeweiligen Skill laden.
      Bereich** mit ihrer Sprachstufe (Regel 16) und die **Betriebsart**.
      Ohne sie rät der Agent — und er rät jedes Mal anders.
    - **Was dort nicht steht, wird erfragt, nicht angenommen** (Regel 2).
+   - **Werden für das Projekt Cloud-Sitzungen benutzt, steht der Hinweis
+     auf das Setup-Skript der Umgebung dort.** Eine Cloud-Sitzung
+     installiert keine Plugins aus der Repository-Konfiguration; ohne das
+     Skript sind dort weder die Skills noch diese Kernregeln geladen
+     (README, Abschnitt „Cloud-Sitzungen").
 5. **Ein Repository gehört der Sitzung, die es geöffnet hat.** Eine
    Sitzung schreibt **nur** in das Repository, für das sie gestartet
    wurde — lesen darf sie jedes, das ihr zugänglich ist. Zwei

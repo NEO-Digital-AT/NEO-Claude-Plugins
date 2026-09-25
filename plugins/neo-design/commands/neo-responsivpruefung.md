@@ -1,11 +1,13 @@
 ---
-description: Eine Oberfläche auf allen Breiten messen — kein Überlauf, nichts ragt hinaus, Tabellen füllen, keine Löcher, Bedienziele groß genug
+description: Eine Oberfläche auf allen Breiten und in allen Scrollphasen messen — kein Überlauf, nichts ragt hinaus, deckende Flächen reichen an den Rand, keine Deko über Text, Tabellen füllen, keine Löcher, Bedienziele groß genug
 ---
 
 Miss die Oberfläche auf allen Prüfbreiten. **Gemessen wird, nicht
 angesehen.** Erlaubt sind null Befunde.
 
-Lade zuerst den Skill `neo-design` und `references/responsiv.md`.
+Lade zuerst den Skill `neo-design` und `references/responsiv.md`. Gibt es
+angeheftete Flächen, durchlaufenden Inhalt oder Stationen, zusätzlich
+`references/scrolleffekte.md`.
 
 ## Vorbereiten
 
@@ -21,7 +23,12 @@ Kläre, falls es nicht im Projekt steht:
    kurzen Daten hält, hält nicht.
 5. Welche Bereiche dürfen ausdrücklich waagrecht scrollen? Sie tragen
    `data-table-area` und `overflow-x: auto`.
-6. **Übernimmt die Bühne des Prüfstands die Prüfbreite?** Eine auf 1440 px
+6. **Gibt es scrollgebundene Effekte?** Angeheftete Bildflächen,
+   durchlaufender Text, Stationen einer Galerie, Einblenden beim
+   Scrollen. Wenn ja: Welche **Phasen** hat jeder Effekt, und bei welcher
+   Scrollposition beginnt jede? Die Liste wird festgehalten, nicht
+   geschätzt.
+7. **Übernimmt die Bühne des Prüfstands die Prüfbreite?** Eine auf 1440 px
    festgenagelte Bühne nimmt den Umbruchpunkt der Anwendung nicht mit —
    dann sind die Zahlen unterhalb des Umbruchpunkts nur untereinander
    vergleichbar und keine Aussage über die Anwendung. Läuft die Uhr des
@@ -72,7 +79,7 @@ Bildlaufstellung statt der Aufklapprichtung. Zusätzlich bei **kleiner
 Höhe** (400 px, Telefon quer) — dort klappt fast alles falsch auf, was am
 Schreibtisch passt.
 
-Der Überlaufprüfer meldet neun Arten:
+Der Überlaufprüfer meldet zehn Arten:
 
 | Art | Bedeutung |
 | --- | --- |
@@ -87,7 +94,7 @@ Der Überlaufprüfer meldet neun Arten:
 | Überlagerung abgeschnitten | Ein Vorfahre schneidet sie ab — Umklappen hilft nicht, sie gehört in eine eigene Ebene |
 | Überlagerung höher als der Bildschirm | Ohne eigenen Scrollbereich ist der untere Teil unerreichbar |
 
-Der Textpassungsprüfer meldet neun Arten:
+Der Textpassungsprüfer meldet acht Arten:
 
 | Art | Bedeutung |
 | --- | --- |
@@ -99,12 +106,52 @@ Der Textpassungsprüfer meldet neun Arten:
 | Umbruch mitten im Wort | `break-all` oder `anywhere` im Fließtext |
 | Silbentrennung ohne Sprachangabe | `hyphens: auto` ohne `lang` — wirkungslos |
 | Schrift zu klein | unter 12 px, auf schmal unter 14 px |
+| Etwas ist über den Text gezeichnet | Deko, Abzeichen oder Verlauf auf einer Zeile — in **jeder** Phase ein Fehler |
 
 **Auch Dialoge und geöffnete Menüs messen.** Ein geschlossenes Menü ragt
 nie hinaus; ein geöffnetes schon. Also: öffnen, messen, schließen.
 
 **Zusätzlich bei 200 % Textvergrößerung messen.** Dort fällt ein Layout
 mit fester Kartenhöhe zuerst um: der Text wächst, die Karte nicht.
+
+### Scrollphasen einzeln messen
+
+**Die Ruhelage beweist über einen scrollgebundenen Effekt nichts.** Je
+Effekt und je Phase — Einstieg, jede Station, jeder Übergang, Ende,
+Ausstieg und die Auslaufzone, in der die Fläche durchsichtig wird:
+
+```js
+await page.addScriptTag({ path: '${CLAUDE_PLUGIN_ROOT}/scripts/surface-edge.js' })
+for (const phase of phasen) {
+  await page.evaluate((y) => window.scrollTo(0, y), phase)
+  await page.screenshot({ path: `phase-${phase}.png` })
+  for (const w of ['neoSurfaceEdge', 'neoTextFit', 'neoOverflow']) {
+    const e = await page.evaluate((n) => window[n].check(), w)
+    const text = await page.evaluate(([n, x]) => window[n].report(x), [w, e])
+    expect(e.findings, text).toHaveLength(0)
+  }
+}
+```
+
+Die Prüfbreiten sind hier andere, und **alle** sind Pflicht: 320, 360,
+390 und 412 hochkant, 768 × 1024, 844 × 390 quer, Desktop quer und
+**1500 × 600** — das niedrige breite Fenster, in dem der Randstreifen am
+größten wird.
+
+`surface-edge.js` meldet zwei Arten:
+
+| Art | Bedeutung |
+| --- | --- |
+| Fläche reicht nicht an den Rand, Inhalt läuft darunter | Befund. Der Bericht nennt die Größe des Spalts und das Elternelement, dessen `padding-inline` oder `max-width` ihn verursacht |
+| Fläche reicht nicht an den Rand, nichts läuft darunter | Hinweis, kein Befund — aber eine andere Phase kann Inhalt dorthin schieben |
+
+`text-fit.js` meldet zusätzlich `covered-text`: etwas ist über eine
+Textzeile gezeichnet. Eine angeheftete Fläche über der halben
+Fensterbreite gilt als Seitenrahmen und wird dort nicht gemeldet; für sie
+gilt die Randstreifenprüfung.
+
+**Jede Phase bekommt eine Aufnahme, und jede Aufnahme wird abgesucht** —
+Ränder, Ecken, Übergänge, Überlagerungen (`references/pruefstand.md`).
 
 ## Deuten
 
@@ -154,6 +201,19 @@ zur Behebung.
 
 **Nichts reparieren, solange der Umfang nicht freigegeben ist.** Nach der
 Freigabe: beheben, **erneut messen**, die neuen Zahlen nennen.
+
+**Der Befundvergleich entscheidet, nicht der Eindruck.** Vorher und
+nachher laufen `overflow.js` und `text-fit.js` auf allen acht Breiten, und
+der Vergleich zeigt **null neue Befunde**. Eine Behebung, die einen
+anderen Befund erzeugt — etwa ein Pseudo-Element mit `100vw`, das
+`content-too-wide` auslöst —, wird umgebaut, bevor sie gemergt wird.
+
+**Ein gemeldeter Mangel ist eine Befundklasse.** Dieselbe Ursache wird
+überall gesucht: andere Seite, anderes Ende, andere Breiten, jede Seite
+mit derselben Komponente. Alle Fundstellen werden genannt.
+
+**Jede sichtbare Korrektur wird mit einem Vorher-nachher-Bild gemeldet**,
+die Stelle markiert (`scripts/comparison.js`).
 
 Am Ende eine Zeile mit Zahlen, nicht mit einer Einschätzung: wie viele
 Seiten × Breiten × Sprachen geprüft, wie viele bestanden. Solange eine

@@ -305,6 +305,27 @@ Geprüft wird auf **jeder** Prüfbreite und zusätzlich bei **kleiner Höhe**
 — ein Telefon quer hat rund 400 px, und dort klappt fast alles falsch
 auf, was am Schreibtisch passt.
 
+## Deckende Flächen reichen bis an beide Fensterränder
+
+Gilt für angeheftete, fixierte und überlagernde Flächen, **unter denen
+Inhalt durchläuft**.
+
+Der Fehler sitzt nicht an der Fläche, sondern am Elternelement: dessen
+`padding-inline` oder `max-width` hält sie vom Rand weg. Im Streifen
+dazwischen bleibt der durchlaufende Inhalt sichtbar — am Telefon 16 px,
+auf dem Tablet 31 px, in einem niedrigen breiten Fenster 90 px.
+
+- **Geprüft wird der Streifen** zwischen Fläche und Fensterrand, links und
+  rechts, im deckenden **und** im auslaufenden Teil:
+  `${CLAUDE_PLUGIN_ROOT}/scripts/surface-edge.js`.
+- **Vollbreite über `border-image` mit `outset`** — reine Zeichenfläche,
+  erzeugt keinen Überlaufbefund.
+- **Kein Pseudo-Element mit `100vw`, keine negativen Ränder.** Beides
+  erzeugt einen neuen Befund am Raster.
+- **Absichtlich eingerückt** heißt `data-inset-ok` mit Grund.
+
+Vollständig, samt Phasen und Deko über Text: `scrolleffekte.md`.
+
 ## Höchstbreiten
 
 Auf großen Bildschirmen sind Höchstbreiten kein Feinschliff, sondern
@@ -337,6 +358,19 @@ Voraussetzung dafür, dass eine Anwendung nicht auseinanderfällt.
   Drittel der Höhe frisst, ist auf 390 × 660 px unbrauchbar.
 - **Zahlen und Zeiten** kürzen ihre Darstellung, nicht ihre Bedeutung:
   aus „14. September 2026, 09:31" wird „14.09.26, 09:31", nie „14.09."
+
+## Akzentmarker
+
+Ein Akzentmarker hebt **ein** Wort hervor, höchstens zwei.
+
+- **Am Desktop nie zweizeilig** und nie so, dass ein einzelnes Wort allein
+  davor steht.
+- **Geprüft wird auf Layoutbreiten von 1007 bis 1903 px**, in Schritten
+  von 8 px — mit **eingerechneter Breite klassischer Scrollbalken**. Genau
+  dort bricht die Zeile, und genau diese Breiten sieht niemand, der nur
+  1280 und 1920 prüft.
+- Ein Marker, der auf einer dieser Breiten umbricht, wird gekürzt, nicht
+  kleiner gesetzt.
 
 ## Große Bildschirme
 

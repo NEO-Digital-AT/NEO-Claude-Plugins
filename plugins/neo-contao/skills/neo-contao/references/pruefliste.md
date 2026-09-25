@@ -70,6 +70,29 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
 - [ ] Der Seed läuft automatisch und **genau einmal**; ein zweiter Push
       überschreibt nichts, was die Redaktion geändert hat.
 
+## Inhaltsänderungen an einer bestehenden Seite
+
+Nur wenn Text, Titel, Meta-Angaben oder Einträge geändert wurden
+(`inhaltsmigrationen.md`).
+
+- [ ] Die Änderung ist eine **Migration im Bundle**, kein SQL zum
+      Eintippen, keine Backend-Anleitung, kein Befehl für den Server.
+- [ ] Jeder Schritt trägt eine **Bezeichnung**, die im Deploy-Protokoll
+      erscheint.
+- [ ] **Dieselbe Bedingung** in der Prüfung „ist offen" und im `WHERE`.
+- [ ] Serialisierte Felder **entpackt und neu gepackt**, nie per
+      `REPLACE`; `allowed_classes => false` gesetzt.
+- [ ] **Zweimal hintereinander gelaufen**; der zweite Lauf meldet „Nichts
+      zu tun".
+- [ ] Zeilen über **stabile Merkmale** gefunden, nie über IDs aus einer
+      lokalen Kopie; eine mehrdeutige Bedingung bricht ab.
+- [ ] Der **Seed** trägt denselben Text, im selben Commit, und
+      überschreibt die Datenbank nicht.
+- [ ] Gegen eine **Kopie des Live-Bestands** geprüft: alte Texte null
+      Treffer, neue gefunden — und nach dem Ausrollen **live wiederholt**.
+- [ ] Felder aus Erweiterungen vor dem Zugriff geprüft.
+- [ ] **Redaktionelle Änderungen sind unangetastet.**
+
 ## Theme
 
 - [ ] Das Webdesign ist ein **Theme** mit eigenem Repository.

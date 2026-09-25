@@ -233,6 +233,20 @@ wird **defensiv** geschrieben — die Anwendung kann in jedem Zustand sein
 Getestet wird gegen eine Kopie eines echten Bestands; eine leere
 Datenbank besteht jede Migration.
 
+**Auch eine Inhaltsänderung an einer bestehenden Seite ist eine
+Migration.** Ein Text, ein Titel, eine Meta-Angabe, ein FAQ-Eintrag: Nie
+SQL zum Eintippen, nie „bitte im Backend ändern", nie ein Befehl für den
+Server. Am Server gibt niemand etwas von Hand ein. Die Migration ändert
+ein Feld **nur, solange es exakt den alten Wert trägt** — was die
+Redaktion seither geändert hat, bleibt unangetastet. Serialisierte Felder
+(`listWizard`, Blog-FAQ, Blob-Arrays) werden entpackt und neu gepackt,
+**nie per SQL-`REPLACE`**: Das zerstört die Längenangaben von
+`serialize()`. Und jeder Schritt ist nach dem Ausführen **nicht mehr
+offen**, sonst dreht `contao:migrate` den Deploy im Kreis und die Seite
+bleibt unten. Pflichttest: zweimal hintereinander laufen lassen, der
+zweite Lauf meldet „Nichts zu tun". Verfahren, Bausteine und Abnahme:
+`references/inhaltsmigrationen.md`.
+
 Migrationen, idempotenter Seed, Übertragung von `files/` und Assets:
 `references/betrieb.md`. Migrationen im eigenen Bundle:
 `references/erweiterungsbau.md`.

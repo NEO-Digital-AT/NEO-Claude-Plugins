@@ -153,6 +153,40 @@ Daraus folgt dreierlei:
   übernimmt die Prüfbreite, statt sie zu überschreiben. Erst dann sagen
   die Zahlen etwas über die Anwendung.
 
+## Die eigene Aufnahme ist Prüfgegenstand
+
+> **Was in einer eigenen Aufnahme sichtbar war und nicht gemeldet wurde,
+> ist ein Verstoß.**
+
+Eine Aufnahme wird nicht gemacht, um sie abzuhaken, sondern um sie
+anzusehen. **Jeder** Screenshot, den der Agent erzeugt, wird vollständig
+abgesucht, bevor er in eine Antwort kommt:
+
+| Wo hingesehen wird | Was dort auffällt |
+| --- | --- |
+| **Beide Seitenränder**, oben und unten | Ein Streifen in einer anderen Farbe, ein Spalt, eine Kante |
+| **Alle vier Ecken** | Abgeschnittene Rundungen, überlappende Elemente |
+| **Übergänge zwischen Abschnitten** | Sprünge, doppelte Abstände, Farbbrüche |
+| **Überlagerungen** | Deko auf Text, Schatten über Beschriftungen |
+| **Ränder von Text** | Abgeschnittenes, Verdecktes, zu Enges |
+| **Alles, was der Aufgabe nichts zu tun hat** | Genau dort sitzt der unbemerkte Mangel |
+
+- **Jeder sichtbare Mangel wird in derselben Antwort gemeldet**, auch wenn
+  er nicht zur Aufgabe gehört und auch wenn er die Antwort länger macht.
+- **Behoben wird nur nach Freigabe** (Kernregel 1). Melden ist Pflicht,
+  beheben ist es nicht.
+- **Ein Mangel, der auf der Aufnahme zu sehen war, gilt als bekannt.**
+  „Nicht aufgefallen" ist keine Auskunft: Die Aufnahme lag vor.
+- **Die Messung ersetzt das Ansehen nicht, und das Ansehen nicht die
+  Messung.** Ein Randstreifen von 16 px wurde von keinem Prüfer gemeldet,
+  weil es den Prüfer noch nicht gab; sichtbar war er.
+
+**Der Fall, aus dem diese Regel entstanden ist:** Ein Agent hatte den
+violetten Randstreifen neben einer angehefteten schwarzen Fläche in seinem
+eigenen Screenshot vor sich und meldete ihn nicht. Der Projektinhaber fand
+ihn danach am Telefon. Gemessen wurde anschließend: Randpixel (17,4,36)
+gegen Fläche (7,6,12).
+
 ## Abnahme
 
 - [ ] Die Uhr des Prüfstands läuft; fest ist nur ihr Startpunkt.

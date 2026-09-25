@@ -84,6 +84,29 @@ Die Paardatei gehört ins Projekt und wächst mit ihm. Sie ist der Beleg,
 dass geprüft wurde — nicht der Satz „sieht gut aus". Beispiel für den
 Aufbau liefert `--example`.
 
+## Dunkle Abschnitte: jedes Textelement trägt seine Farbe
+
+> **Ohne eigene Farbe erbt ein Textelement die dunkle Standardschrift —
+> auf dunklem Grund ist es damit unlesbar.**
+
+Gemessen wurden **1,08:1** auf violettem Grund, und das monatelang
+unbemerkt — weil die Seite auf jedem Bildschirm „dunkel und hochwertig"
+aussah.
+
+- **Jedes** Textelement in einem dunklen Abschnitt bekommt seine Farbe
+  gesetzt: Überschrift, Fließtext, Beschriftung, Listenpunkt, Fußnote,
+  Link, Datum, Zahl. Nicht der Abschnitt, sondern das Element.
+- **Eine vererbte Farbe zählt nicht als gesetzt.** Wer sich darauf
+  verlässt, verliert sie beim nächsten Umbau des Abschnitts.
+- **Nach jeder Farbänderung wird gescannt**, nicht gestichprobt: alle
+  Seiten, alle Abschnitte, hell und dunkel.
+
+**Lighthouse misst Abschnitte mit `content-visibility: auto` nicht
+zuverlässig.** Was nicht gerendert ist, wird nicht bewertet — ein grüner
+Wert beweist für diese Abschnitte nichts. Deshalb läuft nach jeder
+Farbänderung ein eigener Kontrastscan über alle Seiten und alle
+Abschnitte, mit `contrast.py` gegen den **tatsächlichen** Untergrund.
+
 ## Tastatur
 
 - **Alles ist ohne Maus bedienbar**, in sinnvoller Reihenfolge, ohne
@@ -144,6 +167,27 @@ Aufbau liefert `--example`.
   horizontales Scrollen (1.4.10) — siehe `responsiv.md`.
 - Erhöhte Zeichen-, Wort- und Zeilenabstände zerstören kein Layout
   (1.4.12). Feste Höhen an Textbehältern sind deshalb verboten.
+
+## Abgeschaltete Bewegung schaltet auch die Verzögerungen ab
+
+Bei `prefers-reduced-motion: reduce` werden **auch `animation-delay` und
+`transition-delay` zurückgesetzt**, nicht nur Dauer und Kurve:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+```
+
+**Sonst bleibt Inhalt unsichtbar stehen.** Ein Element, das erst nach
+600 ms Verzögerung eingeblendet wird, wartet bei abgeschalteter Bewegung
+auf eine Animation, die nie läuft — und bleibt auf `opacity: 0`. Das ist
+kein Schönheitsfehler, sondern fehlender Inhalt.
 
 ## Neu in WCAG 2.2 — Punkte, die hier oft fehlen
 

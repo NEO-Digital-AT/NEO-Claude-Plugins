@@ -78,6 +78,19 @@ Schmuck, sondern Teil der Gestaltung — aber sie hat immer einen Grund.
 - Dauer 200–600 ms, ruhige Kurve, kein Federn, kein Überschwingen.
 - Nichts spielt von selbst mit Ton. Nichts blinkt.
 
+## Wechselnde Wörter und Scroll-Handler
+
+- **Ein wechselndes oder animiertes Wort reserviert den Platz der
+  längsten Fassung.** Sonst springt die Zeile bei jedem Wechsel, und der
+  Wert für Layoutstabilität (CLS) fällt. Gemessen wird die längste
+  ausgelieferte Fassung in **jeder** Sprache, nicht die deutsche.
+- **Scroll-Handler lesen keine Geometrie.** Kein
+  `getBoundingClientRect`, kein `offsetTop`, kein `scrollHeight` in einem
+  Scroll-Ereignis: Jeder Lesezugriff erzwingt Layout, bei jedem
+  Bildaufbau. Dafür gibt es `IntersectionObserver`.
+- **Was scrollgebunden ist, wird in jeder Phase gemessen**, nicht in der
+  Ruhelage: `scrolleffekte.md`.
+
 ## Navigation und Burgermenü
 
 - **Das Burgermenü wird animiert**: das Symbol wandelt sich in ein

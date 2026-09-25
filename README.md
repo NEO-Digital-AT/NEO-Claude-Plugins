@@ -8,14 +8,14 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 
 | Plugin | Zweck | Wirkung |
 | --- | --- | --- |
-| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit zwölf Referenzdateien, drei Werkzeugen; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
+| `neo-grundregeln` | Arbeitsprozess, Entscheidungshoheit, Belegpflicht, Selbstkontrolle, Debugging, Tests, Oberflächendurchlauf, Git, Projektstart | Kernregeln laufen über einen SessionStart-Hook in JEDE Sitzung, der zugleich die Plugins auf dem Stand des Marktplatzes hält; Skill mit zwölf Referenzdateien, vier Werkzeugen; Befehle `/neo-grundregeln:neo-selbstkontrolle` und `/neo-grundregeln:neo-projektstart` |
 | `neo-code` | Codeaufbau nach den Vorgaben von .NET 10, Vue 3 und Flutter; Schichten, Benennung, Werkzeuge, Querschnitt, **Lesbarkeit vor Abstraktion**, **Sprache im System: englisch** | Skill mit sieben Referenzdateien, lädt beim Anlegen von Dateien, Klassen, Modulen |
 | `neo-dotnet` | ASP.NET Core: **strenger, zentraler Bau** (Warnungen als Fehler, zentrale Paketverwaltung, Sperrdatei, **Architekturtest** für die Schichtgrenze), dünne Endpunkte, Options-Muster mit Startprüfung, EF Core ohne N+1, Mandantentrennung im Datenzugriff, Migrationen gegen eine Bestandskopie, async durchgehend, **Zeitbudget je Endpunkt und Lasttest**, **deny-by-default über die Rückfallregel**, Ratenbegrenzung, Grenzen für Rumpf und Uploads, Zeit über `TimeProvider` | Skill mit fünf Referenzdateien (Bau, Leistung, Härtung, EF Core, Abnahmeliste), lädt bei Backend-Arbeit |
 | `neo-php` | PHP und Laravel: API nachschlagen statt erinnern (Laravel Boost), strict_types und volle Typisierung, Enums, Laravel wie gemeint verwendet, kein N+1, Migrationen ohne Datenverlust, statische Analyse als Blocker | Skill mit drei Referenzdateien, lädt bei PHP-Arbeit |
 | `neo-vue` | Vue 3, Nuxt, Nuxt UI, Vuetify, Pinia: llms.txt vor dem Schreiben lesen, script setup mit TypeScript, Reaktivität ohne Überraschung, Server-Browser-Grenze in Nuxt, genau eine UI-Bibliothek hinter den Wrappern | Skill mit drei Referenzdateien, lädt bei Vue- und Nuxt-Arbeit |
 | `neo-angular` | Angular, Angular Material, Material Design 3: standalone und inject(), Signals gegen RxJS, OnPush, typisierte reaktive Formulare, Theme aus Tokens statt `::ng-deep`, MD3 als System | Skill mit zwei Referenzdateien, lädt bei Angular-Arbeit |
 | `neo-mobil` | Flutter und Material 3: kleine Widgets, Ressourcen freigeben, eine Zustandsverwaltung, Größen auf Telefon und Tablet bei jeder Systemschrift, keine Geheimnisse im Paket, Flutter oder nativ als Entscheidung des Inhabers; lokale Daten mit Schemaversion, Migrationstest und unveränderlichen Aufzeichnungen; Betriebsgeräte: Vollbild/Kiosk, Scanner als Tastatur, Drucker und Lade, Offline als Normalfall | Skill mit vier Referenzdateien (Material 3 in Flutter, lokale Daten und Migrationen, Geräte und Peripherie, Abnahmeliste), lädt bei App-Arbeit |
-| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte, Prüfstand | Skill mit vierzehn Referenzdateien, zehn Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
+| `neo-design` | Gestaltung und Bedienung in zwei Betriebsarten (Anwendung/Portal, Webseite): Entwurf vor Bau, Bauen nach Claude Design, Abgleich mit dem Designsystem, Eingabeführung, Farbe und Layout, Zustände, Barrierefreiheit, responsive Anwendungen von 320 px bis 4K, Text im Layout, Übersetzungen, Messwerte, Prüfstand | Skill mit fünfzehn Referenzdateien, elf Werkzeugen, Befehle `/neo-design:neo-designumsetzung`, `/neo-design:neo-designabgleich`, `/neo-design:neo-responsivpruefung` und `/neo-design:neo-oberflaechenpruefung` |
 | `neo-komponenten` | Komponenten-Grundsatz (Neo*, LeoFlex*), Benennung, Pflichtkatalog, Komponentenvertrag, Größenskala, Wächter-Test, Bestandsbibliotheken | Skill mit fünf Referenzdateien, lädt bei Oberflächenarbeit |
 | `neo-api` | Swagger und OpenAPI als Pflicht, Dokumentschnitt, Versionierung, Fehlerhülle, Autorisierung, Betrieb, sechs Pflichttestfälle je Endpunkt | Skill mit drei Referenzdateien, lädt bei Endpoint-, Vertrags- und Betriebsarbeit |
 | `neo-cors` | Herkunftsgrenzen im Browser: die Freigabe **vor** dem Bauen geklärt, Wirkungsrichtung je Fehlerbild, Rangfolge (gleiche Herkunft schlägt jede Freigabe), verbotene Abkürzungen, Serverseite mit Vorabfrage und `Vary`, Prüfstand und Entwicklung | Skill mit vier Referenzdateien, zwei Werkzeugen, Befehl `/neo-cors:neo-corspruefung` |
@@ -26,7 +26,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle und Härtefälle, Modellzugang über Requesty, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit zehn Referenzdateien, drei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung`, `/neo-assistent:neo-goldlauf` und `/neo-assistent:neo-haertefaelle` |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
-| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit sieben Referenzdateien, lädt bei Contao-Arbeit |
+| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit acht Referenzdateien, lädt bei Contao-Arbeit |
 | `neo-sicherheit` | Zehn harte Verbote, Autorisierung und Mandantentrennung, Secrets und Protokolle, hochsensible Daten, Härtung, Lieferkette, Release-Evidenz, Paritätsbetrieb | Skill mit sechs Referenzdateien, lädt bei Sicherheits-, API-, Release-Arbeit |
 
 Google Ads liegt **nicht** hier, sondern in einem eigenen Marktplatz:
@@ -293,6 +293,81 @@ drehen muss.
 `neo-recht` und `neo-betrieb` gehören in jede `CLAUDE.md`, sobald etwas
 veröffentlicht oder betrieben wird.
 
+## Cloud-Sitzungen (claude.ai/code)
+
+**In einer Cloud-Sitzung fehlen die NEO-Plugins, und die Konfiguration des
+Repositorys ändert daran nichts.** Das ist keine Fehlfunktion, sondern so
+gebaut — aus zwei voneinander unabhängigen Gründen:
+
+1. **Der Marktplatz wird nicht hinzugefügt.** Die Doku zu Plugins
+   (`plugins/loading`, Abschnitt „Plugins shared through a repository",
+   geprüft 25.09.2026): *„A cloud session doesn't add the marketplaces a
+   repository lists under `extraKnownMarketplaces`, because that requires
+   the workspace trust dialog, which a cloud session never shows."*
+2. **Ein Plugin, das nur das Projekt einschaltet, wird nie geholt.**
+   Dieselbe Seite, Abschnitt „Enabled in project settings but not
+   installed": Geholt wird nur, was **Benutzereinstellungen**,
+   `settings.local.json`, `--settings` oder Managed Settings auf `true`
+   setzen. Ein `enabledPlugins` in der `.claude/settings.json` des
+   Repositorys schaltet ein, lädt aber nichts herunter.
+
+Damit greift auch der SessionStart-Hook nicht, und **die Kernregeln sind
+in der Sitzung nicht geladen**.
+
+### Die Lösung: ein Setup-Skript der Umgebung
+
+`plugins/neo-grundregeln/scripts/cloud-setup.sh` registriert die
+Marktplätze und installiert jedes Plugin im **Benutzerbereich** — also in
+genau der Quelle, die geholt und geladen wird. Es läuft **vor** dem Start
+von Claude Code, gilt für jede Sitzung dieser Umgebung und für jedes
+Repository.
+
+**Eintragen:** Cloud-Umgebung → **Bearbeiten** → **Setup-Skript**, den
+Inhalt der Datei hineinkopieren. In **jeder** Umgebung, die benutzt wird —
+die Einstellung hängt an der Umgebung, nicht am Repository.
+
+**Es greift erst in neuen Sitzungen.** Die Umgebung wird
+zwischengespeichert; die laufende Sitzung bekommt die Plugins nicht
+nachträglich.
+
+Das Skript beendet sich **nie mit einem Fehlercode**. Ein fehlgeschlagenes
+Setup-Skript nimmt die ganze Sitzung mit, und dafür ist kein Plugin
+wichtig genug.
+
+### Was daran gemessen ist, und was nicht
+
+**Gemessen** (in einer Cloud-Maschine, 25.09.2026):
+
+| Prüfung | Ergebnis |
+| --- | --- |
+| Zustand ohne Setup-Skript | `~/.claude/plugins/` enthält nur `synced/`, keine `settings.json`, keine NEO-Plugins, keine NEO-Skills |
+| Skript mit leerem Home | 21 Plugins installiert, 16 s, Rückgabe 0 |
+| Wohin es schreibt | `enabledPlugins` **und** `extraKnownMarketplaces` in die Benutzereinstellungen |
+| Ohne `claude` im Pfad | Meldung, Rückgabe 0 |
+| Defekter Marktplatz-Katalog | übersprungen, Rückgabe 0 |
+
+**Noch zu bestätigen:** Dass eine **neue** Cloud-Sitzung diese Plugins
+samt Hooks, Befehlen und Fachagenten lädt und dass der SessionStart-Hook
+mit den Kernregeln und `rules-update.py` dort laufen. Nach der Doku ist es
+zu erwarten — Plugins laden beim Sitzungsstart aus
+`installed_plugins.json` und dem Zwischenspeicher, ohne Netz, und
+Plugins im Benutzerbereich tragen keine der Einschränkungen, die für
+Projekt-Plugins gelten. **Gemessen ist es nicht**, und das geht erst in
+einer frischen Sitzung, nachdem das Skript in der Umgebung eingetragen
+ist.
+
+### Der Weg über das claude.ai-Konto hilft hier nicht
+
+Geprüft, weil er einfacher wäre: Plugins, die für das claude.ai-Konto
+eingeschaltet sind, kommen ohne Setup-Skript auf jede Maschine. Laut Doku
+gilt das aber für **Terminal- und Cowork-Sitzungen**, nicht für
+Cloud-Sitzungen; der Tab „Cloud session" in `plugins/install` sagt
+ausdrücklich, dass eine Cloud-Sitzung weder die eigenen Plugins noch die
+des Repositorys lädt. Auch `claude plugin marketplace add --claudeai` ist
+auf Terminal-Sitzungen beschränkt. Das Verzeichnis
+`~/.claude/plugins/synced/` gibt es in einer Cloud-Sitzung, es war aber
+leer. **Das Setup-Skript bleibt der Weg.**
+
 ## Werkzeuge in den Plugins
 
 **Die Regeln sind deutsch, die Werkzeuge sind englisch.** Kommentare,
@@ -303,6 +378,8 @@ Tor in der CI.
 
 | Werkzeug | Wo | Wofür |
 | --- | --- | --- |
+| `surface-edge.js` | `plugins/neo-design/scripts/` | Prüft, ob eine deckende Fläche, unter der Inhalt durchläuft, bis an beide Fensterränder reicht — angeheftet, fixiert oder markiert. Nennt die Größe des Spalts, das Elternelement, dessen `padding-inline` oder `max-width` ihn verursacht, und was darunter durchläuft. Erkennt die Vollbreite über `border-image` mit `outset`, die kein Layout erzeugt. Am DOM gemessen, also ohne Aufnahme und mit Ursache statt nur mit Symptom. |
+| `cloud-setup.sh` | `plugins/neo-grundregeln/scripts/` | Registriert die NEO-Marktplätze und installiert alle Plugins im Benutzerbereich. Für das Setup-Skript einer Cloud-Umgebung, weil eine Cloud-Sitzung keine Plugins aus der Repository-Konfiguration installiert. Liest die Marktplatz-Kataloge, statt Plugin-Namen zu führen, und beendet sich **nie** mit einem Fehlercode. |
 | `branch-check.py` | `plugins/neo-grundregeln/scripts/` | Nennt die Zweige, die geöffnet und nie gemergt wurden, ihr Alter und die, die schon gemergt sind und nur noch gelöscht gehören. Ein Auftrag, ein Zweig: Wer neue Zweige auf halbfertigen stapelt, endet bei Cherry-Picks. Ohne Abhängigkeiten außer git. |
 | `repo-hygiene.py` | `plugins/neo-grundregeln/scripts/` | Sieht die verfolgten Dateien eines Repositories durch und meldet vier Gruppen: Geheimnisse, Reste (Protokolle, Bau-Ausgaben, Zwischenspeicher, Screenshots aus einer Sitzung), nirgends Erwähntes und liegen gebliebene Planungen. **Löscht nichts** — die letzten beiden Gruppen sind Vorschläge, keine Urteile. Kennt die Ausnahmen: Sperrdateien der Abhängigkeiten, Dokumentation fremder Schnittstellen und Entscheidungsakten bleiben. Ohne Abhängigkeiten außer git. |
 | `contrast.py` | `plugins/neo-design/scripts/` | Kontrastverhältnis nach WCAG 2.2 rechnen und prüfen, einzeln oder als Paardatei in der CI. Kennt durchsichtige Farben und rechnet sie über ihren Grund zusammen. Ohne Abhängigkeiten. |

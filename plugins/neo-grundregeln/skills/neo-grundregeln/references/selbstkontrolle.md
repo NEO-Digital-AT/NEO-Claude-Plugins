@@ -100,6 +100,53 @@ Fest, nach jeder substanziellen Änderung:
 Commit, keine Fertigmeldung. Ein Schritt wird nicht übersprungen, weil
 der vorige „schon gestern lief".
 
+## Ein Befund ist eine Klasse, keine Einzelstelle
+
+> **Meldet der Projektinhaber einen Mangel, ist die gemeldete Stelle ein
+> Beispiel — nicht der Umfang.**
+
+Wer nur die genannte Stelle behebt, liefert dieselbe Meldung in einer Woche
+erneut, für die Seite daneben. Deshalb wird nach jedem gemeldeten Mangel
+**dieselbe Ursache überall gesucht**:
+
+| Wo noch gesucht wird | Warum |
+| --- | --- |
+| **Das andere Ende** | Links gefunden heißt rechts ungeprüft — oben heißt unten |
+| **Andere Breiten und Größen** | 16 px am Telefon sind 90 px im niedrigen breiten Fenster |
+| **Jede Seite mit derselben Komponente** | Die Ursache sitzt in der Komponente, nicht auf der Seite |
+| **Derselbe Zustand woanders** | Hover, Fokus, leer, ladend, Fehler |
+| **Dieselbe Ursache in anderer Form** | Ein vergessener Wert ist selten einmal vergessen |
+
+- **Alle Fundstellen werden gemeldet**, auch die, für die keine Freigabe
+  vorliegt.
+- **Behoben wird der freigegebene Umfang**, nicht mehr (Kernregel 1).
+- **Die Zahl gehört in die Antwort**: „gemeldet: 1, gefunden: 7, behoben
+  nach Freigabe: 7".
+
+## Die eigene Aufnahme ist Prüfgegenstand
+
+**Jeder Screenshot, jede Aufnahme, jede Ausgabe, die der Agent selbst
+erzeugt, wird angesehen, bevor sie in eine Antwort kommt** — vollständig,
+nicht an der Stelle, um die es ging.
+
+- **Jeder sichtbare Mangel wird in derselben Antwort gemeldet**, auch wenn
+  er nicht zur Aufgabe gehört.
+- **Ein Mangel, der in einer eigenen Aufnahme sichtbar war und nicht
+  gemeldet wurde, ist ein Verstoß.** „Nicht aufgefallen" ist keine
+  Auskunft: Die Aufnahme lag vor.
+- Bei Oberflächen im Einzelnen: Skill `neo-design`,
+  `references/pruefstand.md`.
+
+## Keine Behebung erzeugt einen neuen Befund
+
+**Vorher und nachher wird mit demselben Werkzeug gemessen, und die
+Befundlisten werden verglichen.** Null neue Befunde.
+
+Eine Behebung, die einen anderen Befund erzeugt, wird **umgebaut, bevor
+sie gemergt wird** — nicht danach gemeldet und nicht als Folgeaufgabe
+notiert. Das gilt auch, wenn der neue Befund „kleiner" wirkt als der
+alte: Ob er kleiner ist, entscheidet der Projektinhaber.
+
 ## Was der Agent nie tut
 
 - Eine Vermutung als Feststellung ausgeben.
@@ -110,3 +157,7 @@ der vorige „schon gestern lief".
   Problem zu passen scheint.
 - Ein Symptom unterdrücken, statt die Ursache zu beheben.
 - Behaupten, etwas sei geprüft, wenn nur der Code gelesen wurde.
+- **Einen Mangel in einer eigenen Aufnahme übergehen.**
+- **Nur die gemeldete Stelle beheben**, ohne dieselbe Ursache anderswo
+  gesucht zu haben.
+- **Eine Behebung mergen, die einen neuen Prüfbefund erzeugt.**

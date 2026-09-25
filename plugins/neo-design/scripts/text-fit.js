@@ -6,7 +6,7 @@
  * produces no scrollbar: text gets clipped, squeezed or unreadably narrow,
  * and the layout looks tidy while it happens.
  *
- * Seven things are checked:
+ * Eight things are checked:
  *
  *   1. Clipped horizontally  — text disappears behind the edge
  *   2. Clipped vertically    — text is cut off at the bottom, with no hint
@@ -15,10 +15,27 @@
  *   5. Wrong word break      — broken mid-word instead of at a syllable
  *   6. Font too small        — below the readability floor
  *   7. Overlap               — two texts sit on top of each other
+ *   8. Covered text          — something else is painted on top of a line
  *
  * The fourth and the fifth are the ones no standard tool checks: a table
  * column that is three characters wide at 320px breaks no CSS rule. It is
  * just useless.
+ *
+ * The eighth catches what a glance misses: a progress bar, a badge or a
+ * gradient sitting on top of running text. Check 7 only sees two TEXTS in
+ * normal flow; this one sees any painting element above any text line,
+ * including absolutely positioned and sticky ones, found per point with
+ * document.elementsFromPoint.
+ *
+ * Because elementsFromPoint ignores elements with `pointer-events: none`,
+ * and decoration usually sets exactly that, the check switches pointer
+ * events on for the duration of the measurement and restores them after.
+ *
+ * A pinned or fixed surface that spans most of the width is page chrome:
+ * content scrolls underneath it by design, so it is not reported here —
+ * whether it reaches both window edges is `surface-edge.js`'s question.
+ * Any other cover that is intended carries `data-covers-ok` or is named in
+ * the `coverAllowed` option. An unmarked cover is a finding.
  *
  * Usage (Playwright):
  *   await page.addScriptTag({ path: 'tools/text-fit.js' })
@@ -38,6 +55,12 @@
     minFontSizeNarrow: 14,    // px, on narrow devices
     narrowUpTo: 768,
     overlapFrom: 4,           // px, from which an overlap is a finding
+    coverSamples: 3,          // sample points per axis and text line
+    coverMinArea: 12,         // px², below this a cover is a rounding artefact
+    coverMaxLines: 12,        // lines sampled per element
+    coverAllowed: [],         // selectors that are allowed to cover text
+    coverChromeSpan: 0.5,     // from this share of the width a sticky surface
+                              // counts as page chrome, not as decoration
     truncationAllowed: true,  // truncation with a full text counts as intent
     maxPerKind: 12,
     root: null
@@ -112,6 +135,78 @@
       if (d && d.textContent.trim().length >= shown.length) return true
     }
     return false
+  }
+
+  /** Does the element paint anything of its own? A transparent wrapper that
+   * happens to span the area covers nothing. */
+  function paints (el) {
+    var tag = el.tagName
+    if (tag === 'IMG' || tag === 'SVG' || tag === 'CANVAS' || tag === 'VIDEO' ||
+        tag === 'PICTURE') return true
+    var s = getComputedStyle(el)
+    if (s.visibility === 'hidden' || parseFloat(s.opacity) === 0) return false
+    if (s.backgroundImage && s.backgroundImage !== 'none') return true
+    if (s.boxShadow && s.boxShadow !== 'none') return true
+    var bg = s.backgroundColor || ''
+    var rgba = bg.match(/rgba?\(([^)]+)\)/)
+    if (rgba) {
+      var parts = rgba[1].split(',')
+      var alpha = parts.length > 3 ? parseFloat(parts[3]) : 1
+      if (alpha > 0.02) return true
+    }
+    var sides = ['borderTopWidth', 'borderRightWidth', 'borderBottomWidth',
+      'borderLeftWidth']
+    for (var i = 0; i < sides.length; i++) {
+      if (parseFloat(s[sides[i]]) > 0) return true
+    }
+    return false
+  }
+
+  /** The line boxes of the element's own text, one rect per line. */
+  function lineBoxes (el) {
+    var range = document.createRange()
+    range.selectNodeContents(el)
+    var boxes = range.getClientRects()
+    var out = []
+    for (var i = 0; i < boxes.length; i++) {
+      if (boxes[i].width < 1 || boxes[i].height < 1) continue
+      out.push(boxes[i])
+    }
+    return out
+  }
+
+  /** Which relationship means "not a cover":
+   *  - the element itself
+   *  - an ancestor: it paints BEHIND its own text, never over it
+   *  - a descendant in normal flow: an inline span is part of the line
+   * A positioned descendant is NOT exempt: decoration absolutely positioned
+   * inside the very paragraph it covers is the most common form of this
+   * defect, because it looks correct in the markup. */
+  function partOfLine (over, el) {
+    if (over === el) return true
+    if (over.contains(el)) return true
+    if (el.contains(over)) {
+      // Not the element itself decides, but the chain up to the text: the
+      // strips are static flex items, their CONTAINER is the absolute one.
+      for (var n = over; n && n !== el; n = n.parentElement) {
+        var position = getComputedStyle(n).position
+        if (position === 'absolute' || position === 'fixed' ||
+            position === 'sticky') return false
+      }
+      return true
+    }
+    return false
+  }
+
+  /** A pinned or fixed surface spanning most of the width is page chrome:
+   * content scrolls underneath it, and that is the design. Whether such a
+   * surface reaches both window edges is `surface-edge.js`'s question. This
+   * check is about DECORATION over text — strips, badges, glows. */
+  function pageChrome (el, minSpan) {
+    var s = getComputedStyle(el)
+    if (s.position !== 'sticky' && s.position !== 'fixed') return false
+    var r = el.getBoundingClientRect()
+    return r.width >= document.documentElement.clientWidth * minSpan
   }
 
   // ---------------------------------------------------------------- Checks
@@ -230,6 +325,67 @@
       }
     }
 
+    // 8. Something is painted on top of a text line
+    var patch = document.createElement('style')
+    patch.textContent = '*{pointer-events:auto !important}'
+    document.head.appendChild(patch)
+    try {
+      var allowed = o.coverAllowed || []
+      var seen = {}
+      withText.forEach(function (el) {
+        var boxes = lineBoxes(el).slice(0, o.coverMaxLines)
+        boxes.forEach(function (box) {
+          var points = []
+          for (var k = 1; k <= o.coverSamples; k++) {
+            for (var v = 1; v <= o.coverSamples; v++) {
+              // Sampling only the middle of the line misses decoration that
+              // covers its upper or lower half — a 6px strip on a 20px line.
+              points.push([box.left + box.width * (k / (o.coverSamples + 1)),
+                box.top + box.height * (v / (o.coverSamples + 1))])
+            }
+          }
+          for (var pi = 0; pi < points.length; pi++) {
+            var x = points[pi][0]
+            var y = points[pi][1]
+            if (x < 0 || y < 0 || x > width || y > window.innerHeight) continue
+            var stack = document.elementsFromPoint(x, y)
+            for (var i = 0; i < stack.length; i++) {
+              var over = stack[i]
+              if (partOfLine(over, el)) break
+              if (over === document.body ||
+                  over === document.documentElement) break
+              if (over.hasAttribute('data-covers-ok')) break
+              var isAllowed = false
+              for (var a = 0; a < allowed.length; a++) {
+                if (over.closest(allowed[a])) isAllowed = true
+              }
+              if (isAllowed) break
+              if (pageChrome(over, o.coverChromeSpan)) break
+              if (!paints(over)) continue
+              var r = over.getBoundingClientRect()
+              var acrossX = Math.min(r.right, box.right) - Math.max(r.left, box.left)
+              var acrossY = Math.min(r.bottom, box.bottom) - Math.max(r.top, box.top)
+              if (acrossX * acrossY < o.coverMinArea) continue
+              var key = selector(over) + '|' + selector(el)
+              if (seen[key]) break
+              seen[key] = true
+              findings.push({
+                kind: 'covered-text',
+                what: selector(over) + ' is painted over ' +
+                      Math.round(acrossX) + 'x' + Math.round(acrossY) +
+                      'px of this line',
+                where: selector(el),
+                text: shorten(ownText(el))
+              })
+              break
+            }
+          }
+        })
+      })
+    } finally {
+      patch.parentNode.removeChild(patch)
+    }
+
     return {
       width: width,
       fontFloor: fontFloor,
@@ -249,10 +405,11 @@
     'break-in-word': 'Break in the middle of a word',
     'hyphens-no-lang': 'Hyphenation without a language',
     'font-too-small': 'Font too small',
-    'overlap': 'Texts overlap'
+    'overlap': 'Texts overlap',
+    'covered-text': 'Something is painted over the text'
   }
 
-  var ORDER = ['clipped-x', 'clipped-y', 'truncated-no-source',
+  var ORDER = ['clipped-x', 'clipped-y', 'covered-text', 'truncated-no-source',
     'overlap', 'too-narrow', 'break-in-word',
     'hyphens-no-lang', 'font-too-small', 'truncated']
 
@@ -262,7 +419,8 @@
     var lines = ['Text fit at ' + result.width + 'px, font floor ' +
       result.fontFloor + 'px — ' + result.textElements + ' elements with text']
     if (!result.findings.length) {
-      lines.push('Passed. No text clipped, no area too narrow, no break inside a word.')
+      lines.push('Passed. No text clipped, nothing painted over it, no area ' +
+        'too narrow, no break inside a word.')
       return lines.join('\n')
     }
     lines.push('')

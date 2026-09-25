@@ -253,6 +253,19 @@ ausnahmslos ein Element der einen Spalte mit einem der anderen. Solche
 Zahlen sind ein Artefakt der Bühne und kein Mangel der Anwendung —
 `references/pruefstand.md`.
 
+**Was scrollgebunden ist, hat keinen Zustand, sondern eine Abfolge.**
+Angeheftete Flächen, durchlaufender Text, Stationen einer Galerie werden
+in **jeder Phase** gemessen — Einstieg, jede Station, jeder Übergang,
+Ende, Ausstieg und die Auslaufzone, in der die Fläche durchsichtig wird.
+Ein Effekt, der nur in der Ruhelage geprüft wurde, gilt als ungeprüft.
+Dazu zwei harte Regeln: **Eine deckende Fläche, unter der Inhalt
+durchläuft, reicht bis an beide Fensterränder** (`surface-edge.js`;
+Vollbreite über `border-image` mit `outset`, nie über ein Pseudo-Element
+mit `100vw`), und **nichts Dekoratives liegt über Text, in keinem
+Zustand** (`text-fit.js`, Befund `covered-text`). Phasen, Prüfbreiten
+einschließlich 1500 × 600 und der Befundvergleich vorher/nachher:
+`references/scrolleffekte.md`.
+
 Umbruchpunkte, Tabellenrangfolge, Lückenregel mit Beispielcode,
 Höchstbreiten und Navigation: `references/responsiv.md`. Umbruch, Kürzen,
 zu schmale Bereiche und mitwachsende Schriftgrößen:
@@ -420,6 +433,28 @@ Erfindung. Wird eine solche Erfindung beanstandet, ist die Korrektur
 ihre **Entfernung**, nicht eine leisere Fassung. Ausführlich mit dem
 Fall, aus dem die Regel stammt: `references/claude-design.md`.
 
+**Die eigene Aufnahme ist Prüfgegenstand.** Jeder Screenshot, den der
+Agent macht, wird vollständig abgesucht — beide Ränder, alle Ecken,
+Übergänge, Überlagerungen, abgeschnittene und verdeckte Inhalte. **Jeder
+sichtbare Mangel wird in derselben Antwort gemeldet**, auch wenn er nicht
+zur Aufgabe gehört; behoben wird nur nach Freigabe. Ein Mangel, der in
+einer eigenen Aufnahme sichtbar war und nicht gemeldet wurde, ist ein
+Verstoß (`references/pruefstand.md`).
+
+**Ein gemeldeter Mangel ist eine Befundklasse, keine Einzelstelle.**
+Meldet der Projektinhaber etwas, wird dieselbe Ursache überall gesucht:
+andere Seite, anderes Ende, andere Breiten, jede Seite mit derselben
+Komponente. Alle Fundstellen werden gemeldet, behoben wird der
+freigegebene Umfang (Skill `neo-grundregeln`,
+`references/selbstkontrolle.md`).
+
+**Jede sichtbare Korrektur wird mit einem Vorher-nachher-Bild gemeldet**,
+die betroffene Stelle markiert (`comparison.js`). „Sieht gut aus" ist
+keine Abnahme. Und **kein Fix erzeugt einen neuen Prüfbefund**: Vorher
+und nachher laufen `overflow.js` und `text-fit.js` auf allen acht
+Breiten, der Vergleich zeigt null neue Befunde — sonst wird die Lösung
+umgebaut, bevor sie gemergt wird.
+
 **Selbstkontrolle ist Pflicht.** Nach jeder Korrektur erneut messen und
 die Zahl nennen; „sieht gut aus" ist keine Zahl. Die letzte Zeile jeder
 Fertigmeldung lautet: **„Eigene Gestaltungsentscheidungen: 0."** Steht
@@ -465,6 +500,10 @@ Vor jeder Fertigmeldung die Liste in `references/pruefliste.md`
 durchgehen und das Ergebnis berichten. Nicht Geprüftes gilt als nicht
 erfüllt. Der Befehl `/neo-design:neo-oberflaechenpruefung` führt die
 Prüfung an einer bestehenden Ansicht durch.
+
+| Bereich | Referenz |
+| --- | --- |
+| Scrollgebundene Effekte: Phasen, Randstreifen, Deko über Text | `references/scrolleffekte.md` |
 
 Zugehörige Skills: `neo-komponenten` (Wrapper-Komponenten, Katalog),
 `neo-doku` (Bedienungsdoku, Screenshots), `neo-grundregeln` (Prozess,
