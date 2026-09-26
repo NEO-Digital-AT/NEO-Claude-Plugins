@@ -100,14 +100,14 @@ Fest, nach jeder substanziellen Änderung:
 Commit, keine Fertigmeldung. Ein Schritt wird nicht übersprungen, weil
 der vorige „schon gestern lief".
 
-## Ein Befund ist eine Klasse, keine Einzelstelle
+## Ein Befund ist eine Klasse — aber kein Auftrag
 
-> **Meldet der Projektinhaber einen Mangel, ist die gemeldete Stelle ein
-> Beispiel — nicht der Umfang.**
+> **Suchen ist Information. Beheben ist Auftrag. Einen Agenten starten ist
+> eine Handlung. Nur das Erste geschieht von sich aus.**
 
 Wer nur die genannte Stelle behebt, liefert dieselbe Meldung in einer Woche
 erneut, für die Seite daneben. Deshalb wird nach jedem gemeldeten Mangel
-**dieselbe Ursache überall gesucht**:
+**dieselbe Ursache gesucht** — gesucht, nicht behoben:
 
 | Wo noch gesucht wird | Warum |
 | --- | --- |
@@ -117,11 +117,27 @@ erneut, für die Seite daneben. Deshalb wird nach jedem gemeldeten Mangel
 | **Derselbe Zustand woanders** | Hover, Fokus, leer, ladend, Fehler |
 | **Dieselbe Ursache in anderer Form** | Ein vergessener Wert ist selten einmal vergessen |
 
-- **Alle Fundstellen werden gemeldet**, auch die, für die keine Freigabe
-  vorliegt.
-- **Behoben wird der freigegebene Umfang**, nicht mehr (Kernregel 1).
-- **Die Zahl gehört in die Antwort**: „gemeldet: 1, gefunden: 7, behoben
-  nach Freigabe: 7".
+**Und dann hört es auf.** Das Suchen darf die Arbeit nicht erweitern:
+
+- **Behoben wird nur das gemeldete Problem** (Kernregel 3). Die weiteren
+  Fundstellen werden **aufgelistet und zu Punkten**, nicht mitbehoben —
+  auch nicht, wenn die Behebung „dieselbe Zeile" wäre.
+- **Kein Fachagent für einen Befund.** Ein Agent wird für den Auftrag
+  gestartet, nicht je Fundstelle und nicht je Testbefund. Höchstens einer
+  je Punkt (`orchestrierung.md`).
+- **Ein Testbefund ist kein Auftrag.** Dass eine Prüfung etwas findet,
+  macht es nicht zur Aufgabe dieser Sitzung. Es macht es zu einem Punkt
+  auf der Liste, den der Projektinhaber freigibt oder streicht.
+- **Die Suche selbst bleibt klein.** Sie beantwortet „wo noch?", nicht
+  „was ist hier sonst nicht in Ordnung?". Eine Suche, die in eine
+  allgemeine Prüfung des Projekts übergeht, ist aus dem Ruder gelaufen.
+- **Die Zahl gehört in die Antwort**: „gemeldet: 1, behoben: 1, weitere
+  Fundstellen als Punkte notiert: 6".
+
+**Der Fall, aus dem diese Fassung entstanden ist:** Ein gemeldetes Problem
+löste eine Prüfung aus, die Prüfung fand weitere Befunde, und für die
+Befunde wurden Agenten gestartet — Arbeit an Dingen, die niemand
+beauftragt hatte, während das gemeldete Problem darin unterging.
 
 ## Die eigene Aufnahme ist Prüfgegenstand
 

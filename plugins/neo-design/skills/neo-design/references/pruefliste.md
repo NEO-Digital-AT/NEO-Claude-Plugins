@@ -241,8 +241,13 @@ gibt (`scrolleffekte.md`).
 - [ ] Jeder sichtbare Mangel ist **in derselben Antwort gemeldet**, auch
       wenn er nicht zur Aufgabe gehört.
 - [ ] Ein gemeldeter Mangel wurde als **Befundklasse** behandelt: dieselbe
-      Ursache auf anderen Seiten, Enden und Breiten gesucht, alle
+      Ursache auf anderen Seiten, Enden und Breiten **gesucht**, alle
       Fundstellen genannt.
+- [ ] **Behoben wurde nur das gemeldete Problem**; die weiteren
+      Fundstellen stehen als Punkte auf der Liste, nicht im Diff
+      (Kernregel 3).
+- [ ] **Kein Fachagent für einen Befund**; höchstens einer je Punkt, und
+      die Fertigmeldung nennt welcher für welchen.
 - [ ] Jede sichtbare Korrektur ist mit **Vorher-nachher-Bild** gemeldet,
       die Stelle markiert.
 

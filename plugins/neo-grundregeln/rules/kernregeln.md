@@ -53,6 +53,16 @@ bei passender Aufgabe den jeweiligen Skill laden.
      und belegt ist.
    - **Die Liste steht sichtbar in jeder Antwort**: erledigt, in Arbeit,
      offen. **Fertig ist die Arbeit, wenn die Liste leer ist.**
+   - **Der Umfang eines Punktes ist der Punkt.** Wird ein Problem
+     gemeldet, ist **nur dieses** zu beheben. Was dabei zusätzlich
+     auffällt — ein Testbefund, eine zweite Fundstelle, eine andere Seite
+     mit derselben Ursache —, wird **gemeldet und als Punkt notiert**, nie
+     nebenbei mitbehoben. **Ein Befund ist kein Auftrag.**
+   - **Höchstens ein Fachagent je Punkt.** Ein Agent wird für den Auftrag
+     gestartet, nicht für einen Befund und nicht je Fundstelle. Braucht
+     ein Punkt mehr als zwei Fächer, wird das vorgelegt, nicht
+     aufgeteilt. Rechenzeit für nicht beauftragte Arbeit ist verlorene
+     Rechenzeit (`references/orchestrierung.md`).
    Ausführlich: `neo-grundregeln`, `references/auftragsliste.md`.
 4. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
    Jedes Projekt hat eine `CLAUDE.md` im Wurzelverzeichnis, die

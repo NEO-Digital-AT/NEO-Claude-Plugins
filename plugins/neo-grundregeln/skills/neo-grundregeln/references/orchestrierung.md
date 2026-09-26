@@ -92,6 +92,30 @@ einem Ergebnis dazwischen. Nicht ein Agent, der beides „mitmacht".
 - **Mehr Agenten sind nicht besser.** Ein Fach, das keine eigenen Regeln
   hat, braucht keinen eigenen Agenten.
 
+## Die Obergrenze
+
+> **Höchstens ein Fachagent je Punkt der Auftragsliste.**
+
+Ein Agent wird für einen **Auftrag** gestartet, nie für einen Befund:
+
+| Auslöser | Was daraus folgt |
+| --- | --- |
+| Ein Punkt der Auftragsliste | **Ein** Fachagent, der ihn übernimmt |
+| Ein Punkt, der zwei Fächer berührt | Zwei Übergaben **nacheinander**, mit einem Ergebnis dazwischen |
+| Ein Punkt, der mehr als zwei Fächer berührt | **Vorlegen**, nicht aufteilen — der Punkt ist zu groß geschnitten |
+| Ein Testbefund, eine zweite Fundstelle, ein Nebenfund | **Kein Agent.** Melden und als Punkt notieren |
+
+- **Kein Agent für etwas, das nicht auf der Liste steht.** Rechenzeit für
+  nicht beauftragte Arbeit ist verlorene Rechenzeit, und sie verdeckt das
+  gemeldete Problem.
+- **Kein Agent, um einen Agenten zu beaufsichtigen.** Prüfen tut die
+  Weiche, mit den Werkzeugen des Fachs.
+- **Kein Agent für eine Aufgabe, die kürzer ist als ihre Übergabe.** Eine
+  Zeile ändern, einen Wert nachlesen, eine Datei umbenennen: Das macht die
+  Weiche selbst.
+- **Die Zahl steht in der Fertigmeldung**: welcher Agent für welchen Punkt
+  lief. Mehr Agenten als Punkte sind ein Verstoß.
+
 ## Wann die Aufteilung wieder geprüft wird
 
 Wenn ein Skill so lang wird, dass sein Fachagent ihn nicht mehr

@@ -441,12 +441,13 @@ zur Aufgabe gehört; behoben wird nur nach Freigabe. Ein Mangel, der in
 einer eigenen Aufnahme sichtbar war und nicht gemeldet wurde, ist ein
 Verstoß (`references/pruefstand.md`).
 
-**Ein gemeldeter Mangel ist eine Befundklasse, keine Einzelstelle.**
-Meldet der Projektinhaber etwas, wird dieselbe Ursache überall gesucht:
-andere Seite, anderes Ende, andere Breiten, jede Seite mit derselben
-Komponente. Alle Fundstellen werden gemeldet, behoben wird der
-freigegebene Umfang (Skill `neo-grundregeln`,
-`references/selbstkontrolle.md`).
+**Ein gemeldeter Mangel ist eine Befundklasse — aber kein Auftrag.**
+Dieselbe Ursache wird **gesucht**: andere Seite, anderes Ende, andere
+Breiten, jede Seite mit derselben Komponente. **Behoben wird nur das
+gemeldete Problem** (Kernregel 3); die weiteren Fundstellen werden
+aufgelistet und zu Punkten, nicht mitbehoben. **Kein Fachagent für einen
+Befund** — höchstens einer je Punkt (Skill `neo-grundregeln`,
+`references/selbstkontrolle.md`, `references/orchestrierung.md`).
 
 **Jede sichtbare Korrektur wird mit einem Vorher-nachher-Bild gemeldet**,
 die betroffene Stelle markiert (`comparison.js`). „Sieht gut aus" ist
