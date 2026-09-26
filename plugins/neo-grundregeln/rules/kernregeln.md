@@ -63,6 +63,13 @@ bei passender Aufgabe den jeweiligen Skill laden.
      ein Punkt mehr als zwei Fächer, wird das vorgelegt, nicht
      aufgeteilt. Rechenzeit für nicht beauftragte Arbeit ist verlorene
      Rechenzeit (`references/orchestrierung.md`).
+   - **Findet eine Prüfung Probleme, kommt zuerst ein Voranschlag, dann
+     die Freigabe, dann die Reparatur.** Der Voranschlag nennt je Befund
+     die **Notwendigkeit** (Blocker · sollte · kosmetisch · kein Befund),
+     die **Zahl der Fachagenten** und die **geschätzte Dauer**, dazu eine
+     Summenzeile. **Vorher wird nichts gestartet** — kein Agent, keine
+     Datei geändert, keine „schnelle Zeile". Einzige Ausnahme: eine harte
+     Sicherheitslücke (Regel 27).
    Ausführlich: `neo-grundregeln`, `references/auftragsliste.md`.
 4. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
    Jedes Projekt hat eine `CLAUDE.md` im Wurzelverzeichnis, die

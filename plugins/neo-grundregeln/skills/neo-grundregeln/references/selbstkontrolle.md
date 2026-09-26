@@ -139,6 +139,60 @@ löste eine Prüfung aus, die Prüfung fand weitere Befunde, und für die
 Befunde wurden Agenten gestartet — Arbeit an Dingen, die niemand
 beauftragt hatte, während das gemeldete Problem darin unterging.
 
+## Der Reparaturvoranschlag
+
+> **Ein Prüfbericht endet mit einem Voranschlag, nicht mit einer
+> Reparatur.**
+
+Ein Review, ein Testlauf, ein Prüfwerkzeug findet Befunde. Was davon
+behoben wird, entscheidet der Projektinhaber — und er kann es nur
+entscheiden, wenn er weiß, was es kostet. Deshalb steht am Ende jeder
+Prüfung diese Tabelle, und **nichts läuft, bevor sie freigegeben ist**:
+
+```
+Nr  Befund                            Notwendigkeit  Agenten  Dauer
+ 1  Kontrast 1,08:1 im dunklen Block   Blocker           1     ~25 min
+ 2  Randstreifen 16 px auf 3 Seiten    Blocker           1     ~40 min
+ 3  Zwei Begriffe für dieselbe Sache   sollte            0     ~10 min
+ 4  Abstand 14 statt 16 px             kosmetisch        0     ~5 min
+ 5  „Fehlender Alternativtext"         kein Befund       0       —
+                                       Summe: 2 Agenten, ~75 min
+```
+
+### Die vier Stufen der Notwendigkeit
+
+| Stufe | Was hineingehört |
+| --- | --- |
+| **Blocker** | Fehlfunktion, Datenverlust, Sicherheitslücke, rechtliche Pflicht, Verstoß gegen eine Regel mit „nie", „immer" oder „muss" |
+| **sollte** | Ein echter Mangel, an dem nichts bricht: Wortwahl, doppelte Begriffe, fehlender Test, unsaubere Struktur |
+| **kosmetisch** | Sichtbar, aber ohne Folge. Kann bleiben |
+| **kein Befund** | Der Prüfer hat sich geirrt. **Wird trotzdem genannt**, mit Begründung, sonst taucht er beim nächsten Lauf wieder auf |
+
+**Die Stufe wird begründet, nicht behauptet.** „Blocker" braucht den Satz,
+was bricht; „kosmetisch" den Satz, warum nichts davon abhängt.
+
+### Die Dauer ist eine Schätzung und heißt so
+
+- **Grundlage benennen**: Zahl der berührten Dateien, ob gemessen werden
+  muss, ob ein Fremdsystem beteiligt ist. Eine Zahl ohne Grundlage ist
+  geraten.
+- **Nach der Arbeit wird die tatsächliche Dauer genannt**, neben der
+  geschätzten. Nur so werden die Schätzungen besser.
+- **Zwei Stunden sind keine Schätzung, sondern ein Schnitt.** Was länger
+  dauert, wird in Punkte zerlegt und einzeln vorgelegt.
+
+### Vor der Freigabe läuft nichts
+
+- **Kein Fachagent**, auch keiner „zur Vorbereitung" oder „nur zum
+  Nachsehen".
+- **Keine Datei geändert**, auch nicht die eine Zeile, die „sowieso klar"
+  ist.
+- **Keine Teilfreigabe von selbst.** Gibt der Projektinhaber Befund 1 und
+  3 frei, bleiben 2 und 4 offene Punkte auf der Liste — nicht
+  „naheliegend mitgemacht".
+- **Einzige Ausnahme: eine harte Sicherheitslücke.** Die wird sofort
+  behoben und unverzüglich gemeldet (Kernregel 27). Alles andere wartet.
+
 ## Die eigene Aufnahme ist Prüfgegenstand
 
 **Jeder Screenshot, jede Aufnahme, jede Ausgabe, die der Agent selbst
@@ -177,3 +231,7 @@ alte: Ob er kleiner ist, entscheidet der Projektinhaber.
 - **Nur die gemeldete Stelle beheben**, ohne dieselbe Ursache anderswo
   gesucht zu haben.
 - **Eine Behebung mergen, die einen neuen Prüfbefund erzeugt.**
+- **Nach einer Prüfung mit dem Reparieren anfangen**, ohne Voranschlag und
+  ohne Freigabe.
+- **Eine Dauer nennen, ohne ihre Grundlage zu nennen** — oder die
+  tatsächliche Dauer danach verschweigen.
