@@ -86,9 +86,9 @@ er steht im Inhalt.
 - Für die Qualität der Antworten selbst: eine gepflegte Sammlung echter
   Fälle mit erwartetem Ergebnis, die bei jeder Änderung erneut
   durchlaufen wird. Sie ersetzt keinen Test, sie ist ein Vergleich.
-  Ruft die KI-Funktion **Werkzeuge** auf, gelten die drei Belegarten des
-  Skills `neo-assistent`, `references/abnahme.md` — die Messung mit dem
-  echten Modell führt dort keine Werkzeuge aus.
+  Ruft die KI-Funktion **Werkzeuge** auf, gelten die Belegarten des
+  Skills `neo-assistent`, `references/abnahme.md`: Tests der
+  Werkzeuggrenzen und der Lauf im Staging.
 - **Ein Modellwechsel ist eine Änderung mit Auswirkung** und wird wie
   eine solche behandelt: vorlegen, vergleichen, freigeben (Skill
   `neo-grundregeln`).

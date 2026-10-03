@@ -6,7 +6,7 @@ Lesekonvention siehe `SKILL.md`.
 > stillgelegt.** Einzeln wirkt jede vernünftig. Zusammen haben sie einen
 > Assistenten ergeben, der an seinen eigenen Absicherungen gescheitert ist.
 
-**Herkunft:** LeoFlex-Concierge, Juli bis September 2026 — Router mit
+**Herkunft:** ein Hotel-Concierge im Betrieb, Juli bis September 2026 — Router mit
 Fachagenten und Schreiber, ein über Monate gewachsener Prompt im Code,
 Prüfungen der Antwort im Code und durch ein zweites Modell. Nach dem Umbau
 vom 30.09.2026 arbeitet er mit einem Modell, Werkzeugen und Skills, und
@@ -79,13 +79,15 @@ Anwendung schickt, wenn der Lauf scheitert oder eine Prüfung anschlägt.
 
 **Woran es bricht:** Ein Gast wählte einen Tarif, nannte seinen Namen und
 bekam eine Absage. Ein erschöpfter Lauf erzeugte einen festen Text oder
-beauftragte ein Modell, eine Absage zu schreiben.
+beauftragte ein Modell, eine Absage zu schreiben. Umgekehrt gab ein Lauf
+ein Gespräch still an das Team ab: Der Gast bekam keine Antwort mehr und
+erfuhr nicht, warum.
 
 **Stattdessen:** Jeder Text an den Kunden kommt vom Modell; die Anwendung
 hängt nur KI-Hinweis und Signatur an, immer gleich. Kommt ein Lauf
-nicht zu Ende, arbeitet er mit den festgehaltenen Ergebnissen weiter, oder
-das Team bekommt einen internen Hinweis. Die Nachricht bleibt
-unbeantwortet, nicht falsch beantwortet (`aufbau.md`).
+nicht zu Ende, arbeitet er mit den festgehaltenen Ergebnissen weiter; ein
+voller Kontext wird komprimiert. Übergibt das Modell an das Team, schreibt
+es dem Kunden selbst, dass ein Mitarbeiter übernimmt (`aufbau.md`).
 
 ## 6. Fachliche Folgekette
 
@@ -134,8 +136,9 @@ Antworten beendet den Lauf — mit einem Text an den Kunden.
 Buchungsablauf nicht. Drei verworfene Antworten beendeten den Lauf, auch
 wenn er zwischendurch vorankam.
 
-**Stattdessen:** Großzügige, einstellbare Grenzen; am Ende Fortsetzung
-oder ein interner Hinweis (`aufbau.md`).
+**Stattdessen:** Großzügige, einstellbare Grenzen; am Ende Fortsetzung.
+Ein voller Kontext wird komprimiert — nie eine Absage, nie eine stille
+Abschaltung (`aufbau.md`).
 
 ## Woran man einen Rückfall erkennt
 
@@ -145,6 +148,10 @@ oder ein interner Hinweis (`aufbau.md`).
 - Ein Werkzeug gibt einen fertigen Satz für den Kunden zurück.
 - Ein Test prüft Code, der im echten Lauf nicht aufgerufen wird.
 - Ein Kommentar beschreibt Router, Fachagenten oder Schreiber.
+- Ein Gespräch endet beim Team, ohne dass der Kunde es vom Modell erfahren
+  hat.
+- Ein Skill erklärt eine reine Informationsfrage oder begründet seine
+  Regeln in Prosa.
 
 Jeder dieser Funde wird gemeldet und vorgelegt, nicht nebenbei gebaut und
 nicht nebenbei entfernt (Kernregel 3).

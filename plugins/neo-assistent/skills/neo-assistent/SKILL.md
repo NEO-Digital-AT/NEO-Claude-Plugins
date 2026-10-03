@@ -10,7 +10,7 @@ description: >
   Router, ein zweites Modell oder ein fester Antworttext entsteht. Ebenso
   bei Requesty, Modellwechsel und Abnahme eines Assistenten.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg; Bauweise des LeoFlex-Concierge nach dem Umbau vom 30.09.2026, Stand 2026-10
+  herkunft: NEO Digital — Vorgaben Erich Nigg aus dem Betrieb eines Hotel-Concierge, Umbau vom 30.09.2026, Stand 2026-10
 ---
 
 # KI-Assistenten bauen
@@ -18,10 +18,9 @@ metadata:
 Lesekonvention siehe `README.md` des Regel-Repositorys: **Nie**,
 **immer** und **muss** sind verbindlich, ein Verstoß ist ein Blocker.
 
-Dieser Skill regelt den **Bau**. Rechtsstand, Kennzeichnung,
-Datenweitergabe und Kosten stehen im Skill `neo-ki` und gelten zusätzlich.
-„Skill des Assistenten" heißt hier das Regelwerk, das das Modell im
-Produkt befolgt — nicht dieser Text für den Agenten, der baut.
+Dieser Skill regelt den **Bau**; Rechtsstand, Kennzeichnung,
+Datenweitergabe und Kosten regelt zusätzlich `neo-ki`. „Skill des
+Assistenten" heißt das Regelwerk, das das Modell im Produkt befolgt.
 
 ## Der Satz, um den es geht
 
@@ -30,10 +29,9 @@ Produkt befolgt — nicht dieser Text für den Agenten, der baut.
 > geschieht. Die Skills bestimmen, wie es geschieht. Die Werkzeuge führen
 > aus und halten die Grenzen. Mehr wird nicht gebaut.**
 
-Jede andere Bauweise — Router, Fachagenten-Kette, Prüfagent,
-Absicherungen um das Modell herum, Riesenprompt — ist ein **Blocker**.
-Sie wurde im LeoFlex-Concierge zweieinhalb Monate lang gebaut und
-nachgebessert und ist dort stillgelegt (`references/verbote.md`).
+Jede andere Bauweise — Router, Fachagenten-Kette, Prüfagent, Absicherungen
+um das Modell herum, Riesenprompt — ist ein **Blocker**; sie wurde gebaut,
+nachgebessert und stillgelegt (`references/verbote.md`).
 
 ## 1. Die drei Bausteine
 
@@ -41,7 +39,7 @@ nachgebessert und ist dort stillgelegt (`references/verbote.md`).
 | --- | --- | --- |
 | **Modell** | ein Sprachmodell, gewählt in der Konfiguration | was der Kunde will, was fehlt, welche Regel gilt, welches Werkzeug als Nächstes, wann die Arbeit fertig ist, was geantwortet wird |
 | **Werkzeuge** | die angebundenen MCP-Server; eigene Werkzeuge der Anwendung nur für Abläufe, für die es keinen MCP-Server gibt | nichts Fachliches — sie führen aus und prüfen Mandant, Rechte, Eigentum und Doppelausführung |
-| **Skills** | das Regelwerk des Assistenten: ein kleiner Kern und je Aufgabenbereich ein Skill | nichts — sie sagen dem Modell, was wann wie zu tun ist und was nie |
+| **Skills** | das Regelwerk des Assistenten: ein strenger Kern und je komplexem Ablauf ein Skill | nichts — sie sagen dem Modell, was wann wie zu tun ist und was nie |
 
 Ein **MCP-Server** ist ein Werkzeugserver nach dem Model Context Protocol:
 Er nennt seine Werkzeuge mit Beschreibung und erlaubten Angaben (Schema).
@@ -64,13 +62,15 @@ Wie Claude Code mit einem Auftrag:
 
 1. Die Nachricht lesen und im Gespräch nachsehen, was schon gesagt ist.
 2. Im Regelwerk nachsehen, welcher Ablauf gilt und was wichtig ist.
-3. Die Werkzeuge prüfen und den nächsten Schritt planen.
+3. Die Werkzeuge prüfen und den nächsten Schritt selbst planen.
 4. Das Werkzeug aufrufen, das Ergebnis lesen, weiter bei 2.
 5. Antworten, wenn die Aufgabe erledigt ist oder nur der Kunde
-   weiterhelfen kann.
+   weiterhelfen kann. An das Team erst, wenn kein Werkzeug mehr hilft —
+   und der Kunde erfährt es vom Modell selbst.
 
 Schreibt der Kunde dazwischen, geht die Nachricht in die laufende Arbeit
-ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt.
+ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt. Wird
+der Kontext zu groß, wird komprimiert und weitergearbeitet.
 
 ## 4. Verboten — ohne Ausnahme
 
@@ -84,10 +84,9 @@ ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt.
 5. **Nie** ein Text vom Server an den Kunden — keine Ersatzantwort, keine
    Absage; nur KI-Hinweis und Signatur hängt die Anwendung an.
 6. **Nie** eine fachliche Folgekette, die der Server von selbst anstößt.
-7. **Nie** Skills oder Werkzeuge erst im Gespräch nachladen oder
-   freischalten.
+7. **Nie** Skills oder Werkzeuge im Gespräch nachladen oder freischalten.
 8. **Nie** ein Laufzeitprompt im Code.
-9. **Nie** eine Grenze, die mit einer Absage an den Kunden endet.
+9. **Nie** eine Absage oder eine stille Abschaltung an einer Grenze.
 
 Woran jede davon brach und was stattdessen gilt: `references/verbote.md`.
 
@@ -99,7 +98,7 @@ arbeitet. Daraus folgt, was seine Werkzeuge erreichen dürfen:
 | Art | Für wen | Werkzeuge erreichen | Nachweis |
 | --- | --- | --- | --- |
 | Plattformassistenz | den angemeldeten Plattformbetreiber im Admin-Werkzeug | mandantenübergreifend die eigene Plattform | die Anmeldung als Plattformbetreiber |
-| Kundenassistenz mit Kundendaten | einen Kunden über einen Kanal, nicht angemeldet | die Vorgänge vieler Kunden eines Mandanten | vor jedem Zugriff auf einen bestehenden Vorgang, im Werkzeug |
+| Kundenassistenz mit Kundendaten | einen Kunden über einen Kanal, nicht angemeldet | die Vorgänge vieler Kunden eines Mandanten | vor jeder Auskunft zu einem bestehenden Vorgang, im Werkzeug |
 | Kundenassistenz ohne Kundendaten | einen Kunden in einer öffentlichen Strecke | nur öffentliche Funktionen | keiner — es gibt nichts Privates |
 
 - **Mandantentrennung ist hart.** Jede Assistenz eines Mandanten oder
@@ -107,16 +106,18 @@ arbeitet. Daraus folgt, was seine Werkzeuge erreichen dürfen:
 - **Ein Assistent handelt nie mit mehr Rechten als die Person, für die er
   arbeitet.**
 - **Prozesskritische Werkzeuge bekommt eine Kundenassistenz nie** —
-  Stammdaten, Einstellungen, Löschungen, Tagesabschluss.
-- **Nachweis bei Kundendaten:** mindestens zwei Merkmale stimmen mit dem
-  Vorgang überein, nur wer gebucht hat; das Werkzeug gleicht ab, das Modell
-  sieht die Daten erst nach dem Treffer.
+  Stammdaten, Einstellungen, Löschungen, Tagesabschluss. Die Abrechnung
+  zwischen Plattform und Mandant erreicht nur die Plattformassistenz.
+- **Nachweis bei Kundendaten:** vor jeder Auskunft zu einem Vorgang zwei
+  bis drei Merkmale, nur wer gebucht hat; das Werkzeug gleicht ab, das
+  Modell sieht die Daten erst nach dem Treffer.
 
 Einzelheiten und die Einstellungen: `references/zugriff.md`.
 
 ## 6. Werkzeuge
 
 - **Freigabeliste je Assistent:** nur, was Art und Aufgabe brauchen.
+- **Selbstständig:** Das Modell nutzt Werkzeuge ohne Anleitung im Skill.
 - **Die Definition kommt vom Server**, wie er sie liefert; jeder Vertrag
   ist gegen die Dokumentation und einen echten Aufruf geprüft.
 - **Fehler gehen als Tatsache an das Modell zurück**; es korrigiert selbst.
@@ -130,7 +131,11 @@ Einzelheiten: `references/werkzeuge.md`.
 
 ## 7. Skills des Assistenten
 
-- **Ein Paket:** ein kleiner Kern, je Aufgabenbereich ein Skill, ein Manifest.
+- **Ein Paket:** ein strenger Kern, ein Skill je komplexem Ablauf mit
+  Folgen (Buchen, Zahlen, Stornieren, Rechnung), ein Manifest — keiner
+  für reine Information. Jeder Skill kurz: Zweck, Werkzeuge, Schritte,
+  Nie, Übergabe, eine Aussage je Zeile.
+- **Der Kern verbietet das Erfinden:** Gesagt wird nur, was belegt ist.
 - **Jede Regel genau einmal**, in dem Skill, dem der Bereich gehört — und
   nie zugleich im Code.
 - **Englisch, im Befehlston, konkret.** Die Beschreibung sagt, wofür ein
@@ -143,30 +148,25 @@ Einzelheiten: `references/skills.md`.
 
 ## 8. Wenn der Assistent falsch handelt
 
-1. **Den Lauf lesen:** was das Modell bekam, welche Werkzeuge es rief, was
-   zurückkam, was es antwortete.
-2. **Verhaltensfehler → die Regel im Skill** schärfen.
-3. **Grenzverletzung → das Werkzeug** reparieren: Mandant, Eigentum,
-   Doppelausführung.
-4. **Nie** eine Prüfung, einen Filter, einen Ersatztext, einen Router oder
-   ein zweites Modell als Reparatur.
-5. Denselben Fall erneut mit dem echten Modell laufen lassen.
+Den Lauf lesen: was das Modell bekam, rief, zurückbekam und antwortete.
+Verhaltensfehler → Regel im Skill schärfen; Grenzverletzung → Werkzeug
+reparieren; dann denselben Fall erneut mit dem echten Modell. **Nie** als
+Reparatur: Prüfung, Filter, Ersatztext, Router oder zweites Modell.
 
 ## 9. Modell und Abnahme
 
 - **Modell** über den Requesty-EU-Router, Regionsangabe in der Kennung,
   Schlüssel nur aus der Umgebung, feste Fassung aus der Konfiguration. Ein
   Modellwechsel ist keine Reparatur.
-- **Abnahme** mit drei Belegarten, getrennt berichtet: Tests der Grenzen,
-  Messung mit dem echten Modell ohne Ausführung, Lauf im Staging mit
-  Testdaten. Ein grüner Test beweist nicht, dass das Modell die Skills
-  befolgt.
+- **Abnahme:** Tests der Werkzeuggrenzen und ein Lauf im Staging mit dem
+  echten Modell und Testdaten, getrennt berichtet. Keine Prüfskripte um
+  das Modell; ein grüner Test beweist nicht, dass es die Skills befolgt.
 
 ## Die Bereiche
 
 | Bereich | Referenz |
 | --- | --- |
-| Schleife, Kontext, Gedächtnis, neue Nachrichten, Zustellung | `references/aufbau.md` |
+| Schleife, Kontext, Gedächtnis, neue Nachrichten, Zustellung, Übergabe | `references/aufbau.md` |
 | Die verbotenen Bauweisen, woran sie brachen, was stattdessen gilt | `references/verbote.md` |
 | Arten von Assistenten, Mandant, Nachweis, Geheimnisse, Einstellungen | `references/zugriff.md` |
 | Werkzeuge und MCP-Server | `references/werkzeuge.md` |

@@ -16,13 +16,49 @@ skills/<assistent>/
 
 | Teil | Inhalt | Umfang |
 | --- | --- | --- |
-| **Kern** | wer der Assistent ist (aus den Einstellungen), Sprache des Kunden, Wahrheit, Zustimmung, Form der Antwort, Vorrang der Anweisungen, Umgang mit Fehlern und Grenzen | klein — er steht in jedem Aufruf |
-| **Aufgaben-Skill** | ein Aufgabenbereich: Ablauf, nötige Angaben, Zustimmung, Werkzeuge in ihrer Reihenfolge, was nie, wann das Team übernimmt | wenige Tausend Zeichen; wird er größer, wird er geteilt |
+| **Kern** | wer der Assistent ist (aus den Einstellungen), Sprache des Kunden, Wahrheit, Zustimmung, Form der Antwort, Vorrang der Anweisungen, Umgang mit Fehlern und Grenzen, Übergabe | streng und klein — er steht in jedem Aufruf |
+| **Aufgaben-Skill** | ein komplexer Ablauf mit Folgen: Zweck, Werkzeuge, Schritte, was nie, wann das Team übernimmt | kurz; wird er größer, wird er geteilt |
 | **Manifest** | je Skill Kennung, Fassung, Zweck, Abhängigkeiten, genutzte Werkzeuge, betroffene Datenarten | keine Regeltexte |
 
 Jeder Skill beginnt mit `name` und `description`. **Die Beschreibung sagt,
 wofür der Skill da ist** — nie eine Liste von Wörtern, die ein Kunde
 schreiben könnte.
+
+## Wofür es einen Skill gibt
+
+> **Einen Skill gibt es nur für einen Ablauf, der komplex ist und Folgen
+> hat** — Buchen, Zahlen, Stornieren, eine Rechnung, eine Änderung am
+> Vorgang. Für eine Information braucht es keinen.
+
+- **Informationsfragen beantwortet das Modell mit Kern und Werkzeugen.**
+  Es sucht selbst: im Wissen, im Fachsystem, auf der freigegebenen Website.
+- **Der Kern verbietet das Erfinden.** Gesagt wird nur, was ein
+  Werkzeugergebnis, das Wissen oder das Gespräch belegt und nichts
+  widerlegt. Ein Angebot, eine Leistung oder eine Möglichkeit — etwa ein
+  Zimmer für wenige Stunden — wird erst genannt, wenn ein Werkzeug sie
+  bestätigt hat.
+
+## Form: kurz und streng
+
+Jeder Aufgaben-Skill hat fünf Teile, in dieser Reihenfolge, je als Liste
+mit einer Aussage pro Zeile:
+
+```
+PURPOSE    ein Satz: wofür der Skill da ist
+TOOLS      Werkzeugname — wann es gebraucht wird
+STEPS      die Schritte des Ablaufs, nummeriert
+NEVER      was nie geschieht
+HANDOVER   wann das Team übernimmt — immer mit Nachricht an den Kunden
+```
+
+- **Keine Begründungsprosa, keine Vorgeschichte.** Warum eine Regel gilt,
+  steht in der Entscheidungsakte, nicht im Skill.
+- **Was das Werkzeug erzwingt, beschreibt der Skill nicht nach.** Er sagt,
+  welches Werkzeug mit welchen Angaben aufgerufen wird. Mandant, Nachweis,
+  Eigentum und Doppelausführung prüft das Werkzeug, und dessen Fehler sagt
+  dem Modell, was fehlt.
+- **Die Längengrenze legt das Projekt fest** und misst sie beim Start.
+  Richtwert: Kern höchstens 4.000, Aufgaben-Skill höchstens 2.000 Zeichen.
 
 ## Wie ein Skill geschrieben wird
 
@@ -78,9 +114,9 @@ schreiben könnte.
 
 1. **Den Skill ändern, dem der Bereich gehört** — nicht den Code.
 2. **Die Fassung im Manifest heben.**
-3. **Die Prüfung des Pakets laufen lassen** (Belegart 1, `abnahme.md`).
-4. **Den betroffenen Ablauf mit dem echten Modell prüfen** (Belegart 2
-   oder 3).
+3. **Die Tests laufen lassen** (Belegart 1, `abnahme.md`).
+4. **Den betroffenen Ablauf im Staging mit dem echten Modell
+   durchspielen** (Belegart 2).
 
 Eine neue Kombination bestehender Fähigkeiten braucht nur Skills und
 Tests. Eine neue Fähigkeit braucht dazu ein Werkzeug, mit Vertrag, Rechten

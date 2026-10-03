@@ -24,6 +24,9 @@ Anwendung, nicht als Bitte im Skill.
   Stammdaten und Einstellungen (Häuser, Tarife, Einheiten, Richtlinien,
   Konfiguration), Löschungen, Tagesabschluss, das Zusammenführen oder
   Anonymisieren von Personen.
+- **Die Abrechnung zwischen Plattform und Mandant** — Verträge, Gebühren,
+  Rechnungen der Plattform — erreicht nur die Plattformassistenz. Kein
+  Werkzeug einer Mandanten- oder Kundenassistenz kommt daran.
 - **Ein Werkzeug außerhalb der Liste wird nicht ausgeführt**, auch wenn
   das Modell es aufruft.
 - **Neue Werkzeuge des Servers kommen nicht von selbst dazu.** Die
@@ -43,6 +46,20 @@ Anwendung, nicht als Bitte im Skill.
   (Skill `neo-grundregeln`, `references/belegpflicht.md`).
 - **Kennungen kommen aus Ergebnissen**, nie aus dem Gedächtnis des Modells
   und nie aus einem Anzeigenamen.
+
+## Selbstständig nutzen
+
+> **Das Modell nutzt seine Werkzeuge selbst — wie Claude Code.** Dafür
+> braucht es keinen Skill; es braucht Werkzeuge, die das zulassen.
+
+- **Die Beschreibung eines Werkzeugs sagt, was es tut, was es braucht und
+  was es liefert** — kurz. Sie schreibt dem Modell keinen festen Weg vor.
+- **Freigegebene Websites:** Das Werkzeug liest jede Seite der
+  freigegebenen Domains — die Startseite, gefundene Links, eine selbst
+  gebaute Adresse wie ein Veranstaltungskalender mit Zeitraum. Eine
+  `llms.txt` ist eine Abkürzung, wo es sie gibt, keine Voraussetzung.
+- **Erst die Werkzeuge, dann das Team.** Ein gescheiterter Abruf beweist
+  nicht, dass es die Information nicht gibt.
 
 ## Ergebnisse und Fehler
 

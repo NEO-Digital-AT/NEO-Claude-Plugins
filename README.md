@@ -23,7 +23,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-technologiewahl` | Systementscheidungen: erst die sechs Fragen stellen, deren Antworten nicht im Repository stehen (Zielplattformen in 24 Monaten, Verbindlichkeit des Designsystems, Hardware, Lebensdauer, wer wartet es, was ist entschieden), dann Kriterien in fester Reihenfolge, Belege mit Fundstelle und Datum, **gezählte** Wechselkosten, der günstigste Schnitt vor der teuersten Strecke, und ein **Nachbau statt einer Debatte** | Skill mit drei Referenzdateien, Befehl `/neo-technologiewahl:neo-technologiewahl`, lädt bei jeder Technologie- oder Rahmenwerksfrage |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit fünf Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
-| `neo-assistent` | Bau von KI-Assistenten: Modell, Werkzeuge und Skills — sonst nichts; kein Router, kein Prüfagent, keine Absicherung um das Modell; Zugriff nach Art des Assistenten, Mandantentrennung und Nachweis im Werkzeug; Skills des Assistenten als Paket; Modellzugang über Requesty; drei Belegarten | Skill mit acht Referenzdateien, lädt bei jeder Arbeit an einem Assistenten |
+| `neo-assistent` | Bau von KI-Assistenten: Modell, Werkzeuge und Skills — sonst nichts; kein Router, kein Prüfagent, keine Absicherung um das Modell; Zugriff nach Art des Assistenten, Mandantentrennung und Nachweis im Werkzeug; Skills nur für komplexe Abläufe, kurz und streng; nie still abschalten, Kontext komprimieren; Modellzugang über Requesty; Abnahme ohne Prüfskripte | Skill mit acht Referenzdateien, lädt bei jeder Arbeit an einem Assistenten |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit acht Referenzdateien, lädt bei Contao-Arbeit |
@@ -103,8 +103,9 @@ Werbekonten aus, und das ist eine andere Entscheidung beim Installieren.
   Router, kein Prüfagent, keine Absicherung um das Modell — auch nicht,
   „damit es nicht wieder passiert".
 - **Bevor ein Assistent abgenommen wird:** `neo-assistent`,
-  `references/abnahme.md` — drei Belegarten, getrennt berichtet. Ein
-  grüner Test beweist die Anwendung, nicht das Modell.
+  `references/abnahme.md` — Tests der Werkzeuggrenzen und ein Lauf im
+  Staging, getrennt berichtet; keine Prüfskripte um das Modell. Ein grüner
+  Test beweist die Anwendung, nicht das Modell.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```

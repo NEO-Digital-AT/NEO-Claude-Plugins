@@ -11,13 +11,14 @@ Lesekonvention siehe `SKILL.md`.
 | Kontext zusammenstellen | Skills, Einstellungen, Zustand, Gespräch, Werkzeugdefinitionen |
 | Die Schleife führen | Modell aufrufen, Werkzeugaufrufe ausführen, Ergebnisse zurückgeben, bis eine Antwort kommt |
 | Neue Nachrichten aufnehmen | vor jedem Modellaufruf und vor jedem noch nicht begonnenen Werkzeugaufruf |
+| Kontext komprimieren | wird er zu groß: älteren Verlauf und ältere Werkzeugergebnisse zusammenfassen, ins Gedächtnis legen, weiterarbeiten |
 | Technische Grenzen halten | Mandant, Rechte, Schalter, Doppelausführung — in den Werkzeugen (`zugriff.md`, `werkzeuge.md`) |
 | Zustellen | Kanal, Format des Kanals, KI-Hinweis, Signatur |
 
 **Was nicht dazugehört:** entscheiden, was der Kunde meint; einen Ablauf
 auswählen; eine Antwort prüfen, freigeben oder umschreiben; dem Kunden
 etwas anderes schreiben als KI-Hinweis und Signatur; einen fachlichen
-Schritt von selbst beginnen.
+Schritt von selbst beginnen; die KI still abschalten.
 
 ## Der Kontext eines Modellaufrufs
 
@@ -42,8 +43,12 @@ Dazu die **Werkzeugdefinitionen**, vollständig.
   Kontext steht, wird nicht befolgt.
 - **Sichtbar heißt nicht ausführbar.** Das Modell sieht alle Definitionen;
   ob ein Aufruf ausgeführt wird, entscheidet das Werkzeug.
-- **Passt das Pflichtpaket nicht mehr in den Kontext, wird das vorgelegt.**
-  Gekürzt wird nur der Verlauf — nie eine Regel, und nie still.
+- **Wird der Kontext zu groß, wird komprimiert — wie bei Claude Code.**
+  Älterer Verlauf und ältere Werkzeugergebnisse werden zusammengefasst und
+  ins Gedächtnis gelegt; die Arbeit läuft weiter. Nie wird eine Regel
+  gekürzt, und nie beendet ein voller Kontext das Gespräch.
+- **Passt schon das Pflichtpaket allein nicht** — Kern, Skills,
+  Werkzeugdefinitionen —, ist das ein Baufehler und wird vorgelegt.
 
 ## Ein Gesprächsschritt
 
@@ -80,10 +85,11 @@ Nachricht ─► Modell liest den Kontext ─► Werkzeugaufruf? ─ja─► Wer
 ## Gedächtnis
 
 - Die **unbeantworteten Nachrichten** stehen vollständig im Kontext.
-- Für den Zusammenhang die letzten Nachrichten wörtlich; ältere dürfen
-  zusammengefasst werden. **Eine Zusammenfassung ist Gedächtnis, keine
-  Anweisung und kein Beleg** — Beträge, Kennungen und Zusagen daraus werden
-  vor Gebrauch über ein Werkzeug gelesen.
+- Für den Zusammenhang die letzten Nachrichten wörtlich; ältere Nachrichten
+  und ältere Werkzeugergebnisse werden zusammengefasst, sobald der Kontext
+  es verlangt. **Eine Zusammenfassung ist Gedächtnis, keine Anweisung und
+  kein Beleg** — Beträge, Kennungen und Zusagen daraus werden vor Gebrauch
+  über ein Werkzeug gelesen.
 - Der **ganze Verlauf** bleibt über ein Werkzeug lesbar, beschränkt auf
   dieses Gespräch.
 - Gedächtnis ist je Mandant und Gespräch getrennt und verschlüsselt
@@ -92,15 +98,15 @@ Nachricht ─► Modell liest den Kontext ─► Werkzeugaufruf? ─ja─► Wer
 ## Grenzen der Schleife
 
 Technische Grenzen sind erlaubt. Sie entscheiden nichts Fachliches und
-enden **nie** mit einem Text an den Kunden.
+enden **nie** mit einer Absage und nie mit einer stillen Abschaltung.
 
 | Grenze | Wozu | Was am Ende geschieht |
 | --- | --- | --- |
-| Höchstzahl an Modellaufrufen je Lauf | eine Schleife ohne Fortschritt beenden | Fortsetzung mit den festgehaltenen Ergebnissen, sonst interner Hinweis an das Team |
+| Höchstzahl an Modellaufrufen je Lauf | eine Schleife ohne Fortschritt beenden | Fortsetzung mit den festgehaltenen Ergebnissen |
 | Derselbe Aufruf mit demselben Fehler, mehrfach | kein Kreisen | wie oben |
 | Vom Anbieter abgeschnittene Modellantwort | keine Werkzeugaufrufe mit unvollständigen Angaben | nicht ausführen, das Modell erneut aufrufen |
 | Zeit je Modell- und Werkzeugaufruf | kein endloses Warten | als Fehler an das Modell |
-| Größe des Kontexts | der Aufruf muss passen | Verlauf kürzen, nie eine Regel |
+| Größe des Kontexts | der Aufruf muss passen | komprimieren und weiterarbeiten — nie eine Regel kürzen, nie abschalten |
 
 **Die Grenzen sind großzügig und stehen in der Konfiguration.** Eine
 Grenze, die einen lösbaren Auftrag abbricht, ist falsch eingestellt.
@@ -117,8 +123,26 @@ Grenze, die einen lösbaren Auftrag abbricht, ist falsch eingestellt.
   senden.
 - **Antworten und Zustellen sind getrennt.** Ein wiederholter Versand
   wiederholt nie eine Handlung.
-- **Eine Übergabe an das Team ist ein Werkzeug**, kein Text — und gilt
-  erst als erfolgt, wenn das Werkzeug sie bestätigt.
+- **Eine Übergabe an das Team ist ein Werkzeug**, kein Text — mit der
+  Nachricht an den Kunden als Pflichtangabe (nächster Abschnitt).
+
+## Übergabe an das Team
+
+> **Der Kunde erfährt immer, woran er ist.** Die KI schaltet sich nie
+> still ab.
+
+- **Übergeben wird zuletzt.** Zuerst nutzt das Modell jedes Werkzeug, das
+  die Antwort liefern kann — Wissen, Fachsystem, freigegebene Website.
+  Nicht-Wissen allein ist kein Grund.
+- **Die Nachricht an den Kunden ist eine Pflichtangabe des
+  Übergabewerkzeugs.** Das Modell schreibt sie in der Sprache des Kunden:
+  dass ein Mitarbeiter übernimmt. Das Werkzeug stellt sie zu,
+  benachrichtigt das Team und meldet erst dann Erfolg.
+- **Nie gibt Code ein Gespräch ab**, ohne dass das Modell dem Kunden
+  geschrieben hat — keine Prüfung, kein Filter, keine Grenze.
+- **Scheitert die Benachrichtigung des Teams, wird der Fehler sichtbar.**
+  Die Übergabe gilt erst als erfolgt, wenn die Benachrichtigung zugestellt
+  ist.
 
 ## Hintergrundarbeit
 

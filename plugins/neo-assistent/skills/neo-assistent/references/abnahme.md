@@ -5,18 +5,21 @@ Lesekonvention siehe `SKILL.md`.
 > **Ein grüner Test beweist die Anwendung, nicht das Modell.** Ob das
 > Modell die Skills befolgt, zeigt nur ein Lauf mit dem echten Modell.
 
-## Drei Belegarten — getrennt berichtet
+## Zwei Belegarten — getrennt berichtet
 
 | Belegart | Was sie beweist | Was sie nicht beweist |
 | --- | --- | --- |
-| **1. Deterministische Tests**, mit gestelltem Modell | dass die Anwendung ihre Grenzen hält | dass das echte Modell richtig handelt |
-| **2. Messung mit dem echten Modell, ohne Ausführung** | welche Werkzeuge das Modell in einer Lage wählt | dass die Angaben im Fachsystem durchgehen und der Ablauf zu Ende kommt |
-| **3. Lauf im Staging** mit echtem Modell, echter Anwendung und Testdaten | dass ein Anliegen von der Nachricht bis zum Ergebnis funktioniert | dass es in jeder Sprache und jeder Lage funktioniert |
+| **1. Tests der Werkzeuggrenzen**, mit gestelltem Modell | dass die Anwendung ihre Grenzen hält | dass das echte Modell richtig handelt |
+| **2. Lauf im Staging** mit echtem Modell, echter Anwendung und Testdaten | dass ein Anliegen von der Nachricht bis zum Ergebnis funktioniert | dass es in jeder Sprache und jeder Lage funktioniert |
 
 **Eine Belegart ersetzt keine andere.** Fehlt eine, steht in der
 Fertigmeldung „nicht geprüft", nie „bestanden".
 
-### 1. Deterministische Tests
+**Keine Prüfskripte um das Modell.** Kein Messgerüst wertet Antworten oder
+Werkzeugwahl des Modells aus: Ob das Modell richtig handelt, zeigt der
+echte Lauf.
+
+### 1. Tests der Werkzeuggrenzen
 
 Pflicht, bei jeder Änderung, in der CI:
 
@@ -39,18 +42,7 @@ Ein gestelltes Modell ruft nur Werkzeuge auf, die im jeweiligen Aufruf
 tatsächlich angeboten werden — sonst prüft der Test einen Assistenten, den
 es nicht gibt.
 
-### 2. Messung mit dem echten Modell
-
-- **Erfundene Gespräche**, keine echten Kundendaten.
-- **Die Werkzeugaufrufe werden aufgezeichnet und nie ausgeführt.**
-- **Mehrere Sprachen, jede für sich gelaufen.** Die Übersetzung eines
-  deutschen Laufs ist kein Lauf.
-- **Je Fall festgehalten:** angefragtes und geliefertes Modell, Fassung
-  des Skill-Pakets.
-- **Fehlen die Zugangsdaten, heißt das Ergebnis „übersprungen"**, nie
-  „bestanden".
-
-### 3. Lauf im Staging
+### 2. Lauf im Staging
 
 Vor jeder Freigabe einer Änderung an Skill, Werkzeug, Kontext oder
 Modell: die betroffenen Abläufe, von der Nachricht bis zum Ergebnis im
@@ -58,6 +50,8 @@ Fachsystem.
 
 - **Testumgebung, Testdaten.** Keine Schreibvorgänge mit echten
   Kundendaten, keine echten Zahlungen.
+- **Jede ausgelieferte Sprache für sich.** Die Übersetzung eines deutschen
+  Laufs ist kein Lauf.
 - **Je Lauf festgehalten:** Ablauf, Sprache, Modell (angefragt und
   geliefert), Stand des Codes, Fassung des Skill-Pakets, Werkzeugaufrufe
   mit Ergebnis, Wirkung im Fachsystem, die zugestellte Antwort, was offen
