@@ -71,6 +71,17 @@ Sie bleiben hochsensibel.
 - Der Pfad, der Ausweisdaten verarbeitet, bekommt die Redaktionstests
   unten über jeden Ausgabekanal.
 
+## Kfz-Kennzeichen: gewöhnliche Daten mit Zweck
+
+Kfz-Kennzeichen von Gästen dürfen gespeichert werden, wo ein Zweck sie
+braucht — etwa Parkplatz oder Garage. Sie sind **keine hochsensiblen
+Daten**, sondern gewöhnliche personenbezogene Daten:
+
+- **Der Zweck wird festgehalten.**
+- **Wie jede Datenart haben sie eine Frist mit Auslöser** und werden danach
+  gelöscht (Skill `neo-recht`, `references/loeschkonzept.md`).
+- **Nie in einem Protokoll** (hartes Verbot 2).
+
 ## Isolierte Verarbeitungspfade
 
 Wo hochsensible Daten unvermeidlich durch das System laufen:

@@ -6,7 +6,8 @@ description: >
   Sessions, Tokens und Scopes, Secrets, Logging und Audit,
   Mandantentrennung, Datenbank- und Migrationsarbeit,
   Datei-Import und -Export, Webhooks, Zahlungs-, Gesundheits- oder
-  Ausweisdaten, Frontend- und Container-Härtung, Sicherheitskopfzeilen,
+  Ausweisdaten, Kfz-Kennzeichen, Frontend- und Container-Härtung,
+  Sicherheitskopfzeilen,
   Abhängigkeits-Updates und Lieferkette, Releases, Schwachstellenmeldungen
   sowie riskanten Umbauten bestehender Systeme (Schatten- und
   Paritätsbetrieb).

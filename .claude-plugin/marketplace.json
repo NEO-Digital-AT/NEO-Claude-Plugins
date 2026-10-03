@@ -93,7 +93,7 @@
     {
       "name": "neo-sicherheit",
       "source": "./plugins/neo-sicherheit",
-      "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: zehn harte Verbote ohne Freigabeweg, Security by Design, Identität und Autorisierung mit objektbezogener Prüfung, Mandantentrennung mit Nachweistest, Sessions und Tokens, Secrets und Rotation, Protokollierung ohne personenbezogene Daten, Audit, hochsensible Daten mit Redaktionstests über alle Ausgabekanäle, Frontend-, Kopfzeilen-, Container- und Netzhärtung, Lieferkette und CI-Tore, Release-Evidenz, Schwachstellenmeldungen, Schatten- und Paritätsbetrieb bei riskanten Umbauten, Abnahmeliste. Meldeweg und CRA-Dokumente im Skill neo-recht."
+      "description": "Sicherheitsregeln der NEO Digital nach EU-CRA-orientierter Baseline: zehn harte Verbote ohne Freigabeweg, Security by Design, Identität und Autorisierung mit objektbezogener Prüfung, Mandantentrennung mit Nachweistest, Sessions und Tokens, Secrets und Rotation, Protokollierung ohne personenbezogene Daten, Audit, hochsensible Daten mit Redaktionstests über alle Ausgabekanäle, Ausweisdaten nur feldweise verschlüsselt, auf sechs Felder begrenzt und nie als Bild, Kfz-Kennzeichen als gewöhnliche Daten mit Zweck und Frist, Frontend-, Kopfzeilen-, Container- und Netzhärtung, Lieferkette und CI-Tore, Release-Evidenz, Schwachstellenmeldungen, Schatten- und Paritätsbetrieb bei riskanten Umbauten, Abnahmeliste. Meldeweg und CRA-Dokumente im Skill neo-recht."
     },
     {
       "name": "neo-technologiewahl",
