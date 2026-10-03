@@ -61,7 +61,10 @@ findet, behebt es sofort und meldet es unverzüglich (Kernregel 27).
    geschütztes Verhalten.
 6. **Nie** eine Anfrage direkt an eine Entität binden.
 7. **Nie** eine Webhook-Signatur überspringen oder fail-open prüfen.
-8. **Nie** Karten-, Gesundheits- oder Ausweisdaten dauerhaft speichern.
+8. **Nie** Karten- oder Gesundheitsdaten dauerhaft speichern. **Nie**
+   Ausweisdaten unverschlüsselt speichern — und von einem Ausweis nie mehr
+   als Name, Ausweisart, Ausweisnummer, Ausstellungsdatum, Ablaufdatum und
+   Ausstellungsland, nie ein Bild (`references/daten.md`).
 9. **Nie** ein Token im local- oder sessionStorage.
 10. **Nie** Verstecken als Schutz ausgeben: ein unverlinkter Endpoint,
     eine ausgeblendete Navigation oder eine geratene Adresse ersetzen

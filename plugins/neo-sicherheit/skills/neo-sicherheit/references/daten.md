@@ -10,6 +10,8 @@ Meldedaten, biometrische Daten, Zugangsdaten Dritter.
 ## Die Grundregel
 
 **Hochsensible Daten werden nie persistiert.** Kein Freigabeweg.
+**Einzige Ausnahme sind Ausweisdaten**, unter den Bedingungen des
+Abschnitts „Ausweisdaten" — darüber hinaus gilt auch für sie diese Regel.
 
 Nicht in: Tabellen, Roh-Nutzlasten, Webhook-Protokollen,
 Warteschlangen, Auftragsdetails, Fehlerablagen, Protokollen,
@@ -31,6 +33,43 @@ Nur sichere Kennzeichen, aus denen sich nichts rekonstruieren lässt:
 | Die letzten vier Stellen | `•••• 4242` |
 | Eine Referenz des Zahlungsdienstleisters | `pm_1a2b3c` |
 | Ein Ablaufdatum | `12/2029` |
+
+## Ausweisdaten: verschlüsselt, und nur sechs Felder
+
+Ausweisdaten dürfen gespeichert werden, weil sie gebraucht werden: für
+die Buchung, eine schnellere Anmeldung, die Übergabe an das Fachsystem.
+Sie bleiben hochsensibel.
+
+- **Gespeichert werden höchstens sechs Felder:** Name, Ausweisart,
+  Ausweisnummer, Ausstellungsdatum, Ablaufdatum, Ausstellungsland. Mehr
+  nicht.
+- **Nie ein Bild des Ausweises** — kein Foto, kein Scan, keine Kopie. Ein
+  Bild wird für genau einen Aufruf gelesen, die erlaubten Felder werden
+  übernommen, das Bild wird verworfen.
+- **Immer verschlüsselt, Feld für Feld durch die Anwendung.** In der
+  Datenbank steht nur Geheimtext. Eine verschlüsselte Festplatte allein
+  genügt nicht: Wer Zugriff auf die Datenbank oder eine Sicherung hat,
+  liest sonst mit.
+- **Der Schlüssel liegt nie neben den Daten**, und ein Schlüsselwechsel
+  ist ohne Datenverlust möglich (Abschnitt „Verschlüsselung").
+- **Entschlüsselt wird nur zur Verwendung** — für den Zweck, im Dienst,
+  nach Mandanten- und Berechtigungsprüfung. Jeder Zugriff wird auditiert
+  (`secrets-und-logging.md`).
+- **Außerhalb der verschlüsselten Felder gilt die Grundregel:** nie in
+  Protokollen, Roh-Nutzlasten, Warteschlangen, Fehlerantworten,
+  Diagnoseausgaben, Exporten, Zwischenspeichern oder Suchindizes.
+- **Wie jede Datenart haben sie eine Frist mit Auslöser** und werden danach
+  gelöscht (Skill `neo-recht`, `references/loeschkonzept.md`). Die Frist
+  legt der Projektinhaber fest.
+- **Nach der Übergabe an ein Fremdsystem**, etwa das PMS, verantwortet
+  dessen Betreiber die Speicherung dort. Das Produkt verantwortet seine
+  eigene, verschlüsselte Kopie. Übertragen wird verschlüsselt.
+- **Geburtsdatum und Staatsangehörigkeit sind keine Ausweisdaten** im Sinne
+  dieser Regel, sondern gewöhnliche personenbezogene Daten — auch wenn sie
+  im Ausweis stehen. Ebenso der Name, wo er außerhalb des
+  Ausweisdatensatzes steht, etwa in einer Buchung.
+- Der Pfad, der Ausweisdaten verarbeitet, bekommt die Redaktionstests
+  unten über jeden Ausgabekanal.
 
 ## Isolierte Verarbeitungspfade
 

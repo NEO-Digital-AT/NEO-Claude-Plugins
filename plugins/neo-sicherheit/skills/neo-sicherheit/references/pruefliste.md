@@ -39,9 +39,16 @@ ist, wird benannt, mit Grund, Freigabe und Datum.
 
 ## Daten
 
-- [ ] Keine hochsensiblen Daten persistiert — über alle Ausgabekanäle
-      geprüft (Liste in `daten.md`), mit echten Testwerten.
+- [ ] Keine hochsensiblen Daten persistiert, außer Ausweisdaten nach
+      `daten.md` — über alle Ausgabekanäle geprüft (Liste in `daten.md`),
+      mit echten Testwerten.
 - [ ] Nur sichere Kennzeichen gespeichert.
+- [ ] Ausweisdaten: höchstens die sechs Felder, nie ein Bild des
+      Ausweises.
+- [ ] Ausweisdaten feldweise verschlüsselt, Schlüssel getrennt, jeder
+      Zugriff auditiert.
+- [ ] Ausweisdaten haben eine Frist mit Auslöser und werden danach
+      gelöscht.
 - [ ] Übertragung verschlüsselt, ruhende Daten wo vorgesehen.
 - [ ] Schlüssel liegt nicht neben den Daten.
 - [ ] Hochgeladene Dateien an den ersten Bytes geprüft, begrenzt,
