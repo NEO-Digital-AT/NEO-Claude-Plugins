@@ -116,8 +116,41 @@ implementiert.
 
 ## Fremde Schnittstellen
 
-Vor jeder Integration:
+> **Gebaut wird nur gegen einen Endpunkt, von dem belegt ist, dass es ihn
+> gibt, was er erwartet und was er liefert.** Bei einer Schnittstelle gibt
+> es keine Annahme — ein geratener Pfad, ein geratenes Feld oder ein
+> geratener Wert verzeiht die Gegenseite nicht.
 
+### Abgleich mit jeder Unterlage — Pflicht
+
+Vor jeder Zeile Code gegen eine fremde Schnittstelle, und vor jedem
+Werkzeug, das ein KI-Assistent bekommt:
+
+1. **Alle Unterlagen suchen, die es gibt:** maschinenlesbare
+   Spezifikation (OpenAPI, Swagger-JSON, JSON Schema), die Dokumentation
+   im Repository (etwa `docs/integrations/<anbieter>/`), PDFs und
+   Postman-Sammlungen des Anbieters, die Werkzeugdefinitionen eines
+   MCP-Servers, die offizielle Online-Dokumentation.
+2. **Jede davon lesen und gegeneinander abgleichen:** Pfad, Methode,
+   Parameter mit Name, Typ und Pflicht, Aufzählungswerte, Form der
+   Antwort, Fehlerfälle, Grenzen.
+3. **Wo es eine Testumgebung gibt, den Aufruf selbst machen** — über den
+   MCP-Server oder die Schnittstelle — und festhalten, was geschickt wurde
+   und was zurückkam, im Erfolg wie im Fehler.
+4. **Ein Widerspruch zwischen zwei Quellen ist ein Befund**, nie Anlass zu
+   einer Vermutung. Er wird mit beiden Fundstellen festgehalten und
+   vorgelegt; was tatsächlich gilt, zeigt der echte Aufruf.
+5. **Was beobachtet wurde, kommt mit Datum neben die Unterlagen** in die
+   Doku der Integration — damit der Nächste nicht wieder messen muss.
+
+**Fehlt eine Unterlage oder ein Testzugang, wird er angefordert, bevor
+gebaut wird.** Ein Endpunkt, ein Feld oder ein Wert, der in keiner Quelle
+steht und nicht gemessen wurde, existiert für den Code nicht.
+
+### Vor jeder Integration
+
+- [ ] Alle vorhandenen Unterlagen gefunden, gelesen und abgeglichen
+      (oben).
 - [ ] Gibt es eine offizielle, maschinenlesbare Spezifikation?
 - [ ] Gibt es ein offizielles SDK?
 - [ ] Gibt es einen Dokumentations-MCP für diese Technologie?
@@ -137,14 +170,14 @@ fremder Typ wandert bis in die Fachlogik** (Skill `neo-code`).
 | Art | Zweck | Regel |
 | --- | --- | --- |
 | **Dokumentations-MCP** | Props, Parameter, Beispiele nachschlagen | **Vor** der Implementierung konsultieren, nicht danach |
-| **Aktions-MCP** | Werkzeug für Laufzeit-Aktionen an Produktivsystemen | **Keine Dokumentationsquelle.** Wer daraus Verhalten ableitet, rät mit zusätzlichen Schritten |
+| **Aktions-MCP** | Werkzeug für Aktionen am Fachsystem | **In einer Testumgebung ein Prüfmittel:** Werkzeugliste, Schema, echter Aufruf, echte Antwort. Er belegt, was das System tut, die Spezifikation, was es zusagt — beides wird abgeglichen. **An einem Produktivsystem nur lesen**, nie zum Ausprobieren schreiben |
 
 **MCP-Zugangsdaten nie in Konfigurationsdateien** (Skill
 `neo-sicherheit`).
 
 Vor der Implementierung gegen eine fremde Technologie wird geprüft, ob
-ein Dokumentations-MCP verfügbar ist. Ist einer da und wird nicht
-genutzt, ist das ein Befund.
+ein Dokumentations-MCP oder ein Aktions-MCP mit Testzugang verfügbar ist.
+Ist einer da und wird nicht genutzt, ist das ein Befund.
 
 ## Verteilte Systeme: die „Nie annehmen"-Liste
 
