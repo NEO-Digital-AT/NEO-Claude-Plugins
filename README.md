@@ -23,7 +23,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-technologiewahl` | Systementscheidungen: erst die sechs Fragen stellen, deren Antworten nicht im Repository stehen (Zielplattformen in 24 Monaten, Verbindlichkeit des Designsystems, Hardware, Lebensdauer, wer wartet es, was ist entschieden), dann Kriterien in fester Reihenfolge, Belege mit Fundstelle und Datum, **gezählte** Wechselkosten, der günstigste Schnitt vor der teuersten Strecke, und ein **Nachbau statt einer Debatte** | Skill mit drei Referenzdateien, Befehl `/neo-technologiewahl:neo-technologiewahl`, lädt bei jeder Technologie- oder Rahmenwerksfrage |
 | `neo-recht` | Impressum, Datenschutz, Barrierefreiheitserklärung, Consent, CRA-Dokumentenpaket | Skill mit fünf Referenzdateien, lädt bei Pflichtseiten- und Consent-Arbeit |
 | `neo-ki` | KI im Produkt: EU-KI-Verordnung, Offenlegung, Kennzeichnung, Datenweitergabe, Prüfung der Ausgaben | Skill mit zwei Referenzdateien, lädt bei jeder KI-Funktion |
-| `neo-assistent` | Bau von KI-Assistenten mit Werkzeugzugriff: Schichten statt großem Prompt, Absichten statt Schlüsselwörter, Schema statt Prosa, Mehrsprachigkeit, Goldfälle und Härtefälle, Modellzugang über Requesty, Modellwahl, Umbau eines gewachsenen Assistenten | Skill mit zehn Referenzdateien, drei Werkzeugen, Befehle `/neo-assistent:neo-assistentpruefung`, `/neo-assistent:neo-goldlauf` und `/neo-assistent:neo-haertefaelle` |
+| `neo-assistent` | Bau von KI-Assistenten: Modell, Werkzeuge und Skills — sonst nichts; kein Router, kein Prüfagent, keine Absicherung um das Modell; Zugriff nach Art des Assistenten, Mandantentrennung und Nachweis im Werkzeug; Skills des Assistenten als Paket; Modellzugang über Requesty; drei Belegarten | Skill mit acht Referenzdateien, lädt bei jeder Arbeit an einem Assistenten |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
 | `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit acht Referenzdateien, lädt bei Contao-Arbeit |
@@ -97,14 +97,14 @@ Werbekonten aus, und das ist eine andere Entscheidung beim Installieren.
 - **Wenn ein Knopf an zwei Stellen vorkommt:** `neo-grundregeln`,
   `references/durchlauf.md` — er wird an **beiden** geprüft. Ein Element,
   das auf Seite A getestet ist und auf Seite B nicht, bricht auf Seite B.
-- **Bevor ein KI-Assistent entsteht oder wächst:** `neo-assistent` —
-  ein Assistent ist eine Architektur, kein Prompt. Absichten statt
-  Schlüsselwörter, Schema statt Prosa, und keine Änderung an Prompt,
-  Werkzeug oder Modell ohne Goldfall-Lauf davor und danach.
-- **Bevor ein Assistent abgenommen wird:** `/neo-assistent:neo-haertefaelle`
-  — der klare Fall beweist, dass er funktioniert, der Härtefall, dass er
-  nicht schadet. Elf Pflichtklassen, je Sprache, schreibende Werkzeuge
-  und Einmalgeheimnisse bei 100 Prozent.
+- **Bevor ein KI-Assistent entsteht, wächst oder repariert wird:**
+  `neo-assistent` — Modell, Werkzeuge und Skills, sonst nichts. Fachliche
+  Regeln stehen in den Skills des Assistenten, Grenzen im Werkzeug. Kein
+  Router, kein Prüfagent, keine Absicherung um das Modell — auch nicht,
+  „damit es nicht wieder passiert".
+- **Bevor ein Assistent abgenommen wird:** `neo-assistent`,
+  `references/abnahme.md` — drei Belegarten, getrennt berichtet. Ein
+  grüner Test beweist die Anwendung, nicht das Modell.
 - **Bevor eine Farbe gesetzt wird:** Kontrast rechnen, nicht schätzen:
 
   ```
@@ -392,9 +392,6 @@ Tor in der CI.
 | `md3-token-check.py` | `plugins/neo-design/scripts/` | Vergleicht die Tokens eines Projekts mit den **Originalwerten von Material 3** — Eckenradien, Höhenstufen und Zustandsdeckschichten — und meldet jede Abweichung als Zahl. Deckt den Fall ab, dass ein Entwurfswerkzeug das Designsystem nur nachzeichnet: 24 dp statt 28, Stufe 2 statt Stufe 1. Liest JSON, CSS, SCSS, Dart und Kotlin; bewusste Abweichungen brauchen einen Grund. Ohne Abhängigkeiten. |
 | `ui-text-check.py` | `plugins/neo-design/scripts/` | Prüft, woher die Texte einer Oberfläche kommen: Jeder sichtbare Text muss im Entwurf, in einer freigegebenen Textliste oder in einer Anweisung stehen — was keine Herkunft hat, ist erfunden. Meldet zusätzlich die Sätze, die etwas über das Verhalten zusagen (erreichbar unter, wird automatisch, innerhalb von, Sie können wählen), damit sie am Code belegt werden statt geglaubt. Liest JSON, ARB, PHP, YAML und den HTML-Export des Entwurfs; erkennt Platzhalter. Ohne Abhängigkeiten. |
 | `comparison.js` | `plugins/neo-design/scripts/` | Stellt für eine Rückfrage zwei Aufnahmen nebeneinander — links die Vorgabe aus dem Designsystem, rechts der Vorschlag — mit Titeln, Maßen und Hinweisfeld. Meldet ein nicht geladenes Bild sichtbar, statt eine leere Gegenüberstellung auszuliefern. |
-| `gold-run.py` | `plugins/neo-assistent/scripts/` | Führt Goldfälle gegen einen laufenden KI-Assistenten aus und prüft, ob er die richtigen Werkzeuge mit den richtigen Argumenten aufruft. Läuft jeden Fall mehrfach, weil ein Modell nicht deterministisch antwortet, und wertet nach Sprache und Absicht aus. Kennt keinen Anbieter — er ruft einen Adapter des Projekts. Ohne Abhängigkeiten. |
-| `requesty-adapter.py` | `plugins/neo-assistent/scripts/` | Verbindet den Goldfall-Prüfer mit dem Requesty-EU-Router. Fährt einen Fall gegen das echte Modell, zeichnet jeden Werkzeugaufruf auf, **ohne ihn auszuführen**, und prüft die Argumente gegen das Schema. Schlüssel nur aus `REQUESTY_API_KEY`; warnt, wenn Router oder Modellkennung die Verarbeitung aus der EU führen. Ohne Abhängigkeiten. |
-| `prompt-inventory.py` | `plugins/neo-assistent/scripts/` | Vermisst einen gewachsenen Systemprompt und meldet Schlüsselwort-Verzweigung, Schemata in der Prosa, wortgleiche Wiederholungen und zu große Abschnitte, jeweils mit Zeilennummer. Zählt und findet Muster; es urteilt nicht. Ohne Abhängigkeiten. |
 | `rules-update.py` | `plugins/neo-grundregeln/scripts/` | Hält die installierten Regel-Plugins auf dem Stand des Marktplatzes. Läuft aus dem SessionStart-Hook, frischt den Marktplatz auf und führt für jedes veraltete Plugin `claude plugin update` aus. Meldet sich nur, wenn sich etwas geändert hat; ohne Python, ohne Netz und bei unlesbarer Registrierung tut es nichts. Fremde Marktplätze bleiben unangetastet. |
 | `cors-check.py` | `plugins/neo-cors/scripts/` | Misst, ob ein Browser unter einer bestimmten Herkunft eine Quelle tatsächlich benutzen darf: stellt die Vorabfrage und die echte Anfrage, liest jede Freigabekopfzeile und meldet, was der Browser abweisen wird — fehlende Freigabe, Stern neben Anmeldedaten, gespiegelte Herkunft ohne `Vary`, eine Vorabfrage mit 401 aus der Anmeldeprüfung, nicht freigegebene Antwortkopfzeilen, blockierende Ressourcenrichtlinie bei Medien. Schickt von sich aus keine schreibende Anfrage ab. Rückgabewert ungleich null bei einem Blocker, also als Tor in der CI verwendbar. Ohne Abhängigkeiten. |
 | `cors-scan.py` | `plugins/neo-cors/scripts/` | Liest den Quelltext, bevor etwas läuft, und trennt zwei Gruppen: **sichere Befunde** (abgeschaltete Browsersicherheit, öffentlicher Weiterleitungsdienst, Stern neben Anmeldedaten, jede Herkunft gespiegelt, fremdes Worker-Skript, `file://`) und **was nachzusehen ist** (Canvas ohne `crossorigin`, fremde Schrift, fremdes Modul, Anmeldedaten). Die zweite Gruppe ist ausdrücklich kein Mangel — ein Prüfer, der Falsches meldet, wird ignoriert, und mit ihm der echte Befund. Nennt, was er nicht sehen kann. Ohne Abhängigkeiten. |

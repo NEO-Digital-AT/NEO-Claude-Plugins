@@ -105,8 +105,9 @@ schreibt deutsch. Beides zurückzudrehen ist ein Befund.
 - **Tabellen und Spalten englisch**, in der Schreibweise des Stacks.
 - **Aufzählungswerte englisch** und kanonisch: `cancelled`, nicht
   `storniert`. Was der Anwender sieht, ist die Beschriftung dazu — aus
-  der Sprachdatei, nicht aus der Spalte (Skill `neo-assistent`,
-  `references/sprachen.md`).
+  der Sprachdatei, nicht aus der Spalte. Für die Argumente der Werkzeuge
+  eines KI-Assistenten gilt dasselbe (Skill `neo-assistent`,
+  `references/werkzeuge.md`).
 - Ein Wert, der übersetzt in der Datenbank steht, lässt sich nicht mehr
   suchen, nicht mehr filtern und nicht mehr auswerten.
 

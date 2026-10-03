@@ -18,7 +18,7 @@
     {
       "name": "neo-assistent",
       "source": "./plugins/neo-assistent",
-      "description": "Bau von KI-Assistenten mit Werkzeugzugriff: fünf getrennte Schichten statt eines großen Prompts, Absichtskatalog statt Schlüsselwort-Verzweigung, Werkzeugbeschreibung als Routing und striktes Schema statt Prosa, Zustand und Vorbedingungen im Code. Eine neue Sprache dazuzuschalten ändert keine Prompt-Zeile. Fertig heißt gemessen: Goldfälle und elf Pflichtklassen an Härtefällen — ungenaue Sprache, ganze Abläufe, Einmalgeheimnisse, Zahlung, Eskalation, Einschleusung — mehrfach gelaufen, schreibende Werkzeuge bei 100 Prozent. Modellzugang über Requesty und den EU-Router, Schlüssel nur aus der Umgebung. Mit Goldfall-Prüfer, Requesty-Adapter, Prompt-Inventar und den Befehlen /neo-assistent:neo-assistentpruefung, /neo-assistent:neo-goldlauf und /neo-assistent:neo-haertefaelle."
+      "description": "Bau von KI-Assistenten und Agenten im Produkt: Modell, Werkzeuge und Skills — sonst nichts. Das Modell entscheidet, was als Nächstes geschieht, die Skills des Assistenten bestimmen, wie, die Werkzeuge führen aus und halten die Grenzen. Verboten sind Router, Fachagenten-Ketten, Prüfagenten, fachliche Absicherungen im Code, Texte vom Server an den Kunden, automatische Folgeketten, nachgeladene Skills und Laufzeitprompts im Code. Zugriff nach Art des Assistenten, Mandantentrennung und Nachweis mit zwei Merkmalen im Werkzeug, prozesskritische Werkzeuge nie für Kunden, Geheimnisse nie im Kontext. Skills als versioniertes Paket, ganz im Kontext ab dem ersten Aufruf. Modellzugang über den Requesty-EU-Router mit Regionsangabe. Abnahme mit drei getrennt berichteten Belegarten."
     },
     {
       "name": "neo-betrieb",

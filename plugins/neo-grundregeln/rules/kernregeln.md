@@ -282,7 +282,9 @@ bei passender Aufgabe den jeweiligen Skill laden.
     werden müsste, wird nie gelöscht. Wer KI einsetzt, legt offen, dass
     es KI ist (Artikel 50 EU-KI-Verordnung, seit 02.08.2026), und
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
-    Modell.
+    Modell. **Ein KI-Assistent besteht aus Modell, Werkzeugen und
+    Skills** — Router, Prüfagenten und Absicherungen um das Modell herum
+    sind verboten (Skill `neo-assistent`).
 27. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte Änderung braucht vorher eine Rückfrage. Das gilt
     ausdrücklich für **Umbenennen** von Dateien, Symbolen, Schaltern oder

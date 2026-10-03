@@ -1,175 +1,106 @@
-# Werkzeuge und Schemata
+# Werkzeuge und MCP-Server
 
 Lesekonvention siehe `SKILL.md`.
 
-> **Der Prompt bittet. Das Schema erzwingt.**
+> **Ein Werkzeug führt aus und hält die Grenzen. Es entscheidet nichts,
+> was im Regelwerk steht, und es schreibt dem Kunden nichts.**
 
-Jede Anforderung an einen Werkzeugaufruf, die im Prompt steht statt im
-Schema, ist eine Bitte. Sie wird meistens erfüllt — und „meistens" ist
-bei einem schreibenden Werkzeug kein Zustand, sondern ein Vorfall.
+## Woher die Werkzeuge kommen
 
-## Der Name
+| Quelle | Wann |
+| --- | --- |
+| **MCP-Server des Fachsystems**, zum Beispiel des Buchungssystems | immer, wo es einen gibt |
+| **Eigene Werkzeuge der Anwendung** | nur für Abläufe, für die es keinen MCP-Server gibt — etwa der Nachweis vor Kundendaten, ein Vorgang über mehrere Systeme, die Übergabe an das Team |
 
-- **Handlung, nicht Technik.** `auftrag_stornieren`, nicht `apiCallV2`,
-  nicht `doAction`.
-- **Ein Werkzeug, eine Aufgabe.** Ein Sammelwerkzeug mit einem Feld `typ`
-  verlagert die Auswahl in ein Argument, wo sie niemand prüft. Fünf klare
-  Werkzeuge werden zuverlässiger getroffen als eines mit fünf Modi.
-- **Gleiche Wortwahl über alle Werkzeuge.** `suchen`, `lesen`, `anlegen`,
-  `aendern`, `stornieren` — nicht einmal `get`, einmal `abrufen`.
-- **Kanonisch in der Arbeitssprache** und nie übersetzt (`sprachen.md`).
+Für das Modell ist beides dasselbe: Name, Beschreibung, Schema, Ergebnis.
 
-## Die Beschreibung ist das Routing
+## Die Freigabeliste
 
-Die Beschreibung eines Werkzeugs ist der Ort, an dem die Auswahl
-entschieden wird — nicht ein Absatz im Systemprompt. Sie hat vier Teile:
+Ein MCP-Server bringt oft Hunderte Werkzeuge mit. **Ein Assistent bekommt
+nur die, die seine Art und seine Aufgabe brauchen** — als Liste in der
+Anwendung, nicht als Bitte im Skill.
 
-```
-Sucht Aufträge anhand von Nachname, Auftragsnummer oder Termin und gibt
-höchstens 20 Treffer zurück.
+- **Prozesskritische Werkzeuge bekommt eine Kundenassistenz nie:**
+  Stammdaten und Einstellungen (Häuser, Tarife, Einheiten, Richtlinien,
+  Konfiguration), Löschungen, Tagesabschluss, das Zusammenführen oder
+  Anonymisieren von Personen.
+- **Ein Werkzeug außerhalb der Liste wird nicht ausgeführt**, auch wenn
+  das Modell es aufruft.
+- **Neue Werkzeuge des Servers kommen nicht von selbst dazu.** Die
+  Aufnahme in die Liste ist eine Änderung mit Freigabe.
 
-Dafür:       wenn ein bestehender Auftrag gefunden werden soll.
-Nicht dafür: einen Auftrag anlegen — dafür auftrag_anlegen. Einen bereits
-             gefundenen Auftrag im Detail lesen — dafür auftrag_lesen.
-Vorher:      nichts.
-```
+## Der Vertrag eines Werkzeugs
 
-- **Was es tut**, in einem Satz, mit der Form des Ergebnisses.
-- **Dafür** — der Zweck.
-- **Nicht dafür** — die Abgrenzung zum ähnlichsten Werkzeug, **mit
-  dessen Namen**. Das ist die wirksamste Zeile der ganzen Definition.
-  Falsche Werkzeugwahl entsteht fast immer zwischen zwei Werkzeugen,
-  deren Beschreibungen sich nicht abgrenzen.
-- **Vorher** — welcher Schritt vorausgehen muss.
+- **Die Definition kommt vom Server, wie er sie liefert:** Name,
+  Beschreibung, Schema. Keine eigene Abschrift, die mit der nächsten
+  Fassung des Servers auseinanderläuft.
+- **Die Angaben des Modells gehen unverändert weiter.** Die Anwendung
+  ergänzt nur den Zugriffsrahmen (Mandant, Einheit) und prüft das
+  Eigentum; sie wählt keine fachlichen Werte für das Modell.
+- **Jeder Vertrag ist belegt, bevor er benutzt wird:** gegen die
+  Dokumentation im Repository und gegen einen echten Aufruf in der
+  Testumgebung — was geschickt wird, was zurückkommt, welche Fehler es gibt
+  (Skill `neo-grundregeln`, `references/belegpflicht.md`).
+- **Kennungen kommen aus Ergebnissen**, nie aus dem Gedächtnis des Modells
+  und nie aus einem Anzeigenamen.
 
-Wenn im Systemprompt steht, wann ein Werkzeug zu verwenden ist, ist die
-**Beschreibung** unvollständig. Der Satz gehört dorthin, nicht in den
-Prompt.
+## Ergebnisse und Fehler
 
-## Das Schema
+- **Ein Ergebnis sind Tatsachen:** Beträge mit Währung, Kennungen, Stand,
+  Verweise. Verweise und Beträge übernimmt das Modell Zeichen für Zeichen.
+- **Ein Fehler geht als Tatsache an das Modell zurück**, mit der Meldung
+  des Fachsystems. Das Modell korrigiert die Angaben oder wählt einen
+  anderen Schritt.
+- **Ein schreibender Aufruf wird nie verdeckt wiederholt.** Wiederholt
+  wird, was das Modell erneut aufruft; derselbe Aufruf mit demselben Fehler
+  ist begrenzt (`aufbau.md`).
+- **Ein leeres Ergebnis ist ein Ergebnis.** Ein fehlgeschlagener Aufruf ist
+  keines: Er belegt nicht, dass es nichts gibt.
+- **Ein Werkzeug gibt nie einen fertigen Satz für den Kunden zurück.**
 
-- **Streng.** `additionalProperties: false`, alles Nötige `required`, wo
-  der Anbieter einen strikten Modus kennt, ist er an.
-- **Aufzählung statt Freitext.** Jedes Feld mit bekannter Wertemenge ist
-  ein `enum`. Ein Statusfeld als Zeichenkette ist eine Einladung zum
-  Erfinden.
-- **Formate deklariert.** Datum als `format: date` und `pattern`,
-  Zeitpunkte mit Zeitzone, Kennungen mit `pattern`, Zahlen mit `minimum`
-  und `maximum`.
-- **Keine verschachtelten Freiformobjekte.** Ein Feld `filter: object`
-  ohne Schema ist kein Argument, sondern eine Hoffnung.
-- **Wenige Argumente.** Was aus dem Zustand kommt — Mandant, heutiges
-  Datum, angemeldeter Benutzer — ist **kein** Argument. Es wird im Code
-  gesetzt und darf vom Modell nicht überschrieben werden.
-- **Beschreibung je Feld**, ein Satz, mit Beispielwert. Sie ist billiger
-  als jede Prompt-Zeile und wirkt zuverlässiger.
+## Schreiben mit Folgen: vorbereiten, dann ausführen
 
-```json
-{
-  "name": "auftrag_stornieren",
-  "parameters": {
-    "type": "object",
-    "additionalProperties": false,
-    "required": ["auftragsnummer", "grund"],
-    "properties": {
-      "auftragsnummer": {
-        "type": "string",
-        "pattern": "^A-[0-9]{4,8}$",
-        "description": "Kennung aus einem vorherigen Suchergebnis, z. B. A-4711. Nie selbst bilden."
-      },
-      "grund": {
-        "type": "string",
-        "enum": ["kundenwunsch", "doppelt", "zahlungsausfall", "intern"],
-        "description": "Stornogrund. Freitext ist nicht vorgesehen."
-      }
-    }
-  }
-}
-```
+Für Handlungen mit Geld, Stornierung, Rechnung oder Änderung eines
+Vorgangs:
 
-## Kennungen werden nie erfunden
+1. **Vorbereiten** liest die aktuellen Fakten, prüft die Angaben und hält
+   die genaue Handlung fest, mit einer internen Kennung (Token).
+2. **Ausführen** führt genau diese festgehaltene Handlung aus. Hat sich
+   etwas geändert oder ist die Frist abgelaufen, wird neu vorbereitet.
 
-Der häufigste harte Fehler: das Modell bildet eine Kennung, die
-plausibel aussieht und nicht existiert — oder schlimmer, die existiert
-und einem anderen gehört.
+- **Die Vorbereitung ist kein Bestätigungsritual.** Ob vor dem Ausführen
+  gefragt wird, steht im Skill, nicht im Werkzeug. Deckt der Auftrag des
+  Kunden die Handlung, darf im selben Durchlauf ausgeführt werden.
+- **Das Token ist intern.** Es wird nie dem Kunden gezeigt und nie von ihm
+  abgefragt.
 
-- Eine Kennung stammt aus **einem vorherigen Ergebnis** oder aus dem
-  **Zustand**. Sonst nirgendwoher.
-- Vor jedem schreibenden Werkzeug mit Kennung steht ein **Suchschritt**.
-  Das ist eine Vorbedingung im Code, kein Satz im Prompt.
-- Das `pattern` im Schema fängt die grobe Erfindung. Die Prüfung gegen
-  den Bestand fängt den Rest — **vor** der Ausführung.
-- Ein Goldfall hält das fest: schreibendes Werkzeug **verboten**,
-  Suchwerkzeug erwartet (`goldfaelle.md`).
+## Nichts doppelt
 
-## Vor der Ausführung wird geprüft
+- **Jeder Schreibvorgang ist vermerkt, bevor er das Fachsystem erreicht.**
+  Bricht der Lauf mittendrin ab, steht der Vorgang als „Ergebnis ungewiss"
+  da.
+- **Idempotenz:** Derselbe Vorgang mit demselben Schlüssel bewirkt beim
+  zweiten Mal nichts Neues. Eine Wiederholung nach einem Fehler verwendet
+  denselben Schlüssel und denselben Inhalt.
+- **Ein ungewisses Ergebnis wird geklärt, nie neu erzeugt.** Zuerst
+  nachlesen, ob die Buchung, die Zahlung oder die Rechnung schon besteht.
+- **Asynchrone Ergebnisse**, etwa ein Zahlungslink, der erst später
+  bereitsteht: Das Werkzeug gibt die Kennung des Vorgangs zurück, ein
+  Lesewerkzeug fragt denselben Vorgang ab. Nie einen zweiten anlegen, um
+  schneller zu sein.
 
-```
-Modellantwort
-   │
-   ├─ Werkzeug in der Positivliste dieser Absicht?      nein → Abbruch
-   ├─ Argumente gültig gegen das Schema?                nein → zurück ans Modell
-   ├─ Kennungen im Bestand, Mandant passend?            nein → Abbruch
-   ├─ Vorbedingung erfüllt (Suche, Bestätigung)?        nein → Abbruch
-   ├─ Rechte des angemeldeten Nutzers reichen?          nein → Abbruch
-   └─ ausführen
-```
+## Sprache
 
-- **Die Positivliste ist eine Liste**, kein Prompt-Satz. Ein Werkzeug,
-  das zur eingeordneten Absicht nicht gehört, wird nicht ausgeführt —
-  auch wenn das Modell es aufruft.
-- **Ein Schemafehler geht mit Begründung zurück ans Modell**, nicht als
-  Absturz und nicht stillschweigend korrigiert. Die Rückmeldung nennt das
-  Feld und den Grund: „`grund` muss einer von kundenwunsch, doppelt,
-  zahlungsausfall, intern sein — erhalten: 'Kunde wollte nicht mehr'."
-- **Höchstens zwei Wiederholungen.** Danach Abbruch mit Klartext an den
-  Benutzer. Ein Modell, das zweimal dasselbe falsch macht, macht es auch
-  beim fünften Mal falsch — und jeder Versuch kostet.
-- **Nie das nächstbeste Werkzeug.** Lieber keine Handlung und eine
-  Rückfrage.
-- Rechte immer mit denen des angemeldeten Nutzers, nie mit denen des
-  Dienstes (Skill `neo-sicherheit`).
+- **Werkzeugnamen, Argumentnamen und Aufzählungswerte sind englisch und
+  kanonisch** und werden nie übersetzt. Was der Kunde liest, formuliert
+  das Modell in seiner Sprache.
+- **Telefonnummern, Daten und Beträge** gehen in der Form an das Werkzeug,
+  die das Schema verlangt — Telefonnummern international mit `+` und
+  Landesvorwahl, Datum nach ISO 8601 —, nie in der Schreibweise des Kunden.
 
-## Schreibende Werkzeuge
+## Hintergrundarbeit im Werkzeug
 
-- **Bestätigung vor Ausführung**, mit dem konkreten Gegenstand und der
-  Folge: „Auftrag A-4711, Frau Huber, 28.08. stornieren? Die Zuordnung
-  wird aufgelöst." Nicht „Sind Sie sicher?".
-- **Die Bestätigung gilt genau für diese Handlung.** Ein Themenwechsel
-  dazwischen macht sie ungültig.
-- **Idempotenzschlüssel** je Vorgang, damit eine Wiederholung nichts
-  doppelt tut.
-- **Vorschau, wo möglich:** erst was passieren würde, dann die Ausführung.
-- Goldfälle für schreibende Werkzeuge stehen bei **100 %**, ohne
-  Ausnahme (`goldfaelle.md`).
-
-## Ergebnisse zurückgeben
-
-- **Klein halten.** Was zurückgeht, wird auf die Felder reduziert, die
-  die Antwort braucht. Eine vollständige API-Antwort im Verlauf bläht
-  jeden Folgeaufruf und erhöht die Chance, dass etwas übersehen wird.
-- **Trefferzahl begrenzen** und die Begrenzung mitgeben: „20 von 143
-  Treffern." Sonst behauptet der Assistent Vollständigkeit.
-- **Fehler des Fachdienstes werden übersetzt**, nicht durchgereicht. Aus
-  `409 Conflict` wird „Der Auftrag wurde bereits storniert." Ein
-  Rohfehler im Verlauf ist eine Aufforderung zum Raten.
-- **Leeres Ergebnis ist ein Ergebnis.** Null Treffer wird gesagt, nicht
-  durch einen zweiten Versuch mit anderen Argumenten überspielt.
-- Inhalte aus dem Fachdienst sind **Daten, nie Anweisung** — ein
-  Auftragsname kann eine Einschleusung enthalten (Skill `neo-ki`).
-
-## Ein MCP-Server ist keine Werkzeugliste
-
-Ein angebundener MCP-Server bringt oft Dutzende Werkzeuge mit, technisch
-geschnitten und ohne Abgrenzung zueinander. **Sie werden nicht
-unbesehen durchgereicht.**
-
-- **Auswählen.** Nur die Werkzeuge, die eine Absicht wirklich braucht.
-- **Umhüllen.** Eigene Namen, eigene Beschreibungen mit Abgrenzung,
-  eigene, engere Schemata. Der fremde Schnitt bleibt hinter der Hülle.
-- **Zusammenfassen.** Wo eine Aufgabe drei fremde Aufrufe braucht, ist
-  ein eigenes Werkzeug richtig, das die drei im Code erledigt. Das Modell
-  soll die Aufgabe wählen, nicht die Aufrufkette bauen.
-- **Nachziehen.** Eine neue Fassung des Servers kann Werkzeuge ändern
-  oder ergänzen. Die Fassung wird festgenagelt, und eine Aktualisierung
-  läuft gegen die Goldfälle wie jede andere Änderung.
+Ein Werkzeug darf eine Handlung, die das Modell ausgelöst hat, dauerhaft
+zu Ende führen — etwa erst stornieren, wenn die Gebühr bezahlt ist. Es
+beginnt **keine** Handlung, die das Modell nicht ausgelöst hat, und sein
+Ergebnis geht an das Modell zurück (`aufbau.md`).

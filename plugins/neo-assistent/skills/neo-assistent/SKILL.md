@@ -1,241 +1,180 @@
 ---
 name: neo-assistent
 description: >
-  NEO-Regeln für den Bau von KI-Assistenten mit Werkzeugzugriff. Diesen
-  Skill laden, sobald ein Assistent, ein Chatbot, ein Agent oder ein
-  Copilot gebaut, erweitert oder umgebaut wird, und bei jeder Änderung an
-  seinem Systemprompt, an seinen Werkzeugen, an seinem Werkzeugschema
-  oder an seinem Modell. Ebenso bei Anbindung eines MCP-Servers oder
-  einer Fach-API an ein Sprachmodell, bei der Frage, welches Werkzeug ein
-  Modell wann aufruft, bei falschen oder ausbleibenden Werkzeugaufrufen,
-  bei falschen Argumenten oder Datenformaten, bei mehrsprachigen
-  Assistenten und beim Dazuschalten einer Sprache. Ebenso bei einem
-  Prompt, der zu groß geworden ist, bei Änderungen, die an anderer Stelle
-  etwas kaputt machen, bei der Wahl und beim Wechsel des Modells und
-  immer dann, wenn die Zuverlässigkeit eines Assistenten gemessen werden
-  soll. Ebenso bei allem, was den Modellzugang über Requesty betrifft —
-  EU-Router, API-Schlüssel, Modellkennung, Policy, Datenhaltung — und bei
-  Härtefällen: ungenaue Eingaben, ganze Abläufe über mehrere Schritte,
-  Einmalgeheimnisse wie Codes und Schlüssel, Zahlungsvorgänge,
-  Eskalation und Einschleusung über Fremddaten.
+  NEO-Regeln für KI-Assistenten und Agenten im Produkt. Laden, sobald ein
+  Assistent, Chat, Agent oder Concierge gebaut, geändert oder repariert
+  wird — an Skills, Werkzeugen, MCP-Servern, Kontext oder Modell; bei der
+  Frage, welche Werkzeuge und Daten er erreichen darf, bei
+  Mandantentrennung, Identitätsnachweis und Einstellungen; und immer, wenn
+  ein Assistent etwas falsch macht, bevor eine Prüfung, ein Filter, ein
+  Router, ein zweites Modell oder ein fester Antworttext entsteht. Ebenso
+  bei Requesty, Modellwechsel und Abnahme eines Assistenten.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg, Stand 2026-08
+  herkunft: NEO Digital — Vorgaben Erich Nigg; Bauweise des LeoFlex-Concierge nach dem Umbau vom 30.09.2026, Stand 2026-10
 ---
 
 # KI-Assistenten bauen
 
-Lesekonvention siehe `README.md` des Regel-Repositorys.
+Lesekonvention siehe `README.md` des Regel-Repositorys: **Nie**,
+**immer** und **muss** sind verbindlich, ein Verstoß ist ein Blocker.
 
-Dieser Skill regelt den **Bau**. Rechtsstand, Kennzeichnungspflicht,
-Datenweitergabe, Prompt Injection, Protokollierung und Kosten stehen im
-Skill `neo-ki` und gelten zusätzlich.
+Dieser Skill regelt den **Bau**. Rechtsstand, Kennzeichnung,
+Datenweitergabe und Kosten stehen im Skill `neo-ki` und gelten zusätzlich.
+„Skill des Assistenten" heißt hier das Regelwerk, das das Modell im
+Produkt befolgt — nicht dieser Text für den Agenten, der baut.
 
 ## Der Satz, um den es geht
 
-> **Ein Assistent ist eine Architektur, kein Prompt.**
+> **Ein KI-Assistent besteht aus drei Bausteinen: dem Modell, den
+> Werkzeugen und den Skills. Das Modell entscheidet, was als Nächstes
+> geschieht. Die Skills bestimmen, wie es geschieht. Die Werkzeuge führen
+> aus und halten die Grenzen. Mehr wird nicht gebaut.**
 
-Ein Assistent aus einem großen Systemprompt wird ab einer gewissen Größe
-unwartbar, und zwar an denselben vier Stellen:
+Jede andere Bauweise — Router, Fachagenten-Kette, Prüfagent,
+Absicherungen um das Modell herum, Riesenprompt — ist ein **Blocker**.
+Sie wurde im LeoFlex-Concierge zweieinhalb Monate lang gebaut und
+nachgebessert und ist dort stillgelegt (`references/verbote.md`).
 
-| Symptom | Ursache |
-| --- | --- |
-| Eine Änderung bricht eine andere Stelle | Alle Anweisungen sehen einander. Es gibt keine Trennung. |
-| Auf Deutsch geht es, auf Englisch nicht | Der Ablauf hängt an Wörtern. Wörter überleben keine Übersetzung. |
-| Das falsche Werkzeug, falsche Argumente | Die Auswahl steht in Prosa statt im Schema. Prosa erzwingt nichts. |
-| „Mit dem größeren Modell geht es besser" | Der Prompt ist zu groß. Das Modell kauft Zeit, es löst nichts. |
+## 1. Die drei Bausteine
 
-**Ein größeres Modell ist nie die Antwort auf eine dieser vier
-Ursachen.** Es verschiebt die Grenze und bringt sie später zurück.
-
-## 1. Fünf Schichten, getrennt
-
-Die Trennung ist der eigentliche Gewinn: was getrennt ist, kann einander
-nicht mehr kaputt machen.
-
-| Schicht | Inhalt | Ort |
+| Baustein | Was er ist | Was er entscheidet |
 | --- | --- | --- |
-| **Systemprompt** | Rolle, Ton, Grenzen, Eskalation | eine Datei, **unter 150 Zeilen** |
-| **Absichten** | geschlossene Liste; je Absicht Zweck, Werkzeuge, Zusatzanweisung | Katalog, je Absicht ein Abschnitt |
-| **Werkzeuge** | Name, Beschreibung, Schema | Schemadatei, nicht Prosa |
-| **Zustand** | was bereits bekannt ist: Mandant, Datum, Auswahl | Code, als Daten übergeben |
-| **Ablauf** | Vorbedingung, Bestätigung, Wiederholung, Abbruch | Code, nicht Text |
+| **Modell** | ein Sprachmodell, gewählt in der Konfiguration | was der Kunde will, was fehlt, welche Regel gilt, welches Werkzeug als Nächstes, wann die Arbeit fertig ist, was geantwortet wird |
+| **Werkzeuge** | die angebundenen MCP-Server; eigene Werkzeuge der Anwendung nur für Abläufe, für die es keinen MCP-Server gibt | nichts Fachliches — sie führen aus und prüfen Mandant, Rechte, Eigentum und Doppelausführung |
+| **Skills** | das Regelwerk des Assistenten: ein kleiner Kern und je Aufgabenbereich ein Skill | nichts — sie sagen dem Modell, was wann wie zu tun ist und was nie |
 
-**Die Obergrenze wird gemessen, nicht geschätzt.** Was den Systemprompt
-sprengt, gehört in eine der anderen Schichten. Die wichtigste Grenze
-läuft zwischen Prompt und Code: **ein Prompt bittet, ein Schema
-erzwingt, eine Vorbedingung im Code entscheidet.**
+Ein **MCP-Server** ist ein Werkzeugserver nach dem Model Context Protocol:
+Er nennt seine Werkzeuge mit Beschreibung und erlaubten Angaben (Schema).
+Die **Anwendung** um das Modell führt nur die Schleife und stellt zu; sie
+entscheidet nichts (`references/aufbau.md`).
 
-Schichten, Zweistufigkeit und wann ein Router nötig wird:
-`references/architektur.md`.
+## 2. Was das Modell bekommt — und sonst nichts
 
-## 2. Kein natürlichsprachiges Wort steuert den Ablauf
+1. **Die Skills**, vollständig, ab dem ersten Aufruf.
+2. **Die Einstellungen des Mandanten** — Name und Stil, freigeschaltete
+   Funktionen, Anweisungen des Betreibers, Wissen über das Haus.
+3. **Den Zustand und das Gespräch** — die unbeantworteten Nachrichten
+   vollständig, dazu den Verlauf, den der Zusammenhang braucht; der ganze
+   Verlauf bleibt über ein Werkzeug lesbar.
+4. **Die Werkzeugdefinitionen**, vollständig, ab dem ersten Aufruf.
 
-**Nie** so:
+## 3. Wie der Assistent arbeitet
 
-```
-Wenn der Benutzer „stornieren" oder „cancel" schreibt, rufe das
-Werkzeug auftrag_stornieren auf.
-```
+Wie Claude Code mit einem Auftrag:
 
-Das ist der teuerste Fehler im ganzen Skill. Er bricht bei der nächsten
-Sprache, bei jeder Umschreibung und bei jedem Tippfehler.
+1. Die Nachricht lesen und im Gespräch nachsehen, was schon gesagt ist.
+2. Im Regelwerk nachsehen, welcher Ablauf gilt und was wichtig ist.
+3. Die Werkzeuge prüfen und den nächsten Schritt planen.
+4. Das Werkzeug aufrufen, das Ergebnis lesen, weiter bei 2.
+5. Antworten, wenn die Aufgabe erledigt ist oder nur der Kunde
+   weiterhelfen kann.
 
-Stattdessen: eine **Absicht** mit einem Zweck, und ein **Werkzeug**,
-dessen Beschreibung sagt, wofür es da ist. Die Zuordnung macht das
-Modell — semantisch, in jeder Sprache.
+Schreibt der Kunde dazwischen, geht die Nachricht in die laufende Arbeit
+ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt.
 
-> **Die Prüffrage: Eine neue Sprache dazuschalten darf keine einzige
-> Prompt-Zeile ändern.** Muss sie es doch, gibt es Schlüsselwort-Routing,
-> und es muss weg.
+## 4. Verboten — ohne Ausnahme
 
-Absichtskatalog, Zuschnitt, Mehrdeutigkeit und Rückfallabsicht:
-`references/absichten.md`. Sprachen, kanonische Arbeitssprache und das
-Dazuschalten: `references/sprachen.md`.
+1. **Nie** ein Router oder Klassifizierer vor dem Modell — weder ein
+   Modell noch eine Wortliste.
+2. **Nie** eine Kette aus Fachagenten oder eine Übergabe zwischen Modellen.
+3. **Nie** ein Prüfagent, Antwortprüfer oder Endredakteur, der eine
+   Antwort freigibt, verwirft oder umschreibt.
+4. **Nie** eine fachliche Absicherung im Code: Pflichtbestätigung, feste
+   Formel, Wortliste, Textbeleg, Mengen- oder Reihenfolgeregel.
+5. **Nie** ein Text vom Server an den Kunden — keine Ersatzantwort, keine
+   Absage; nur KI-Hinweis und Signatur hängt die Anwendung an.
+6. **Nie** eine fachliche Folgekette, die der Server von selbst anstößt.
+7. **Nie** Skills oder Werkzeuge erst im Gespräch nachladen oder
+   freischalten.
+8. **Nie** ein Laufzeitprompt im Code.
+9. **Nie** eine Grenze, die mit einer Absage an den Kunden endet.
 
-## 3. Das Werkzeug trägt seine Auswahl selbst
+Woran jede davon brach und was stattdessen gilt: `references/verbote.md`.
 
-- **Die Beschreibung ist das Routing.** Sie sagt, wann das Werkzeug zu
-  verwenden ist **und wann nicht** — mit Abgrenzung zum ähnlichsten
-  Werkzeug, unter dessen Namen. Zwei Werkzeuge ohne Abgrenzung sind die
-  häufigste Ursache für die falsche Wahl.
-- **Ein Werkzeug, eine Aufgabe.** Kein `aktion(typ, nutzlast)`. Der Name
-  ist eine Handlung: `auftrag_stornieren`, nicht `apiCallV2`.
-- **Aufzählungen statt Freitext**, Formate deklariert,
-  `additionalProperties: false`. **Kennungen werden nie erfunden**: sie
-  stammen aus einem Ergebnis oder aus dem Zustand, davor gehört ein
-  Suchschritt.
-- **Geprüft wird vor der Ausführung.** Ein ungültiger Aufruf geht mit
-  Begründung zurück ans Modell, höchstens zweimal, dann Abbruch mit
-  Klartext. Nie stillschweigend das nächstbeste Werkzeug.
-- **Schreibende Werkzeuge bestätigen**, sind idempotent und laufen mit
-  den Rechten des angemeldeten Nutzers (Skill `neo-sicherheit`).
+## 5. Zugriff: für wen der Assistent arbeitet
 
-Schemata, Beschreibungen, Abgrenzung, Fehlerrückgabe und Vorbedingungen:
-`references/werkzeuge.md`.
+Vor dem Bau wird festgelegt und dokumentiert, **für wen** der Assistent
+arbeitet. Daraus folgt, was seine Werkzeuge erreichen dürfen:
 
-## 4. Fertig heißt gemessen
+| Art | Für wen | Werkzeuge erreichen | Nachweis |
+| --- | --- | --- | --- |
+| Plattformassistenz | den angemeldeten Plattformbetreiber im Admin-Werkzeug | mandantenübergreifend die eigene Plattform | die Anmeldung als Plattformbetreiber |
+| Kundenassistenz mit Kundendaten | einen Kunden über einen Kanal, nicht angemeldet | die Vorgänge vieler Kunden eines Mandanten | vor jedem Zugriff auf einen bestehenden Vorgang, im Werkzeug |
+| Kundenassistenz ohne Kundendaten | einen Kunden in einer öffentlichen Strecke | nur öffentliche Funktionen | keiner — es gibt nichts Privates |
 
-**Keine Änderung an Prompt, Absicht, Werkzeug, Schema oder Modell ohne
-Goldfall-Lauf davor und danach.** „Es wirkt besser" ist keine Zahl.
+- **Mandantentrennung ist hart.** Jede Assistenz eines Mandanten oder
+  seiner Kunden erreicht nur diesen Mandanten — technisch, im Werkzeug.
+- **Ein Assistent handelt nie mit mehr Rechten als die Person, für die er
+  arbeitet.**
+- **Prozesskritische Werkzeuge bekommt eine Kundenassistenz nie** —
+  Stammdaten, Einstellungen, Löschungen, Tagesabschluss.
+- **Nachweis bei Kundendaten:** mindestens zwei Merkmale stimmen mit dem
+  Vorgang überein, nur wer gebucht hat; das Werkzeug gleicht ab, das Modell
+  sieht die Daten erst nach dem Treffer.
 
-```
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/gold-run.py gold-cases.json \
-  --adapter "python3 tools/assistant_adapter.py" --runs 5
-```
+Einzelheiten und die Einstellungen: `references/zugriff.md`.
 
-Der Prüfer läuft jeden Fall mehrfach, weil ein Modell nicht
-deterministisch antwortet, und bewertet die Trefferquote.
+## 6. Werkzeuge
 
-| Fallart | Schwelle |
+- **Freigabeliste je Assistent:** nur, was Art und Aufgabe brauchen.
+- **Die Definition kommt vom Server**, wie er sie liefert; jeder Vertrag
+  ist gegen die Dokumentation und einen echten Aufruf geprüft.
+- **Fehler gehen als Tatsache an das Modell zurück**; es korrigiert selbst.
+- **Schreiben mit Folgen in zwei Schritten:** vorbereiten, dann genau das
+  Vorbereitete ausführen. Die Vorbereitung ist kein Bestätigungsritual.
+- **Nichts doppelt:** Jeder Schreibvorgang ist vor dem Aufruf vermerkt;
+  ein ungewisses Ergebnis wird geklärt, nie neu erzeugt.
+- **Geheimnisse erreichen das Modell nie.**
+
+Einzelheiten: `references/werkzeuge.md`.
+
+## 7. Skills des Assistenten
+
+- **Ein Paket:** ein kleiner Kern, je Aufgabenbereich ein Skill, ein Manifest.
+- **Jede Regel genau einmal**, in dem Skill, dem der Bereich gehört — und
+  nie zugleich im Code.
+- **Englisch, im Befehlston, konkret.** Die Beschreibung sagt, wofür ein
+  Skill da ist — nie eine Liste von Kundenwörtern.
+- **Versioniert im Repository, in die Anwendung eingebettet**, beim Start
+  geprüft; nie aus einer Kundennachricht, einer Webseite oder einer
+  beschreibbaren Einstellung geladen.
+
+Einzelheiten: `references/skills.md`.
+
+## 8. Wenn der Assistent falsch handelt
+
+1. **Den Lauf lesen:** was das Modell bekam, welche Werkzeuge es rief, was
+   zurückkam, was es antwortete.
+2. **Verhaltensfehler → die Regel im Skill** schärfen.
+3. **Grenzverletzung → das Werkzeug** reparieren: Mandant, Eigentum,
+   Doppelausführung.
+4. **Nie** eine Prüfung, einen Filter, einen Ersatztext, einen Router oder
+   ein zweites Modell als Reparatur.
+5. Denselben Fall erneut mit dem echten Modell laufen lassen.
+
+## 9. Modell und Abnahme
+
+- **Modell** über den Requesty-EU-Router, Regionsangabe in der Kennung,
+  Schlüssel nur aus der Umgebung, feste Fassung aus der Konfiguration. Ein
+  Modellwechsel ist keine Reparatur.
+- **Abnahme** mit drei Belegarten, getrennt berichtet: Tests der Grenzen,
+  Messung mit dem echten Modell ohne Ausführung, Lauf im Staging mit
+  Testdaten. Ein grüner Test beweist nicht, dass das Modell die Skills
+  befolgt.
+
+## Die Bereiche
+
+| Bereich | Referenz |
 | --- | --- |
-| Schreibende Werkzeuge | **100 %** |
-| Verweigerung, Einschleusung, Zuständigkeitsgrenze | **100 %** |
-| Alles Übrige | **95 %** |
+| Schleife, Kontext, Gedächtnis, neue Nachrichten, Zustellung | `references/aufbau.md` |
+| Die verbotenen Bauweisen, woran sie brachen, was stattdessen gilt | `references/verbote.md` |
+| Arten von Assistenten, Mandant, Nachweis, Geheimnisse, Einstellungen | `references/zugriff.md` |
+| Werkzeuge und MCP-Server | `references/werkzeuge.md` |
+| Skills des Assistenten schreiben und ändern | `references/skills.md` |
+| Modellzugang und Modellwechsel | `references/modell.md` |
+| Belegarten, Testdaten, Fehlersuche | `references/abnahme.md` |
+| Abnahme vor jeder Fertigmeldung | `references/pruefliste.md` |
 
-Je Absicht mindestens drei Fälle: der klare, der mehrdeutige und der,
-der **kein** Werkzeug auslösen darf. Jeder Fall in **jeder**
-ausgelieferten Sprache.
-
-**Eine Änderung je Lauf.** Zwei gleichzeitig, und niemand weiß, welche
-gewirkt hat.
-
-Format, Abdeckung, Schwellen, CI und das Vorgehen bei einem Rückschritt:
-`references/goldfaelle.md`.
-
-## 5. Der klare Fall genügt nicht
-
-> **Der klare Fall beweist, dass er funktioniert. Der Härtefall beweist,
-> dass er nicht schadet.**
-
-Elf Klassen sind Pflicht, jede in jeder Sprache: ungenaue Sprache mit
-Tippfehlern und halben Sätzen, der vollständige Ablauf über mehrere
-Schritte, Anfragen außerhalb der Zuständigkeit, Zusatzleistungen zu einem
-bestehenden Vorgang, **Einmalgeheimnisse**, Eskalation, die aktuelle
-Betriebslage, Zahlungsvorgänge, Störungsmeldungen und Einschleusung über
-Fremddaten.
-
-**Eine Mengenregel steht nie im Prompt, sondern im Code.** Wovon je
-Person genau eines ausgegeben werden darf — ein Code, ein Schlüssel, eine
-Kennzahl —, wird von einer Vorbedingung durchgesetzt, die den zweiten
-Aufruf zurückweist. Auch beim zweiten Fragen. Auch wenn dringlich
-gefragt wird. Auch wenn „es nicht funktioniert hat" — dann folgt
-**Eskalation, nie ein zweites Geheimnis**.
-
-Klassen, Pflichtfälle je Klasse und was ein Härtefall nie tut:
-`references/haertefaelle.md`. Der Befehl
-`/neo-assistent:neo-haertefaelle` erzeugt sie und fährt sie.
-
-## 6. Requesty, EU-Router, Schlüssel aus der Umgebung
-
-**Modelle werden über Requesty angesprochen, über den EU-Router**
-(`https://router.eu.requesty.ai/v1`, OpenAI-kompatibel). Der Schlüssel
-steht **ausschließlich** in `REQUESTY_API_KEY` — nie in einer
-Konfiguration, nie im Repository, nie in einem Protokoll.
-
-> **Der EU-Router allein hält die Verarbeitung nicht in der EU.** Zeigt
-> die Modellkennung auf ein Modell außerhalb der EU, geht die Anfrage vom
-> Router aus hinaus. EU-Modelle tragen eine Regionsangabe in der Kennung
-> (`@eu-central-1`, `@eu`, `@francecentral`). Eine Kennung ohne
-> Regionsangabe ist ein Befund, kein Detail.
-
-Eine Policy (`policy/<name>`) als Rückfallkette ist erlaubt und meist
-besser — **jedes Kettenglied ist ein eigenes Modell** und wird gegen
-dieselben Goldfälle gemessen. Ein ungeprüftes Rückfallmodell ist ein
-zweiter, ungeprüfter Assistent.
-
-`scripts/requesty-adapter.py` verbindet den Goldfall-Prüfer mit dem
-Router: er fährt den Fall, zeichnet jeden Werkzeugaufruf auf, **ohne ihn
-auszuführen**, und prüft die Argumente gegen das Schema.
-`--check` prüft Zugang und Konfiguration und warnt, wenn die
-Verarbeitung die EU verlässt. Adressen, Kennungsform, strenge Ausgaben,
-Fehlercodes und Belege: `references/requesty.md`.
-
-## 7. Das Modell ist ein gemessener Parameter
-
-- **Festgenagelte Version**, nie „latest". Ein stiller Modellwechsel
-  bricht den Assistenten ohne eine einzige Codeänderung.
-- **Je Stufe ein Modell**: klein und schnell für die Einordnung, stark
-  für die Bearbeitung — genauer und billiger als ein Modell für alles.
-- **Ein Modellwechsel wird gemessen wie jede andere Änderung**: dieselben
-  Goldfälle, Zahlen vorher und nachher, sonst nichts verändert, Ergebnis
-  als Entscheidungsakte (Skill `neo-doku`).
-- **Nie als Reparatur einer Strukturschwäche.** Erst Struktur, dann
-  messen, dann Modelle vergleichen. Der Modellname steht in der
-  Konfiguration, nie im Code (Skill `neo-ki`).
-
-Vergleich, Wechsel und was billiger ist als hochrüsten:
-`references/modellwahl.md`.
-
-## 8. Ein bestehender Assistent wird nicht neu geschrieben
-
-Ein gewachsener Assistent wird **in Schritten** umgebaut, jeder einzeln
-gemessen, vom billigsten zum teuersten Eingriff: **Inventar**
-(`scripts/prompt-inventory.py`) → **Ausgangsmessung** → **Schemata
-härten** → **Fachwissen herausziehen** → **Absichten schneiden** →
-**Router**, letzterer erst, wenn die Messung ihn nötig macht.
-
-**Nie alles auf einmal**, **nie ohne Freigabe des Umfangs** (Skill
-`neo-grundregeln`), und ein Schritt, der die Zahl verschlechtert, wird
-zurückgenommen statt nachgebessert. Vorgehen je Schritt:
-`references/umbau.md`. Der Befehl
-`/neo-assistent:neo-assistentpruefung` führt Inventar und
-Ausgangsmessung durch und legt den Umbauplan vor.
-
-## 9. Mehrere Assistenten teilen ein Skelett
-
-Gemeinsam sind Schichtung, Router, Schemaprüfung, Fehlerrückgabe,
-Sprachbehandlung, Goldfall-Prüfer, Adapter und Protokollierung. Eigen
-sind nur Absichten, Werkzeuge, Ton und Goldfälle. Wer den zweiten
-Assistenten als Kopie des ersten anlegt, pflegt ab dem Tag zwei
-Fassungen jeder Regel.
-
-## 10. Abnahme
-
-Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und das
-Ergebnis mit Zahlen berichten. Nicht Geprüftes gilt als nicht erfüllt.
-Der Befehl `/neo-assistent:neo-goldlauf` führt die Messung durch.
-
-Zugehörige Skills: `neo-ki` (Recht, Kennzeichnung, Daten, Injection,
-Kosten), `neo-api` (Schnittstellen), `neo-sicherheit` (Rechte, Secrets),
-`neo-code` (Abstraktion, Schichten), `neo-doku` (Entscheidungsakten),
-`neo-grundregeln` (Freigabe, eine Änderung je Commit).
+Zugehörige Skills: `neo-ki` (Recht, Kennzeichnung, Kosten),
+`neo-sicherheit` (Rechte, Geheimnisse, Ausweisdaten), `neo-grundregeln`
+(Belegpflicht für Schnittstellen), `neo-doku` (Entscheidungsakten).

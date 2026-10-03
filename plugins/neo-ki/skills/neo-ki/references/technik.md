@@ -42,7 +42,10 @@ er steht im Inhalt.
 - Bei Klassifizierung: nur Werte aus der bekannten Menge annehmen;
   alles andere ist „unbekannt", nicht der nächstähnliche Wert.
 - **Keine Zustandsänderung ohne Prüfung.** Löschen, Buchen, Senden,
-  Bezahlen laufen nie direkt aus einer Modellausgabe.
+  Bezahlen laufen nie direkt aus einer Modellausgabe. Bei einem
+  Assistenten laufen sie über Werkzeuge, und das Werkzeug prüft Mandant,
+  Rechte, Eigentum und die vorbereitete Handlung — nicht ein zweites
+  Modell (Skill `neo-assistent`, `references/werkzeuge.md`).
 - Ein Weg für Rückmeldungen des Anwenders auf eine falsche Antwort, und
   jemand, der sie liest.
 
@@ -83,9 +86,9 @@ er steht im Inhalt.
 - Für die Qualität der Antworten selbst: eine gepflegte Sammlung echter
   Fälle mit erwartetem Ergebnis, die bei jeder Änderung erneut
   durchlaufen wird. Sie ersetzt keinen Test, sie ist ein Vergleich.
-  Ruft die KI-Funktion **Werkzeuge** auf, ist diese Sammlung Pflicht und
-  hat ein festes Format — Goldfälle, mehrfach gelaufen, mit Schwellen je
-  Fallart (Skill `neo-assistent`, `references/goldfaelle.md`).
+  Ruft die KI-Funktion **Werkzeuge** auf, gelten die drei Belegarten des
+  Skills `neo-assistent`, `references/abnahme.md` — die Messung mit dem
+  echten Modell führt dort keine Werkzeuge aus.
 - **Ein Modellwechsel ist eine Änderung mit Auswirkung** und wird wie
   eine solche behandelt: vorlegen, vergleichen, freigeben (Skill
   `neo-grundregeln`).
