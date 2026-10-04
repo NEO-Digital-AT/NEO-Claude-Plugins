@@ -143,7 +143,9 @@ Abschaltung (`aufbau.md`).
 ## Woran man einen Rückfall erkennt
 
 - Eine Änderung baut eine Prüfung der Antwort, eine Wortliste oder einen
-  zweiten Modellaufruf ein, „damit das nicht wieder passiert".
+  zweiten Modellaufruf ein, der entscheidet, prüft oder antwortet, „damit
+  das nicht wieder passiert". (Ein Hilfsaufruf, der nur für den Kontext
+  zusammenfasst, ist erlaubt — `aufbau.md`.)
 - Eine Regel steht im Code und im Skill, mit verschiedenem Wortlaut.
 - Ein Werkzeug gibt einen fertigen Satz für den Kunden zurück.
 - Ein Test prüft Code, der im echten Lauf nicht aufgerufen wird.

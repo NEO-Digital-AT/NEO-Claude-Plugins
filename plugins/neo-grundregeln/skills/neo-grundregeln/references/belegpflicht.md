@@ -126,21 +126,29 @@ implementiert.
 Vor jeder Zeile Code gegen eine fremde Schnittstelle, und vor jedem
 Werkzeug, das ein KI-Assistent bekommt:
 
-1. **Alle Unterlagen suchen, die es gibt:** maschinenlesbare
-   Spezifikation (OpenAPI, Swagger-JSON, JSON Schema), die Dokumentation
-   im Repository (etwa `docs/integrations/<anbieter>/`), PDFs und
-   Postman-Sammlungen des Anbieters, die Werkzeugdefinitionen eines
-   MCP-Servers, die offizielle Online-Dokumentation.
-2. **Jede davon lesen und gegeneinander abgleichen:** Pfad, Methode,
-   Parameter mit Name, Typ und Pflicht, Aufzählungswerte, Form der
-   Antwort, Fehlerfälle, Grenzen.
-3. **Wo es eine Testumgebung gibt, den Aufruf selbst machen** — über den
-   MCP-Server oder die Schnittstelle — und festhalten, was geschickt wurde
-   und was zurückkam, im Erfolg wie im Fehler.
-4. **Ein Widerspruch zwischen zwei Quellen ist ein Befund**, nie Anlass zu
+1. **Der Vertrag ist die Spezifikation, die der Anbieter aktuell online
+   veröffentlicht** (OpenAPI, Swagger-JSON, JSON Schema) — für apaleo
+   etwa `https://api.apaleo.com/swagger`. Sie wird für jede Arbeit dort
+   abgerufen. Eine Kopie im Repository ist ein Stand mit Datum, nie der
+   Vertrag; weicht sie ab, gilt die Online-Fassung.
+2. **Ergänzend lesen und gegen den Vertrag abgleichen:** die
+   Online-Dokumentation, PDFs und Postman-Sammlungen des Anbieters und die
+   Doku der Integration im Repository (etwa
+   `docs/integrations/<anbieter>/`) — Pfad, Methode, Parameter mit Name,
+   Typ und Pflicht, Aufzählungswerte, Form der Antwort, Fehlerfälle,
+   Grenzen.
+3. **Ein MCP-Server des Anbieters ist eine eigene Schnittstelle** mit
+   eigenen Endpunkten, Argumenten und Antworten. Seine
+   Werkzeugdefinitionen beschreiben den MCP-Server, nicht die API: Code
+   gegen die API richtet sich nie nach ihnen, ein Assistent, der den
+   MCP-Server benutzt, richtet sich nach ihnen.
+4. **Wo es eine Testumgebung gibt, den Aufruf selbst machen** — gegen
+   genau die Schnittstelle, die benutzt wird — und festhalten, was
+   geschickt wurde und was zurückkam, im Erfolg wie im Fehler.
+5. **Ein Widerspruch zwischen zwei Quellen ist ein Befund**, nie Anlass zu
    einer Vermutung. Er wird mit beiden Fundstellen festgehalten und
    vorgelegt; was tatsächlich gilt, zeigt der echte Aufruf.
-5. **Was beobachtet wurde, kommt mit Datum neben die Unterlagen** in die
+6. **Was beobachtet wurde, kommt mit Datum neben die Unterlagen** in die
    Doku der Integration — damit der Nächste nicht wieder messen muss.
 
 **Fehlt eine Unterlage oder ein Testzugang, wird er angefordert, bevor
@@ -151,7 +159,8 @@ steht und nicht gemessen wurde, existiert für den Code nicht.
 
 - [ ] Alle vorhandenen Unterlagen gefunden, gelesen und abgeglichen
       (oben).
-- [ ] Gibt es eine offizielle, maschinenlesbare Spezifikation?
+- [ ] Ist die aktuelle Spezifikation beim Anbieter online abgerufen — nicht
+      die Kopie im Repository?
 - [ ] Gibt es ein offizielles SDK?
 - [ ] Gibt es einen Dokumentations-MCP für diese Technologie?
 - [ ] Liegt die Fassung vor, die tatsächlich angesprochen wird?
@@ -170,7 +179,7 @@ fremder Typ wandert bis in die Fachlogik** (Skill `neo-code`).
 | Art | Zweck | Regel |
 | --- | --- | --- |
 | **Dokumentations-MCP** | Props, Parameter, Beispiele nachschlagen | **Vor** der Implementierung konsultieren, nicht danach |
-| **Aktions-MCP** | Werkzeug für Aktionen am Fachsystem | **In einer Testumgebung ein Prüfmittel:** Werkzeugliste, Schema, echter Aufruf, echte Antwort. Er belegt, was das System tut, die Spezifikation, was es zusagt — beides wird abgeglichen. **An einem Produktivsystem nur lesen**, nie zum Ausprobieren schreiben |
+| **Aktions-MCP** | Werkzeug für Aktionen am Fachsystem | **In einer Testumgebung ein Prüfmittel:** Werkzeugliste, Schema, echter Aufruf, echte Antwort. Er belegt, was der MCP-Server tut — nicht, was die API liefert; Code gegen die API wird gegen die API selbst geprüft. **An einem Produktivsystem nur lesen**, nie zum Ausprobieren schreiben |
 
 **MCP-Zugangsdaten nie in Konfigurationsdateien** (Skill
 `neo-sicherheit`).

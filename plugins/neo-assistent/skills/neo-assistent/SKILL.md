@@ -69,8 +69,8 @@ Wie Claude Code mit einem Auftrag:
    und der Kunde erfährt es vom Modell selbst.
 
 Schreibt der Kunde dazwischen, geht die Nachricht in die laufende Arbeit
-ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt. Wird
-der Kontext zu groß, wird komprimiert und weitergearbeitet.
+ein, solange die Antwort nicht zugestellt ist. Ausgeführtes bleibt. Ein
+voller Kontext wird komprimiert, auch per zusammenfassendem Hilfsaufruf.
 
 ## 4. Verboten — ohne Ausnahme
 

@@ -26,7 +26,9 @@ bei passender Aufgabe den jeweiligen Skill laden.
    Pakete oder tragende Architektur. Mehrere Optionen mit Vor- und
    Nachteilen vorlegen, Empfehlung abgeben — die Entscheidung fällt
    ausnahmslos der Projektinhaber. Vor jedem Umsetzungsschritt
-   zusammenfassen und die Freigabe abwarten. **Freie Hand gibt es nicht** —
+   zusammenfassen und die Freigabe abwarten — **kurz**: was gebaut wird und
+   was zu entscheiden ist. „Mach es fertig" zu einem geklärten Auftrag ist
+   die Freigabe. **Freie Hand gibt es nicht** —
    auch nicht bei Kleinigkeiten, auch nicht, wenn die Antwort auf der Hand
    liegt. Einzige Ausnahme: harte Sicherheitslücken (Regel 27).
 2. **Nichts erfinden, was jemand für Wahrheit halten könnte.** Kein
@@ -51,8 +53,10 @@ bei passender Aufgabe den jeweiligen Skill laden.
    - **Eine Anweisung wird ausgeführt, nicht bestätigt.** „Mergen",
      „pushen", „committen" gelten erst als erledigt, wenn es geschehen
      und belegt ist.
-   - **Die Liste steht sichtbar in jeder Antwort**: erledigt, in Arbeit,
-     offen. **Fertig ist die Arbeit, wenn die Liste leer ist.**
+   - **Jede Antwort nennt, was noch offen ist und was vom
+     Projektinhaber gebraucht wird — in kurzen Sätzen.** Erledigtes wird
+     nicht aufgezählt; Belege stehen in Commit, Pull Request oder Worklog.
+     **Fertig ist die Arbeit, wenn nichts mehr offen ist.**
    - **Der Umfang eines Punktes ist der Punkt.** Wird ein Problem
      gemeldet, ist **nur dieses** zu beheben. Was dabei zusätzlich
      auffällt — ein Testbefund, eine zweite Fundstelle, eine andere Seite
@@ -65,11 +69,11 @@ bei passender Aufgabe den jeweiligen Skill laden.
      Rechenzeit (`references/orchestrierung.md`).
    - **Findet eine Prüfung Probleme, kommt zuerst ein Voranschlag, dann
      die Freigabe, dann die Reparatur.** Der Voranschlag nennt je Befund
-     die **Notwendigkeit** (Blocker · sollte · kosmetisch · kein Befund),
-     die **Zahl der Fachagenten** und die **geschätzte Dauer**, dazu eine
-     Summenzeile. **Vorher wird nichts gestartet** — kein Agent, keine
-     Datei geändert, keine „schnelle Zeile". Einzige Ausnahme: eine harte
-     Sicherheitslücke (Regel 27).
+     in einer Zeile die **Notwendigkeit** (Blocker · sollte · kosmetisch ·
+     kein Befund), die **Zahl der Fachagenten** und die **geschätzte
+     Dauer**, dazu eine Summenzeile. **Vorher wird nichts gestartet** —
+     kein Agent, keine Datei geändert, keine „schnelle Zeile". Einzige
+     Ausnahme: eine harte Sicherheitslücke (Regel 27).
    Ausführlich: `neo-grundregeln`, `references/auftragsliste.md`.
 4. **Eine CLAUDE.md ist Pflicht, und die Skills darin sind Vorgabe.**
    Jedes Projekt hat eine `CLAUDE.md` im Wurzelverzeichnis, die
@@ -122,9 +126,12 @@ bei passender Aufgabe den jeweiligen Skill laden.
      **Nie zum Wechseln eines Schlüssels raten, bevor das feststeht** —
      das kostet den Projektinhaber Zeit für einen Fehler, der woanders
      liegt.
-   - Bei fremden Schnittstellen prüfen, ob ein MCP-Server oder eine
-     maschinenlesbare Spezifikation (OpenAPI) vorliegt; ist die
-     Dokumentation nicht öffentlich, Unterlagen anfordern.
+   - **Bei fremden Schnittstellen gilt die Spezifikation, die der Anbieter
+     aktuell online veröffentlicht** (OpenAPI, Swagger) — sie wird dort
+     abgerufen. Eine Kopie im Repository ist ein Stand mit Datum, nie der
+     Vertrag. **Ein MCP-Server des Anbieters ist eine eigene Schnittstelle**
+     mit eigenen Endpunkten und Antworten, nie die Dokumentation der API.
+     Ist die Dokumentation nicht öffentlich, Unterlagen anfordern.
 7. **Selbstkontrolle vor dem nächsten Schritt.** Nach jeder Änderung den
    eigenen Code kontrollieren und prüfen, welche anderen Programmteile,
    Verträge, Tests und Dokumente betroffen sind. Grüne Tests allein sind
@@ -207,7 +214,9 @@ bei passender Aufgabe den jeweiligen Skill laden.
     Bezeichner. Keine Emojis in Dokumentation, Commits und Oberflächen.
 19. **Sicherheit von Anfang an.** Secrets nie in Code, Konfiguration oder
     Logs. Destruktive Aktionen brauchen eine Bestätigung, die die Folge
-    benennt. Verstecken ist kein Schutz.
+    benennt; bei einem KI-Assistenten holt das Modell die Zustimmung nach
+    seinem Skill ein — kein Bestätigungszwang im Code (Regel 26).
+    Verstecken ist kein Schutz.
 20. **Zweige: ein Auftrag, ein Zweig — und erst mergen, dann den
     nächsten.** Welches Modell gilt, steht in der `CLAUDE.md`; fehlt der
     Eintrag, gilt das strengste und es wird gefragt. **Modell `dev`**
@@ -284,7 +293,10 @@ bei passender Aufgabe den jeweiligen Skill laden.
     schickt keine personenbezogenen Daten ohne Rechtsgrundlage an ein
     Modell. **Ein KI-Assistent besteht aus Modell, Werkzeugen und
     Skills** — Router, Prüfagenten und Absicherungen um das Modell herum
-    sind verboten (Skill `neo-assistent`).
+    sind verboten. Die Regeln stehen in den Skills, das Modell entscheidet;
+    der Code hält nur Mandant, Rechte, Eigentum und Doppelausführung. Der
+    Assistent schaltet sich nie still ab, ein voller Kontext wird
+    komprimiert (Skill `neo-assistent`).
 27. **Nur harte Sicherheitslücken sofort beheben** — jede andere
     ungefragte Änderung braucht vorher eine Rückfrage. Das gilt
     ausdrücklich für **Umbenennen** von Dateien, Symbolen, Schaltern oder

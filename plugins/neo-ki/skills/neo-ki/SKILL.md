@@ -83,7 +83,8 @@ nicht der Agent und nicht die Agentur allein (Skill `neo-recht`).
   übersteuern. Kein Modellname im Code.
 - **Ist die Fähigkeit abgeschaltet, startet die Anwendung trotzdem** und
   die betroffenen Abläufe behandeln sie als nicht verfügbar — mit
-  Meldung, nicht mit einem Absturz.
+  Meldung, nicht mit einem Absturz. Bei einem Assistenten gehen die
+  Nachrichten dann an das Team; der Server schreibt dem Kunden nichts.
 
 Grenzen, Prompt Injection, Prüfung der Ausgaben, Kosten, Protokollierung
 und Tests: `references/technik.md`.
@@ -106,8 +107,10 @@ und Tests: `references/technik.md`.
 ## Verantwortung
 
 - **Die Ausgabe eines Modells ist ein Vorschlag, kein Ergebnis.** Wo sie
-  gespeichert, veröffentlicht oder als Datensatz weiterverarbeitet wird,
-  wird sie vorher geprüft.
+  gespeichert oder als Datensatz weiterverarbeitet wird, wird sie vorher
+  geprüft; ein Text zur Veröffentlichung geht vorher über einen Menschen.
+  Die Antwort eines Assistenten an den Kunden ist ausgenommen (nächster
+  Punkt).
 - Wo eine Ausgabe eine Handlung auslöst, prüft der Code die Gestalt und
   die Grenzen der Ausgabe, bevor er handelt.
 - **Bei einem Assistenten mit Werkzeugen ist die Prüfung das Werkzeug**:

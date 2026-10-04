@@ -14,6 +14,8 @@
 - **Ist die Fähigkeit abgeschaltet, startet die Anwendung trotzdem.** Die
   betroffenen Abläufe behandeln sie als nicht verfügbar und sagen das:
   eine Meldung, kein Absturz, kein stiller Rückfall auf etwas anderes.
+  Bei einem Assistenten gehen die Nachrichten dann an das Team; der
+  Server schreibt dem Kunden nichts (Skill `neo-assistent`).
 
 ## Fremder Text ist Daten, nie Anweisung
 
@@ -31,9 +33,15 @@ er steht im Inhalt.
 - Ausgaben, die weiterverarbeitet werden, werden gegen ein Schema
   geprüft. Freier Text aus einem Modell ist nie ein Datensatz.
 - Verweise und Adressen aus einer Ausgabe werden nie ungeprüft
-  aufgerufen oder verlinkt.
+  aufgerufen. Bei einem Assistenten prüft das Werkzeug, das sie aufruft;
+  welche Links das Modell schreibt, regeln Skill und Einstellungen.
 
 ## Ausgaben prüfen
+
+Gilt für Ausgaben, die Code weiterverarbeitet — Datensatz,
+Klassifizierung, Extraktion. **Die Antwort eines Assistenten an den
+Kunden wird nie geprüft, gefiltert oder umgeschrieben**; seine Grenzen
+halten die Werkzeuge (Skill `neo-assistent`).
 
 - **Gestalt vor Inhalt:** erst prüfen, ob die Antwort die erwartete Form
   hat, dann verwenden.
@@ -60,7 +68,9 @@ er steht im Inhalt.
 - Wiederholung mit wachsendem Abstand und Obergrenze — nur bei Fehlern,
   die sich wiederholen lassen.
 - Kosten sind sichtbar: je Ablauf zählen, was verbraucht wurde, und eine
-  Grenze, ab der abgeschaltet statt weitergezahlt wird.
+  Grenze, ab der abgeschaltet statt weitergezahlt wird. Eine laufende
+  Anfrage an einen Assistenten endet dabei nie still (Skill
+  `neo-assistent`).
 - Ein Zwischenspeicher für gleiche Anfragen, wo die Antwort nicht
   personenbezogen ist.
 

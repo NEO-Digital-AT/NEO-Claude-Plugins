@@ -8,7 +8,8 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] Der Assistent besteht aus Modell, Werkzeugen und Skills — sonst
       nichts.
 - [ ] Kein Router, kein Klassifizierer, keine Wortliste vor dem Modell.
-- [ ] Keine Fachagenten, keine Übergabe zwischen Modellen.
+- [ ] Keine Fachagenten, keine Übergabe zwischen Modellen; ein Hilfsaufruf
+      fasst höchstens für den Kontext zusammen.
 - [ ] Kein Prüfagent, kein Antwortprüfer, kein Endredakteur.
 - [ ] Keine fachliche Regel im Code; im Code nur Mandant, Rechte,
       Eigentum, gültige Angaben, Doppelausführung.

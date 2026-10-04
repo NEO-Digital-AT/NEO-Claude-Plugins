@@ -15,7 +15,8 @@ mitgeändert hat.
 
 ## Auswirkungsanalyse
 
-Pflicht, und zwar schriftlich. Benannt wird, **was betroffen ist**:
+Pflicht, und zwar schriftlich — im Pull Request oder Worklog, nicht in
+der Antwort an den Projektinhaber. Benannt wird, **was betroffen ist**:
 
 | Bereich | Frage |
 | --- | --- |

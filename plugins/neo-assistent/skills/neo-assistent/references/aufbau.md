@@ -47,6 +47,12 @@ Dazu die **Werkzeugdefinitionen**, vollständig.
   Älterer Verlauf und ältere Werkzeugergebnisse werden zusammengefasst und
   ins Gedächtnis gelegt; die Arbeit läuft weiter. Nie wird eine Regel
   gekürzt, und nie beendet ein voller Kontext das Gespräch.
+- **Zusammenfassen darf ein Hilfsaufruf im Hintergrund** — dasselbe oder
+  ein anderes Modell, auch mehrere. Er liest lange Inhalte (älteren
+  Verlauf, Werkzeugergebnisse, Webseiten) und gibt dem Modell das
+  Wichtige zurück. Er entscheidet nichts, antwortet nie dem Kunden,
+  prüft nichts und ruft kein Werkzeug mit Folgen. Das ist keine
+  Fachagenten-Kette.
 - **Passt schon das Pflichtpaket allein nicht** — Kern, Skills,
   Werkzeugdefinitionen —, ist das ein Baufehler und wird vorgelegt.
 

@@ -21,16 +21,17 @@ fällt Wochen später auf.
 Auftragsliste gehängt. Die laufende Arbeit wird zuerst zu Ende gebracht.
 
 ```
-Auftragsliste
-  1  Tabellenkopf klebt beim Scrollen nicht          erledigt
+Offen
   2  Knopf „Speichern" fehlt auf der Detailseite     in Arbeit
   3  Screenshot: Abstand über der Karte zu groß      offen
-  4  Auf dev mergen                                  offen
+  4  Auf dev mergen                                  wartet auf deine Freigabe
 ```
 
-Die Liste steht **am Ende jeder Antwort**, vollständig, mit Stand. Was
-nicht auf der Liste steht, gilt als vergessen — deshalb wird sie
-mitgeschrieben und nicht im Kopf geführt.
+Geführt wird die Liste **vollständig**, mitgeschrieben und nicht im
+Kopf — was nicht auf ihr steht, gilt als vergessen. **Am Ende jeder
+Antwort steht nur, was offen ist und was vom Projektinhaber gebraucht
+wird**, in kurzen Sätzen. Erledigtes verschwindet aus der Antwort; es
+steht in Commit, Pull Request oder Worklog.
 
 ## Was erlaubt ist, während etwas läuft
 
@@ -105,7 +106,8 @@ zuletzt genannte Punkt erledigt ist. Vor jeder Fertigmeldung:
 - [ ] Kein Punkt steht auf **wartend**, ohne dass die Rückfrage offen
       sichtbar gestellt wurde.
 - [ ] Jede Anweisung zu Git ist **ausgeführt und belegt**, nicht angekündigt.
-- [ ] Die Liste steht in der Antwort, mit Stand je Punkt.
+- [ ] Die Antwort nennt nur, was offen ist und was gebraucht wird; ist
+      nichts offen, sagt sie das in einem Satz.
 
 ## Wenn der Kontext knapp wird
 

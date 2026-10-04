@@ -55,9 +55,13 @@ Die Zusammenfassung enthält:
 | „Ja, aber Punkt 3 anders" (dann gilt die Korrektur) | „Klingt gut" auf eine Frage, die zwei Optionen enthielt |
 | Eine ausdrückliche Auswahl aus vorgelegten Optionen | Schweigen |
 | „Wie besprochen" mit klarem Bezug | Eine Freigabe für etwas anderes |
+| „Mach es fertig" zu einem geklärten Auftrag | „Mach es fertig" zu etwas, das noch offen ist |
 
-**„Leg los" hebt diesen Schritt nicht auf.** Auch dann wird erst
-zusammengefasst und die Bestätigung abgewartet. Wer ohne Freigabe baut,
+**„Leg los" vor jeder Klärung hebt diesen Schritt nicht auf.** Auch dann
+wird erst zusammengefasst und die Bestätigung abgewartet. Die
+Zusammenfassung ist kurz: was gebaut wird, was offen ist und entschieden
+werden muss. **„Mach es fertig" zu einem geklärten Auftrag ist die
+Freigabe.** Wer ohne Freigabe baut,
 baut auf eigenes Risiko und hat die Regel verletzt, auch wenn das
 Ergebnis gefällt.
 
@@ -97,12 +101,14 @@ Systemdoku, Änderungsprotokoll, betroffene Handbuch- und Regelseiten
 
 ### 9. Fertigmelden
 
-Ehrlich:
+Ehrlich und kurz — nur, was der Projektinhaber braucht:
 
-- Was sichtbar ist und wie man es sieht
 - Was offen blieb und warum
-- Was als Nächstes ansteht
+- Was er tun oder entscheiden soll; soll er etwas prüfen: wo und wie
 - **Rote Tests heißen rot.** Zahlen statt Einschätzungen.
+
+Erledigtes und Belege stehen in Commit, Pull Request oder Worklog, nicht
+in der Antwort.
 
 ## Der Umsetzungsplan bei großen Aufgaben
 

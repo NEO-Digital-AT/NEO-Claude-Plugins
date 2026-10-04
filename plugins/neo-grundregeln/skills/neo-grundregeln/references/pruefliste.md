@@ -1,8 +1,9 @@
 # Abnahmeliste Arbeitsprozess
 
-Vor jeder Fertigmeldung durchgehen. Jeden Punkt mit dem **Ergebnis**
-berichten, nicht mit „erledigt". **Nicht Geprüftes gilt als nicht
-erfüllt.**
+Vor jeder Fertigmeldung durchgehen. Das **Ergebnis** je Punkt steht in
+Commit, Pull Request oder Worklog, nicht „erledigt"; die Antwort an den
+Projektinhaber nennt nur, was offen ist oder fehlt. **Nicht Geprüftes
+gilt als nicht erfüllt.**
 
 Der Befehl `/neo-grundregeln:neo-selbstkontrolle` geht diese Liste am
 aktuellen Arbeitsstand durch.
@@ -16,7 +17,8 @@ aktuellen Arbeitsstand durch.
       sichtbar gestellt wurde.
 - [ ] **Jede Anweisung zu Git wurde ausgeführt und belegt** — Merge,
       Commit, Push mit Kennung, nicht angekündigt.
-- [ ] Die Liste steht in der Antwort, mit Stand je Punkt.
+- [ ] Die Antwort nennt nur Offenes und was gebraucht wird, in kurzen
+      Sätzen.
 
 ## Prozess
 
