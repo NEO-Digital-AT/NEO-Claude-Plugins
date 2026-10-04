@@ -83,12 +83,12 @@ er steht im Inhalt.
 - Getestet wird das Verhalten drumherum: Abstraktion, Prüfung der
   Ausgabe, Fehlerfall, Zeitüberschreitung, abgeschaltete Fähigkeit,
   Grenzen.
-- Für die Qualität der Antworten selbst: eine gepflegte Sammlung echter
-  Fälle mit erwartetem Ergebnis, die bei jeder Änderung erneut
-  durchlaufen wird. Sie ersetzt keinen Test, sie ist ein Vergleich.
-  Ruft die KI-Funktion **Werkzeuge** auf, gelten die Belegarten des
-  Skills `neo-assistent`, `references/abnahme.md`: Tests der
-  Werkzeuggrenzen und der Lauf im Staging.
+- Die Qualität der Antworten zeigt nur ein Lauf mit dem echten Modell in
+  der Testumgebung, mit Testdaten. **Kein Prüfskript und keine
+  Fallsammlung bewertet Antworten automatisch.** Ruft die KI-Funktion
+  **Werkzeuge** auf, gelten die Belegarten des Skills `neo-assistent`,
+  `references/abnahme.md`: Tests der Werkzeuggrenzen und der Lauf im
+  Staging.
 - **Ein Modellwechsel ist eine Änderung mit Auswirkung** und wird wie
   eine solche behandelt: vorlegen, vergleichen, freigeben (Skill
   `neo-grundregeln`).
