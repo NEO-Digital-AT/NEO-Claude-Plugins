@@ -64,9 +64,9 @@ Regeln dazu:
 
 - **Leitsprache ist Deutsch**, sofern das Projekt nichts anderes
   festlegt. Sie ist der Stand, gegen den übersetzt wird.
-- **Ausnahme: Contao-Erweiterungen.** Dort ist **Englisch Pflicht und
-  Leitsprache**, Deutsch optional — die Doku richtet sich an das
-  Contao-Ökosystem (Skill `neo-contao`). Die Doku der Kundenwebsite im
+- **Ausnahme: Contao-Erweiterungen.** Dort steht **Englisch zuerst und ist
+  Leitsprache, Deutsch folgt und ist ebenfalls Pflicht** — die Doku
+  richtet sich an das Contao-Ökosystem (Skill `neo-contao-erweiterung`). Die Doku der Kundenwebsite im
   selben Repo bleibt davon unberührt und deutsch.
 - Die Ordnernamen sind die zweibuchstabigen Sprachkürzel (`de`, `en`,
   `fr`, `it`), bei Bedarf mit Region (`de-AT`, `pt-BR`).

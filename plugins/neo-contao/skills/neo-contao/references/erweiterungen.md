@@ -62,10 +62,10 @@ Update weg und beim übernächsten ein Fehler, den niemand findet.
 
 ## Eigene Erweiterungen
 
-- **Eigenes Repository je Erweiterung.** Name:
-  **`Contao-<NameDerErweiterung>-by-NEO`**, ohne Leerzeichen, z. B.
-  `Contao-BrevoNewsletter-by-NEO`.
-- Composer-Paket `neo/<name>-bundle`, Tabellen `tl_neo_*`.
+- **Eigenes Repository je Erweiterung.** Name **`NEO-Contao-<Name>`**,
+  z. B. `NEO-Contao-Brevo`. Regeln für Neutralität, Sprachen, Doku und
+  Einstellungen: Skill `neo-contao-erweiterung`.
+- Composer-Paket `neo-digital/contao-<name>-bundle`, Tabellen `tl_neo_*`.
 - **Keine Projekt-Spezifika.** Alles, was ein anderes Projekt anders
   braucht, ist ein Einstellungsfeld: Routen statt fester Adressen,
   Auswahl statt eingebauter Firmenregel, Vorlage statt eingebautem Text.
@@ -75,26 +75,22 @@ Update weg und beim übernächsten ein Fehler, den niemand findet.
 - Rechte mitliefern: Backend-Module registrieren, Tabellen den Modulen
   zuordnen, Feldrechte bedenken.
 - Migrationen mitliefern, auch für das Entfernen.
-- Vollständige Dokumentation über mehrere Seiten. **Englisch ist Pflicht
-  und Leitsprache**, Deutsch optional daneben (Skill `neo-doku`). Ohne
-  englische Doku ist die Erweiterung nicht fertig.
-- Übersetzungen der Oberfläche mindestens Englisch und Deutsch.
+- Vollständige Dokumentation über mehrere Seiten. **Erst Englisch, dann
+  Deutsch, beide Pflicht** (Skill `neo-contao-erweiterung`).
+- Übersetzungen der Oberfläche in **elf Sprachen** (en, de, fr, nl, it,
+  pl, cs, hu, sl, hr, es).
 
 ## Vorhandene NEO-Bundles
 
-In `NEO-Digital-AT/website` liegen drei Bundles, die noch **nicht** in
-eigenen Repositories stehen. Sie dürfen weiterverwendet werden:
+Jede liegt in einem eigenen Repository und in Projekten als Spiegel unter
+`bundles/<ordner>/` (Skill `neo-contao-erweiterung`, `references/aufbau.md`):
 
-| Paket | Ordner | Zweck |
+| Repository | Paket | Zweck |
 | --- | --- | --- |
-| `neo/super-agent-bundle` | `bundles/super-agent-bundle` | KI-Chat |
-| `neo/brevo-newsletter-bundle` | `bundles/brevo-newsletter-bundle` | Anbindung an Brevo |
-| `neo/llms-bundle` | `bundles/llms-bundle` | `llms.txt` und `llms-full.txt` |
-
-Eingebunden sind sie dort als Pfad-Repositories mit Symlink. Wird eines
-in ein eigenes Repository herausgelöst, gilt die Namensregel oben, und
-die Einbindung wechselt von Pfad auf VCS oder Paketquelle. Der Umzug ist
-eine eigene, angekündigte Änderung — nicht nebenbei.
+| `NEO-Contao-SuperAgent` | `neo-digital/contao-superagent-bundle` | KI-Chat |
+| `NEO-Contao-Brevo` | `neo-digital/contao-brevo-bundle` | Anbindung an Brevo |
+| `NEO-Contao-LLMS` | `neo-digital/contao-llms-bundle` | `llms.txt` und `llms-full.txt` |
+| `NEO-Contao-Websitecheck` | `neo-digital/contao-websitecheck-bundle` | Website-Check als Lead-Magnet |
 
 Vor dem Bau einer neuen Erweiterung wird zuerst geprüft, ob eines dieser
 Bundles die Aufgabe bereits löst.

@@ -61,12 +61,15 @@ Negatives davon.
 ## Aufbau
 
 Nach dem offiziellen Weg für Contao 5. Belege am Ende dieses Textes.
+**Namen, Ordner und Einstellungs-Muster der ausgelieferten Erweiterungen
+stehen in Skill `neo-contao-erweiterung`, `references/aufbau.md` — sie
+gehen dem Schema unten vor.**
 
 ```
-Contao-Beispiel-by-NEO/
+NEO-Contao-Beispiel/
   composer.json
   src/
-    ContaoBeispielBundle.php          Bundle-Klasse
+    NeoBeispielBundle.php          Bundle-Klasse
     ContaoManager/Plugin.php          Managed Edition
     Controller/ContentElement/        Inhaltselemente
     Controller/FrontendModule/        Frontend-Module
@@ -94,12 +97,12 @@ Contao-Beispiel-by-NEO/
 
 ```json
 {
-  "name": "neo/beispiel-bundle",
+  "name": "neo-digital/contao-beispiel-bundle",
   "type": "contao-bundle",
   "require": { "php": "^8.2", "contao/core-bundle": "^5.3" },
-  "autoload": { "psr-4": { "Neo\\ContaoBeispielBundle\\": "src/" } },
+  "autoload": { "psr-4": { "Neo\\BeispielBundle\\": "src/" } },
   "extra": {
-    "contao-manager-plugin": "Neo\\ContaoBeispielBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "Neo\\BeispielBundle\\ContaoManager\\Plugin"
   }
 }
 ```
@@ -118,9 +121,9 @@ Contao-Beispiel-by-NEO/
 
 | Was | Regel | Beispiel |
 | --- | --- | --- |
-| Repository | `Contao-<Name>-by-NEO` | `Contao-Terminplaner-by-NEO` |
-| Composer-Paket | `neo/<name>-bundle`, Kleinbuchstaben | `neo/terminplaner-bundle` |
-| Namensraum | `Neo\Contao<Name>Bundle` | `Neo\ContaoTerminplanerBundle` |
+| Repository | `NEO-Contao-<Name>` | `NEO-Contao-Terminplaner` |
+| Composer-Paket | `neo-digital/contao-<name>-bundle`, Kleinbuchstaben | `neo-digital/contao-terminplaner-bundle` |
+| Namensraum | `Neo\<Name>Bundle` | `Neo\TerminplanerBundle` |
 | Tabellen | `tl_neo_<name>` | `tl_neo_termin` |
 | Templates | eigener Präfix | `ce_neo_termin`, `mod_neo_termin` |
 | Dienste | Namensraum, kein Alias-Wildwuchs | — |
@@ -172,9 +175,10 @@ Eine Migration ist ein Dienst mit dem Tag `contao.migration`, der
 
 - **Kein fester Text im Code oder im Template.** Alles über die
   Sprachdateien; im Frontend über Felder und Insert-Tags (`SKILL.md`).
-- **Deutsch und Englisch** liegen bei, weitere Sprachen sind vorgesehen.
-- Die Doku der Erweiterung ist **englisch** (Pflicht), deutsch optional
-  (Skill `neo-doku`, `references/sprache.md`).
+- **Elf Sprachen** liegen bei (en, de, fr, nl, it, pl, cs, hu, sl, hr, es),
+  Backend und Standardtexte (Skill `neo-contao-erweiterung`).
+- Die Doku der Erweiterung ist **erst englisch, dann deutsch**, beide
+  Pflicht.
 - Keine Projekt-Spezifika: was ein anderes Projekt anders braucht, ist
   ein **Einstellungsfeld** — Route statt fester Adresse, Auswahl statt
   eingebauter Firmenregel, Imageset statt fester Maße.

@@ -128,12 +128,17 @@ eigenen Bundles und die vorhandenen NEO-Bundles:
 
 ## Eigene Erweiterungen: eigenes Repository
 
+> **Für jede eigene Erweiterung gilt zusätzlich Skill
+> `neo-contao-erweiterung`** — vollständig neutral (keine Personen-,
+> Firmen-, Kunden- oder Ortsnamen, kein Hausdesign), elf Sprachen im
+> Backend, README erst Englisch dann Deutsch, Einstellungen und Schlüssel
+> im Backend, Prüfwerkzeug `bundle-check.py`. Bei Widerspruch gilt dort.
+
 - Alles, was für Contao gebaut wird, ist eine **eigene Extension in einem
   eigenen Repository**.
-- Repository-Name: **`Contao-<NameDerErweiterung>-by-NEO`**, ohne
-  Leerzeichen. Composer-Paket `neo/<name>-bundle`, Namensraum
-  `Neo\Contao<Name>Bundle`, Tabellen `tl_neo_*`, Templates mit
-  eigenem Präfix.
+- Repository-Name **`NEO-Contao-<Name>`**, Composer-Paket
+  `neo-digital/contao-<name>-bundle`, Namensraum `Neo\<Name>Bundle`,
+  Tabellen `tl_neo_*`, Templates mit eigenem Präfix, Lizenz MIT.
 - Keine Projekt-Spezifika im Bundle: alles, was ein anderes Projekt
   anders braucht, ist ein Einstellungsfeld — Routen statt fester
   Adressen, Auswahl statt eingebauter Firmenregel.
@@ -158,10 +163,10 @@ ein Änderungsprotokoll je Fassung.
 Aufbau eines Bundles, `composer.json`, Registrierung über Dienste-Tags,
 Migrationen, Tests und die Doku im Paket: `references/erweiterungsbau.md`.
 
-In `NEO-Digital-AT/website` liegen bereits Bundles, die noch **nicht** in
-eigenen Repositories stehen und weiterverwendet werden dürfen:
-`neo/super-agent-bundle` (KI-Chat), `neo/brevo-newsletter-bundle`,
-`neo/llms-bundle`. Beim Herauslösen gilt die Namensregel oben.
+Bestehende Erweiterungen, die vor jeder neuen geprüft werden:
+`NEO-Contao-SuperAgent` (KI-Chat), `NEO-Contao-Brevo` (Newsletter),
+`NEO-Contao-LLMS` (`llms.txt`), `NEO-Contao-Websitecheck` (Website-Check
+als Lead-Magnet). In Projekten liegen sie als Spiegel unter `bundles/`.
 
 ## Webdesign ist ein Theme
 
@@ -258,10 +263,10 @@ wird dokumentiert, **einschließlich Bedienungsanleitung** für die
 Redaktion.
 
 - Eigenentwicklungen brauchen eine vollständige Doku über mehrere Seiten.
-  **Englisch ist Pflicht und Leitsprache** (`docs/en/`), Deutsch ist
-  optional (`docs/de/`). Eine Erweiterung ohne englische Doku gilt als
-  unfertig — sie richtet sich an das Contao-Ökosystem, nicht an einen
-  einzelnen Kunden.
+  **Erst Englisch, dann Deutsch, beide Pflicht** (README: englischer Teil
+  oben, deutscher darunter; `docs/en/`, `docs/de/`). Eine Erweiterung ohne
+  beide gilt als unfertig — sie richtet sich an das Contao-Ökosystem,
+  nicht an einen einzelnen Kunden (Skill `neo-contao-erweiterung`).
 - **Diese Sprachregel gilt nur für die Doku von Erweiterungen.** Die
   Dokumentation einer Kundenwebsite bleibt deutsch, nach der Leitsprache
   aus dem Skill `neo-doku`. Zwei verschiedene Publika, zwei verschiedene

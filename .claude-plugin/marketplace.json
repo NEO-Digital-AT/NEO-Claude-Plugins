@@ -33,7 +33,12 @@
     {
       "name": "neo-contao",
       "source": "./plugins/neo-contao",
-      "description": "Contao-Websites: alles in Contao verwaltbar, kein fester Text im Template, Bordmittel vor Eigenbau. Erweiterungsbau mit belegter Rangfolge — eine bestehende wird ergänzt statt eine zweite gebaut, und zwar so, dass jede Installation ohne Schaden aktualisieren kann; Migrationen defensiv, wiederholbar, ohne Datenverlust. Jedes Webdesign ist ein .cto-exportierbares Theme, anderswo ohne KI installierbar. Gestaltung aus Claude Design, Barrierefreiheit und PageSpeed ohne Abzug. Doku im Paket, englisch Pflicht."
+      "description": "Contao-Websites: alles in Contao verwaltbar, kein fester Text im Template, Bordmittel vor Eigenbau. Erweiterungsbau mit belegter Rangfolge — eine bestehende wird ergänzt statt eine zweite gebaut, und zwar so, dass jede Installation ohne Schaden aktualisieren kann; Migrationen defensiv, wiederholbar, ohne Datenverlust. Jedes Webdesign ist ein .cto-exportierbares Theme, anderswo ohne KI installierbar. Gestaltung aus Claude Design, Barrierefreiheit und PageSpeed ohne Abzug. Doku im Paket, erst englisch, dann deutsch. Eigene Erweiterungen nach neo-contao-erweiterung."
+    },
+    {
+      "name": "neo-contao-erweiterung",
+      "source": "./plugins/neo-contao-erweiterung",
+      "description": "Eigene Contao-Erweiterungen zum Weitergeben und Verkaufen: vollständig neutral — keine Personen-, Firmen-, Kunden- oder Ortsnamen, kein Hersteller-Branding in Texten und Beispielen, kein Hausdesign, nur der Erweiterungsname trägt die Marke. Aufbau nach den bestehenden Erweiterungen, Einstellungen und Schlüssel im Backend, elf Sprachen, README erst Englisch dann Deutsch mit Installation und Bedienung, Prüfwerkzeug bundle-check.py."
     },
     {
       "name": "neo-cors",

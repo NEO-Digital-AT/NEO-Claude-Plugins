@@ -1,0 +1,7 @@
+{
+  "name": "neo-contao-erweiterung",
+  "displayName": "NEO Contao-Erweiterungen",
+  "version": "1.0.0",
+  "description": "Verbindliche Regeln für eigene Contao-Erweiterungen, die weitergegeben oder verkauft werden. Vollständig neutral: keine Personen-, Firmen-, Kunden- oder Ortsnamen, kein Hersteller-Branding in Texten und Beispielen, kein Hausdesign — nur der Erweiterungsname darf die Marke tragen; Beispiele mit Max Mustermann und example.com. Aufbau nach den bestehenden Erweiterungen (Repository NEO-Contao-<Name>, Paket neo-digital/contao-<name>-bundle, MIT). Einstellungen und API-Schlüssel im Backend, verschlüsselt und exakt gespeichert, Umgebung nur als Rückfall, Auswahl vom Fremdsystem live, Knopf zum Prüfen der Verbindungen, Kostenschutz bei bezahlten Aufrufen. Backend und alle Standardtexte in elf Sprachen. README erst Englisch, dann Deutsch, mit Installation, Einrichtung und Bedienung. Prüfwerkzeug bundle-check.py für Neutralität, Sprachen, Paket und README.",
+  "author": { "name": "NEO Digital" }
+}
