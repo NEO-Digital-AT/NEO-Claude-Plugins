@@ -26,7 +26,7 @@ Qualitätsstandard — unabhängig von Sprache und Technik.
 | `neo-assistent` | Bau von KI-Assistenten: Modell, Werkzeuge und Skills — sonst nichts; kein Router, kein Prüfagent, keine Absicherung um das Modell; Zugriff nach Art des Assistenten, Mandantentrennung und Nachweis im Werkzeug; Skills nur für komplexe Abläufe, kurz und streng; nie still abschalten, Kontext komprimieren; Modellzugang über Requesty; Abnahme ohne Prüfskripte | Skill mit acht Referenzdateien, lädt bei jeder Arbeit an einem Assistenten |
 | `neo-deployment` | Zweigmodell dev/main, Schutzregeln, Pflichtprüfungen, Ausrollung | Skill mit GitHub-Einstellungen und Workflow-Gerüsten |
 | `neo-betrieb` | Sicherung und Wiederherstellung, Notfall, E-Mail-Zustellbarkeit, Umzug und Weiterleitungen | Skill mit vier Referenzdateien, lädt bei Betriebs- und Umzugsarbeit |
-| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb | Skill mit acht Referenzdateien, lädt bei Contao-Arbeit |
+| `neo-contao` | Contao-Websites: alles in Contao verwaltbar, Bordmittel, Erweiterungsbau als eigenes Bundle, Themes mit `.cto`-Export, Migrationen ohne Schaden, Betrieb, Ladezeit nach dem Referenzaufbau `ergotherapie-schumann.at` | Skill mit neun Referenzdateien, lädt bei Contao-Arbeit |
 | `neo-contao-erweiterung` | Eigene Contao-Erweiterungen zum Weitergeben und Verkaufen: **vollständig neutral** (keine Personen-, Firmen-, Kunden- oder Ortsnamen, kein Hausdesign — nur der Erweiterungsname trägt die Marke), Aufbau nach den bestehenden Erweiterungen, Einstellungen und Schlüssel im Backend, **elf Sprachen**, README **erst Englisch, dann Deutsch** | Skill mit fünf Referenzdateien und dem Werkzeug `bundle-check.py`, lädt bei jeder Arbeit an einer eigenen Erweiterung |
 | `neo-sicherheit` | Zehn harte Verbote, Autorisierung und Mandantentrennung, Secrets und Protokolle, hochsensible Daten, Härtung, Lieferkette, Release-Evidenz, Paritätsbetrieb | Skill mit sechs Referenzdateien, lädt bei Sicherheits-, API-, Release-Arbeit |
 
@@ -126,7 +126,9 @@ Werbekonten aus, und das ist eine andere Entscheidung beim Installieren.
 - **Bevor ein Endpoint entsteht:** `neo-api` — OpenAPI ist Pflicht, eine
   Fehlerhülle für alles, Autorisierung deny-by-default.
 - **Bei Contao:** `neo-contao` — die Seite muss wirken, als wäre sie rein
-  in Contao entstanden; Styles ausnahmslos SCSS, im Layout gewählt.
+  in Contao entstanden; Styles ausnahmslos SCSS, im Layout gewählt;
+  Ladezeit nach dem Referenzaufbau `ergotherapie-schumann.at`
+  (`references/ladezeit.md`).
 - **Vor jeder Fertigmeldung einer Webseite:** `neo-recht` — Impressum,
   Datenschutz, Barrierefreiheitserklärung, und im Netzwerkmitschnitt
   kein fremder Host vor der Einwilligung.

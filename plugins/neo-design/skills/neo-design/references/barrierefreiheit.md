@@ -107,6 +107,15 @@ Wert beweist für diese Abschnitte nichts. Deshalb läuft nach jeder
 Farbänderung ein eigener Kontrastscan über alle Seiten und alle
 Abschnitte, mit `contrast.py` gegen den **tatsächlichen** Untergrund.
 
+Auch umgekehrt: **Eine zu niedrige Schätzhöhe (`contain-intrinsic-size`)
+erzeugt Kontrastbefunde, die es nicht gibt.** Lighthouse wertet die
+Abschnitte in der geschätzten Lage; ragt ein Element dort in den
+nächsten Abschnitt, steht es auf fremdem Untergrund. Gemessen an
+`ergotherapie-schumann.at`: Schätzung 1500 px, Kontaktbereich am Telefon
+rund 2300 px, Ergebnis Barrierefreiheit 97. Die Schätzhöhe ist deshalb
+mindestens so hoch wie der höchste Abschnitt am Telefon, gemessen (Skill
+`neo-contao`, `references/ladezeit.md`, Baustein 5).
+
 ## Tastatur
 
 - **Alles ist ohne Maus bedienbar**, in sinnvoller Reihenfolge, ohne

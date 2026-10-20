@@ -184,6 +184,13 @@ Nur bei Webseiten, nicht bei Anwendungen und Portalen.
       bedienbar.
 - [ ] Schriften werden selbst ausgeliefert, nicht von einem fremden
       Dienst geladen.
+- [ ] **Neuladen ohne Versatz:** an mehreren Stellen und Breiten neu
+      geladen, der sichtbare Inhalt steht danach um 0 px gleich, die
+      Wiederherstellung ist ein Sprung, keine Fahrt; bewegte Dekoration
+      und Bühne tragen `overflow-anchor: none`.
+- [ ] SVG-Grafiken ohne Metadaten und ohne Kurvennäherung optimiert,
+      Pixelvergleich alt gegen neu belegt.
+- [ ] Genau eine Skriptdatei je Seite, mit `defer`.
 
 ## Messwerte
 

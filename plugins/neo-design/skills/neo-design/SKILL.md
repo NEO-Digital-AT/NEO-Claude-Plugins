@@ -491,9 +491,17 @@ der maschinenlesbare Vertrag (Skill `neo-api`).
 automatisch, was sich automatisch prüfen lässt — ein Bruchteil der
 WCAG-Kriterien. 100 dort ersetzt die Prüfung aus Abschnitt 6 nicht.
 
-Berichtet werden Zahlen je Seite und Kategorie. Einzelheiten, Ursachen
-und der Unterschied zwischen Feld- und Laborwerten:
-`references/messwerte.md`.
+Berichtet werden Zahlen je Seite und Kategorie. Einzelheiten, Ursachen,
+Hinweise, die keine Fehler sind, und der Unterschied zwischen Feld- und
+Laborwerten: `references/messwerte.md`.
+
+**Referenz für jede Webseite (Vorgabe Erich Nigg, 20.10.2026):** der
+Aufbau von `ergotherapie-schumann.at`, mobil 98/100/100/100 und 3/3 —
+eine Skriptdatei je Seite mit `defer`, eingebettete Stylesheets,
+beschnittene Schriften, vorgeladenes Bühnenbild, gemessene Schätzhöhen,
+optimierte SVG, Neuladen ohne Versatz: Skill `neo-contao`,
+`references/ladezeit.md`; die allgemeinen Regeln dazu in
+`references/webseiten.md`.
 
 ## 11. Abnahme
 

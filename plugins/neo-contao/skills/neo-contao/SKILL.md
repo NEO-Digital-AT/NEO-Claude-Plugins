@@ -7,14 +7,16 @@ description: >
   Imagesets und Bildkompression, SCSS und dessen Einbindung im Layout,
   MetaModels oder Contao Catalog,
   Backend-Rechte, Composer-Bundles, Migrationen und Seed, Deployment,
-  Minifizierung von CSS und JavaScript, llms.txt. Ebenso beim Bau einer
+  Minifizierung von CSS und JavaScript, Ladezeit und PageSpeed (Skripte,
+  Stylesheets, Schriften, Bühnenbild, SVG, Scrollposition beim
+  Neuladen), llms.txt. Ebenso beim Bau einer
   eigenen Contao-Erweiterung (Bundle, Plugin): composer.json,
   Manager-Plugin, Dienste-Tags, DCA, Migrationen, Aktualisierung ohne
   Schaden für bestehende Installationen. Ebenso bei Themes: Aufbau,
   Export als .cto, Import anderswo, Voraussetzungen. Ebenso bei der Frage,
   ob eine fremde Erweiterung eingesetzt oder eine eigene gebaut wird.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO-Digital-AT/website (docs/STANDARD-PROMPT-CONTAO.md, composer.json, bundles/), Stand 2026-08
+  herkunft: NEO Digital — Vorgaben Erich Nigg, belegt an NEO-Digital-AT/website (docs/STANDARD-PROMPT-CONTAO.md, composer.json, bundles/), Stand 2026-08; Ladezeit-Referenz ergotherapie-schumann.at (Website- und Theme-Repository), Stand 2026-10-20
 ---
 
 # NEO-Regeln für Contao
@@ -93,6 +95,9 @@ sein** (Skill `neo-design`).
 - **Stylesheets werden im Contao-Layout gewählt, genau wie JavaScript.**
 - **Jede Seite liefert nur, was sie braucht.** Kein großes Gesamt-CSS,
   sondern ein Einstiegsbündel je Seitengattung.
+- **Jede Seite lädt genau eine Skriptdatei**, mit `defer`: ein Grundmodul,
+  das jede Einstiegsdatei importiert, und im Layout genau eine Datei
+  (`references/ladezeit.md`, Baustein 1).
 
 Ebenen, Auslagerung, Namensfallen und die Regeln im Einzelnen:
 `references/scss.md`.
@@ -216,6 +221,33 @@ einschließlich Textpassung.
 
 Konkrete Einstellungen, Erweiterungen für die Minifizierung und die
 Prüfung der Auslieferung: `references/betrieb.md`.
+
+### Ladezeit: der Referenzaufbau
+
+**Vorgabe Erich Nigg, 20.10.2026: Der Aufbau von `ergotherapie-schumann.at`
+gilt für jede NEO-Website** — dort mobil Leistung 98, Barrierefreiheit,
+Best Practices und SEO je 100, agentisches Browsen 3/3. Jede neue Seite
+übernimmt alle acht Bausteine; eine bestehende zieht sie beim nächsten
+Auftrag an der Seite nach:
+
+1. Genau eine Skriptdatei je Seite, mit `defer` (das Seiten-Template
+   ergänzt es, der Kern bleibt unverändert).
+2. Kleine Stylesheets ins HTML eingebettet; was der erste Bildschirm
+   nicht braucht, nach dem Laden.
+3. Schriften selbst ausgeliefert, beschnitten, nur die des ersten
+   Bildschirms vorgeladen.
+4. Bühnenbild vorgeladen, `fetchpriority="high"`, Größen aus Contao.
+5. `content-visibility: auto` unterhalb des ersten Bildschirms, mit
+   **gemessener** Schätzhöhe.
+6. SVG ohne Metadaten und gerundet, **ohne** Kurvennäherung, belegt per
+   Pixelvergleich.
+7. Neuladen ohne Versatz: `overflow-anchor: none` auf bewegter Dekoration
+   und Bühne, weiches Scrollen erst nach dem Laden.
+8. Webserver komprimiert auch SVG; Stempel in der Adresse, lange
+   Haltbarkeit.
+
+Umsetzung mit Code, gemessene Fehler und die Prüfung nach jedem
+Ausrollen: `references/ladezeit.md`.
 
 ## Datenbank und Deployment
 

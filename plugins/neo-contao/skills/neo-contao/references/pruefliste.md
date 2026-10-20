@@ -134,6 +134,16 @@ Nur wenn Text, Titel, Meta-Angaben oder Einträge geändert wurden
       95 (Skill `neo-design`).
 - [ ] Barrierefreiheit nach WCAG 2.2 AA **gerechnet und berichtet**, nicht
       vom Lighthouse-Wert abgeleitet.
+- [ ] **Referenzaufbau Ladezeit** (`ladezeit.md`), alle acht Bausteine:
+      je Seite genau eine Skriptdatei des Themes, mit `defer`; kleine
+      Stylesheets eingebettet; Schriften beschnitten, nur der erste
+      Bildschirm vorgeladen; Bühnenbild vorgeladen; Schätzhöhe für
+      `content-visibility` gemessen; SVG optimiert und per Pixelvergleich
+      belegt; Webserver komprimiert SVG.
+- [ ] **Neuladetest bestanden:** bei 0, 120, 300, 700, 1500 und 3000 px,
+      Breiten 390 bis 1920 verschiebt sich der sichtbare Inhalt um 0 px,
+      die Wiederherstellung fährt nicht sichtbar, Links innerhalb der
+      Seite scrollen weich.
 - [ ] Deployment ohne Handgriff, einschließlich `files/` und Assets.
 
 ## Recht

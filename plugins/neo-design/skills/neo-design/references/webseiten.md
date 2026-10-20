@@ -91,6 +91,30 @@ Schmuck, sondern Teil der Gestaltung — aber sie hat immer einen Grund.
 - **Was scrollgebunden ist, wird in jeder Phase gemessen**, nicht in der
   Ruhelage: `scrolleffekte.md`.
 
+## Neuladen: die Seite bleibt, wo sie war
+
+Nach dem Neuladen stellt der Browser die Scrollposition wieder her. Zwei
+Dinge haben das an `ergotherapie-schumann.at` sichtbar gestört:
+
+- **Bewegte Dekoration als Bezugspunkt.** Chrome merkt sich ein Element
+  und stellt die Lage über dieses wieder her (Scroll Anchoring). War das
+  eine treibende Form oder die Überschrift der Bühne, stand die Seite
+  danach ab 1024 px Breite 9 bis 35 px tiefer — auch ganz oben. Abhilfe:
+  `overflow-anchor: none` auf jeder bewegten Dekoration und auf der Bühne
+  des ersten Bildschirms. Für die Abschnitte darunter bleibt das
+  Verankern an.
+- **Weiches Scrollen gilt auch für die Wiederherstellung.** Mit
+  `scroll-behavior: smooth` am `html` fuhr die Seite die alte Stelle
+  sichtbar von oben an. Abhilfe: weiches Scrollen erst nach dem Laden
+  einschalten (ein Attribut am `html`, gesetzt einen Bildaufbau nach
+  `load`); bei reduzierter Bewegung und im Modus „Animationen stoppen"
+  aus, auch am `html` selbst.
+
+Geprüft wird es: an mehreren Stellen neu laden und die Lage des
+sichtbaren Inhalts vorher und nachher vergleichen — Soll 0 px, und die
+Wiederherstellung ist ein Sprung, keine Fahrt. Umsetzung und Testablauf:
+Skill `neo-contao`, `references/ladezeit.md`, Baustein 7.
+
 ## Navigation und Burgermenü
 
 - **Das Burgermenü wird animiert**: das Symbol wandelt sich in ein
@@ -110,12 +134,29 @@ Schmuck, sondern Teil der Gestaltung — aber sie hat immer einen Grund.
   `width`/`height` im Markup, damit nichts springt.
 - Das Bühnenbild wird bevorzugt geladen, alles darunter nachrangig.
 - **Schriften immer selbst ausliefern**, nie von einem fremden Dienst
-  laden (Skill `neo-recht`).
+  laden (Skill `neo-recht`). Beschnitten auf die Zeichen der Seite; nur
+  die Schnitte des ersten Bildschirms werden vorgeladen.
+- **SVG-Grafiken werden optimiert, bevor sie eingebaut werden.**
+  Grafikprogramme schreiben Herkunftsdaten (C2PA) und sieben
+  Nachkommastellen hinein; ein Logo kam so auf 25 KB statt 13,5 KB.
+  Optimiert wird ohne Kurvennäherung — das SVGO-Standardpaket verschob
+  Kanten um bis zu ein Pixel — und belegt mit einem Pixelvergleich bei
+  mehreren Breiten (Skill `neo-contao`, `references/ladezeit.md`,
+  Baustein 6).
 
 ## Referenz
 
-`neo-digital.at` und das Repository `NEO-Digital-AT/website`. Dort steht
-der Aufbau, der gemeint ist: `theme/scss/` mit einem Bündel je Bereich,
+**Ladezeit und Stabilität:** `ergotherapie-schumann.at` (Vorgabe Erich
+Nigg, 20.10.2026, mobil Leistung 98, sonst 100, agentisches Browsen
+3/3). Die acht Bausteine — eine Skriptdatei je Seite mit `defer`,
+eingebettete Stylesheets, beschnittene Schriften, vorgeladenes
+Bühnenbild, gemessene Schätzhöhen, optimierte SVG, Neuladen ohne
+Versatz, Webserver — gelten für jede Webseite: Skill `neo-contao`,
+`references/ladezeit.md`. Die Regeln dort sind in Contao formuliert,
+gelten aber sinngemäß für jede Webseite.
+
+**Aufbau von Stil und Bewegung:** `neo-digital.at` und das Repository
+`NEO-Digital-AT/website`: `theme/scss/` mit einem Bündel je Bereich,
 `theme/js/` mit einem Modul je Effekt (`reveal.js`, `lp-motion.js`,
 `neo-bg-fx.js`, `lp-herowall.js`). Aufbau übernehmen, Gestaltung nicht
 kopieren — jede Kundenseite bekommt ihre eigene.

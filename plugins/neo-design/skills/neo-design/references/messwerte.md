@@ -61,6 +61,9 @@ Untergrenze, nicht das Ziel.
 | --- | --- | --- |
 | Leistung | Bilder in falscher Größe oder falschem Format | Bildgrößen des CMS, moderne Formate, Maße im Markup |
 | Leistung | Blockierendes CSS und JavaScript im Kopf | Nur ausliefern, was die Seite braucht; minifizieren; JavaScript nachrangig laden |
+| Leistung („Netzwerkabhängigkeitsbaum") | Mehr als eine Skriptdatei je Seite; Skript ohne `defer` am Seitenende, das der Browser vor Bild und Schriften lädt | Genau eine Skriptdatei je Seite, mit `defer`; kleine Stylesheets ins HTML einbetten |
+| Leistung | SVG mit eingebetteten Metadaten und sieben Nachkommastellen | Optimieren ohne Kurvennäherung, Pixelvergleich (`webseiten.md`) |
+| Barrierefreiheit | Zu niedrige Schätzhöhe bei `content-visibility: auto` | Schätzhöhe mindestens wie der höchste Abschnitt am Telefon (`barrierefreiheit.md`) |
 | Leistung | Schriften | Selbst ausliefern, vorladen, Anzeige ohne Umsprung |
 | Leistung | Drittanbieter vor der Einwilligung | Nichts lädt vor der Einwilligung — das ist zugleich Pflicht (Skill `neo-recht`) |
 | Layoutstabilität | Bilder und Rahmen ohne Maße, nachgeladene Banner | Maße setzen, Platz reservieren |
@@ -68,6 +71,30 @@ Untergrenze, nicht das Ziel.
 | Best Practices | Fehler in der Konsole, veraltete Schnittstellen, unsicheres Laden | Konsole muss leer sein; alles über HTTPS; Inhaltsrichtlinie setzen |
 | SEO | Fehlender oder zu langer Titel, fehlende Beschreibung, fehlendes Canonical | Aus Feldern im CMS, nicht aus dem Template |
 | SEO | Seiten auf `noindex`, die in der Sitemap stehen | Sitemap und Indexierungsangabe müssen zusammenpassen |
+
+## Hinweise, die keine Fehler sind
+
+Nicht jeder rote Hinweis ist ein Mangel. Diese beiden werden **nicht
+„behoben"**, sondern im Bericht mit Begründung benannt:
+
+- **„Bildübermittlung verbessern"** beim Bühnenbild. Lighthouse vergleicht
+  die geladene Datei mit der angezeigten Größe **ohne die Pixeldichte**
+  des Testgeräts (Moto G Power, 1,75×). Beispiel `ergotherapie-schumann.at`:
+  500 px Datei für 277 px Anzeige, nötig sind 485 px. Eine kleinere Datei
+  wäre am Telefon unscharf. Ein Mangel ist es nur, wenn die Datei auch mit
+  Pixeldichte deutlich zu groß ist.
+- **Lighthouse aus einer Sandbox.** Läuft der Prüfbrowser über einen
+  Proxy mit HTTP/1.1 und auf langsamer CPU, meldet er fehlendes HTTP/2
+  und Blockierzeiten, die die Seite nicht hat. Leistungszahlen kommen aus
+  PageSpeed Insights auf der ausgelieferten Adresse; lokale Läufe dienen
+  der Ursachensuche.
+
+## Referenz
+
+Den Aufbau, mit dem eine Contao-Seite die Zielwerte erreicht hat — mobil
+Leistung 98, Barrierefreiheit, Best Practices und SEO je 100, agentisches
+Browsen 3/3 —, beschreibt Skill `neo-contao`, `references/ladezeit.md`
+(Vorgabe Erich Nigg, 20.10.2026: Referenz für jede NEO-Website).
 
 ## Wann gemessen wird
 
