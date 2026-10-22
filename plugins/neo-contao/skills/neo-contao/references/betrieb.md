@@ -43,6 +43,36 @@ Bildverarbeitung im Build neben Contao.
 
 Was sich ändern soll, ändert sich im Imageset — dann rechnet Contao neu.
 
+## Website-Icon
+
+**Contao liefert das Website-Icon des Startpunkts unter `/favicon.ico`
+aus, schreibt aber keinen Link darauf in die Seite.** Browser fragen
+`/favicon.ico` von selbst ab; **Google zeigt in den Suchergebnissen nur
+ein Icon, das die Startseite verlinkt.** Gemessen an
+`ergotherapie-schumann.at` (22.10.2026): Startseite indexiert, kein Icon
+in der Suche, `/favicon.ico` Google unbekannt.
+
+Das Seiten-Template des Themes (bzw. ein Teil-Template, das alle
+Seitenvorlagen einbinden) setzt deshalb:
+
+```twig
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" href="{{ icon_192 }}" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="{{ touch_180 }}">
+```
+
+- `/favicon.ico` bleibt das Icon aus dem Backend (Startpunkt,
+  „Website-Icon"), mehrere Größen in einer Datei (16, 32, 48, 64 px).
+- **Ein PNG in einem Vielfachen von 48 px** (192 × 192) für Google,
+  quadratisch, mit Rand: Google zeigt das Icon in einem runden Rahmen;
+  kein deckender Bildpunkt liegt außerhalb des eingeschriebenen Kreises.
+- **Ein Touch-Icon** 180 × 180 auf deckendem Grund (iOS füllt Transparenz
+  schwarz).
+- Die PNGs liegen im Theme-Ordner und tragen einen Stempel in der Adresse.
+- Nach dem Ausrollen in der Search Console für die Startseite
+  „Indexierung beantragen"; Google übernimmt das Icon beim nächsten Abruf,
+  das dauert Tage.
+
 ## llms.txt
 
 **Bei einer Webseite sind `llms.txt` und `llms-full.txt` Pflicht.** Ohne
@@ -123,6 +153,8 @@ Skill `neo-deployment`.
 - [ ] HTML, CSS und JavaScript kommen minifiziert und komprimiert an —
       belegt an der Antwort, nicht behauptet.
 - [ ] Bilder kommen aus den Imagesets, in den vorgesehenen Formaten.
+- [ ] Die Startseite verlinkt das Website-Icon: `/favicon.ico`, ein PNG
+      192 × 192 und ein Touch-Icon 180 × 180.
 - [ ] `llms.txt` und `llms-full.txt` bilden den aktuellen Seitenbestand
       ab.
 - [ ] Ein zweiter Durchlauf des Deployments ändert nichts an den Inhalten.

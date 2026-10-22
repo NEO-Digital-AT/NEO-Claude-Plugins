@@ -129,6 +129,10 @@ Nur wenn Text, Titel, Meta-Angaben oder Einträge geändert wurden
       Minifizierung über eine Erweiterung, nicht von Hand.
 - [ ] **`llms.txt` und `llms-full.txt`** an der Domain-Wurzel, aus dem
       Bestand erzeugt — bei einer Webseite Pflicht.
+- [ ] **Website-Icon verlinkt** (`<link rel="icon">` auf `/favicon.ico`
+      und ein PNG 192 × 192, dazu `apple-touch-icon` 180 × 180) — Contao
+      liefert `/favicon.ico` nur aus, ohne Link zeigt Google kein Icon
+      (`betrieb.md`).
 - [ ] PageSpeed **mobil je Seitenvorlage**: Best Practices 100, SEO 100,
       agentisches Browsen 3/3, Leistung und Barrierefreiheit mindestens
       95 (Skill `neo-design`).

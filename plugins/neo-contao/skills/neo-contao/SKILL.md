@@ -218,6 +218,10 @@ einschließlich Textpassung.
   der Domain-Wurzel. Bei Web-Anwendungen und APIs sind sie es nicht —
   dort ist OpenAPI der Vertrag (Skill `neo-api`).
 - Bildkompression und Formate ausschließlich über die Imagesets.
+- **Das Website-Icon wird verlinkt.** Contao liefert `/favicon.ico` aus,
+  setzt aber keinen `<link rel="icon">` — ohne den zeigt Google kein Icon
+  in der Suche. Das Theme verlinkt `/favicon.ico`, ein PNG 192 × 192 und
+  ein Touch-Icon 180 × 180.
 
 Konkrete Einstellungen, Erweiterungen für die Minifizierung und die
 Prüfung der Auslieferung: `references/betrieb.md`.
