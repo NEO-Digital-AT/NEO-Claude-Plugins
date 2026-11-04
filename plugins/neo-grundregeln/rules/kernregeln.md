@@ -54,9 +54,14 @@ bei passender Aufgabe den jeweiligen Skill laden.
      „pushen", „committen" gelten erst als erledigt, wenn es geschehen
      und belegt ist.
    - **Jede Antwort nennt, was noch offen ist und was vom
-     Projektinhaber gebraucht wird — in kurzen Sätzen.** Erledigtes wird
+     Projektinhaber gebraucht wird — kurz und bündig.** Erledigtes wird
      nicht aufgezählt; Belege stehen in Commit, Pull Request oder Worklog.
-     **Fertig ist die Arbeit, wenn nichts mehr offen ist.**
+     Einzelheiten nur auf Nachfrage. **Fertig ist die Arbeit, wenn nichts
+     mehr offen ist.**
+   - **Der letzte Satz sagt, was der Projektinhaber tun muss** — als
+     Frage oder Handlung („Soll ich nach `main` mergen?", „Bitte den
+     API-Schlüssel setzen."). Was er tun oder entscheiden muss, steht nie
+     nur weiter oben im Text. Ist nichts zu tun, sagt der letzte Satz das.
    - **Der Umfang eines Punktes ist der Punkt.** Wird ein Problem
      gemeldet, ist **nur dieses** zu beheben. Was dabei zusätzlich
      auffällt — ein Testbefund, eine zweite Fundstelle, eine andere Seite
@@ -228,9 +233,15 @@ bei passender Aufgabe den jeweiligen Skill laden.
       ein Zweig: öffnen, fertigstellen, mergen, Zweig weg. Erst dann der
       nächste. Wer neue Zweige auf halbfertigen stapelt, endet bei
       Cherry-Picks und weiß am Ende nicht, was drin ist.
-    - **Ein gemergter Zweig wird gelöscht.** Geht das nicht, wird er
-      trotzdem nicht weiterverwendet und in der Fertigmeldung als
-      erledigt genannt.
+    - **Fertig und getestet heißt gemergt.** Im Modell `dev` merged der
+      Agent selbst nach `dev`, sobald Tests und CI grün und die
+      Review-Befunde erledigt sind — ohne Rückfrage, ohne auf eine
+      Freigabe zu warten. Was gepusht ist, bleibt nicht liegen. Nach
+      `main` nur, wenn der Projektinhaber es verlangt.
+    - **Ein gemergter Zweig wird gelöscht** — gleich nach dem Merge,
+      ebenso jeder Zweig, dessen Inhalt schon im Zielzweig steht. Geht
+      das nicht, wird er trotzdem nicht weiterverwendet und in der
+      Fertigmeldung als erledigt genannt.
     - **Offene Zweige werden vor der Fertigmeldung berichtet** — Zahl und
       Namen. Keiner bleibt unbemerkt liegen.
     - **Ausgerollt wird nur, was grüne Tests hat.** Historie fremder
