@@ -24,14 +24,16 @@ Auftragsliste gehängt. Die laufende Arbeit wird zuerst zu Ende gebracht.
 Offen
   2  Knopf „Speichern" fehlt auf der Detailseite     in Arbeit
   3  Screenshot: Abstand über der Karte zu groß      offen
-  4  Auf dev mergen                                  wartet auf deine Freigabe
+  4  Auf main mergen                                 wartet auf deine Freigabe
 ```
 
 Geführt wird die Liste **vollständig**, mitgeschrieben und nicht im
 Kopf — was nicht auf ihr steht, gilt als vergessen. **Am Ende jeder
 Antwort steht nur, was offen ist und was vom Projektinhaber gebraucht
-wird**, in kurzen Sätzen. Erledigtes verschwindet aus der Antwort; es
-steht in Commit, Pull Request oder Worklog.
+wird**, kurz und bündig. Erledigtes verschwindet aus der Antwort; es
+steht in Commit, Pull Request oder Worklog. **Der letzte Satz sagt, was
+der Projektinhaber tun muss** — als Frage oder Handlung; ist nichts zu
+tun, sagt er das. Der Projektinhaber liest oft nur diesen Satz.
 
 ## Was erlaubt ist, während etwas läuft
 

@@ -218,5 +218,7 @@ wird gewechselt — es reicht nicht, den Commit zu entfernen
   bewusst offen blieb.
 - **Ein roter Lauf wird nicht durch einen leeren Commit erneut
   angestoßen.** Ursache suchen, beheben, pushen.
-- Der Agent **merged nicht selbst**, solange der Projektinhaber es nicht
-  verlangt hat.
+- **Nach `dev` merged der Agent selbst**, sobald Tests und CI grün und
+  die Review-Befunde erledigt sind — ohne Rückfrage (Kernregel 20). Nach
+  `main` merged er nur, wenn der Projektinhaber es verlangt hat.
+- **Nach dem Merge wird der Zweig gelöscht**, im selben Arbeitsgang.
