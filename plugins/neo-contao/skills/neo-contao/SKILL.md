@@ -250,6 +250,16 @@ Auftrag an der Seite nach:
 8. Webserver komprimiert auch SVG; Stempel in der Adresse, lange
    Haltbarkeit.
 
+**Grundsatz (Erich Nigg, 6.11.2026): so wenig Dateien und so klein wie
+möglich.** Jede Datei kostet eine eigene Anfrage. Je Seite nur die Skripte
+und Stile, die sie wirklich braucht — minimiert, kombiniert, komprimiert in
+**höchstens eine** Skript- und **eine** Stylesheet-Datei (Ausnahme nur, was
+sich nicht kombinieren lässt, z. B. ALTCHA als ES-Modul: dann zwei, nie
+zehn). Skripte mit `defer`/`async`; was der erste Bildschirm braucht, steht
+im HTML, der Rest lädt nach. Bilder so klein wie möglich, so groß wie nötig,
+Qualität sichtbar erhalten. Contao-Bordmittel zuerst (Combiner mit
+`|static`, Bild-Pipeline), dann erst Eigenbau.
+
 Umsetzung mit Code, gemessene Fehler und die Prüfung nach jedem
 Ausrollen: `references/ladezeit.md`.
 
