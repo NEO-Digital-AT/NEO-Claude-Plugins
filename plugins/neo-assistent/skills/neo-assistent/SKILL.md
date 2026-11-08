@@ -122,8 +122,9 @@ arbeitet. Daraus folgt, was seine Werkzeuge erreichen dürfen:
   Produkt deutlich. Die Abrechnung
   zwischen Plattform und Mandant erreicht nur die Plattformassistenz.
 - **Nachweis bei Kundendaten:** vor jeder Auskunft zu einem Vorgang zwei
-  bis drei Merkmale, nur wer gebucht hat; das Werkzeug gleicht ab, das
-  Modell sieht die Daten erst nach dem Treffer.
+  bis drei Merkmale, nur wer gebucht hat. Den Nachweis führt das Modell
+  nach dem Skill; eigene Werkzeuge prüfen bei jedem Aufruf, dass er im
+  nachgewiesenen Vorgang bleibt.
 
 Einzelheiten und die Einstellungen: `references/zugriff.md`.
 
