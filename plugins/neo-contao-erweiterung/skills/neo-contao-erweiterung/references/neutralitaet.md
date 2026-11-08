@@ -17,7 +17,11 @@ Einzelnen heißt.
 
 **Erlaubt** sind: der Name der Erweiterung selbst (er darf die Marke
 tragen), das Backend-Menü der Erweiterung, `authors` in `composer.json`
-und der Rechteinhaber in `LICENSE`. Sonst nichts.
+und der Rechteinhaber in `LICENSE`. Dazu **Namen fremder Produkte und
+Dienste, die die Erweiterung anbindet** — etwa in Vorlagen für MCP-Server
+oder Schnittstellen: Apaleo, HubSpot, Calendly, Requesty (Projektinhaber,
+08.11.2026). Ein Kundenprojekt bleibt verboten, auch wenn es ein solches
+Produkt nutzt. Sonst nichts.
 
 ## Neutrale Beispielwerte
 

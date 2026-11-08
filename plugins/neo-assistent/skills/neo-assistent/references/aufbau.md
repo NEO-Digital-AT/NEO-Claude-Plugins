@@ -31,18 +31,27 @@ Jeder Teil ist ein eigener Abschnitt, damit seine Größe messbar bleibt:
 3. **Zustand** — Angaben der Anwendung, keine Behauptungen des Kunden:
    heutiges Datum und Zeitzone, Kanal, ob der Assistent schon geantwortet
    hat, welche Einheit zugeordnet ist.
-4. **Alle Aufgaben-Skills**, vollständig.
+4. **Der Katalog** — je Aufgaben-Skill die Kennung und ein Satz, je
+   Werkzeug der Name und ein Satz — und darunter die bisher geladenen
+   Skills vollständig.
 5. **Wissen** — Hausinformationen und häufige Fragen, als Daten
    gekennzeichnet.
 6. **Das Gespräch** (unten).
 
-Dazu die **Werkzeugdefinitionen**, vollständig.
+Dazu die **Definitionen der geladenen Werkzeuge**.
 
-- **Alles ab dem ersten Aufruf.** Kein Schritt, in dem das Modell erst
-  Regeln laden oder Werkzeuge freischalten muss. Ein Skill, der nicht im
-  Kontext steht, wird nicht befolgt.
-- **Sichtbar heißt nicht ausführbar.** Das Modell sieht alle Definitionen;
-  ob ein Aufruf ausgeführt wird, entscheidet das Werkzeug.
+- **Katalog zuerst, Inhalte auf Abruf** (Projektinhaber, 09.10.2026: „das
+  Claude-Code-Prinzip“). Das Modell lädt den Skill eines Bereichs mit
+  `load_module`, bevor es dort handelt; Abhängigkeiten und die Werkzeuge
+  des Skills kommen mit. Eine einzelne Definition lädt es mit
+  `load_tools`. Geladenes bleibt für den Lauf. Nie wieder alle Skills und
+  alle Schemata in jedem Schritt — daran lief der Kontext über.
+- **Die Anwendung fügt selbst hinzu**, was offene Vorgänge brauchen: die
+  Skills einer vorbereiteten Buchung, einer laufenden Stornierung.
+- **Geladen heißt nicht erlaubt, nicht geladen heißt nicht verboten.** Ein
+  Werkzeug, das das Modell mit dem Namen aus dem Katalog ohne Laden
+  aufruft, wird ausgeführt, und seine Definition kommt für den nächsten
+  Schritt dazu. Ob ein Aufruf erlaubt ist, prüft der Aufruf.
 - **Wird der Kontext zu groß, wird komprimiert — wie bei Claude Code.**
   Älterer Verlauf und ältere Werkzeugergebnisse werden zusammengefasst und
   ins Gedächtnis gelegt; die Arbeit läuft weiter. Nie wird eine Regel
@@ -53,8 +62,8 @@ Dazu die **Werkzeugdefinitionen**, vollständig.
   Wichtige zurück. Er entscheidet nichts, antwortet nie dem Kunden,
   prüft nichts und ruft kein Werkzeug mit Folgen. Das ist keine
   Fachagenten-Kette.
-- **Passt schon das Pflichtpaket allein nicht** — Kern, Skills,
-  Werkzeugdefinitionen —, ist das ein Baufehler und wird vorgelegt.
+- **Passt schon das Pflichtpaket allein nicht** — Kern, Einstellungen,
+  Katalog —, ist das ein Baufehler und wird vorgelegt.
 
 ## Ein Gesprächsschritt
 
