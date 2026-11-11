@@ -45,6 +45,13 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
 - **Keine Projektreste.** Keine Kommentare wie „für Kunde X ergänzt",
   „Befund von Y", keine Datumsnotizen aus einem Projekt.
 
+**Zwei Ausnahmen, nur im gemeinsamen Grundpaket (Basic):** die Zeile
+„powered by …" der kostenlosen Fassung (Wortmarke und Link auf die Website
+des Herstellers; sie verschwindet mit einer gültigen Lizenz) und die Adresse
+des Lizenzdiensts, gegen die Basic die Lizenzen prüft. Beide sind gewollt und
+bleiben. Beim Prüfwerkzeug werden ihre Dateien mit `--allow` genannt; keine
+andere Datei und keine andere Erweiterung bekommt eine Ausnahme.
+
 **Belegt wird das mit dem Prüfwerkzeug**, nicht mit Durchsehen:
 
 ```

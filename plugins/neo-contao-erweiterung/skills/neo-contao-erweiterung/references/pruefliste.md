@@ -9,6 +9,8 @@ Nicht Geprüftes gilt als nicht erfüllt.
       der Firma, der Domain und betroffener Kunden: **0 Befunde** in allen
       sechs Gruppen (Neutralität, Backend-Sprachen, Frontend-Texte, Paket,
       README, Doku). Jeder Name als eigenes `--forbid` oder kommagetrennt.
+      In Basic dazu `--allow public/credit.js --allow
+      src/License/LicenseService.php` (die beiden Ausnahmen der Regel).
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.

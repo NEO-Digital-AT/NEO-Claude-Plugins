@@ -8,8 +8,13 @@ install and use it. This script checks exactly that:
 1. Neutrality: forbidden names (--forbid, repeatable or comma-separated; whole words, so
    "Erich" does not hit "Bericht"), e-mail addresses outside the reserved
    example domains (example.com/.org/.net), phone numbers. Put the
-   author's domain into --forbid as well. LICENSE and the "authors" block
-   of composer.json are the only places where the author may appear.
+   author's domain into --forbid as well. The author may appear in LICENSE,
+   the "authors" block of composer.json and the labels of its menu group
+   ($GLOBALS['TL_LANG']['MOD'], ['FMD'] and ['CTE'] in
+   contao/languages/*/modules.php). --allow
+   names a file for the two exceptions of the rule in the shared base
+   bundle: the credit line of the free edition and the address of the
+   licence service; e-mail and phone checks still apply there.
 2. Back-end languages: contao/languages/<lang>/ exists for every required
    language, with the same files and the same keys as the reference
    language (en).
@@ -28,6 +33,7 @@ install and use it. This script checks exactly that:
 
     bundle-check.py path/to/bundle
     bundle-check.py path/to/bundle --forbid "Jane Doe" --forbid "Acme Ltd"
+    bundle-check.py path/to/bundle --forbid acme.example --allow public/credit.js
     bundle-check.py path/to/bundle --json
 
 Exit code 0 when nothing was found, 1 on findings, 2 when the path is not
@@ -48,6 +54,9 @@ SKIP_DIRS = {".git", "vendor", "node_modules", "dev", "var", "tests"}
 EXAMPLE_DOMAINS = ("example.com", "example.org", "example.net")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<![\w.])(?:\+\d{2}[\s/-]?)?\(?0\d{2,4}\)?[\s/-]\d{3,}[\s-]?\d{2,}(?![\w.])")
+# The menu group of the extension may carry the brand: lines that set a label of the back-end menu (MOD) or of the
+# groups in the lists of front-end modules (FMD) and content elements (CTE).
+MENU_LINE = re.compile(r"""\$GLOBALS\[\s*'TL_LANG'\s*\]\s*\[\s*'(?:MOD|FMD|CTE)'\s*\]""")
 PHP_KEY = re.compile(r"""\[\s*'([^']+)'\s*\](?:\s*\[\s*'([^']+)'\s*\])?(?:\s*\[\s*'([^']+)'\s*\])?\s*=""")
 
 
@@ -68,8 +77,10 @@ def term_pattern(term: str) -> re.Pattern[str]:
     return re.compile(left + re.escape(term) + right, re.IGNORECASE)
 
 
-def check_neutrality(root: pathlib.Path, forbid: list[str]) -> list[str]:
+def check_neutrality(root: pathlib.Path, forbid: list[str], allow: list[str] | None = None) -> list[str]:
     findings = []
+    # Files named with --allow may carry the names (only the exceptions of the rule); e-mail and phone checks still apply.
+    allowed = {pathlib.PurePosixPath(value.strip()).as_posix() for value in (allow or []) if value.strip()}
     # "--forbid 'A, B'" is two names: a single option with commas was read as one name before and found nothing.
     terms = [term.strip() for value in forbid for term in value.split(",")]
     patterns = [(term, term_pattern(term)) for term in terms if term]
@@ -91,8 +102,12 @@ def check_neutrality(root: pathlib.Path, forbid: list[str]) -> list[str]:
             data.pop("authors", None)
             text = json.dumps(data, ensure_ascii=False, indent=1)
 
+        menu = re.fullmatch(r"contao/languages/[^/]+/modules\.php", rel) is not None
+
         for number, line in enumerate(text.splitlines(), 1):
             for term, pattern in patterns:
+                if rel in allowed or (menu and MENU_LINE.search(line)):
+                    continue
                 if pattern.search(line):
                     findings.append(f"{rel}:{number}: forbidden name \"{term}\"")
             for match in EMAIL.finditer(line):
@@ -320,6 +335,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("path", help="root folder of the bundle (where composer.json is)")
     parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable, or several separated by commas")
+    parser.add_argument("--allow", action="append", default=[], help="file (relative to the bundle) where the forbidden names may appear; only for the exceptions of the rule (credit line of the free edition, address of the licence service); repeatable")
     parser.add_argument("--json", action="store_true", help="print the findings as JSON")
     args = parser.parse_args()
 
@@ -329,7 +345,7 @@ def main() -> int:
         return 2
 
     groups = {
-        "neutrality": check_neutrality(root, args.forbid),
+        "neutrality": check_neutrality(root, args.forbid, args.allow),
         "backend_languages": check_backend_languages(root),
         "frontend_texts": check_frontend_texts(root),
         "package": check_package(root),
@@ -344,6 +360,8 @@ def main() -> int:
             print(f"{group}: {'ok' if not findings else f'{len(findings)} finding(s)'}")
             for finding in findings:
                 print(f"  {finding}")
+            if group == "neutrality" and args.allow:
+                print("  allowed by --allow: " + ", ".join(args.allow))
 
     return 1 if any(groups.values()) else 0
 
