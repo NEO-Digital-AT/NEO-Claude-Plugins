@@ -16,8 +16,15 @@ Einzelnen heißt.
 | Projektdatum und Projektbezug | „ergänzt am … für …", „Ansage vom …" |
 
 **Erlaubt** sind: der Name der Erweiterung selbst (er darf die Marke
-tragen), das Backend-Menü der Erweiterung, `authors` in `composer.json`
-und der Rechteinhaber in `LICENSE`. Sonst nichts.
+tragen), die Menügruppe der Erweiterung (im Backend-Menü und in den Listen
+der Frontend-Module und Inhaltselemente), `authors` in `composer.json`
+und der Rechteinhaber in `LICENSE`. Dazu **Namen fremder Produkte und
+Dienste, die die Erweiterung anbindet** — etwa in Vorlagen für MCP-Server
+oder Schnittstellen: Apaleo, HubSpot, Calendly, Requesty (Projektinhaber,
+08.11.2026). Ein Kundenprojekt bleibt verboten, auch wenn es ein solches
+Produkt nutzt. Und im gemeinsamen Grundpaket (Basic) die Zeile „powered by …"
+der kostenlosen Fassung (`public/credit.js`) und die Adresse des
+Lizenzdiensts (`src/License/LicenseService.php`). Sonst nichts.
 
 ## Neutrale Beispielwerte
 
@@ -71,7 +78,14 @@ python3 plugins/neo-contao-erweiterung/scripts/bundle-check.py <bundle> \
   „Bericht".
 - Zusätzlich meldet das Werkzeug jede E-Mail-Adresse außerhalb der
   Beispiel-Domains und Zahlenfolgen, die wie eine Telefonnummer aussehen.
-- `LICENSE` und `authors` in `composer.json` werden übersprungen.
+- `LICENSE` und `authors` in `composer.json` werden übersprungen, ebenso
+  die Bezeichnungen der Menügruppe (`$GLOBALS['TL_LANG']['MOD']`, `['FMD']`
+  und `['CTE']` in `contao/languages/*/modules.php`).
+- `--allow <datei>` nimmt eine Datei von den verbotenen Namen aus, nur für
+  die beiden Ausnahmen in Basic:
+  `--allow public/credit.js --allow src/License/LicenseService.php`.
+  Mailadressen und Telefonnummern prüft das Werkzeug dort trotzdem; die
+  Ausgabe nennt die ausgenommenen Dateien.
 - Ergebnis muss **null Befunde** sein. Ein Befund wird behoben, nicht
   weggeschaltet.
 

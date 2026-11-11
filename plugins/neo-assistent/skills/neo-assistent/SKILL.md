@@ -10,7 +10,7 @@ description: >
   Router, ein zweites Modell oder ein fester Antworttext entsteht. Ebenso
   bei Requesty, Modellwechsel und Abnahme eines Assistenten.
 metadata:
-  herkunft: NEO Digital — Vorgaben Erich Nigg aus dem Betrieb eines Hotel-Concierge, Umbau vom 30.09.2026, Stand 2026-10
+  herkunft: NEO Digital — Vorgaben Erich Nigg aus dem Betrieb eines Hotel-Concierge, Umbau vom 30.09.2026, Katalog-Prinzip vom 09.10.2026, Stand 2026-11
 ---
 
 # KI-Assistenten bauen
@@ -39,7 +39,7 @@ nachgebessert und stillgelegt (`references/verbote.md`).
 | --- | --- | --- |
 | **Modell** | ein Sprachmodell, gewählt in der Konfiguration | was der Kunde will, was fehlt, welche Regel gilt, welches Werkzeug als Nächstes, wann die Arbeit fertig ist, was geantwortet wird |
 | **Werkzeuge** | die angebundenen MCP-Server; eigene Werkzeuge der Anwendung nur für Abläufe, für die es keinen MCP-Server gibt | nichts Fachliches — sie führen aus und prüfen Mandant, Rechte, Eigentum und Doppelausführung |
-| **Skills** | das Regelwerk des Assistenten: ein strenger Kern und je komplexem Ablauf ein Skill | nichts — sie sagen dem Modell, was wann wie zu tun ist und was nie |
+| **Skills** | das Regelwerk des Assistenten: ein strenger Kern und je Fachbereich ein kleiner Skill | nichts — sie sagen dem Modell, was wann wie zu tun ist und was nie |
 
 Ein **MCP-Server** ist ein Werkzeugserver nach dem Model Context Protocol:
 Er nennt seine Werkzeuge mit Beschreibung und erlaubten Angaben (Schema).
@@ -48,20 +48,30 @@ entscheidet nichts (`references/aufbau.md`).
 
 ## 2. Was das Modell bekommt — und sonst nichts
 
-1. **Die Skills**, vollständig, ab dem ersten Aufruf.
+1. **Den Kern-Skill**, vollständig, in jedem Schritt.
 2. **Die Einstellungen des Mandanten** — Name und Stil, freigeschaltete
    Funktionen, Anweisungen des Betreibers, Wissen über das Haus.
 3. **Den Zustand und das Gespräch** — die unbeantworteten Nachrichten
    vollständig, dazu den Verlauf, den der Zusammenhang braucht; der ganze
    Verlauf bleibt über ein Werkzeug lesbar.
-4. **Die Werkzeugdefinitionen**, vollständig, ab dem ersten Aufruf.
+4. **Den Katalog**, ab dem ersten Schritt: je Aufgaben-Skill die Kennung
+   und ein Satz, je Werkzeug der Name und ein Satz.
+5. **Was es geladen hat:** Den Inhalt eines Skills lädt das Modell selbst,
+   bevor es in dessen Bereich handelt (`load_module`); dessen
+   Abhängigkeiten und Werkzeuge kommen mit. Eine einzelne
+   Werkzeugdefinition lädt es mit `load_tools`. Geladenes bleibt für den
+   Lauf.
+
+**Katalog zuerst, Inhalte auf Abruf** — wie Claude Code (Projektinhaber,
+09.10.2026). Nie wieder alle Skills und alle Schemata in jedem Schritt:
+Daran ist der volle Kontext übergelaufen.
 
 ## 3. Wie der Assistent arbeitet
 
 Wie Claude Code mit einem Auftrag:
 
 1. Die Nachricht lesen und im Gespräch nachsehen, was schon gesagt ist.
-2. Im Regelwerk nachsehen, welcher Ablauf gilt und was wichtig ist.
+2. Im Katalog nachsehen, welcher Ablauf gilt, und dessen Skill laden.
 3. Die Werkzeuge prüfen und den nächsten Schritt selbst planen.
 4. Das Werkzeug aufrufen, das Ergebnis lesen, weiter bei 2.
 5. Antworten, wenn die Aufgabe erledigt ist oder nur der Kunde
@@ -84,7 +94,8 @@ voller Kontext wird komprimiert, auch per zusammenfassendem Hilfsaufruf.
 5. **Nie** ein Text vom Server an den Kunden — keine Ersatzantwort, keine
    Absage; nur KI-Hinweis und Signatur hängt die Anwendung an.
 6. **Nie** eine fachliche Folgekette, die der Server von selbst anstößt.
-7. **Nie** Skills oder Werkzeuge im Gespräch nachladen oder freischalten.
+7. **Nie** ein Recht über das Laden vergeben: Ob ein Werkzeug ausgeführt
+   wird, prüft der Aufruf — nie das Verstecken einer Definition.
 8. **Nie** ein Laufzeitprompt im Code.
 9. **Nie** eine Absage oder eine stille Abschaltung an einer Grenze.
 
@@ -106,17 +117,23 @@ arbeitet. Daraus folgt, was seine Werkzeuge erreichen dürfen:
 - **Ein Assistent handelt nie mit mehr Rechten als die Person, für die er
   arbeitet.**
 - **Prozesskritische Werkzeuge bekommt eine Kundenassistenz nie** —
-  Stammdaten, Einstellungen, Löschungen, Tagesabschluss. Die Abrechnung
+  Stammdaten, Einstellungen, Löschungen, Tagesabschluss. In einem Produkt
+  sperrt die Vorlage sie ab Werk; hebt der Kunde die Sperre auf, warnt das
+  Produkt deutlich. Die Abrechnung
   zwischen Plattform und Mandant erreicht nur die Plattformassistenz.
 - **Nachweis bei Kundendaten:** vor jeder Auskunft zu einem Vorgang zwei
-  bis drei Merkmale, nur wer gebucht hat; das Werkzeug gleicht ab, das
-  Modell sieht die Daten erst nach dem Treffer.
+  bis drei Merkmale, nur wer gebucht hat. Den Nachweis führt das Modell
+  nach dem Skill; eigene Werkzeuge prüfen bei jedem Aufruf, dass er im
+  nachgewiesenen Vorgang bleibt.
 
 Einzelheiten und die Einstellungen: `references/zugriff.md`.
 
 ## 6. Werkzeuge
 
-- **Freigabeliste je Assistent:** nur, was Art und Aufgabe brauchen.
+- **Freigabeliste je Assistent:** nur, was Art und Aufgabe brauchen. In
+  einem Produkt, das der Kunde selbst einrichtet, legt er sie fest; der
+  Administrator kann Werkzeuge sperren, das Produkt warnt vor ändernden,
+  löschenden und Kundendaten lesenden Werkzeugen.
 - **Selbstständig:** Das Modell nutzt Werkzeuge ohne Anleitung im Skill.
 - **Die Definition kommt vom Server**, wie er sie liefert; jeder Vertrag
   ist gegen die Dokumentation und einen echten Aufruf geprüft.
@@ -131,18 +148,28 @@ Einzelheiten: `references/werkzeuge.md`.
 
 ## 7. Skills des Assistenten
 
-- **Ein Paket:** ein strenger Kern, ein Skill je komplexem Ablauf mit
-  Folgen (Buchen, Zahlen, Stornieren, Rechnung), ein Manifest — keiner
-  für reine Information. Jeder Skill kurz: Zweck, Werkzeuge, Schritte,
-  Nie, Übergabe, eine Aussage je Zeile.
+- **Ein Paket:** ein strenger Kern, je Fachbereich ein kleiner Skill, ein
+  Manifest. Jeder Skill höchstens 2.800 Zeichen, eine Aussage je Zeile;
+  lieber mehr kleine als wenige große (Projektinhaber, 15.10.2026).
+- **Ein Skill** übersetzt, was der Kunde schreibt, beschreibt die
+  Standardabläufe und sagt, woher das Modell die Informationen nimmt.
+  Standardfälle stehen im Skill, Sonderfälle gehen an das Team.
+- **Skills sperren nur, was gefährlich ist:** Daten, die der Kunde nicht
+  sehen darf, und Handlungen, die nur der Betreiber darf (Projektinhaber,
+  10.10.2026).
 - **Der Kern verbietet das Erfinden:** Gesagt wird nur, was belegt ist.
 - **Jede Regel genau einmal**, in dem Skill, dem der Bereich gehört — und
   nie zugleich im Code.
-- **Englisch, im Befehlston, konkret.** Die Beschreibung sagt, wofür ein
-  Skill da ist — nie eine Liste von Kundenwörtern.
-- **Versioniert im Repository, in die Anwendung eingebettet**, beim Start
-  geprüft; nie aus einer Kundennachricht, einer Webseite oder einer
-  beschreibbaren Einstellung geladen.
+- **Englisch, im Befehlston, konkret.** Die Beschreibung sagt, wann der
+  Skill geladen wird — nie eine Liste von Kundenwörtern.
+- **Eigene Assistenten:** versioniert im Repository, in die Anwendung
+  eingebettet, beim Start geprüft.
+- **Produkte, die der Kunde selbst einrichtet,** dürfen Skills aus Quellen
+  wie GitHub installieren (Projektinhaber, 08.11.2026): beim Installieren
+  eine feste Fassung ablegen und prüfen, zur Laufzeit nichts aus dem Netz,
+  aktualisieren nur durch den Administrator.
+- **Nie** aus einer Kundennachricht, einer besuchten Webseite oder einem
+  Anhang.
 
 Einzelheiten: `references/skills.md`.
 

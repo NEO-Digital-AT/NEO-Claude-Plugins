@@ -5,11 +5,16 @@ point back to the people or the company that built it, every back-end
 language must be complete, and the README must tell a stranger how to
 install and use it. This script checks exactly that:
 
-1. Neutrality: forbidden names (--forbid, repeatable; whole words, so
+1. Neutrality: forbidden names (--forbid, repeatable or comma-separated; whole words, so
    "Erich" does not hit "Bericht"), e-mail addresses outside the reserved
    example domains (example.com/.org/.net), phone numbers. Put the
-   author's domain into --forbid as well. LICENSE and the "authors" block
-   of composer.json are the only places where the author may appear.
+   author's domain into --forbid as well. The author may appear in LICENSE,
+   the "authors" block of composer.json and the labels of its menu group
+   ($GLOBALS['TL_LANG']['MOD'], ['FMD'] and ['CTE'] in
+   contao/languages/*/modules.php). --allow
+   names a file for the two exceptions of the rule in the shared base
+   bundle: the credit line of the free edition and the address of the
+   licence service; e-mail and phone checks still apply there.
 2. Back-end languages: contao/languages/<lang>/ exists for every required
    language, with the same files and the same keys as the reference
    language (en).
@@ -19,10 +24,16 @@ install and use it. This script checks exactly that:
    autoloading and a Contao Manager plugin; README.md, CHANGELOG.md and
    LICENSE exist.
 5. README: an English part first, then a German part; both describe the
-   installation.
+   installation and link to the documentation (docs/en/, docs/de/).
+6. Documentation shipped with the bundle: docs/en/ and docs/de/ with the
+   required pages (installation, setup, permissions, usage, privacy,
+   troubleshooting), the same file names in both languages, a README.md
+   in every folder that links each page of the folder, and no local link
+   or image that points to a missing file.
 
     bundle-check.py path/to/bundle
     bundle-check.py path/to/bundle --forbid "Jane Doe" --forbid "Acme Ltd"
+    bundle-check.py path/to/bundle --forbid acme.example --allow public/credit.js
     bundle-check.py path/to/bundle --json
 
 Exit code 0 when nothing was found, 1 on findings, 2 when the path is not
@@ -43,6 +54,9 @@ SKIP_DIRS = {".git", "vendor", "node_modules", "dev", "var", "tests"}
 EXAMPLE_DOMAINS = ("example.com", "example.org", "example.net")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,}")
 PHONE = re.compile(r"(?<![\w.])(?:\+\d{2}[\s/-]?)?\(?0\d{2,4}\)?[\s/-]\d{3,}[\s-]?\d{2,}(?![\w.])")
+# The menu group of the extension may carry the brand: lines that set a label of the back-end menu (MOD) or of the
+# groups in the lists of front-end modules (FMD) and content elements (CTE).
+MENU_LINE = re.compile(r"""\$GLOBALS\[\s*'TL_LANG'\s*\]\s*\[\s*'(?:MOD|FMD|CTE)'\s*\]""")
 PHP_KEY = re.compile(r"""\[\s*'([^']+)'\s*\](?:\s*\[\s*'([^']+)'\s*\])?(?:\s*\[\s*'([^']+)'\s*\])?\s*=""")
 
 
@@ -63,9 +77,13 @@ def term_pattern(term: str) -> re.Pattern[str]:
     return re.compile(left + re.escape(term) + right, re.IGNORECASE)
 
 
-def check_neutrality(root: pathlib.Path, forbid: list[str]) -> list[str]:
+def check_neutrality(root: pathlib.Path, forbid: list[str], allow: list[str] | None = None) -> list[str]:
     findings = []
-    patterns = [(term, term_pattern(term.strip())) for term in forbid if term.strip()]
+    # Files named with --allow may carry the names (only the exceptions of the rule); e-mail and phone checks still apply.
+    allowed = {pathlib.PurePosixPath(value.strip()).as_posix() for value in (allow or []) if value.strip()}
+    # "--forbid 'A, B'" is two names: a single option with commas was read as one name before and found nothing.
+    terms = [term.strip() for value in forbid for term in value.split(",")]
+    patterns = [(term, term_pattern(term)) for term in terms if term]
 
     for path in text_files(root):
         rel = path.relative_to(root).as_posix()
@@ -84,8 +102,12 @@ def check_neutrality(root: pathlib.Path, forbid: list[str]) -> list[str]:
             data.pop("authors", None)
             text = json.dumps(data, ensure_ascii=False, indent=1)
 
+        menu = re.fullmatch(r"contao/languages/[^/]+/modules\.php", rel) is not None
+
         for number, line in enumerate(text.splitlines(), 1):
             for term, pattern in patterns:
+                if rel in allowed or (menu and MENU_LINE.search(line)):
+                    continue
                 if pattern.search(line):
                     findings.append(f"{rel}:{number}: forbidden name \"{term}\"")
             for match in EMAIL.finditer(line):
@@ -233,13 +255,87 @@ def check_readme(root: pathlib.Path) -> list[str]:
     if german_part and not re.search(r"^#{2} .*(installation|einrichten|einrichtung)", text[german_part.start():], re.IGNORECASE | re.MULTILINE):
         findings.append("README.md: the German part has no installation section")
 
+    english_text = text[: german_part.start()] if german_part else text
+    german_text = text[german_part.start():] if german_part else ""
+    if not re.search(r"\]\((\./)?docs/en/", english_text):
+        findings.append("README.md: the English part does not link to the documentation (docs/en/README.md)")
+    if german_part and not re.search(r"\]\((\./)?docs/de/", german_text):
+        findings.append("README.md: the German part does not link to the documentation (docs/de/README.md)")
+
+    return findings
+
+
+# Pages every bundle documents, in docs/<lang>/ ("usage" may be a folder with a README.md).
+REQUIRED_PAGES = ("installation", "setup", "permissions", "usage", "privacy", "troubleshooting")
+DOC_LANGUAGES = ("en", "de")
+LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+
+
+def local_target(link: str) -> str | None:
+    """The file part of a relative link, None for web addresses, mail links and anchors."""
+    if re.match(r"^[a-z][a-z0-9+.-]*:", link, re.IGNORECASE) or link.startswith("#") or link.startswith("/"):
+        return None
+    return link.split("#", 1)[0].split("?", 1)[0] or None
+
+
+def check_docs(root: pathlib.Path) -> list[str]:
+    docs = root / "docs"
+    findings = []
+    if not (docs / "README.md").is_file():
+        findings.append("docs/README.md missing (entry point: languages, where to start)")
+
+    pages: dict[str, set[str]] = {}
+    for lang in DOC_LANGUAGES:
+        base = docs / lang
+        if not base.is_dir():
+            findings.append(f"docs/{lang}/ missing")
+            continue
+
+        pages[lang] = {str(path.relative_to(base)) for path in base.rglob("*.md")}
+        for page in REQUIRED_PAGES:
+            if f"{page}.md" not in pages[lang] and f"{page}/README.md" not in pages[lang]:
+                findings.append(f"docs/{lang}/{page}.md missing")
+
+        # Every folder has a README.md that links each page in it.
+        for folder in sorted({base, *(path.parent for path in base.rglob("*.md"))}):
+            index = folder / "README.md"
+            rel = folder.relative_to(docs)
+            if not index.is_file():
+                findings.append(f"docs/{rel}/README.md missing (table of contents)")
+                continue
+            linked = {local_target(link) for link in LINK.findall(index.read_text(encoding="utf-8", errors="replace"))}
+            linked = {pathlib.PurePosixPath(link).as_posix().removeprefix("./") for link in linked if link}
+            for page in sorted(folder.glob("*.md")):
+                if page.name != "README.md" and page.name not in linked:
+                    findings.append(f"docs/{rel}/README.md does not link {page.name}")
+            for sub in sorted(path for path in folder.iterdir() if path.is_dir() and (path / "README.md").is_file()):
+                if f"{sub.name}/README.md" not in linked and f"{sub.name}/" not in linked:
+                    findings.append(f"docs/{rel}/README.md does not link {sub.name}/README.md")
+
+    if len(pages) == len(DOC_LANGUAGES):
+        reference = pages[DOC_LANGUAGES[0]]
+        for lang in DOC_LANGUAGES[1:]:
+            for missing in sorted(reference - pages[lang]):
+                findings.append(f"docs/{lang}/{missing} missing (exists in docs/{DOC_LANGUAGES[0]}/)")
+            for extra in sorted(pages[lang] - reference):
+                findings.append(f"docs/{DOC_LANGUAGES[0]}/{extra} missing (exists in docs/{lang}/)")
+
+    # Local links and images must point to existing files.
+    if docs.is_dir():
+        for path in sorted(docs.rglob("*.md")):
+            for link in LINK.findall(path.read_text(encoding="utf-8", errors="replace")):
+                target = local_target(link)
+                if target and not (path.parent / target).exists():
+                    findings.append(f"{path.relative_to(root)}: link to missing file {target}")
+
     return findings
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("path", help="root folder of the bundle (where composer.json is)")
-    parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable")
+    parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable, or several separated by commas")
+    parser.add_argument("--allow", action="append", default=[], help="file (relative to the bundle) where the forbidden names may appear; only for the exceptions of the rule (credit line of the free edition, address of the licence service); repeatable")
     parser.add_argument("--json", action="store_true", help="print the findings as JSON")
     args = parser.parse_args()
 
@@ -249,11 +345,12 @@ def main() -> int:
         return 2
 
     groups = {
-        "neutrality": check_neutrality(root, args.forbid),
+        "neutrality": check_neutrality(root, args.forbid, args.allow),
         "backend_languages": check_backend_languages(root),
         "frontend_texts": check_frontend_texts(root),
         "package": check_package(root),
         "readme": check_readme(root),
+        "docs": check_docs(root),
     }
 
     if args.json:
@@ -263,6 +360,8 @@ def main() -> int:
             print(f"{group}: {'ok' if not findings else f'{len(findings)} finding(s)'}")
             for finding in findings:
                 print(f"  {finding}")
+            if group == "neutrality" and args.allow:
+                print("  allowed by --allow: " + ", ".join(args.allow))
 
     return 1 if any(groups.values()) else 0
 
