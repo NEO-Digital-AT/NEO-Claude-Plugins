@@ -5,7 +5,7 @@ point back to the people or the company that built it, every back-end
 language must be complete, and the README must tell a stranger how to
 install and use it. This script checks exactly that:
 
-1. Neutrality: forbidden names (--forbid, repeatable; whole words, so
+1. Neutrality: forbidden names (--forbid, repeatable or comma-separated; whole words, so
    "Erich" does not hit "Bericht"), e-mail addresses outside the reserved
    example domains (example.com/.org/.net), phone numbers. Put the
    author's domain into --forbid as well. LICENSE and the "authors" block
@@ -19,7 +19,12 @@ install and use it. This script checks exactly that:
    autoloading and a Contao Manager plugin; README.md, CHANGELOG.md and
    LICENSE exist.
 5. README: an English part first, then a German part; both describe the
-   installation.
+   installation and link to the documentation (docs/en/, docs/de/).
+6. Documentation shipped with the bundle: docs/en/ and docs/de/ with the
+   required pages (installation, setup, permissions, usage, privacy,
+   troubleshooting), the same file names in both languages, a README.md
+   in every folder that links each page of the folder, and no local link
+   or image that points to a missing file.
 
     bundle-check.py path/to/bundle
     bundle-check.py path/to/bundle --forbid "Jane Doe" --forbid "Acme Ltd"
@@ -65,7 +70,9 @@ def term_pattern(term: str) -> re.Pattern[str]:
 
 def check_neutrality(root: pathlib.Path, forbid: list[str]) -> list[str]:
     findings = []
-    patterns = [(term, term_pattern(term.strip())) for term in forbid if term.strip()]
+    # "--forbid 'A, B'" is two names: a single option with commas was read as one name before and found nothing.
+    terms = [term.strip() for value in forbid for term in value.split(",")]
+    patterns = [(term, term_pattern(term)) for term in terms if term]
 
     for path in text_files(root):
         rel = path.relative_to(root).as_posix()
@@ -233,13 +240,86 @@ def check_readme(root: pathlib.Path) -> list[str]:
     if german_part and not re.search(r"^#{2} .*(installation|einrichten|einrichtung)", text[german_part.start():], re.IGNORECASE | re.MULTILINE):
         findings.append("README.md: the German part has no installation section")
 
+    english_text = text[: german_part.start()] if german_part else text
+    german_text = text[german_part.start():] if german_part else ""
+    if not re.search(r"\]\((\./)?docs/en/", english_text):
+        findings.append("README.md: the English part does not link to the documentation (docs/en/README.md)")
+    if german_part and not re.search(r"\]\((\./)?docs/de/", german_text):
+        findings.append("README.md: the German part does not link to the documentation (docs/de/README.md)")
+
+    return findings
+
+
+# Pages every bundle documents, in docs/<lang>/ ("usage" may be a folder with a README.md).
+REQUIRED_PAGES = ("installation", "setup", "permissions", "usage", "privacy", "troubleshooting")
+DOC_LANGUAGES = ("en", "de")
+LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+
+
+def local_target(link: str) -> str | None:
+    """The file part of a relative link, None for web addresses, mail links and anchors."""
+    if re.match(r"^[a-z][a-z0-9+.-]*:", link, re.IGNORECASE) or link.startswith("#") or link.startswith("/"):
+        return None
+    return link.split("#", 1)[0].split("?", 1)[0] or None
+
+
+def check_docs(root: pathlib.Path) -> list[str]:
+    docs = root / "docs"
+    findings = []
+    if not (docs / "README.md").is_file():
+        findings.append("docs/README.md missing (entry point: languages, where to start)")
+
+    pages: dict[str, set[str]] = {}
+    for lang in DOC_LANGUAGES:
+        base = docs / lang
+        if not base.is_dir():
+            findings.append(f"docs/{lang}/ missing")
+            continue
+
+        pages[lang] = {str(path.relative_to(base)) for path in base.rglob("*.md")}
+        for page in REQUIRED_PAGES:
+            if f"{page}.md" not in pages[lang] and f"{page}/README.md" not in pages[lang]:
+                findings.append(f"docs/{lang}/{page}.md missing")
+
+        # Every folder has a README.md that links each page in it.
+        for folder in sorted({base, *(path.parent for path in base.rglob("*.md"))}):
+            index = folder / "README.md"
+            rel = folder.relative_to(docs)
+            if not index.is_file():
+                findings.append(f"docs/{rel}/README.md missing (table of contents)")
+                continue
+            linked = {local_target(link) for link in LINK.findall(index.read_text(encoding="utf-8", errors="replace"))}
+            linked = {pathlib.PurePosixPath(link).as_posix().removeprefix("./") for link in linked if link}
+            for page in sorted(folder.glob("*.md")):
+                if page.name != "README.md" and page.name not in linked:
+                    findings.append(f"docs/{rel}/README.md does not link {page.name}")
+            for sub in sorted(path for path in folder.iterdir() if path.is_dir() and (path / "README.md").is_file()):
+                if f"{sub.name}/README.md" not in linked and f"{sub.name}/" not in linked:
+                    findings.append(f"docs/{rel}/README.md does not link {sub.name}/README.md")
+
+    if len(pages) == len(DOC_LANGUAGES):
+        reference = pages[DOC_LANGUAGES[0]]
+        for lang in DOC_LANGUAGES[1:]:
+            for missing in sorted(reference - pages[lang]):
+                findings.append(f"docs/{lang}/{missing} missing (exists in docs/{DOC_LANGUAGES[0]}/)")
+            for extra in sorted(pages[lang] - reference):
+                findings.append(f"docs/{DOC_LANGUAGES[0]}/{extra} missing (exists in docs/{lang}/)")
+
+    # Local links and images must point to existing files.
+    if docs.is_dir():
+        for path in sorted(docs.rglob("*.md")):
+            for link in LINK.findall(path.read_text(encoding="utf-8", errors="replace")):
+                target = local_target(link)
+                if target and not (path.parent / target).exists():
+                    findings.append(f"{path.relative_to(root)}: link to missing file {target}")
+
     return findings
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("path", help="root folder of the bundle (where composer.json is)")
-    parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable")
+    parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable, or several separated by commas")
     parser.add_argument("--json", action="store_true", help="print the findings as JSON")
     args = parser.parse_args()
 
@@ -254,6 +334,7 @@ def main() -> int:
         "frontend_texts": check_frontend_texts(root),
         "package": check_package(root),
         "readme": check_readme(root),
+        "docs": check_docs(root),
     }
 
     if args.json:

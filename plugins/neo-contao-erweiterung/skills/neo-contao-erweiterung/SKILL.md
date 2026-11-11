@@ -112,18 +112,28 @@ Spanisch (`en de fr nl it pl cs hu sl hr es`).
 Vollständigkeit belegt `bundle-check.py`; Regeln und Wortwahl:
 `references/sprachen.md`.
 
-## 5. Dokumentation: erst Englisch, dann Deutsch
+## 5. Dokumentation im Paket: erst Englisch, dann Deutsch
 
-- `README.md` enthält **zuerst den englischen Teil, dann den deutschen**
-  (`# … (Deutsch)`), beide vollständig.
-- Jeder Teil erklärt mindestens: was die Erweiterung tut, Voraussetzungen,
-  **Installation** (Contao Manager und Composer), Einrichtung im Backend,
-  Bedienung mit Verweis auf die ausführliche Doku, Anpassen des Designs,
-  Rechte für Redakteure, Datenschutz, Sprachen, Lizenz.
+Jede Erweiterung liefert ihre Dokumentation mit: Installation, Einrichtung,
+Rechte, Bedienungsanleitung, Fehlersuche (Vorgabe vom 11.11.2026).
+
+- `README.md` ist **kurz**: Kurzbeschreibung, Funktionen, Voraussetzungen,
+  **Installation** (Contao Manager und Composer) und der Link auf die
+  Dokumentation. Zuerst der englische Teil, dann der deutsche
+  (`# … (Deutsch)`).
+- Die Dokumentation liegt in `docs/en/` und `docs/de/`, mit denselben
+  Dateinamen: `installation.md`, `setup.md`, `permissions.md`, `usage.md`
+  (Bedienungsanleitung, darf ein Ordner `usage/` sein), `privacy.md`,
+  `troubleshooting.md`, bei Ausgabe im Frontend `customising.md`.
+- `permissions.md` nennt **jedes** Recht, das eine Funktion braucht, mit
+  Contaos Bezeichnung in der Benutzergruppe; wer danach einrichtet, dem
+  funktioniert es. `troubleshooting.md` führt jeden bekannten Fehler als
+  Anzeichen, Ursache, Lösung.
+- Eine Funktion ist erst fertig, wenn sie in der Bedienungsanleitung steht;
+  ändert eine Fassung Bedienung oder Rechte, ändert sie die Doku mit.
 - `CHANGELOG.md` je Fassung, aus Sicht dessen, der aktualisiert.
-- Ausführliche Doku über mehrere Seiten nach Skill `neo-doku`.
 
-Aufbau des README und Vorlage: `references/doku.md`.
+Aufbau, Pflichtseiten, Vorlage und Abnahme: `references/doku.md`.
 
 ## 6. Aktualisieren ohne Schaden
 

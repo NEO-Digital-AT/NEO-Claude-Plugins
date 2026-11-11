@@ -7,8 +7,8 @@ Nicht Geprüftes gilt als nicht erfüllt.
 
 - [ ] `bundle-check.py <bundle> --forbid …` mit den Namen des Inhabers,
       der Firma, der Domain und betroffener Kunden: **0 Befunde** in allen
-      fünf Gruppen (Neutralität, Backend-Sprachen, Frontend-Texte, Paket,
-      README).
+      sechs Gruppen (Neutralität, Backend-Sprachen, Frontend-Texte, Paket,
+      README, Doku). Jeder Name als eigenes `--forbid` oder kommagetrennt.
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.
@@ -28,8 +28,14 @@ Nicht Geprüftes gilt als nicht erfüllt.
       offenen Ablehnung.
 - [ ] Aktualisierung über eine bestehende Installation: keine Daten weg,
       kein Feld leer, das vorher gefüllt war.
-- [ ] README: erst Englisch, dann Deutsch; Installation, Einrichtung,
-      Bedienung, Anpassen, Rechte, Datenschutz in beiden Teilen.
+- [ ] README kurz, erst Englisch, dann Deutsch: Installation und Link auf
+      die Doku in beiden Teilen.
+- [ ] `docs/en/` und `docs/de/` mit den Pflichtseiten (Installation,
+      Einrichtung, Rechte, Bedienung, Datenschutz, Fehlersuche), gleiche
+      Dateinamen, Screenshots je Sprache; neue Funktionen, Rechte und
+      bekannte Fehler eingetragen.
+- [ ] Durchgang nach der Doku: Gruppe nach `permissions.md` angelegt, jeder
+      Ablauf aus der Bedienungsanleitung mit diesem Benutzer gelungen.
 - [ ] CHANGELOG-Eintrag für die Fassung.
 - [ ] Spiegel im Projekt aktualisiert (`rsync`), Paketname im Projekt
       stimmt mit `composer.json` der Erweiterung überein.
