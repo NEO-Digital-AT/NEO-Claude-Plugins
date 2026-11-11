@@ -35,8 +35,9 @@ Pflicht, bei jeder Änderung, in der CI:
   ein; ein laufender Schreibvorgang wird festgehalten.
 - **Zustellung:** KI-Hinweis und Signatur stehen an jeder Antwort; ein
   wiederholter Versand wiederholt keine Handlung.
-- **Das Skill-Paket:** vollständig, gültig, im ersten Aufruf ganz im
-  Kontext, unter der Größengrenze.
+- **Das Skill-Paket:** vollständig und gültig; im ersten Aufruf Kern und
+  Katalog; ein geladener Skill bringt Abhängigkeiten und Werkzeuge mit;
+  jeder Skill unter der Größengrenze.
 
 Ein gestelltes Modell ruft nur Werkzeuge auf, die im jeweiligen Aufruf
 tatsächlich angeboten werden — sonst prüft der Test einen Assistenten, den

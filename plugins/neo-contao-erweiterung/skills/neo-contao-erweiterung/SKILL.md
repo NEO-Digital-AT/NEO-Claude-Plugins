@@ -35,6 +35,9 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
   Herstellers oder eines Kunden. Beispiele nutzen die reservierten Domains
   `example.com`, `example.org`, `example.net` und erfundene Orte
   („Musterstadt").
+- **Namen fremder Produkte, die die Erweiterung anbindet, sind erlaubt**
+  (Vorlagen für MCP-Server und Schnittstellen, Anleitungen); ein
+  Kundenprojekt nie (`references/neutralitaet.md`).
 - **Kein Hersteller-Branding in Beschreibungen.** Der Erweiterungsname
   darf die Marke tragen; Texte, Hilfen, Beispielwerte und Doku nicht.
   Kein „Entwickelt von …", kein Verweis auf die eigene Website.

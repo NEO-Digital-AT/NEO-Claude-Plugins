@@ -11,27 +11,35 @@ Lesekonvention siehe `SKILL.md`.
 skills/<assistent>/
   manifest.json          Verzeichnis: Kennung, Fassung, Abhängigkeiten, genutzte Werkzeuge
   core/SKILL.md          der Kern — gilt in jedem Schritt
-  <aufgabe>/SKILL.md     je Aufgabenbereich ein Skill
+  <bereich>/SKILL.md     je Fachbereich ein kleiner Skill
 ```
 
 | Teil | Inhalt | Umfang |
 | --- | --- | --- |
-| **Kern** | wer der Assistent ist (aus den Einstellungen), Sprache des Kunden, Wahrheit, Zustimmung, Form der Antwort, Vorrang der Anweisungen, Umgang mit Fehlern und Grenzen, Übergabe | streng und klein — er steht in jedem Aufruf |
-| **Aufgaben-Skill** | ein komplexer Ablauf mit Folgen: Zweck, Werkzeuge, Schritte, was nie, wann das Team übernimmt | kurz; wird er größer, wird er geteilt |
+| **Kern** | wer der Assistent ist (aus den Einstellungen), Sprache des Kunden, Wahrheit, Zustimmung, Form der Antwort, Vorrang der Anweisungen, Umgang mit Fehlern und Grenzen, Übergabe, wie Skills und Werkzeuge geladen werden | streng und klein — er steht in jedem Aufruf |
+| **Aufgaben-Skill** | ein Fachbereich: was der Kunde meint, die Standardabläufe, woher die Informationen kommen, was nie, wann das Team übernimmt | höchstens 2.800 Zeichen; wird er größer, wird er geteilt |
 | **Manifest** | je Skill Kennung, Fassung, Zweck, Abhängigkeiten, genutzte Werkzeuge, betroffene Datenarten | keine Regeltexte |
 
 Jeder Skill beginnt mit `name` und `description`. **Die Beschreibung sagt,
-wofür der Skill da ist** — nie eine Liste von Wörtern, die ein Kunde
-schreiben könnte.
+wann der Skill geladen wird** — sie steht im Katalog und ist alles, was das
+Modell vor dem Laden von ihm sieht. Nie eine Liste von Wörtern, die ein
+Kunde schreiben könnte.
 
 ## Wofür es einen Skill gibt
 
-> **Einen Skill gibt es nur für einen Ablauf, der komplex ist und Folgen
-> hat** — Buchen, Zahlen, Stornieren, eine Rechnung, eine Änderung am
-> Vorgang. Für eine Information braucht es keinen.
+> **Je Fachbereich ein kleiner Skill** — Buchen, Zahlen, Stornieren,
+> Rechnung, Nachweis, Wissen. Lieber mehr kleine als wenige große
+> (Projektinhaber, 15.10.2026: „kürzer und dafür mehr Skills ist besser als
+> weniger und dafür große Skills“).
 
-- **Informationsfragen beantwortet das Modell mit Kern und Werkzeugen.**
-  Es sucht selbst: im Wissen, im Fachsystem, auf der freigegebenen Website.
+- **Ein Skill übersetzt, was der Kunde schreibt**, beschreibt die
+  Standardabläufe und sagt, woher das Modell die Informationen nimmt: aus
+  dem Wissen, dem Fachsystem, der freigegebenen Website.
+- **Standardfälle stehen im Skill, Sonderfälle gehen an das Team.** Ein
+  Betrieb beschreibt eigene Abläufe in seinen Anweisungen.
+- **Skills sperren nur, was gefährlich ist:** Daten, die der Kunde nicht
+  sehen darf, und Handlungen, die nur der Betreiber darf (Projektinhaber,
+  10.10.2026). Alles andere ist erlaubt.
 - **Der Kern verbietet das Erfinden.** Gesagt wird nur, was ein
   Werkzeugergebnis, das Wissen oder das Gespräch belegt und nichts
   widerlegt. Ein Angebot, eine Leistung oder eine Möglichkeit — etwa ein
@@ -40,8 +48,8 @@ schreiben könnte.
 
 ## Form: kurz und streng
 
-Jeder Aufgaben-Skill hat fünf Teile, in dieser Reihenfolge, je als Liste
-mit einer Aussage pro Zeile:
+Ein Aufgaben-Skill besteht aus den Teilen, die sein Bereich braucht, je
+als Liste mit einer Aussage pro Zeile. Üblich sind:
 
 ```
 PURPOSE    ein Satz: wofür der Skill da ist
@@ -51,14 +59,18 @@ NEVER      was nie geschieht
 HANDOVER   wann das Team übernimmt — immer mit Nachricht an den Kunden
 ```
 
+Ein Bereich kann eigene Teile brauchen, etwa PROOF und SCOPE beim
+Nachweis.
+
 - **Keine Begründungsprosa, keine Vorgeschichte.** Warum eine Regel gilt,
   steht in der Entscheidungsakte, nicht im Skill.
 - **Was das Werkzeug erzwingt, beschreibt der Skill nicht nach.** Er sagt,
   welches Werkzeug mit welchen Angaben aufgerufen wird. Mandant, Nachweis,
   Eigentum und Doppelausführung prüft das Werkzeug, und dessen Fehler sagt
   dem Modell, was fehlt.
-- **Die Längengrenze legt das Projekt fest** und misst sie beim Start.
-  Richtwert: Kern höchstens 4.000, Aufgaben-Skill höchstens 2.000 Zeichen.
+- **Die Längengrenze wird beim Start gemessen:** höchstens 2.800 Zeichen
+  je Aufgaben-Skill, sonst wird ein Teil nicht mehr beachtet. Der Kern
+  bleibt klein.
 
 ## Wie ein Skill geschrieben wird
 
@@ -87,26 +99,38 @@ HANDOVER   wann das Team übernimmt — immer mit Nachricht an den Kunden
 - **Der Skill enthält die Standards, die Einstellungen die Ausnahmen.** Die
   Anweisung des Betreibers geht dem Standard im Skill vor (`zugriff.md`).
 
-## Alles im Kontext
+## Katalog zuerst, Inhalte auf Abruf
 
-- **Kern und alle Aufgaben-Skills stehen ab dem ersten Aufruf im
-  Kontext.** Kein Nachladen, keine Auswahl durch eine Vorstufe.
-- **Die Größe wird gemessen**, je Skill und für das Paket. Ein Skill, der
-  zu lang wird, wird geteilt — nicht gekürzt, bis eine Regel fehlt.
-- **Passt das Paket nicht mehr**, wird das dem Projektinhaber vorgelegt.
-  Nichts wird still weggelassen.
+- **Ab dem ersten Schritt stehen der Kern und der Katalog im Kontext:** je
+  Skill die Kennung und ein Satz, je Werkzeug der Name und ein Satz.
+- **Das Modell lädt einen Skill selbst** (`load_module`), bevor es in
+  dessen Bereich handelt; die Abhängigkeiten aus dem Manifest und die
+  Werkzeuge des Skills kommen mit. Eine einzelne Werkzeugdefinition lädt
+  es mit `load_tools`. Keine Vorstufe wählt für das Modell aus.
+- **Geladenes bleibt für den Lauf.** Nichts wird entladen oder ersetzt. Die
+  Anwendung fügt die Skills offener Vorgänge selbst hinzu, etwa einer
+  vorbereiteten Buchung.
+- **Die Größe wird gemessen**, je Skill und für Kern und Katalog. Ein
+  Skill, der zu lang wird, wird geteilt — nicht gekürzt, bis eine Regel
+  fehlt. Nichts wird still weggelassen.
 
 ## Woher das Paket kommt
 
 - **Im Repository, versioniert, als Dateien** — nicht als Zeichenkette im
   Code, nicht in einer beschreibbaren Ablage.
+- **Produkte, die der Kunde selbst einrichtet,** dürfen zusätzlich Skills
+  aus Quellen wie GitHub installieren (Projektinhaber, 08.11.2026). Beim
+  Installieren wird eine feste Fassung abgelegt und wie unten geprüft; zur
+  Laufzeit wird nichts aus dem Netz geladen; aktualisiert wird nur durch
+  den Administrator, mit Anzeige der Änderungen. Mitgelieferte Skills des
+  Produkts sind eingebettet wie bei eigenen Assistenten.
 - **In die Anwendung eingebettet und beim Start geprüft:** Fehlt eine
   Datei, ist ein Werkzeug oder eine Abhängigkeit unbekannt, gibt es einen
   Kreis in den Abhängigkeiten oder ist ein Skill zu groß, startet die
   Anwendung nicht mit diesem Paket.
-- **Nie aus einer Kundennachricht, einer Webseite, einem Anhang oder einer
-  beschreibbaren Einstellung.** Die Anweisungen des Betreibers sind
-  Einstellungen, keine Skills.
+- **Nie aus einer Kundennachricht, einer besuchten Webseite oder einem
+  Anhang.** Die Anweisungen des Betreibers sind Einstellungen, keine
+  Skills.
 - **Ein Skill gewährt keine Rechte.** Ein Werkzeugname im Skill macht kein
   Werkzeug ausführbar.
 

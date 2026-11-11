@@ -18,9 +18,13 @@ Einzelnen heißt.
 **Erlaubt** sind: der Name der Erweiterung selbst (er darf die Marke
 tragen), die Menügruppe der Erweiterung (im Backend-Menü und in den Listen
 der Frontend-Module und Inhaltselemente), `authors` in `composer.json`
-und der Rechteinhaber in `LICENSE`. Dazu im gemeinsamen Grundpaket (Basic)
-die Zeile „powered by …" der kostenlosen Fassung (`public/credit.js`) und die
-Adresse des Lizenzdiensts (`src/License/LicenseService.php`). Sonst nichts.
+und der Rechteinhaber in `LICENSE`. Dazu **Namen fremder Produkte und
+Dienste, die die Erweiterung anbindet** — etwa in Vorlagen für MCP-Server
+oder Schnittstellen: Apaleo, HubSpot, Calendly, Requesty (Projektinhaber,
+08.11.2026). Ein Kundenprojekt bleibt verboten, auch wenn es ein solches
+Produkt nutzt. Und im gemeinsamen Grundpaket (Basic) die Zeile „powered by …"
+der kostenlosen Fassung (`public/credit.js`) und die Adresse des
+Lizenzdiensts (`src/License/LicenseService.php`). Sonst nichts.
 
 ## Neutrale Beispielwerte
 
