@@ -111,6 +111,12 @@ ausgibt (CSS-Variablen, Template-Überschreibung, Texte im Backend).
   jeweiligen Oberflächensprache, mit Markierungen (Skill `neo-doku`,
   `references/screenshots.md`). Keine echten Namen oder Kundendaten im
   Bild.
+- **Die Bilder entstehen mit einem Aufnahme-Skript im Repository**
+  (`tools/docs-images/`, mit README: was die Testinstallation braucht, wie es
+  aufgerufen wird). Der Ordner ist vom Paket ausgenommen (`.gitattributes`:
+  `/tools export-ignore`). Passwörter kommen aus Umgebungsvariablen, nie aus
+  der Datei. Nach einer Änderung an der Oberfläche werden die betroffenen
+  Bilder damit neu aufgenommen, in jeder Sprache.
 - Beispiele neutral (`neutralitaet.md`): `office@example.com`, `Max
   Mustermann`, `https://example.com`.
 - Keine Zeile „Built by …" / „Entwickelt von …".
