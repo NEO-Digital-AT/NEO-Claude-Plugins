@@ -38,6 +38,9 @@ install and use it. This script checks exactly that:
    troubleshooting), the same file names in both languages, a README.md
    in every folder that links each page of the folder, and no local link
    or image that points to a missing file.
+7. Tests: a PHPUnit (or Pest) configuration (phpunit.xml.dist or
+   phpunit.xml), the test framework in require-dev of composer.json and at
+   least one test file (*Test.php) under tests/.
 
     bundle-check.py path/to/bundle
     bundle-check.py path/to/bundle --forbid "Jane Doe" --forbid "Acme Ltd"
@@ -370,6 +373,23 @@ def check_docs(root: pathlib.Path) -> list[str]:
     return findings
 
 
+def check_tests(root: pathlib.Path) -> list[str]:
+    findings = []
+    try:
+        dev = json.loads((root / "composer.json").read_text(encoding="utf-8")).get("require-dev", {})
+    except (OSError, json.JSONDecodeError):
+        dev = {}
+
+    if not any((root / name).is_file() for name in ("phpunit.xml.dist", "phpunit.xml")):
+        findings.append("phpunit.xml.dist missing (test configuration)")
+    if "phpunit/phpunit" not in dev and "pestphp/pest" not in dev:
+        findings.append("composer.json: no test framework in require-dev (phpunit/phpunit or pestphp/pest)")
+    if not (root / "tests").is_dir() or not any((root / "tests").rglob("*Test.php")):
+        findings.append("tests/ has no test file (*Test.php)")
+
+    return findings
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("path", help="root folder of the bundle (where composer.json is)")
@@ -390,6 +410,7 @@ def main() -> int:
         "package": check_package(root),
         "readme": check_readme(root),
         "docs": check_docs(root),
+        "tests": check_tests(root),
     }
 
     if args.json:

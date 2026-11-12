@@ -47,3 +47,15 @@ Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] CHANGELOG-Eintrag für die Fassung.
 - [ ] Spiegel im Projekt aktualisiert (`rsync`), Paketname im Projekt
       stimmt mit `composer.json` der Erweiterung überein.
+
+## Tests
+
+- [ ] PHPUnit (oder Pest) ist eingerichtet: `phpunit.xml.dist`, das Testwerkzeug in
+      `require-dev`, Tests unter `tests/` (Erich 12.11.2026: „jedes Modul sollte Unit-Tests
+      haben, das ist heutiger Standard“).
+- [ ] Getestet ist die Logik, auf die es ankommt: Verschlüsselung, Signaturen, Filter,
+      Entscheidungen (Lizenzstufen, Einwilligung, gesperrte Felder), Aufbau und Auswertung
+      fremder Antworten, Migrationen. Reine Contao-Verdrahtung braucht keinen eigenen Test.
+- [ ] Gegenprobe: eine getestete Stelle absichtlich verändert, der Test schlägt an.
+- [ ] Die Tests laufen in der CI auf allen freigegebenen PHP-Fassungen.
+- [ ] `bundle-check.py` prüft das Vorhandensein (Gruppe „tests“), nicht die Qualität.
