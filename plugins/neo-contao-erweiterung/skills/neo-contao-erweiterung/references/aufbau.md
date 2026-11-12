@@ -87,6 +87,12 @@ Das Muster aus der Website-Check-Erweiterung:
   bleibt immer in der Liste; Ergebnis eine Stunde zwischengespeichert.
 - **Statuszeile** über den Schlüsselfeldern: woher jeder Wert gerade kommt
   (Backend, Konfiguration, fehlt).
+- **Abhängige Felder**: `submitOnChange` am auslösenden Feld, ein
+  `onload_callback` sperrt die abhängigen (`eval.disabled`, Wert bleibt
+  gespeichert) oder blendet sie aus und ersetzt ihre Hilfe durch den Grund
+  (als Warnung, mit Link zur Stelle, an der man es ändert). Fehlender
+  Schlüssel, andere Einstellung, Lizenzstufe: gleiche Behandlung. Die
+  Ausgabe im Frontend folgt derselben Bedingung.
 - **„Verbindung prüfen"** als Backend-Operation (`key=test_api`): ruft
   jeden Dienst vom Server aus auf, zeigt Status, Dauer und Antwort, dazu
   Länge, Anfang und Ende des Schlüssels — nie den Schlüssel selbst — und

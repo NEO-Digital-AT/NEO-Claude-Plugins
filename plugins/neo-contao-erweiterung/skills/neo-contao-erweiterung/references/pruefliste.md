@@ -24,6 +24,9 @@ Nicht Geprüftes gilt als nicht erfüllt.
       Logo; alle Farben als CSS-Variablen.
 - [ ] Bilder und Screenshots im Paket zeigen keine echte Website, keinen
       echten Namen.
+- [ ] Keine Einstellung sieht wirksam aus, die es nicht ist: Felder, die
+      von einer anderen Einstellung, einem Schlüssel oder der Lizenzstufe
+      abhängen, sind gesperrt oder ausgeblendet, der Grund steht am Feld.
 - [ ] Jede Einstellung, die ein Kunde braucht, ist im Backend pflegbar;
       Schlüssel verschlüsselt, mit Sonderzeichen (`=`, `+`, `/`, `&`)
       gespeichert und wieder gelesen — Wert unverändert.

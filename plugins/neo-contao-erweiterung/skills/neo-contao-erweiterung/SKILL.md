@@ -98,6 +98,14 @@ können.
 - **Ein Knopf „Verbindung prüfen"** zeigt, ob jeder Dienst vom Server aus
   erreichbar ist und den Schlüssel annimmt — mit der genauen Antwort,
   Schlüssel maskiert.
+- **Eine Einstellung, die nichts bewirkt, sieht auch so aus** (Vorgabe des
+  Inhabers vom 12.11.2026, nach einem Supportfall: Spracheingabe
+  eingeschaltet, im Datenschutz-Modus aber wirkungslos, der Grund nur als
+  graue Zeile am Ende des Abschnitts). Hängt ein Feld von einer anderen
+  Einstellung, einem fehlenden Schlüssel oder der Lizenzstufe ab, ist es
+  gesperrt oder ausgeblendet, und der Grund steht **direkt am Feld**, als
+  Warnung, mit dem Weg, wie man die Sperre aufhebt. Nie ein Schalter, der
+  an aussieht und nichts tut.
 - **Kostet die Erweiterung Geld pro Aufruf** (KI, bezahlte API), gibt es
   eine Obergrenze für alle Besucher zusammen, im Backend einstellbar, und
   einen unsichtbaren Spam-Schutz (ALTCHA, Honeypot). Fehlt ein nötiger
