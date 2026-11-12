@@ -24,10 +24,11 @@ Skill `neo-contao` verwendet dieselben Namen.
 
 ```
 NEO-Contao-<Name>/
-  composer.json          type contao-bundle, Lizenz MIT, PSR-4, Manager-Plugin
+  composer.json          type contao-bundle, Lizenz proprietary, PSR-4, Manager-Plugin
   README.md              erst Englisch, dann Deutsch (doku.md)
   CHANGELOG.md
-  LICENSE                MIT
+  LICENSE                eigene Lizenz, erst Deutsch, dann Englisch
+  .gitattributes         export-ignore für alles, was nicht ausgeliefert wird (veroeffentlichen.md)
   config/
     services.yaml        autowire + autoconfigure; Dienste mit Argumenten explizit
     routes.yaml          nur, wo die Erweiterung eigene Endpunkte hat
@@ -47,14 +48,21 @@ NEO-Contao-<Name>/
     Migration/           AbstractMigration, defensiv, wiederholbar
     Security/SecretCipher.php   Verschlüsselung der Schlüssel
     Settings.php         ein Objekt, das Backend vor Konfiguration liest
-  dev/                   lokaler Prüfstand (Docker), wird NICHT gespiegelt
+  docs/                  en/ und de/ (doku.md)
+  dev/                   lokaler Prüfstand (Docker), wird NICHT gespiegelt und nicht ausgeliefert
 ```
 
 `composer.json`, Pflichtangaben wie in den bestehenden Paketen:
-`"type": "contao-bundle"`, `"license": "MIT"`, `"description"` ohne
+`"type": "contao-bundle"`, `"license": "proprietary"`, `"description"` ohne
 Herstellerbezug, `"require"` mit `^`-Bereichen (`"contao/core-bundle":
 "^5.3"`), `"autoload": {"psr-4": {"Neo\\<Name>Bundle\\": "src/"}}`,
 `"extra": {"contao-manager-plugin": "Neo\\<Name>Bundle\\ContaoManager\\Plugin"}`.
+`contao/manager-plugin` steht unter `"require-dev"` (`^2.0`) mit
+`"conflict": {"contao/manager-plugin": "<2.0 || >=3.0"}`, nicht unter
+`"require"` (Contao-Doku, Manager Plugin). Keine `version`; `homepage` und
+`support` zeigen auf das öffentliche Repository (`veroeffentlichen.md`).
+Ausgelieferte Dateien liegen in `public/` im Wurzelordner, nicht in
+`Resources/public/`.
 `authors` darf den Hersteller nennen, ohne Personennamen.
 
 ## Einstellungen

@@ -14,6 +14,9 @@ Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.
+- [ ] Vor dem Veröffentlichen: `release-bundle.py` ohne Befund
+      (`veroeffentlichen.md`); die ZIP lässt sich in einer frischen
+      Contao-Installation installieren, Abhängigkeiten kommen von Packagist.
 
 ## Von Hand
 

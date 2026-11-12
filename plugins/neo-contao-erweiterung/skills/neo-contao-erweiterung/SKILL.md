@@ -74,7 +74,8 @@ Aufbau vor. Namen, Ordner, `composer.json`, Einstellungen im Backend,
 Übernahme alter Werte, lokaler Prüfstand: `references/aufbau.md`.
 
 Kurzform: eigenes Repository `NEO-Contao-<Name>`, Paket
-`neo-digital/contao-<name>-bundle`, `type: contao-bundle`, Lizenz MIT,
+`neo-digital/contao-<name>-bundle`, `type: contao-bundle`, eigene Lizenz
+(`LICENSE`, in `composer.json` `proprietary`),
 Namensraum `Neo\<Name>Bundle`, Tabellen `tl_neo_*`, Spiegel im Projekt
 unter `bundles/<ordner>/` per `rsync`, Änderungen nur im eigenen
 Repository.
@@ -151,6 +152,20 @@ Unverändert aus Skill `neo-contao`, `references/erweiterungsbau.md`:
 neue Felder optional mit Standardwert, nichts umbenannt oder entfernt,
 keine nachträgliche Pflicht, Migrationen defensiv und wiederholbar,
 semantische Versionierung.
+
+## 7. Veröffentlichen: zwei Repositories, ein Werkzeug
+
+Entwickelt wird im privaten Repository `NEO-Contao-<Name>`, ausgeliefert aus
+dem öffentlichen `contao-<name>-bundle`, aus dem Packagist liest. Das
+öffentliche Repository enthält nur das Paket, je Fassung einen Commit
+`Release <Fassung>` mit Tag `v<Fassung>`, ohne Notizen für Agenten, ohne
+Entwicklungsgeschichte und ohne Vermerk eines Werkzeugs. Befüllt wird es nur
+mit `scripts/release-bundle.py`; es prüft vorher Hinweise, `composer.json`,
+`CHANGELOG.md` und `bundle-check.py` und schreibt die ZIP für den Contao
+Manager. Hochgeladen wird erst nach Freigabe des Inhabers.
+
+Ablauf, `composer.json`, Fassungen, ZIP und Sichtbarkeit im Contao Manager:
+`references/veroeffentlichen.md`.
 
 ## Abnahme
 
