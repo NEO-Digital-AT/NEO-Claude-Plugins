@@ -15,6 +15,14 @@ install and use it. This script checks exactly that:
    names a file for the two exceptions of the rule in the shared base
    bundle: the credit line of the free edition and the address of the
    licence service; e-mail and phone checks still apply there.
+   Licence texts of third-party files shipped with the bundle (a font
+   under the SIL Open Font License, an MIT or Apache licensed library)
+   must stay unchanged, and their copyright lines name the original
+   author, often with an e-mail address. In a file named like a licence
+   (OFL, LICENSE, LICENCE, COPYING, NOTICE) that contains one of these
+   licence texts, e-mail addresses in lines starting with "Copyright"
+   are no finding; forbidden names still are. The files are listed in
+   the output.
 2. Back-end languages: contao/languages/<lang>/ exists for every required
    language, with the same files and the same keys as the reference
    language (en).
@@ -57,6 +65,13 @@ PHONE = re.compile(r"(?<![\w.])(?:\+\d{2}[\s/-]?)?\(?0\d{2,4}\)?[\s/-]\d{3,}[\s-
 # The menu group of the extension may carry the brand: lines that set a label of the back-end menu (MOD) or of the
 # groups in the lists of front-end modules (FMD) and content elements (CTE).
 MENU_LINE = re.compile(r"""\$GLOBALS\[\s*'TL_LANG'\s*\]\s*\[\s*'(?:MOD|FMD|CTE)'\s*\]""")
+# Licence texts of third-party files: file names and the wording that marks the licence.
+LICENCE_FILE = re.compile(r"(?i)(?:^|[-_.])(?:ofl|licen[cs]e|copying|notice)(?:[-_.]|$)")
+THIRD_PARTY_LICENCES = (
+    "SIL OPEN FONT LICENSE Version 1.1",
+    "Permission is hereby granted, free of charge, to any person obtaining a copy",
+    "Apache License",
+)
 PHP_KEY = re.compile(r"""\[\s*'([^']+)'\s*\](?:\s*\[\s*'([^']+)'\s*\])?(?:\s*\[\s*'([^']+)'\s*\])?\s*=""")
 
 
@@ -75,6 +90,26 @@ def term_pattern(term: str) -> re.Pattern[str]:
     left = r"(?<!\w)" if term[:1].isalnum() else ""
     right = r"(?!\w)" if term[-1:].isalnum() else ""
     return re.compile(left + re.escape(term) + right, re.IGNORECASE)
+
+
+def is_third_party_licence(rel: str, text: str) -> bool:
+    """A shipped licence text of someone else's file: named like a licence and with the wording of one."""
+    name = pathlib.PurePosixPath(rel).name
+
+    return rel != "LICENSE" and LICENCE_FILE.search(pathlib.PurePosixPath(name).stem) is not None and any(marker.lower() in text.lower() for marker in THIRD_PARTY_LICENCES)
+
+
+def third_party_licences(root: pathlib.Path) -> list[str]:
+    """Third-party licence texts of the bundle, for the output."""
+    found = []
+
+    for path in text_files(root):
+        rel = path.relative_to(root).as_posix()
+
+        if is_third_party_licence(rel, path.read_text(encoding="utf-8", errors="replace")):
+            found.append(rel)
+
+    return found
 
 
 def check_neutrality(root: pathlib.Path, forbid: list[str], allow: list[str] | None = None) -> list[str]:
@@ -103,6 +138,8 @@ def check_neutrality(root: pathlib.Path, forbid: list[str], allow: list[str] | N
             text = json.dumps(data, ensure_ascii=False, indent=1)
 
         menu = re.fullmatch(r"contao/languages/[^/]+/modules\.php", rel) is not None
+        # Third-party licence text: its copyright lines keep the original author's address.
+        licence = is_third_party_licence(rel, text)
 
         for number, line in enumerate(text.splitlines(), 1):
             for term, pattern in patterns:
@@ -111,6 +148,8 @@ def check_neutrality(root: pathlib.Path, forbid: list[str], allow: list[str] | N
                 if pattern.search(line):
                     findings.append(f"{rel}:{number}: forbidden name \"{term}\"")
             for match in EMAIL.finditer(line):
+                if licence and line.lstrip().lower().startswith("copyright"):
+                    continue
                 domain = match.group(0).split("@", 1)[1].lower()
                 if not is_example(domain) and not domain.endswith((".png", ".svg", ".jpg", ".webp")):
                     findings.append(f"{rel}:{number}: e-mail address \"{match.group(0)}\" outside the example domains (use name@example.com)")
@@ -362,6 +401,8 @@ def main() -> int:
                 print(f"  {finding}")
             if group == "neutrality" and args.allow:
                 print("  allowed by --allow: " + ", ".join(args.allow))
+            if group == "neutrality" and third_party_licences(root):
+                print("  third-party licence texts (author's address in the copyright line allowed): " + ", ".join(third_party_licences(root)))
 
     return 1 if any(groups.values()) else 0
 
