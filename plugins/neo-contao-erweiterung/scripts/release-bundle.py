@@ -20,6 +20,13 @@ script makes that copy and refuses when it is not clean:
 5. bundle-check.py (next to this script) on the exported files, with the
    given --forbid and --allow.
 
+Tests are for development only. The public repository keeps them (CI runs
+there), but customers never get them: the export's .gitattributes gets
+`export-ignore` lines for tests/, phpunit.xml.dist and .github/, so the
+archive Composer downloads from the public repository leaves them out, and
+the ZIP below skips them as well. PHPUnit itself is a dev requirement and is
+never installed on a customer's website.
+
 When everything passes, it writes the ZIP for the Contao Manager (files at
 the root, composer.json with the version added, which the Manager needs) to
 --out, and with --target it replaces the working tree of a local clone of
@@ -225,6 +232,25 @@ def check_bundle(root: pathlib.Path, forbid: list[str], allow: list[str]) -> lis
     return [f"bundle-check {check}: {finding}" for check, found in items for finding in (found or [])]
 
 
+# Development files the public repository keeps but customers do not get.
+DEV_ONLY = ("tests/", "phpunit.xml.dist", "phpunit.xml", ".github/", ".phpunit.cache/")
+
+
+def is_dev_only(rel: str) -> bool:
+    return any(rel == entry.rstrip("/") or rel.startswith(entry) for entry in DEV_ONLY)
+
+
+def mark_dev_only(root: pathlib.Path) -> None:
+    """Adds export-ignore lines for the development files to the package's .gitattributes."""
+    path = root / ".gitattributes"
+    lines = path.read_text(encoding="utf-8").splitlines() if path.is_file() else []
+    present = {line.split()[0] for line in lines if line.strip() and not line.startswith("#")}
+    wanted = ["/" + entry.rstrip("/") for entry in DEV_ONLY if (root / entry.rstrip("/")).exists()]
+    added = [f"{entry} export-ignore" for entry in wanted if entry not in present]
+    if added:
+        path.write_text("\n".join(lines + ["# Development only: not in the archive customers download"] + added) + "\n", encoding="utf-8")
+
+
 def write_zip(root: pathlib.Path, data: dict, version: str, out: pathlib.Path) -> pathlib.Path:
     """ZIP for the Contao Manager: package files at the root, composer.json with the version."""
     manifest = {}
@@ -239,6 +265,8 @@ def write_zip(root: pathlib.Path, data: dict, version: str, out: pathlib.Path) -
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in files_of(root):
             rel = path.relative_to(root).as_posix()
+            if is_dev_only(rel):
+                continue
             info = zipfile.ZipInfo(rel, date_time=(2020, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16
@@ -334,6 +362,7 @@ def main() -> int:
         result = {"source": str(source), "commit": commit, "version": args.version, "files": len(files_of(root)), "findings": findings}
 
         if not findings:
+            mark_dev_only(root)
             result["zip"] = str(write_zip(root, data, args.version, pathlib.Path(args.out).resolve()))
             if target:
                 try:

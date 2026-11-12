@@ -102,3 +102,12 @@ Titel, Beschreibung je Sprache, Logo und das Ausblenden aus der Suche kommen
 (`meta/neo-digital/<paket>/<sprache>.yml`, `logo.svg`). Basic bekommt dort
 `dependency: true`: Es ist ein Unterbau und soll in der Suche nicht als
 eigene Erweiterung erscheinen.
+
+## Tests im öffentlichen Repository, nicht beim Kunden
+
+PHPUnit und die Tests braucht nur die Entwicklung. Das öffentliche Repository behält
+`tests/`, `phpunit.xml.dist` und `.github/` (dort läuft die CI). `release-bundle.py` trägt
+dafür `export-ignore` in die `.gitattributes` des Pakets ein: Das Archiv, das Composer beim
+Kunden aus dem öffentlichen Repository lädt, enthält sie nicht, die ZIP für den Contao
+Manager auch nicht. PHPUnit steht in `require-dev` und wird beim Kunden nie installiert.
+Im Entwicklungs-Repository stehen die Tests deshalb nicht auf `export-ignore`.
