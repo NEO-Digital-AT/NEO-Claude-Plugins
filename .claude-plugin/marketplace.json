@@ -38,7 +38,7 @@
     {
       "name": "neo-contao-erweiterung",
       "source": "./plugins/neo-contao-erweiterung",
-      "description": "Eigene Contao-Erweiterungen zum Weitergeben und Verkaufen: vollständig neutral — keine Personen-, Firmen-, Kunden- oder Ortsnamen, kein Hersteller-Branding in Texten und Beispielen, kein Hausdesign, nur der Erweiterungsname trägt die Marke. Aufbau nach den bestehenden Erweiterungen, Einstellungen und Schlüssel im Backend, elf Sprachen, Dokumentation im Paket (kurzes README, docs/en und docs/de mit Installation, Einrichtung, Rechten, Bedienungsanleitung, Fehlersuche), Prüfwerkzeug bundle-check.py."
+      "description": "Eigene Contao-Erweiterungen zum Weitergeben und Verkaufen: vollständig neutral — keine Personen-, Firmen-, Kunden- oder Ortsnamen, kein Hersteller-Branding in Texten und Beispielen, kein Hausdesign, nur der Erweiterungsname trägt die Marke. Aufbau nach den bestehenden Erweiterungen, Einstellungen und Schlüssel im Backend, elf Sprachen, Dokumentation im Paket (kurzes README, docs/en und docs/de mit Installation, Einrichtung, Rechten, Bedienungsanleitung, Fehlersuche), Prüfwerkzeug bundle-check.py, Veröffentlichung mit release-bundle.py, einheitliches Logo für den Contao Manager mit module-logo.py."
     },
     {
       "name": "neo-cors",
