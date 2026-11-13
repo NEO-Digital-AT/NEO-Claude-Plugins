@@ -63,7 +63,16 @@ mittlere, ein Bruch (umbenannte Schalter, entfernte Felder) die erste.
 ## Ablauf
 
 1. Im Entwicklungs-Repository: Abnahme nach `pruefliste.md`, `CHANGELOG.md`
-   mit Datum, Merge nach `main`.
+   mit Datum, Merge nach `main`. **Der Prüflauf auf GitHub ist auf allen
+   PHP-Fassungen der Matrix grün**, nicht nur die Tests auf dem eigenen
+   Rechner: Jede PHP-Fassung bekommt eine andere Contao-Fassung (8.2 → 5.x,
+   8.4 → 6.0), und erst dort zeigt sich, ob eine Abhängigkeit oder ein Test
+   nur mit einer Fassung geht (Befund 13.11.2026: Frontend Editor auf Contao
+   5.3 nicht installierbar, SuperAgent-Tests unter Contao 6 gescheitert).
+   Hat Basic noch keinen Tag, läuft die Prüfung einmal auf dem Arbeitszweig
+   mit `composer config minimum-stability dev && composer config
+   prefer-stable true` im Basic-Schritt; der Commit wird danach im selben
+   Zweig zurückgenommen.
 2. Öffentliches Repository lokal klonen, dann:
 
    ```
