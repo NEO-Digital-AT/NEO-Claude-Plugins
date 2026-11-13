@@ -175,6 +175,11 @@ Manager. Hochgeladen wird erst nach Freigabe des Inhabers.
 Ablauf, `composer.json`, Fassungen, ZIP und Sichtbarkeit im Contao Manager:
 `references/veroeffentlichen.md`.
 
+Jede Erweiterung bekommt für den Contao Manager dasselbe quadratische Logo,
+nur das Icon wechselt; Titel englisch mit „NEO“ davor. Erzeugt wird es mit
+`scripts/module-logo.py` aus dem Icon unter `tools/contao-manager/icon.svg`:
+`references/logo.md`.
+
 ## Abnahme
 
 Vor jeder Fertigmeldung `references/pruefliste.md` durchgehen und die

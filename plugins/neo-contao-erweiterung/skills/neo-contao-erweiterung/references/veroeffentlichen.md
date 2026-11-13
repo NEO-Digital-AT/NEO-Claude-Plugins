@@ -101,7 +101,18 @@ Titel, Beschreibung je Sprache, Logo und das Ausblenden aus der Suche kommen
 über einen Pull Request an `contao/package-metadata`
 (`meta/neo-digital/<paket>/<sprache>.yml`, `logo.svg`). Basic bekommt dort
 `dependency: true`: Es ist ein Unterbau und soll in der Suche nicht als
-eigene Erweiterung erscheinen.
+eigene Erweiterung erscheinen, und kein Logo.
+
+Die Einträge liegen in der Erweiterung unter `tools/contao-manager/`
+(`de.yml`, `en.yml`, `icon.svg`, `logo.svg`), also nicht im Paket. Titel
+englisch mit „NEO“ davor. Das Logo erzeugt `module-logo.py` aus dem Icon,
+für alle Erweiterungen gleich aufgebaut: `logo.md`.
+
+Der Pull Request an `contao/package-metadata` kommt erst, wenn das Paket
+auf Packagist liegt. Dessen Prüfung liest die Texte mit `aspell`; Namen
+(NEO, Produktnamen) und richtige deutsche Zusammensetzungen, die das
+Wörterbuch nicht kennt, kommen im selben Pull Request in
+`linter/allowlists/default.txt` bzw. `linter/allowlists/de.txt`.
 
 ## Tests im öffentlichen Repository, nicht beim Kunden
 
