@@ -86,6 +86,14 @@ python3 plugins/neo-contao-erweiterung/scripts/bundle-check.py <bundle> \
   `--allow public/credit.js --allow src/License/LicenseService.php`.
   Mailadressen und Telefonnummern prüft das Werkzeug dort trotzdem; die
   Ausgabe nennt die ausgenommenen Dateien.
+- Lizenztexte mitgelieferter Fremddateien (eine Schrift unter der SIL Open
+  Font License, eine Bibliothek unter MIT oder Apache) bleiben unverändert,
+  auch wenn ihre Copyright-Zeile den Urheber mit Mailadresse nennt. Das
+  Werkzeug erkennt sie am Dateinamen (OFL, LICENSE, LICENCE, COPYING,
+  NOTICE) zusammen mit dem Wortlaut der Lizenz und lässt Mailadressen in
+  Zeilen, die mit „Copyright" beginnen, durch. Verbotene Namen meldet es
+  dort weiter, die Ausgabe nennt diese Dateien. Ein Vermerk des eigenen
+  Herstellers gehört nicht hinein.
 - Ergebnis muss **null Befunde** sein. Ein Befund wird behoben, nicht
   weggeschaltet.
 

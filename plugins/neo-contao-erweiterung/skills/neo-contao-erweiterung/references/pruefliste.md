@@ -14,6 +14,9 @@ Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.
+- [ ] Vor dem Veröffentlichen: `release-bundle.py` ohne Befund
+      (`veroeffentlichen.md`); die ZIP lässt sich in einer frischen
+      Contao-Installation installieren, Abhängigkeiten kommen von Packagist.
 
 ## Von Hand
 
@@ -21,6 +24,9 @@ Nicht Geprüftes gilt als nicht erfüllt.
       Logo; alle Farben als CSS-Variablen.
 - [ ] Bilder und Screenshots im Paket zeigen keine echte Website, keinen
       echten Namen.
+- [ ] Keine Einstellung sieht wirksam aus, die es nicht ist: Felder, die
+      von einer anderen Einstellung, einem Schlüssel oder der Lizenzstufe
+      abhängen, sind gesperrt oder ausgeblendet, der Grund steht am Feld.
 - [ ] Jede Einstellung, die ein Kunde braucht, ist im Backend pflegbar;
       Schlüssel verschlüsselt, mit Sonderzeichen (`=`, `+`, `/`, `&`)
       gespeichert und wieder gelesen — Wert unverändert.
@@ -41,3 +47,15 @@ Nicht Geprüftes gilt als nicht erfüllt.
 - [ ] CHANGELOG-Eintrag für die Fassung.
 - [ ] Spiegel im Projekt aktualisiert (`rsync`), Paketname im Projekt
       stimmt mit `composer.json` der Erweiterung überein.
+
+## Tests
+
+- [ ] PHPUnit (oder Pest) ist eingerichtet: `phpunit.xml.dist`, das Testwerkzeug in
+      `require-dev`, Tests unter `tests/` (Erich 12.11.2026: „jedes Modul sollte Unit-Tests
+      haben, das ist heutiger Standard“).
+- [ ] Getestet ist die Logik, auf die es ankommt: Verschlüsselung, Signaturen, Filter,
+      Entscheidungen (Lizenzstufen, Einwilligung, gesperrte Felder), Aufbau und Auswertung
+      fremder Antworten, Migrationen. Reine Contao-Verdrahtung braucht keinen eigenen Test.
+- [ ] Gegenprobe: eine getestete Stelle absichtlich verändert, der Test schlägt an.
+- [ ] Die Tests laufen in der CI auf allen freigegebenen PHP-Fassungen.
+- [ ] `bundle-check.py` prüft das Vorhandensein (Gruppe „tests“), nicht die Qualität.

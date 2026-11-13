@@ -29,7 +29,7 @@ ebenfalls Pflicht (Skill `neo-doku`, Abschnitt Sprachen).
 | Voraussetzungen | Contao-, PHP-Fassung, PHP-Erweiterungen, fremde Dienste und Schlüssel |
 | **Installation** | Contao Manager **und** Composer, Schritt für Schritt, danach Datenbank aktualisieren |
 | **Dokumentation** | Link auf `docs/en/README.md` bzw. `docs/de/README.md`, dazu die wichtigsten Seiten (Einrichtung, Rechte, Bedienung, Fehlersuche) |
-| Lizenz | MIT |
+| Lizenz | eigene Lizenz (`LICENSE`) |
 
 Einrichtung im Detail, Rechte, Bedienung, Anpassen, Datenschutz und
 Fehlersuche stehen **nicht** im README, sondern in `docs/`. Zwei Stellen
