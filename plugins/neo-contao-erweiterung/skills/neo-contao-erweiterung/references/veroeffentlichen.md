@@ -77,9 +77,19 @@ mittlere, ein Bruch (umbenannte Schalter, entfernte Felder) die erste.
 
    Das Werkzeug exportiert den Stand (`git archive`, also ohne nicht
    eingecheckte Änderungen und ohne `export-ignore`), prüft Hinweise,
-   `composer.json`, `CHANGELOG.md` und `bundle-check.py`, schreibt die ZIP
-   und legt im öffentlichen Klon Commit und Tag an. Es lädt nichts hoch.
-   Bei einem Befund entsteht nichts.
+   `composer.json`, `CHANGELOG.md` und `bundle-check.py`, dazu zwei Dinge,
+   die erst im öffentlichen Repository auffallen (Befund 13.11.2026):
+   - **Prüfdateien ohne Secrets.** Ein Workflow unter `.github/workflows/`,
+     der ein Secret braucht (außer dem eingebauten `GITHUB_TOKEN`),
+     scheitert dort am Release-Commit. Basic kommt in den Tests aus dem
+     öffentlichen Repository `contao-basic-bundle` bzw. von Packagist, nie
+     aus dem Entwicklungs-Repository.
+   - **Kopf der Doku in der Sprache der Seite.** Eine englische Seite hat
+     `title`, `summary`, `audience`, `language`, `updated`, keine deutschen
+     Feldnamen (Skill `neo-doku`, `agentenlesbarkeit.md`).
+
+   Dann schreibt es die ZIP und legt im öffentlichen Klon Commit und Tag an.
+   Es lädt nichts hoch. Bei einem Befund entsteht nichts.
 3. Hochladen erst nach Freigabe des Inhabers: `git push origin HEAD` und
    `git push origin v<Fassung>` im öffentlichen Klon.
 4. Packagist: Der Inhaber reicht das öffentliche Repository einmal ein

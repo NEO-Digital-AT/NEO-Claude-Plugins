@@ -27,7 +27,28 @@ verwandt:
 ---
 ```
 
-`stand` wird bei jeder inhaltlichen Änderung mitgezogen. Ein Datum, das
+**Der Kopf steht in der Sprache der Seite**, Feldnamen und feste Werte
+eingeschlossen. Eine englische Seite bekommt einen englischen Kopf, eine
+deutsche einen deutschen. Ein deutscher Kopf über englischem Text ist ein
+Befund: GitHub zeigt den Kopf als Tabelle über der Seite, und dort stand
+am 13.11.2026 auf jeder englischen Seite der Contao-Erweiterungen
+„titel“, „kurzfassung“ und „zielgruppe: betrieb“. Zuordnung:
+
+| Deutsch | Englisch |
+| --- | --- |
+| `titel` | `title` |
+| `kurzfassung` | `summary` |
+| `zielgruppe`: `anwender` · `entwickler` · `betrieb` | `audience`: `users` · `developers` · `operations` |
+| `bereich` | `area` |
+| `sprache` | `language` |
+| `stand` | `updated` |
+| `gilt_fuer` | `applies_to` |
+| `verwandt` | `related` |
+
+`frontend` und `backend` bleiben in beiden Sprachen gleich. Andere
+Sprachen nehmen die englischen Feldnamen.
+
+`stand` (englisch `updated`) wird bei jeder inhaltlichen Änderung mitgezogen. Ein Datum, das
 nicht gepflegt wird, ist schlimmer als keines.
 
 ## Aufbau
