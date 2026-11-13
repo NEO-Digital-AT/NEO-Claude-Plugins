@@ -19,6 +19,15 @@ script makes that copy and refuses when it is not clean:
    "Unreleased" section.
 5. bundle-check.py (next to this script) on the exported files, with the
    given --forbid and --allow.
+6. Workflows: no file in .github/workflows/ uses a secret other than
+   GITHUB_TOKEN. The public repository has no secrets; a workflow that needs
+   one fails there on the release commit.
+7. Documentation heads: the head of a Markdown page (front matter) is in the
+   language of the page. A page with "language: en" has English keys and
+   values (title, summary, audience: users | developers | operations,
+   language, updated), a page with "sprache: de" German ones (titel,
+   kurzfassung, zielgruppe: anwender | entwickler | betrieb, sprache, stand).
+   GitHub shows the head as a table above the page.
 
 Tests are for development only. The public repository keeps them (CI runs
 there), but customers never get them: the export's .gitattributes gets
@@ -71,6 +80,15 @@ HINTS = (
 TEXT_SUFFIXES = {".php", ".twig", ".html", ".js", ".mjs", ".cjs", ".css", ".scss", ".yaml", ".yml", ".json", ".md", ".xlf", ".txt", ".svg", ".xml", ".neon", ".dist", ""}
 MANAGER_PLUGIN = "contao/manager-plugin"
 MANAGER_CONFLICT = "<2.0 || >=3.0"
+WORKFLOW_SECRET = re.compile(r"\$\{\{\s*secrets\.(?!GITHUB_TOKEN\b)([A-Za-z0-9_]+)")
+DOC_HEAD = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+# Head keys of a documentation page per language, in the same order: the
+# German key at a position has the English key at the same position.
+HEAD_KEYS = {
+    "de": ("titel", "kurzfassung", "zielgruppe", "bereich", "sprache", "stand", "gilt_fuer", "verwandt"),
+    "en": ("title", "summary", "audience", "area", "language", "updated", "applies_to", "related"),
+}
+AUDIENCES = {"de": ("anwender", "entwickler", "betrieb"), "en": ("users", "developers", "operations")}
 
 
 def run(args: list[str], cwd: pathlib.Path, env: dict[str, str] | None = None) -> str:
@@ -278,6 +296,55 @@ def write_zip(root: pathlib.Path, data: dict, version: str, out: pathlib.Path) -
     return target
 
 
+def check_workflows(root: pathlib.Path) -> list[str]:
+    """The public repository has no secrets: a workflow that needs one fails there."""
+    findings = []
+    folder = root / ".github" / "workflows"
+    if not folder.is_dir():
+        return findings
+
+    for path in sorted(folder.iterdir()):
+        if path.suffix.lower() not in {".yml", ".yaml"}:
+            continue
+        rel = path.relative_to(root).as_posix()
+        for number, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            match = WORKFLOW_SECRET.search(line)
+            if match:
+                findings.append(f"{rel}:{number}: uses the secret {match.group(1)}, which the public repository does not have; the workflow would fail on the release")
+
+    return findings
+
+
+def check_doc_heads(root: pathlib.Path) -> list[str]:
+    """The head of a documentation page is in the language of the page (keys and fixed values)."""
+    findings = []
+    language_keys = {HEAD_KEYS[code][4]: code for code in HEAD_KEYS}
+
+    for path in files_of(root):
+        if path.suffix.lower() != ".md":
+            continue
+        head = DOC_HEAD.match(path.read_text(encoding="utf-8", errors="replace"))
+        if not head:
+            continue
+        fields = dict(re.findall(r"^([a-z_]+):[ \t]*(.*?)[ \t]*$", head.group(1), re.M))
+        # The page's language, from whichever language key the head uses.
+        codes = {fields[key].lower() for key in language_keys if key in fields}
+        if len(codes) != 1 or (code := codes.pop()) not in HEAD_KEYS:
+            continue
+
+        rel = path.relative_to(root).as_posix()
+        own = HEAD_KEYS[code]
+        foreign = [key for other, keys in HEAD_KEYS.items() if other != code for key in keys if key in fields]
+        if foreign:
+            expected = ", ".join(own[HEAD_KEYS["de" if code == "en" else "en"].index(key)] for key in foreign)
+            findings.append(f"{rel}: head of a page in \"{code}\" with the keys {', '.join(foreign)}; use {expected}")
+        audience = own[2]
+        if audience in fields and fields[audience] not in AUDIENCES[code]:
+            findings.append(f"{rel}: {audience}: {fields[audience]} is not one of {' | '.join(AUDIENCES[code])}")
+
+    return findings
+
+
 def check_target(target: pathlib.Path, version: str) -> list[str]:
     """The public clone must be a clean git clone without the tag of this version."""
     if not (target / ".git").exists():
@@ -355,6 +422,8 @@ def main() -> int:
             findings += check_composer(data, args.repo_url)
         findings += check_changelog(root, args.version)
         findings += check_bundle(root, args.forbid, args.allow)
+        findings += check_workflows(root)
+        findings += check_doc_heads(root)
         target = pathlib.Path(args.target).resolve() if args.target else None
         if target:
             findings += check_target(target, args.version)

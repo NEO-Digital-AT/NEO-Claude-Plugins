@@ -67,7 +67,9 @@ Regeln dazu:
 - **Ausnahme: Contao-Erweiterungen.** Dort steht **Englisch zuerst und ist
   Leitsprache, Deutsch folgt und ist ebenfalls Pflicht** — die Doku
   richtet sich an das Contao-Ökosystem (Skill `neo-contao-erweiterung`). Die Doku der Kundenwebsite im
-  selben Repo bleibt davon unberührt und deutsch.
+  selben Repo bleibt davon unberührt und deutsch. Die englischen Seiten
+  haben einen englischen Kopf (`title`, `summary`, `audience` …,
+  Zuordnung in `agentenlesbarkeit.md`); `release-bundle.py` prüft das.
 - Die Ordnernamen sind die zweibuchstabigen Sprachkürzel (`de`, `en`,
   `fr`, `it`), bei Bedarf mit Region (`de-AT`, `pt-BR`).
 - **Die Dateinamen sind in allen Sprachen gleich.** `anlegen.md` heißt
