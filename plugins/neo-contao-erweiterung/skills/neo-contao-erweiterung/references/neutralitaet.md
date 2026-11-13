@@ -82,8 +82,13 @@ python3 plugins/neo-contao-erweiterung/scripts/bundle-check.py <bundle> \
   die Bezeichnungen der Menügruppe (`$GLOBALS['TL_LANG']['MOD']`, `['FMD']`
   und `['CTE']` in `contao/languages/*/modules.php`).
 - `--allow <datei>` nimmt eine Datei von den verbotenen Namen aus, nur für
-  die beiden Ausnahmen in Basic:
-  `--allow public/credit.js --allow src/License/LicenseService.php`.
+  die Ausnahmen in Basic (Skill, Abschnitt „Gewollte Ausnahmen“):
+  `--allow public/credit.js --allow src/License/LicenseService.php --allow
+  src/License/Store.php`.
+- Die Domain des Herstellers steht gewollt an den Stellen dieser Ausnahmen
+  (Hinweis der Gratisfassung, Lizenzdienst, Store). Ob sie sonst irgendwo
+  steht, zeigt `git grep -n "<domain.tld>" -- ':!LICENSE'`: Jede Fundstelle
+  muss eine dieser Ausnahmen sein.
   Mailadressen und Telefonnummern prüft das Werkzeug dort trotzdem; die
   Ausgabe nennt die ausgenommenen Dateien.
 - Lizenztexte mitgelieferter Fremddateien (eine Schrift unter der SIL Open

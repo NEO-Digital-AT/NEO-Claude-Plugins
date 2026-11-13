@@ -48,12 +48,28 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
 - **Keine Projektreste.** Keine Kommentare wie „für Kunde X ergänzt",
   „Befund von Y", keine Datumsnotizen aus einem Projekt.
 
-**Zwei Ausnahmen, nur im gemeinsamen Grundpaket (Basic):** die Zeile
-„powered by …" der kostenlosen Fassung (Wortmarke und Link auf die Website
-des Herstellers; sie verschwindet mit einer gültigen Lizenz) und die Adresse
-des Lizenzdiensts, gegen die Basic die Lizenzen prüft. Beide sind gewollt und
-bleiben. Beim Prüfwerkzeug werden ihre Dateien mit `--allow` genannt; keine
-andere Datei und keine andere Erweiterung bekommt eine Ausnahme.
+**Gewollte Ausnahmen, und nur diese:**
+
+1. **Der Hinweis der kostenlosen Fassung:** die Zeile „powered by …“ in Basic
+   (Wortmarke und Link auf die Website des Herstellers; sie verschwindet mit
+   einer gültigen Lizenz), bei Erweiterungen mit Nennungspflicht die Nennung
+   im Impressum (Lizenzkasten `src/Backend/CreditNote.php`, `LICENSE`, README).
+2. **Die Adresse des Lizenzdiensts**, gegen die Basic die Lizenzen prüft
+   (`src/License/LicenseService.php`).
+3. **Der Store, in dem die Lizenzen verkauft werden** (Vorgabe des Inhabers
+   vom 13.11.2026: „Wie soll sonst jemand wissen, wie er die Lizenzen kaufen
+   kann?“). Verlinkt wird die Produktseite der Erweiterung ohne Sprache,
+   `https://store.neo-digital.at/extensions/<name>` (der Store leitet in die
+   Sprache des Browsers weiter), bei Basic die Startseite. Erlaubt in der
+   `LICENSE` („Lizenzen und Fragen“, bei der Lizenz ohne Nennung), im
+   Abschnitt „License“/„Lizenz“ der README, in der Doku dort, wo
+   Lizenzschlüssel oder die Lizenz ohne Nennung erklärt werden, an jeder
+   Lizenzzeile im Backend (`src/License/Store.php` in Basic) und im
+   Lizenzkasten (`CreditNote.php`).
+
+Sonst steht keine Adresse des Herstellers in Paket, README oder Doku. Beim
+Prüfwerkzeug werden die Dateien der Ausnahmen in Basic mit `--allow`
+genannt.
 
 **Belegt wird das mit dem Prüfwerkzeug**, nicht mit Durchsehen:
 
