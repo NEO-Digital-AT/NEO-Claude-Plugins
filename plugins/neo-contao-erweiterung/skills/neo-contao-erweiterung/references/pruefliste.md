@@ -10,7 +10,12 @@ Nicht Geprüftes gilt als nicht erfüllt.
       sechs Gruppen (Neutralität, Backend-Sprachen, Frontend-Texte, Paket,
       README, Doku). Jeder Name als eigenes `--forbid` oder kommagetrennt.
       In Basic dazu `--allow public/credit.js --allow
-      src/License/LicenseService.php` (die beiden Ausnahmen der Regel).
+      src/License/LicenseService.php --allow src/License/Store.php` (die
+      Ausnahmen der Regel).
+- [ ] Store-Link vorhanden: `LICENSE`, Abschnitt „License“/„Lizenz“ der
+      README und die Lizenzstellen der Doku verlinken
+      `https://store.neo-digital.at/extensions/<name>`; die Adresse
+      antwortet mit 200 (`curl -sL -o /dev/null -w "%{http_code}"`).
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.
