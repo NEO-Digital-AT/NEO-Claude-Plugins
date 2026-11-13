@@ -16,6 +16,9 @@ Nicht Geprüftes gilt als nicht erfüllt.
       README und die Lizenzstellen der Doku verlinken
       `https://store.neo-digital.at/extensions/<name>`; die Adresse
       antwortet mit 200 (`curl -sL -o /dev/null -w "%{http_code}"`).
+      Jeder Linktext passt zum Angebot der Store-Seite: Führt der Store die
+      Erweiterung nur kostenlos, steht nirgends „kaufen“ oder „Lizenz im
+      Store“.
 - [ ] `php -l` über alle PHP-Dateien, Syntaxprüfung der YAML-Dateien.
 - [ ] Im Prüfprojekt: `contao:migrate` läuft durch, ein zweiter Lauf meldet
       nichts mehr.

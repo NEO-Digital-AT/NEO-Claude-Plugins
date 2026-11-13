@@ -61,11 +61,16 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
    kann?“). Verlinkt wird die Produktseite der Erweiterung ohne Sprache,
    `https://store.neo-digital.at/extensions/<name>` (der Store leitet in die
    Sprache des Browsers weiter), bei Basic die Startseite. Erlaubt in der
-   `LICENSE` („Lizenzen und Fragen“, bei der Lizenz ohne Nennung), im
-   Abschnitt „License“/„Lizenz“ der README, in der Doku dort, wo
-   Lizenzschlüssel oder die Lizenz ohne Nennung erklärt werden, an jeder
-   Lizenzzeile im Backend (`src/License/Store.php` in Basic) und im
-   Lizenzkasten (`CreditNote.php`).
+   `LICENSE` („Lizenzen und Fragen“), im Abschnitt „License“/„Lizenz“ der
+   README, in der Doku dort, wo Lizenzschlüssel erklärt werden, und an jeder
+   Lizenzzeile im Backend (`src/License/Store.php` in Basic).
+   **Ein Link zum Kaufen nur, wo der Store etwas verkauft.** Führt der Store
+   eine Erweiterung nur kostenlos („0 € für immer“, Nennung im Impressum),
+   bekommt sie keinen Kauf-Link: nicht im Lizenzkasten (`CreditNote.php`),
+   nicht in README oder Doku, auch nicht für eine Lizenz ohne Nennung
+   (Befund 13.11.2026, Cookie Consent: „ist immer gratis, da gibts nichts zu
+   kaufen“). Was ein Link verspricht, wird vorher auf der Store-Seite
+   nachgesehen, nicht aus der `LICENSE` geschlossen.
 
 Sonst steht keine Adresse des Herstellers in Paket, README oder Doku. Beim
 Prüfwerkzeug werden die Dateien der Ausnahmen in Basic mit `--allow`
