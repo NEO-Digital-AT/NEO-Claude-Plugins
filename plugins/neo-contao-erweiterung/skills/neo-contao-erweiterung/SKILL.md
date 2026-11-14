@@ -71,6 +71,9 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
    (Befund 13.11.2026, Cookie Consent: „ist immer gratis, da gibts nichts zu
    kaufen“). Was ein Link verspricht, wird vorher auf der Store-Seite
    nachgesehen, nicht aus der `LICENSE` geschlossen.
+   **Anfragen gehen an die Website des Herstellers** (`https://neo-digital.at`,
+   etwa „auf Anfrage“ in der `LICENSE`): Der Store hat kein Kontaktformular
+   (Vorgabe des Inhabers vom 14.11.2026).
 
 Sonst steht keine Adresse des Herstellers in Paket, README oder Doku. Beim
 Prüfwerkzeug werden die Dateien der Ausnahmen in Basic mit `--allow`
