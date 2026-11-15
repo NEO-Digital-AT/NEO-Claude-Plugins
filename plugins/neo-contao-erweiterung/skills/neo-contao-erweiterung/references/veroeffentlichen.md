@@ -116,11 +116,17 @@ Vorschläge (`suggest`) wie ein Sprachwechsler kommen nie in die ZIP.
 
 Der Contao Manager findet ein Paket von selbst, sobald es auf Packagist mit
 einem Tag liegt, vom Typ `contao-bundle` ist und ein Manager-Plugin nennt.
-Titel, Beschreibung je Sprache, Logo und das Ausblenden aus der Suche kommen
-über einen Pull Request an `contao/package-metadata`
-(`meta/neo-digital/<paket>/<sprache>.yml`, `logo.svg`). Basic bekommt dort
-`dependency: true`: Es ist ein Unterbau und soll in der Suche nicht als
-eigene Erweiterung erscheinen, und kein Logo.
+Titel, Beschreibung je Sprache und Logo kommen über einen Pull Request an
+`contao/package-metadata` (`meta/neo-digital/<paket>/<sprache>.yml`,
+`logo.svg`).
+
+**Basic steht nicht im Contao Manager** (Projektinhaber 15.11.2026): Es hat
+`"type": "library"`, nicht `contao-bundle`. Die Paketliste von Contao nimmt
+nur Pakete vom Typ `contao-bundle` auf; Basic kommt als Abhängigkeit der
+anderen Erweiterungen mit. Contao lädt es trotzdem, weil das Manager-Plugin
+über `extra.contao-manager-plugin` gefunden wird, nicht über den Typ. Basic
+bekommt darum keinen Eintrag in `contao/package-metadata` und kein Logo.
+Geprüft mit `bundle-check.py … --dependency`.
 
 Die Einträge liegen in der Erweiterung unter `tools/contao-manager/`
 (`de.yml`, `en.yml`, `icon.svg`, `logo.svg`), also nicht im Paket. Titel

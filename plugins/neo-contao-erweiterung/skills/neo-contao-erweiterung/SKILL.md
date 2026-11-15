@@ -98,7 +98,8 @@ Aufbau vor. Namen, Ordner, `composer.json`, Einstellungen im Backend,
 Übernahme alter Werte, lokaler Prüfstand: `references/aufbau.md`.
 
 Kurzform: eigenes Repository `NEO-Contao-<Name>`, Paket
-`neo-digital/contao-<name>-bundle`, `type: contao-bundle`, eigene Lizenz
+`neo-digital/contao-<name>-bundle`, `type: contao-bundle` (Basic:
+`library`, nicht im Contao Manager), eigene Lizenz
 (`LICENSE`, in `composer.json` `proprietary`),
 Namensraum `Neo\<Name>Bundle`, Tabellen `tl_neo_*`, Spiegel im Projekt
 unter `bundles/<ordner>/` per `rsync`, Änderungen nur im eigenen

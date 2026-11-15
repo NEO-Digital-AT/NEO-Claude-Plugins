@@ -30,7 +30,9 @@ install and use it. This script checks exactly that:
    required language with the same keys as the English file.
 4. Package: composer.json has type contao-bundle, a license, PSR-4
    autoloading and a Contao Manager plugin; README.md, CHANGELOG.md and
-   LICENSE exist.
+   LICENSE exist. With --dependency (a shared foundation that only comes
+   as a dependency of other extensions) the type must be library instead,
+   so that the Contao Manager does not list the package.
 5. README: an English part first, then a German part; both describe the
    installation and link to the documentation (docs/en/, docs/de/).
 6. Documentation shipped with the bundle: docs/en/ and docs/de/ with the
@@ -252,7 +254,7 @@ def check_frontend_texts(root: pathlib.Path) -> list[str]:
     return findings
 
 
-def check_package(root: pathlib.Path) -> list[str]:
+def check_package(root: pathlib.Path, dependency: bool = False) -> list[str]:
     findings = []
     for name in ("README.md", "CHANGELOG.md", "LICENSE", "composer.json"):
         if not (root / name).is_file():
@@ -263,8 +265,9 @@ def check_package(root: pathlib.Path) -> list[str]:
     except (OSError, json.JSONDecodeError):
         return findings
 
-    if data.get("type") != "contao-bundle":
-        findings.append("composer.json: \"type\" must be \"contao-bundle\"")
+    expected = "library" if dependency else "contao-bundle"
+    if data.get("type", "library") != expected:
+        findings.append(f"composer.json: \"type\" must be \"{expected}\"" + (" (--dependency: not listed in the Contao Manager)" if dependency else ""))
     if not data.get("license"):
         findings.append("composer.json: \"license\" missing")
     if not data.get("autoload", {}).get("psr-4"):
@@ -395,6 +398,7 @@ def main() -> int:
     parser.add_argument("path", help="root folder of the bundle (where composer.json is)")
     parser.add_argument("--forbid", action="append", default=[], help="name that must not appear (person, company, domain); repeatable, or several separated by commas")
     parser.add_argument("--allow", action="append", default=[], help="file (relative to the bundle) where the forbidden names may appear; only for the exceptions of the rule (credit line of the free edition, address of the licence service); repeatable")
+    parser.add_argument("--dependency", action="store_true", help="the package only comes as a dependency of other extensions (a shared foundation): its type must be library, not contao-bundle, so that the Contao Manager does not list it")
     parser.add_argument("--json", action="store_true", help="print the findings as JSON")
     args = parser.parse_args()
 
@@ -407,7 +411,7 @@ def main() -> int:
         "neutrality": check_neutrality(root, args.forbid, args.allow),
         "backend_languages": check_backend_languages(root),
         "frontend_texts": check_frontend_texts(root),
-        "package": check_package(root),
+        "package": check_package(root, args.dependency),
         "readme": check_readme(root),
         "docs": check_docs(root),
         "tests": check_tests(root),

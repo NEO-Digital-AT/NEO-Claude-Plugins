@@ -62,8 +62,8 @@ NEO-Wort?
 
 ## Basic bekommt kein Logo
 
-Basic ist ein Unterbau, im Contao Manager mit `dependency: true` aus der
-Suche genommen. Es braucht kein Logo.
+Basic ist ein Unterbau mit `"type": "library"` und steht darum nicht im
+Contao Manager (`veroeffentlichen.md`). Es braucht kein Logo.
 
 ## Einreichen
 

@@ -53,7 +53,8 @@ NEO-Contao-<Name>/
 ```
 
 `composer.json`, Pflichtangaben wie in den bestehenden Paketen:
-`"type": "contao-bundle"`, `"license": "proprietary"`, `"description"` ohne
+`"type": "contao-bundle"` (Basic als Unterbau `"library"`, damit es nicht im
+Contao Manager steht: `veroeffentlichen.md`), `"license": "proprietary"`, `"description"` ohne
 Herstellerbezug, `"require"` mit `^`-Bereichen (`"contao/core-bundle":
 "^5.3"`), `"autoload": {"psr-4": {"Neo\\<Name>Bundle\\": "src/"}}`,
 `"extra": {"contao-manager-plugin": "Neo\\<Name>Bundle\\ContaoManager\\Plugin"}`.
