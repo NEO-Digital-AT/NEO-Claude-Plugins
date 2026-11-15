@@ -9,7 +9,8 @@ Nicht Geprüftes gilt als nicht erfüllt.
       der Firma, der Domain und betroffener Kunden: **0 Befunde** in allen
       sechs Gruppen (Neutralität, Backend-Sprachen, Frontend-Texte, Paket,
       README, Doku). Jeder Name als eigenes `--forbid` oder kommagetrennt.
-      In Basic dazu `--allow public/credit.js --allow
+      In Basic dazu `--dependency` (Typ `library`, nicht im Contao
+      Manager) und `--allow public/credit.js --allow
       src/License/LicenseService.php --allow src/License/Store.php` (die
       Ausnahmen der Regel).
 - [ ] Store-Link vorhanden: `LICENSE`, Abschnitt „License“/„Lizenz“ der
