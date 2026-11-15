@@ -287,6 +287,10 @@ und Dunkel.
       24 × 24 px; mindestens 8 px Abstand zwischen zwei Zielen.
 - [ ] Symbolknöpfe in Tabellenzeilen sind auf schmal bedienbar oder durch
       eine Zeilenaktion ersetzt.
+- [ ] **Jede Reihe von Knöpfen ist einzeilig**: was nicht passt, steht im
+      Menü „…“ am Ende, die Hauptaktion bleibt in der Reihe; kein Knopf
+      bricht in eine zweite Reihe, keiner kürzt seine Beschriftung
+      (`references/responsiv.md`, „Knopfleisten bleiben einzeilig“).
 - [ ] Unter dem Umbruchpunkt liegt das Hauptmenü hinter einem Knopf, mit
       `aria-expanded`, Fokusführung und Escape.
 - [ ] **Höchstbreiten** aus Tokens für Inhaltsbereich, Textspalte und

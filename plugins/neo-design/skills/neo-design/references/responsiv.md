@@ -222,9 +222,43 @@ Bedienelemente größer als am Schreibtisch, nicht kleiner.**
   einer Zeilenaktion mit Text oder zu einem Menü.
 - Werkzeugleisten in Editoren werden auf schmal **größer und weniger**,
   nicht kleiner und mehr. Was nicht in eine Reihe passt, geht in ein
-  Überlaufmenü — nicht in eine zweite, halbleere Reihe.
+  Überlaufmenü — nicht in eine zweite, halbleere Reihe (Abschnitt
+  „Knopfleisten bleiben einzeilig“).
 - Ein Textlink im Fließtext ist ausgenommen; ein Link, der wie ein Knopf
   aussieht, nicht.
+
+## Knopfleisten bleiben einzeilig
+
+**Eine Reihe von Knöpfen steht immer in einer Zeile.** Passen nicht alle
+Knöpfe hinein, kommen die, die nicht passen, in ein Menü hinter einem
+Knopf „…“ am Ende der Reihe (Überlaufmenü). Das gilt für jede Reihe von
+Knöpfen: Werkzeugleisten, Reiter mit Werkzeugen, Aktionsleisten am
+unteren Rand, Knöpfe im Kopf und Fuß von Seitenleisten, Karten und
+Dialogen — am Telefon wie am Schreibtisch (Projektinhaber 15.11.2026).
+
+- **Nie umbrechen, nie kürzen.** Keine zweite, halbleere Reihe und keine
+  abgeschnittene Beschriftung („Abbre…“, „Sp…“). Die Knöpfe behalten
+  ihre Breite.
+- **Entschieden wird an der echten Breite**, beim Zeichnen und bei jeder
+  Größenänderung der Reihe (`ResizeObserver`), nicht an einem festen
+  Umbruchpunkt. Wird die Reihe breiter, kommen die Knöpfe zurück.
+- **Es wandert vom Ende her**, in der Reihenfolge der Reihe. Die
+  Hauptaktion (Speichern, Übernehmen) bleibt immer in der Reihe.
+- **Im Menü steht jeder Knopf mit seinem Namen**, auch einer, der in der
+  Reihe nur ein Symbol zeigt; die Einträge sehen aus wie die Einträge der
+  übrigen Menüs. Ein Eintrag schließt das Menü, nachdem er seine Arbeit
+  getan hat; ein Tippen daneben schließt es auch.
+- Das Menü klappt dorthin auf, wo Platz ist (Abschnitt „Aufklappen“); der
+  Knopf „…“ hat einen Namen („Mehr“) und `aria-expanded`.
+- **Trennstriche wandern mit.** Keine Reihe und kein Menü beginnt oder
+  endet mit einem Trennstrich.
+- Eine Gruppe, die am Telefon nie in die Reihe passt (die Werkzeuge eines
+  Textes), darf dort ganz hinter **einen** Knopf mit dem Namen der Gruppe,
+  der sie als Aufklappmenü öffnet.
+- **Prüfen** auf 320, 390, 768, 1024 und 1440 px, in jeder Ansicht und mit
+  geöffneten Zuständen: In keiner Reihe von Knöpfen liegt ein Knopf unter
+  einem anderen (oberer Rand des einen unter dem unteren Rand des anderen),
+  und kein Knopf schneidet seinen Text ab (`scrollWidth > clientWidth`).
 
 ## Navigation auf schmalen Geräten
 
