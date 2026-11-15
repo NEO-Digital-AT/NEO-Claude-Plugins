@@ -16,24 +16,107 @@ Sieben Prüfungen, jede ein Blocker:
 - [ ] **Der Diff entspricht dem freigegebenen Umfang** — Datei für
       Datei durchgesehen.
 
-## Die Commit-Nachricht
+## Einheitlicher Stil: Zweige, Commits, Releases
 
-**Die Commit-Nachricht ist ein deutscher Text.** Sie trägt echte
-Umlaute, keine Ersatzschreibung — ebenso Titel und Text eines Pull
-Requests. Ein Dateiname oder ein Slug in der Nachricht bleibt ASCII
-(`references/loeschkonzept.md`), der Fließtext daneben nicht.
+Projektinhaber 15.11.2026: Die Liste der Commits auf GitHub ist sauber,
+jeder Commit sagt klar, was sich geändert hat, immer im selben Stil —
+kein „Commit-Friedhof“, keine Fantasie- oder Zufallswörter.
 
-Aufbau:
+**Zweignamen:** `<typ>/<kurzbeschreibung>` — englisch, klein, Wörter
+mit Bindestrich, ohne Leerzeichen, ohne Zufallskennung. Beispiele:
+`fix/post-head-buttons`, `feat/sidebar-over-the-page`,
+`docs/contao-manager-metadata`.
+
+**Commit-Betreff nach Conventional Commits 1.0** (der übliche Standard;
+GitHub, Release-Werkzeuge und Changelog-Generatoren lesen ihn):
 
 ```
-Kurzfassung in einer Zeile, was sich ändert
+<typ>(<bereich>): <Kurzbeschreibung>
+```
 
-Warum es sich ändert. Was vorher galt und warum das nicht reichte.
-Nicht, was der Diff ohnehin zeigt.
+| Typ | Wofür |
+| --- | --- |
+| `feat` | neue Funktion |
+| `fix` | Fehlerkorrektur |
+| `docs` | nur Doku, README, Metadaten |
+| `refactor` | Umbau ohne geändertes Verhalten |
+| `perf` | schneller, sparsamer |
+| `test` | nur Tests |
+| `style` | nur Formatierung |
+| `build` / `ci` | Abhängigkeiten, Build, Prüf-Workflows |
+| `chore` | Pflege ohne Wirkung auf das Produkt |
+| `revert` | nimmt einen Commit zurück |
 
-- Der eine wichtige Punkt
-- Der zweite, wenn es einen gibt
-- Was dabei bewusst NICHT gemacht wurde
+`<bereich>` ist optional (z. B. `feat(sidebar): …`); Kurzbeschreibung
+englisch, klein begonnen, ohne Punkt am Ende. Eine
+brechende Änderung trägt `!` nach dem Typ (`feat!: …`) und im Rumpf eine
+Zeile `BREAKING CHANGE: …`. Keine Nummern im Betreff: Commits sind über
+ihren Hash eindeutig, gezählt werden Releases (SemVer) und Pull Requests.
+
+**Logisch zusammenfassen, bevor gemergt wird.** Auf dem eigenen
+Arbeitszweig werden Zwischenstände, Korrekturen („Tests angepasst“,
+„Tippfehler“) und doppelte Commits zu logischen Commits zusammengelegt
+(je Änderung einer, z. B. ein `feat` mit seinen Tests und seiner Doku,
+ein `fix`), erst dann wird gemergt. Viele Commits je Release sind in
+Ordnung, solange jeder eine abgeschlossene Änderung ist. Historie
+anderer Zweige wird nie umgeschrieben.
+
+**Weg eines Commits:** Arbeitszweig → `dev` (Testseite) → `main`. Ein
+Merge nach `main` ist immer ein Release: Version nach SemVer
+(`MAJOR.MINOR.PATCH`), Tag `v<Version>`, Titel `<Version>`, Text = der
+Abschnitt der Version im CHANGELOG (Keep a Changelog: `Added`,
+`Changed`, `Fixed`, `Removed`, `Security`, in dieser Reihenfolge, je
+Punkt ein englischer Satz). Jede Fassung, jedes
+Projekt, auch LeoFlex, im selben Aufbau.
+
+**Versionsnummer `MAJOR.MINOR.PATCH` (Semantic Versioning 2.0):** Die
+Fassung hebt genau eine Stelle, nach der größten Änderung seit dem
+letzten Release; die Stellen rechts davon fallen auf 0 (1.4.2 → 2.0.0,
+1.4.2 → 1.5.0, 1.4.2 → 1.4.3).
+
+| Stelle | Wann | Beispiele |
+| --- | --- | --- |
+| **MAJOR** (1.x.x → 2.0.0) | Wer aktualisiert, muss selbst etwas tun, oder etwas Bestehendes funktioniert nicht mehr wie vorher | öffentliche Methode, Schnittstelle, Template-Variable, Einstellung oder Feld entfernt oder umbenannt; Contao- oder PHP-Fassung fällt weg; Daten werden so umgebaut, dass es kein Zurück gibt; LeoFlex: Relaunch, geänderte API für Kunden |
+| **MINOR** (1.4.x → 1.5.0) | Neues kommt dazu, alles Bestehende läuft unverändert weiter | neue Funktion, neue Einstellung, neue Sprache, neues Modul, neue Contao- oder PHP-Fassung unterstützt; etwas wird als veraltet markiert, aber noch nicht entfernt |
+| **PATCH** (1.4.2 → 1.4.3) | Nur Korrekturen, kein neues Verhalten | Fehler behoben, Sicherheitslücke geschlossen, Text, Übersetzung oder Doku korrigiert, Darstellung repariert |
+
+- Tag `v<Version>` (`v1.5.0`), Release-Titel `<Version>` (`1.5.0`).
+- **Ein veröffentlichter Tag wird nie verschoben oder neu vergeben.**
+  Ein Fehler darin wird mit der nächsten PATCH-Fassung behoben.
+  Ausnahme nur vor der ersten Veröffentlichung (Packagist, Store).
+- Testfassungen auf `dev` tragen einen Zusatz: `1.5.0-beta.1`,
+  `1.5.0-rc.1`; ohne Zusatz nur, was nach `main` geht.
+- Jedes Paket hat seine eigene Nummer. Abhängigkeiten verlangen die
+  kleinste nötige Fassung mit `^` (`^1.2`), damit MINOR und PATCH ohne
+  Änderung ankommen.
+- Im Zweifel die höhere Stelle: lieber MINOR als PATCH, wenn sich
+  Verhalten ändert.
+
+**Öffentliche Repositories zeigen nur `main`** mit seinen
+Release-Commits; Arbeits- und `dev`-Zweige liegen nur im privaten
+Repository. Gemergte Arbeitszweige werden gelöscht.
+
+## Die Commit-Nachricht
+
+**Auf GitHub ist Englisch die Hauptsprache** (Projektinhaber
+15.11.2026), in jedem Repository, auch in privaten wie LeoFlex:
+Commit-Nachrichten, Titel und Text von Pull Requests, Release-Texte und
+CHANGELOG sind englisch, damit auch Entwickler ohne Deutsch mitarbeiten
+können. Deutsch bleiben nur Inhalte, die für deutschsprachige Leser
+geschrieben sind (deutsche Doku, deutsche Oberflächentexte) — dort mit
+echten Umlauten.
+
+Aufbau (Betreff im Stil oben):
+
+```
+feat(sidebar): one-line summary of what changes
+
+Why it changes. What applied before and why that was not enough.
+Not what the diff shows anyway.
+
+- The one important point
+- The second, if there is one
+- What was deliberately NOT done
 ```
 
 | Regel | Folge bei Verstoß |
@@ -42,7 +125,7 @@ Nicht, was der Diff ohnehin zeigt.
 | Erste Zeile ohne Punkt am Ende, unter etwa 70 Zeichen | Sollte |
 | Der Rumpf erklärt das **Warum** | Muss |
 | Keine Emojis | Blocker |
-| Echte Umlaute | Blocker |
+| Englisch (Betreff, Rumpf, Pull Request, Release-Text) | Muss |
 | Keine Kennung eines KI-Modells in Nachricht, Titel oder Rumpf | Blocker |
 
 **Was nicht in eine Commit-Nachricht gehört:** eine Aufzählung der
