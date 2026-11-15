@@ -266,8 +266,12 @@ Zustand** (`text-fit.js`, Befund `covered-text`). Phasen, Prüfbreiten
 einschließlich 1500 × 600 und der Befundvergleich vorher/nachher:
 `references/scrolleffekte.md`.
 
+**Eine Reihe von Knöpfen bleibt einzeilig**: Was nicht hineinpasst,
+kommt in ein Menü „…“ am Ende der Reihe, die Hauptaktion bleibt sichtbar;
+nie eine zweite Reihe, nie eine gekürzte Beschriftung.
+
 Umbruchpunkte, Tabellenrangfolge, Lückenregel mit Beispielcode,
-Höchstbreiten und Navigation: `references/responsiv.md`. Umbruch, Kürzen,
+Höchstbreiten, Knopfleisten und Navigation: `references/responsiv.md`. Umbruch, Kürzen,
 zu schmale Bereiche und mitwachsende Schriftgrößen:
 `references/textpassung.md`. Der Befehl
 `/neo-design:neo-responsivpruefung` führt beide Messungen durch.
