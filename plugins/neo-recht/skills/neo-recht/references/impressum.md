@@ -72,19 +72,28 @@ abgeschaltete Plattform ist irreführend.
 - **Keine E-Mail-Adresse lesbar im ausgelieferten HTML** — das gilt für
   jede Adresse auf jeder Seite, eigene wie fremde, nicht nur im Impressum
   (Erich 21.11.2026: „meine regel gilt für alle mailadressen!“). Im
-  Quelltext steht die Adresse nur verschlüsselt; in der Ansicht erscheint
-  sie normal. Nicht lesbar heißt auch:
+  Quelltext steht die Adresse **so gut verschlüsselt, wie es geht**; in der
+  Ansicht sieht der Besucher sie ganz normal („email muss so gut es geht
+  verschlüsselt sein, aber ein seitenbesucher soll sie im klartext
+  sehen“). Nicht lesbar heißt auch:
   - **keine Ersatzform** wie „name(at)domain“ oder „name [at] domain“ —
     Bots lesen sie genauso („das bringt null. das erkennen die bots
     dennoch“);
   - **keine HTML-Zeichencodes** (`&#97;&#x67;…&#64;…`): Contaos Filter
     `encode_email`, den jedes Rich-Text-Element benutzt, schreibt Adressen
     so; der Browser zeigt sie lesbar, Bots entschlüsseln sie in einem
-    Schritt. Die Verschleierung muss diese Form erkennen.
+    Schritt. Die Verschleierung muss diese Form erkennen;
+  - **kein bloßes Base64**, auch nicht umgedreht: Sammler entschlüsseln
+    Base64 von sich aus. Der Wert wird mit einem Schlüssel verknüpft, der
+    bei jedem Aufruf neu entsteht und nur im Skript steht.
+- Ganz verhindern lässt es sich nicht: Ein Bot, der Seiten wie ein Browser
+  ausführt, sieht, was der Besucher sieht. Die Verschlüsselung hält alle ab,
+  die nur den Quelltext lesen.
 - Umsetzung: Ein Listener am Ende der Antwort ersetzt `mailto:`-Links und
-  sichtbare Adressen durch Elemente mit verschlüsseltem Wert und leerem
-  Inhalt; ein kleines Skript vor `</head>` setzt die Adresse ein, sobald der
-  Browser das Element liest — vor dem ersten Bild, ohne Layout-Sprung. Ohne
+  sichtbare Adressen durch Elemente mit verschlüsseltem Wert (XOR mit dem
+  Schlüssel des Aufrufs, dann Base64) und leerem Inhalt; ein kleines
+  Skript vor `</head>` setzt die Adresse ein, sobald der Browser das
+  Element liest — vor dem ersten Bild, ohne Layout-Sprung. Ohne
   JavaScript bleibt die Stelle leer, ein Mail-Link führt zum
   Kontaktformular. Vorlage: `EmailObfuscationListener` in
   `NEO-Digital-AT/website`.
