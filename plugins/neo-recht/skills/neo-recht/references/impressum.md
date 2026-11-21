@@ -69,9 +69,26 @@ abgeschaltete Plattform ist irreführend.
   `neo-contao`). Eine Adressänderung darf keine Codeänderung sein.
 - Die Seite ist aus jeder Seite über die Fußzeile erreichbar, ohne
   Einwilligung, ohne `noindex`.
-- **Keine Klartext-E-Mail-Adresse im ausgelieferten HTML.** Die Adresse
-  wird verschleiert ausgegeben, mit einer Ersatzform ohne JavaScript.
-  Nie eine Adresse in strukturierten Daten — diese Blöcke werden von der
+- **Keine E-Mail-Adresse lesbar im ausgelieferten HTML** — das gilt für
+  jede Adresse auf jeder Seite, eigene wie fremde, nicht nur im Impressum
+  (Erich 21.11.2026: „meine regel gilt für alle mailadressen!“). Im
+  Quelltext steht die Adresse nur verschlüsselt; in der Ansicht erscheint
+  sie normal. Nicht lesbar heißt auch:
+  - **keine Ersatzform** wie „name(at)domain“ oder „name [at] domain“ —
+    Bots lesen sie genauso („das bringt null. das erkennen die bots
+    dennoch“);
+  - **keine HTML-Zeichencodes** (`&#97;&#x67;…&#64;…`): Contaos Filter
+    `encode_email`, den jedes Rich-Text-Element benutzt, schreibt Adressen
+    so; der Browser zeigt sie lesbar, Bots entschlüsseln sie in einem
+    Schritt. Die Verschleierung muss diese Form erkennen.
+- Umsetzung: Ein Listener am Ende der Antwort ersetzt `mailto:`-Links und
+  sichtbare Adressen durch Elemente mit verschlüsseltem Wert und leerem
+  Inhalt; ein kleines Skript vor `</head>` setzt die Adresse ein, sobald der
+  Browser das Element liest — vor dem ersten Bild, ohne Layout-Sprung. Ohne
+  JavaScript bleibt die Stelle leer, ein Mail-Link führt zum
+  Kontaktformular. Vorlage: `EmailObfuscationListener` in
+  `NEO-Digital-AT/website`.
+- Nie eine Adresse in strukturierten Daten — diese Blöcke werden von der
   Verschleierung übersprungen.
 - In jeder ausgelieferten Sprache vorhanden. Die Pflichtangaben ändern
   sich dabei nicht, nur die Sprache der erklärenden Sätze.

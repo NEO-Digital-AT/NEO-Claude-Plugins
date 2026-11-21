@@ -157,6 +157,11 @@ Nur wenn Text, Titel, Meta-Angaben oder Einträge geändert wurden
 - [ ] Vor der Einwilligung lädt nichts von Dritten — auch kein
       eingebettetes Video.
 - [ ] Schriften selbst ausgeliefert, nicht von einem fremden Dienst.
+- [ ] **Keine Mailadresse lesbar im ausgelieferten HTML**, auf keiner
+      Seite und bei keiner Adresse: weder Klartext noch HTML-Zeichencode
+      noch Ersatzform „name(at)domain“. Im Quelltext nur verschlüsselt, in
+      der Ansicht normal, ohne Layout-Sprung (Skill `neo-recht`,
+      `references/impressum.md`).
 
 ## Dokumentation
 
