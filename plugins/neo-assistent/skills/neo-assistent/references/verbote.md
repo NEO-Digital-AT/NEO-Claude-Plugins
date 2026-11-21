@@ -103,18 +103,24 @@ die Anweisung des Betreibers, keine Vorauszahlung zu verlangen.
 Modell wählt. Hintergrundarbeit führt nur zu Ende, was das Modell
 ausgelöst hat (`aufbau.md`).
 
-## 7. Nachladen und Freischalten
+## 7. Rechte über das Laden
 
-**Was:** Das Modell sieht anfangs nur eine Liste der Skills und muss den
-passenden erst laden; Werkzeuge erscheinen erst nach dem Laden oder nach
-einem bestimmten Schritt.
+**Was:** Ein Werkzeug wird erst nach einem bestimmten Schritt sichtbar, oder
+das Verstecken einer Definition soll verhindern, dass es aufgerufen wird.
 
-**Woran es bricht:** Lädt das Modell den Skill nicht, fehlen Regel und
-Werkzeug. Eine Korrektur schickte das Modell zu Werkzeugen, die es nicht
-sehen konnte.
+**Woran es bricht:** Eine Korrektur schickte das Modell zu Werkzeugen, die
+es nicht sehen konnte; ein verstecktes Werkzeug war trotzdem aufrufbar.
 
-**Stattdessen:** Alle Skills und alle Werkzeugdefinitionen ab dem ersten
-Aufruf. Ob ein Aufruf ausgeführt wird, entscheidet das Werkzeug.
+**Stattdessen:** Katalog zuerst, Inhalte auf Abruf (`aufbau.md`). Das
+Modell lädt Skills und Werkzeugdefinitionen selbst; ein Werkzeug, das es
+ohne Laden mit dem Namen aus dem Katalog aufruft, wird trotzdem
+ausgeführt. Ob ein Aufruf erlaubt ist, prüft der Aufruf — Freigabeliste,
+Mandant, Eigentum —, nie das Verstecken.
+
+**Verlauf:** Bis 09.10.2026 galt hier das Gegenteil — alle Skills und alle
+Werkzeugdefinitionen in jedem Schritt. Daran lief der Kontext über
+(`context_over_budget`). Seither gilt das Katalog-Prinzip wie bei Claude
+Code (Projektinhaber, 09.10.2026).
 
 ## 8. Laufzeitprompt im Code
 
@@ -152,8 +158,9 @@ Abschaltung (`aufbau.md`).
 - Ein Kommentar beschreibt Router, Fachagenten oder Schreiber.
 - Ein Gespräch endet beim Team, ohne dass der Kunde es vom Modell erfahren
   hat.
-- Ein Skill erklärt eine reine Informationsfrage oder begründet seine
-  Regeln in Prosa.
+- Ein Skill begründet seine Regeln in Prosa oder ist länger als 2.800
+  Zeichen.
+- Alle Skills und alle Schemata stehen wieder in jedem Schritt.
 
 Jeder dieser Funde wird gemeldet und vorgelegt, nicht nebenbei gebaut und
 nicht nebenbei entfernt (Kernregel 3).

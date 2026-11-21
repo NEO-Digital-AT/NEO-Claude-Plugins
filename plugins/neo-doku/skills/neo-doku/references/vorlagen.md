@@ -4,6 +4,10 @@ Lesekonvention siehe `SKILL.md`. Existiert im Projekt eine eigene
 Vorlage (etwa `docs/VORLAGE.md`), **gilt sie wörtlich** und geht diesen
 hier vor.
 
+Die Vorlagen zeigen den Kopf einer deutschen Seite. Eine englische Seite
+nimmt die englischen Feldnamen und Werte (`title`, `summary`,
+`audience: users` …, Zuordnung in `agentenlesbarkeit.md`).
+
 ## Bedienungsseite (Anwenderdoku)
 
 ```markdown

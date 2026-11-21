@@ -35,6 +35,9 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
   Herstellers oder eines Kunden. Beispiele nutzen die reservierten Domains
   `example.com`, `example.org`, `example.net` und erfundene Orte
   („Musterstadt").
+- **Namen fremder Produkte, die die Erweiterung anbindet, sind erlaubt**
+  (Vorlagen für MCP-Server und Schnittstellen, Anleitungen); ein
+  Kundenprojekt nie (`references/neutralitaet.md`).
 - **Kein Hersteller-Branding in Beschreibungen.** Der Erweiterungsname
   darf die Marke tragen; Texte, Hilfen, Beispielwerte und Doku nicht.
   Kein „Entwickelt von …", kein Verweis auf die eigene Website.
@@ -44,6 +47,37 @@ Kundenprojekt zeigt** — außer dem Namen der Erweiterung selbst.
   CSS-Variablen, Template-Überschreibungen und Backend-Einstellungen.
 - **Keine Projektreste.** Keine Kommentare wie „für Kunde X ergänzt",
   „Befund von Y", keine Datumsnotizen aus einem Projekt.
+
+**Gewollte Ausnahmen, und nur diese:**
+
+1. **Der Hinweis der kostenlosen Fassung:** die Zeile „powered by …“ in Basic
+   (Wortmarke und Link auf die Website des Herstellers; sie verschwindet mit
+   einer gültigen Lizenz), bei Erweiterungen mit Nennungspflicht die Nennung
+   im Impressum (Lizenzkasten `src/Backend/CreditNote.php`, `LICENSE`, README).
+2. **Die Adresse des Lizenzdiensts**, gegen die Basic die Lizenzen prüft
+   (`src/License/LicenseService.php`).
+3. **Der Store, in dem die Lizenzen verkauft werden** (Vorgabe des Inhabers
+   vom 13.11.2026: „Wie soll sonst jemand wissen, wie er die Lizenzen kaufen
+   kann?“). Verlinkt wird die Produktseite der Erweiterung ohne Sprache,
+   `https://store.neo-digital.at/extensions/<name>` (der Store leitet in die
+   Sprache des Browsers weiter), bei Basic die Startseite. Erlaubt in der
+   `LICENSE` („Lizenzen und Fragen“), im Abschnitt „License“/„Lizenz“ der
+   README, in der Doku dort, wo Lizenzschlüssel erklärt werden, und an jeder
+   Lizenzzeile im Backend (`src/License/Store.php` in Basic).
+   **Ein Link zum Kaufen nur, wo der Store etwas verkauft.** Führt der Store
+   eine Erweiterung nur kostenlos („0 € für immer“, Nennung im Impressum),
+   bekommt sie keinen Kauf-Link: nicht im Lizenzkasten (`CreditNote.php`),
+   nicht in README oder Doku, auch nicht für eine Lizenz ohne Nennung
+   (Befund 13.11.2026, Cookie Consent: „ist immer gratis, da gibts nichts zu
+   kaufen“). Was ein Link verspricht, wird vorher auf der Store-Seite
+   nachgesehen, nicht aus der `LICENSE` geschlossen.
+   **Anfragen gehen an die Website des Herstellers** (`https://neo-digital.at`,
+   etwa „auf Anfrage“ in der `LICENSE`): Der Store hat kein Kontaktformular
+   (Vorgabe des Inhabers vom 14.11.2026).
+
+Sonst steht keine Adresse des Herstellers in Paket, README oder Doku. Beim
+Prüfwerkzeug werden die Dateien der Ausnahmen in Basic mit `--allow`
+genannt.
 
 **Belegt wird das mit dem Prüfwerkzeug**, nicht mit Durchsehen:
 
@@ -64,7 +98,9 @@ Aufbau vor. Namen, Ordner, `composer.json`, Einstellungen im Backend,
 Übernahme alter Werte, lokaler Prüfstand: `references/aufbau.md`.
 
 Kurzform: eigenes Repository `NEO-Contao-<Name>`, Paket
-`neo-digital/contao-<name>-bundle`, `type: contao-bundle`, Lizenz MIT,
+`neo-digital/contao-<name>-bundle`, `type: contao-bundle` (Basic:
+`library`, nicht im Contao Manager), eigene Lizenz
+(`LICENSE`, in `composer.json` `proprietary`),
 Namensraum `Neo\<Name>Bundle`, Tabellen `tl_neo_*`, Spiegel im Projekt
 unter `bundles/<ordner>/` per `rsync`, Änderungen nur im eigenen
 Repository.
@@ -87,6 +123,14 @@ können.
 - **Ein Knopf „Verbindung prüfen"** zeigt, ob jeder Dienst vom Server aus
   erreichbar ist und den Schlüssel annimmt — mit der genauen Antwort,
   Schlüssel maskiert.
+- **Eine Einstellung, die nichts bewirkt, sieht auch so aus** (Vorgabe des
+  Inhabers vom 12.11.2026, nach einem Supportfall: Spracheingabe
+  eingeschaltet, im Datenschutz-Modus aber wirkungslos, der Grund nur als
+  graue Zeile am Ende des Abschnitts). Hängt ein Feld von einer anderen
+  Einstellung, einem fehlenden Schlüssel oder der Lizenzstufe ab, ist es
+  gesperrt oder ausgeblendet, und der Grund steht **direkt am Feld**, als
+  Warnung, mit dem Weg, wie man die Sperre aufhebt. Nie ein Schalter, der
+  an aussieht und nichts tut.
 - **Kostet die Erweiterung Geld pro Aufruf** (KI, bezahlte API), gibt es
   eine Obergrenze für alle Besucher zusammen, im Backend einstellbar, und
   einen unsichtbaren Spam-Schutz (ALTCHA, Honeypot). Fehlt ein nötiger
@@ -112,18 +156,28 @@ Spanisch (`en de fr nl it pl cs hu sl hr es`).
 Vollständigkeit belegt `bundle-check.py`; Regeln und Wortwahl:
 `references/sprachen.md`.
 
-## 5. Dokumentation: erst Englisch, dann Deutsch
+## 5. Dokumentation im Paket: erst Englisch, dann Deutsch
 
-- `README.md` enthält **zuerst den englischen Teil, dann den deutschen**
-  (`# … (Deutsch)`), beide vollständig.
-- Jeder Teil erklärt mindestens: was die Erweiterung tut, Voraussetzungen,
-  **Installation** (Contao Manager und Composer), Einrichtung im Backend,
-  Bedienung mit Verweis auf die ausführliche Doku, Anpassen des Designs,
-  Rechte für Redakteure, Datenschutz, Sprachen, Lizenz.
+Jede Erweiterung liefert ihre Dokumentation mit: Installation, Einrichtung,
+Rechte, Bedienungsanleitung, Fehlersuche (Vorgabe vom 11.11.2026).
+
+- `README.md` ist **kurz**: Kurzbeschreibung, Funktionen, Voraussetzungen,
+  **Installation** (Contao Manager und Composer) und der Link auf die
+  Dokumentation. Zuerst der englische Teil, dann der deutsche
+  (`# … (Deutsch)`).
+- Die Dokumentation liegt in `docs/en/` und `docs/de/`, mit denselben
+  Dateinamen: `installation.md`, `setup.md`, `permissions.md`, `usage.md`
+  (Bedienungsanleitung, darf ein Ordner `usage/` sein), `privacy.md`,
+  `troubleshooting.md`, bei Ausgabe im Frontend `customising.md`.
+- `permissions.md` nennt **jedes** Recht, das eine Funktion braucht, mit
+  Contaos Bezeichnung in der Benutzergruppe; wer danach einrichtet, dem
+  funktioniert es. `troubleshooting.md` führt jeden bekannten Fehler als
+  Anzeichen, Ursache, Lösung.
+- Eine Funktion ist erst fertig, wenn sie in der Bedienungsanleitung steht;
+  ändert eine Fassung Bedienung oder Rechte, ändert sie die Doku mit.
 - `CHANGELOG.md` je Fassung, aus Sicht dessen, der aktualisiert.
-- Ausführliche Doku über mehrere Seiten nach Skill `neo-doku`.
 
-Aufbau des README und Vorlage: `references/doku.md`.
+Aufbau, Pflichtseiten, Vorlage und Abnahme: `references/doku.md`.
 
 ## 6. Aktualisieren ohne Schaden
 
@@ -131,6 +185,25 @@ Unverändert aus Skill `neo-contao`, `references/erweiterungsbau.md`:
 neue Felder optional mit Standardwert, nichts umbenannt oder entfernt,
 keine nachträgliche Pflicht, Migrationen defensiv und wiederholbar,
 semantische Versionierung.
+
+## 7. Veröffentlichen: zwei Repositories, ein Werkzeug
+
+Entwickelt wird im privaten Repository `NEO-Contao-<Name>`, ausgeliefert aus
+dem öffentlichen `contao-<name>-bundle`, aus dem Packagist liest. Das
+öffentliche Repository enthält nur das Paket, je Fassung einen Commit
+`Release <Fassung>` mit Tag `v<Fassung>`, ohne Notizen für Agenten, ohne
+Entwicklungsgeschichte und ohne Vermerk eines Werkzeugs. Befüllt wird es nur
+mit `scripts/release-bundle.py`; es prüft vorher Hinweise, `composer.json`,
+`CHANGELOG.md` und `bundle-check.py` und schreibt die ZIP für den Contao
+Manager. Hochgeladen wird erst nach Freigabe des Inhabers.
+
+Ablauf, `composer.json`, Fassungen, ZIP und Sichtbarkeit im Contao Manager:
+`references/veroeffentlichen.md`.
+
+Jede Erweiterung bekommt für den Contao Manager dasselbe quadratische Logo,
+nur das Icon wechselt; Titel englisch mit „NEO“ davor. Erzeugt wird es mit
+`scripts/module-logo.py` aus dem Icon unter `tools/contao-manager/icon.svg`:
+`references/logo.md`.
 
 ## Abnahme
 

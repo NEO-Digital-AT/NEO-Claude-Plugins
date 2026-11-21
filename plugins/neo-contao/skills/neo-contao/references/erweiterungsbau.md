@@ -108,7 +108,9 @@ NEO-Contao-Beispiel/
 ```
 
 - **`type` ist `contao-bundle`.** Ohne diesen Typ findet der Contao
-  Manager die Erweiterung nicht.
+  Manager die Erweiterung nicht. Ausnahme: ein gemeinsamer Unterbau, der
+  nur als Abhängigkeit mitkommt und nicht in der Liste stehen soll, hat
+  `"type": "library"`; Contao lädt ihn trotzdem über sein Manager-Plugin.
 - **Der Manager-Plugin-Eintrag ist Pflicht** für die Managed Edition;
   die Klasse setzt die Ladereihenfolge nach dem Core-Bundle.
 - **Versionsbereiche mit `^`**, nie ein festgenagelter Punkt: eine

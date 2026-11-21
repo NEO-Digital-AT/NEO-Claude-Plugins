@@ -20,6 +20,41 @@ Quellen: Website `NEO-Digital-AT/Customer_ergotherapie-schumann.at_Contao_2026-1
 Theme `NEO-Digital-AT/Customer_ergotherapie-schumann.at_Contao_2026-10-19_Theme`.
 Übernommen wird der Aufbau, nicht die Gestaltung.
 
+## Grundsatz: so wenig wie möglich, so klein wie möglich
+
+**Vorgabe Erich Nigg, 6.11.2026.** Jede Datei, die eine Seite lädt, kostet
+eine eigene Anfrage — Verbindung, Wartezeit, Priorität. Darum zählt nicht
+nur die Größe, sondern vor allem die **Zahl der Dateien**. Für Skripte,
+Stylesheets und Bilder jeder Website gilt:
+
+| Regel | Bedeutung |
+| --- | --- |
+| Nur, was die Seite braucht | Jede Seite bekommt nur die Skripte und Stile, die auf ihr tatsächlich verwendet werden — kein Effekt, kein Formular-Skript, kein Case-Study-Stil auf Seiten ohne diese Elemente. |
+| Höchstens eine Datei je Art | Je Seite **eine** Skriptdatei und **eine** Stylesheet-Datei, minimiert, kombiniert und komprimiert ausgeliefert. „Nur so groß wie nötig“ heißt **nicht** „viele kleine Dateien“. |
+| Einzige Ausnahme | Was sich technisch nicht kombinieren lässt, z. B. der Spam-Schutz ALTCHA (Contao bindet ihn als ES-Modul ein). Dann sind es zwei Dateien — nie zehn. Nachladen erst bei Bedarf (z. B. three.js beim Hinscrollen) zählt nicht zum Seitenaufbau. |
+| Später laden | Skripte immer mit `defer` (oder `async`, wenn die Reihenfolge egal ist), nie blockierend. |
+| Erster Bildschirm im HTML | Was der sichtbare Bereich beim Öffnen braucht, steht direkt im HTML: die CSS-Regeln des ersten Bildschirms eingebettet, der Rest der Stylesheet-Datei wird nachgeladen. Ebenso kleines, sofort nötiges Skript. |
+| Bilder | So klein wie möglich, so groß wie nötig: Darstellungsbreite und Dichte passend (srcset), moderne Formate (AVIF/WebP), eine Zielgröße je Bild — die Qualität bleibt sichtbar erhalten, nicht „tot komprimiert“. Nur das Bild des ersten Bildschirms lädt sofort, alles andere lazy. |
+| Contao zuerst | Erst prüfen, was Contao schon kann (Combiner „Skripte/Stylesheets zusammenfassen“, `|static`, Bild-Pipeline mit Bildgrößen), dann erst etwas Eigenes bauen. |
+
+Das ist Teil der SEO-Optimierung: PageSpeed bzw. Lighthouse muss in allen
+vier Bereichen passen.
+
+**Umsetzung mit Contao-Bordmitteln** (Referenz `NEO-Digital-AT/website`,
+`App\EventListener\ThemeScriptsListener`, 6.11.2026):
+
+- Alle Skripte als `$GLOBALS['TL_JAVASCRIPT'][…] = 'pfad|defer|static'`; im
+  Layout „Skripte zusammenfassen“ an. Contao schreibt daraus **eine** Datei je
+  Zusammenstellung, gruppiert nach normal/async/defer — darum alles in **eine**
+  Gruppe (`defer`) bringen, auch die Skripte von Erweiterungen, die sich mit
+  `|async|static` anmelden.
+- Keine festen Sammelbündel für „alle Seiten“: Ein Hook (`generatePage`) sieht
+  im fertig aufgebauten Inhalt nach, welche Elemente vorkommen, und meldet nur
+  die passenden Einzeldateien an (Zuordnung Datei → Klassen/Attribute). Neues
+  Skript = neue Zeile in der Zuordnung.
+- Stylesheets ebenso: eine Datei je Seite, die Regeln des ersten Bildschirms
+  eingebettet, die Datei selbst nachgeladen (`CriticalCssListener`).
+
 ## Die Bausteine
 
 | Nr. | Baustein | Kurzregel |

@@ -36,7 +36,8 @@ Was bewusst nicht erfüllt ist, wird benannt, mit Grund.
       Tabellen `tl_neo_*`, Templates mit eigenem Präfix.
 - [ ] Abnahme nach Skill `neo-contao-erweiterung`,
       `references/pruefliste.md` — `bundle-check.py` mit 0 Befunden.
-- [ ] `composer.json`: `type: contao-bundle`, PSR-4 auf `src/`,
+- [ ] `composer.json`: `type: contao-bundle` (ein Unterbau, der nur als
+      Abhängigkeit mitkommt: `library`), PSR-4 auf `src/`,
       `extra.contao-manager-plugin` gesetzt, Versionsbereiche mit `^`.
 - [ ] Registrierung über **Dienste-Tags und Attribute**; `config.php` nur
       für das, was anders nicht geht.

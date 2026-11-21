@@ -24,6 +24,18 @@ Anwendung, nicht als Bitte im Skill.
   Stammdaten und Einstellungen (Häuser, Tarife, Einheiten, Richtlinien,
   Konfiguration), Löschungen, Tagesabschluss, das Zusammenführen oder
   Anonymisieren von Personen.
+- **In einem Produkt, das der Kunde selbst einrichtet** (Projektinhaber,
+  08.11.2026), entscheidet der Kunde je Werkzeug:
+  - Die Liste kommt vom Server, nach dem Verbinden gelesen, mit Name,
+    Beschreibung und Art (liest, ändert, löscht) — aus den Angaben des
+    Servers oder der Vorlage; fehlen beide, gilt es als möglicherweise
+    ändernd.
+  - Der Administrator kann einzelne Werkzeuge oder alle ändernden und
+    löschenden an der Verbindung sperren; ein gesperrtes Werkzeug ist bei
+    keinem Assistenten wählbar.
+  - Eine Vorlage sperrt prozesskritische und Kundendaten lesende Werkzeuge
+    ab Werk und bringt den Skill mit, der deren Grenzen beschreibt. Hebt
+    der Kunde eine Sperre auf, warnt das Produkt deutlich.
 - **Die Abrechnung zwischen Plattform und Mandant** — Verträge, Gebühren,
   Rechnungen der Plattform — erreicht nur die Plattformassistenz. Kein
   Werkzeug einer Mandanten- oder Kundenassistenz kommt daran.

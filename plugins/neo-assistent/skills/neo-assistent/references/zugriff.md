@@ -58,14 +58,19 @@ das Konto des Vorgangs ändern, eine Zahlung anfordern.
 - **Zwei bis drei Merkmale stimmen mit dem Vorgang überein**, zum
   Beispiel Name und Telefonnummer oder E-Mail, bei Zweifel dazu das
   Geburtsdatum. **Ein einzelnes Merkmal genügt nie**, auch keine Nummer
-  allein. Welche Merkmale zählen, legt der Projektinhaber fest; das
-  Werkzeug setzt es durch, der Skill nennt es in einem Satz.
+  allein. Welche Merkmale zählen, legt der Projektinhaber fest; der Skill
+  nennt es.
 - **Wer anfordert, muss der sein, der gebucht hat.** Wer nur Teil eines
   Vorgangs ist, bekommt nur seinen Teil.
-- **Den Abgleich macht das Werkzeug.** Das Modell fragt nach den Merkmalen
-  und übergibt sie; das Werkzeug vergleicht und gibt erst bei
-  Übereinstimmung Daten heraus. **Das Modell sieht die Daten nie vor dem
-  Nachweis.**
+- **Den Nachweis führt das Modell nach dem Skill** (Projektinhaber,
+  08.10.2026): Es fragt nach den Merkmalen, schlägt mit genau diesen
+  Angaben nach und prüft, ob Name und Kontakt zu derselben Person gehören.
+  Vor dem Nachweis gibt es nichts preis.
+- **Die Anwendung hält die Grenze, wo sie es kann:** Eigene Werkzeuge
+  prüfen bei jedem Aufruf zu privaten Daten, dass er im nachgewiesenen
+  Vorgang bleibt (Projektinhaber, 05.11.2026). Bei rohen Werkzeugen eines
+  fremden MCP-Servers ist der Skill die einzige Grenze — deshalb sind deren
+  Kundendaten-Werkzeuge in einem Produkt ab Werk gesperrt.
 - **Ohne Übereinstimmung geschieht nichts**, und die Antwort verrät nicht,
   ob es den Vorgang gibt.
 - **Wiederholte Fehlversuche sperren** den Zugriff in diesem Gespräch für

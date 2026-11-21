@@ -25,8 +25,11 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
 
 ## Kontext und Schleife
 
-- [ ] Kern, alle Aufgaben-Skills und alle Werkzeugdefinitionen stehen ab
-      dem ersten Aufruf im Kontext — gemessen.
+- [ ] Kern und Katalog stehen ab dem ersten Aufruf im Kontext; Skills und
+      Werkzeugdefinitionen lädt das Modell selbst, Geladenes bleibt für
+      den Lauf — gemessen.
+- [ ] Ein Werkzeug, das ohne Laden mit seinem Katalognamen aufgerufen
+      wird, wird ausgeführt; Rechte prüft der Aufruf, nie das Verstecken.
 - [ ] Einstellungen, Zustand und Gespräch kommen als eigene Abschnitte.
 - [ ] Neue Nachrichten gehen in den laufenden Lauf ein; je Gespräch läuft
       genau ein Lauf.
@@ -77,13 +80,13 @@ berichten, nicht mit „erledigt". Nicht Geprüftes gilt als nicht erfüllt.
       Repository, in die Anwendung eingebettet, beim Start geprüft.
 - [ ] Jede Regel steht genau einmal und nicht zugleich im Code.
 - [ ] Englisch, im Befehlston; keine Beschreibung ist eine Wortliste.
-- [ ] Skills nur für komplexe Abläufe mit Folgen, je in der Form Zweck,
-      Werkzeuge, Schritte, Nie, Übergabe, unter der Längengrenze des
-      Projekts.
+- [ ] Je Fachbereich ein kleiner Skill, höchstens 2.800 Zeichen, eine
+      Aussage je Zeile; die Beschreibung sagt, wann er geladen wird.
 - [ ] Der Kern verbietet das Erfinden: Genannt wird nur, was ein Werkzeug,
       das Wissen oder das Gespräch belegt.
-- [ ] Kein Skill wird aus Kundennachricht, Webseite, Anhang oder
-      beschreibbarer Einstellung geladen.
+- [ ] Kein Skill wird aus Kundennachricht, besuchter Webseite oder Anhang
+      geladen; in einem Produkt installierte Skills liegen als geprüfte
+      feste Fassung vor und werden nur vom Administrator aktualisiert.
 - [ ] Jede Änderung hat die Fassung im Manifest gehoben.
 
 ## Modell

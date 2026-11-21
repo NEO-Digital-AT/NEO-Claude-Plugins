@@ -16,8 +16,15 @@ Einzelnen heißt.
 | Projektdatum und Projektbezug | „ergänzt am … für …", „Ansage vom …" |
 
 **Erlaubt** sind: der Name der Erweiterung selbst (er darf die Marke
-tragen), das Backend-Menü der Erweiterung, `authors` in `composer.json`
-und der Rechteinhaber in `LICENSE`. Sonst nichts.
+tragen), die Menügruppe der Erweiterung (im Backend-Menü und in den Listen
+der Frontend-Module und Inhaltselemente), `authors` in `composer.json`
+und der Rechteinhaber in `LICENSE`. Dazu **Namen fremder Produkte und
+Dienste, die die Erweiterung anbindet** — etwa in Vorlagen für MCP-Server
+oder Schnittstellen: Apaleo, HubSpot, Calendly, Requesty (Projektinhaber,
+08.11.2026). Ein Kundenprojekt bleibt verboten, auch wenn es ein solches
+Produkt nutzt. Und im gemeinsamen Grundpaket (Basic) die Zeile „powered by …"
+der kostenlosen Fassung (`public/credit.js`) und die Adresse des
+Lizenzdiensts (`src/License/LicenseService.php`). Sonst nichts.
 
 ## Neutrale Beispielwerte
 
@@ -71,7 +78,27 @@ python3 plugins/neo-contao-erweiterung/scripts/bundle-check.py <bundle> \
   „Bericht".
 - Zusätzlich meldet das Werkzeug jede E-Mail-Adresse außerhalb der
   Beispiel-Domains und Zahlenfolgen, die wie eine Telefonnummer aussehen.
-- `LICENSE` und `authors` in `composer.json` werden übersprungen.
+- `LICENSE` und `authors` in `composer.json` werden übersprungen, ebenso
+  die Bezeichnungen der Menügruppe (`$GLOBALS['TL_LANG']['MOD']`, `['FMD']`
+  und `['CTE']` in `contao/languages/*/modules.php`).
+- `--allow <datei>` nimmt eine Datei von den verbotenen Namen aus, nur für
+  die Ausnahmen in Basic (Skill, Abschnitt „Gewollte Ausnahmen“):
+  `--allow public/credit.js --allow src/License/LicenseService.php --allow
+  src/License/Store.php`.
+- Die Domain des Herstellers steht gewollt an den Stellen dieser Ausnahmen
+  (Hinweis der Gratisfassung, Lizenzdienst, Store). Ob sie sonst irgendwo
+  steht, zeigt `git grep -n "<domain.tld>" -- ':!LICENSE'`: Jede Fundstelle
+  muss eine dieser Ausnahmen sein.
+  Mailadressen und Telefonnummern prüft das Werkzeug dort trotzdem; die
+  Ausgabe nennt die ausgenommenen Dateien.
+- Lizenztexte mitgelieferter Fremddateien (eine Schrift unter der SIL Open
+  Font License, eine Bibliothek unter MIT oder Apache) bleiben unverändert,
+  auch wenn ihre Copyright-Zeile den Urheber mit Mailadresse nennt. Das
+  Werkzeug erkennt sie am Dateinamen (OFL, LICENSE, LICENCE, COPYING,
+  NOTICE) zusammen mit dem Wortlaut der Lizenz und lässt Mailadressen in
+  Zeilen, die mit „Copyright" beginnen, durch. Verbotene Namen meldet es
+  dort weiter, die Ausgabe nennt diese Dateien. Ein Vermerk des eigenen
+  Herstellers gehört nicht hinein.
 - Ergebnis muss **null Befunde** sein. Ein Befund wird behoben, nicht
   weggeschaltet.
 

@@ -155,6 +155,16 @@ Versatz, Webserver — gelten für jede Webseite: Skill `neo-contao`,
 `references/ladezeit.md`. Die Regeln dort sind in Contao formuliert,
 gelten aber sinngemäß für jede Webseite.
 
+**Grundsatz für jede Webseite (Erich Nigg, 6.11.2026): so wenig Dateien und
+so klein wie möglich.** Jede Datei kostet eine eigene Anfrage. Je Seite nur
+die Skripte und Stile, die sie wirklich braucht — minimiert, kombiniert,
+komprimiert in höchstens **eine** Skript- und **eine** Stylesheet-Datei (eine
+zweite nur, wenn sich etwas technisch nicht kombinieren lässt). Skripte mit
+`defer`/`async`; was der erste Bildschirm braucht, steht direkt im HTML, der
+Rest lädt nach. Bilder so klein wie möglich, so groß wie nötig, Qualität
+sichtbar erhalten. Teil der SEO: PageSpeed/Lighthouse muss passen. Ausführlich:
+Skill `neo-contao`, `references/ladezeit.md`, Abschnitt „Grundsatz“.
+
 **Aufbau von Stil und Bewegung:** `neo-digital.at` und das Repository
 `NEO-Digital-AT/website`: `theme/scss/` mit einem Bündel je Bereich,
 `theme/js/` mit einem Modul je Effekt (`reveal.js`, `lp-motion.js`,
