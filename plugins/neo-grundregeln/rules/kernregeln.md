@@ -246,6 +246,15 @@ bei passender Aufgabe den jeweiligen Skill laden.
       Namen. Keiner bleibt unbemerkt liegen.
     - **Ausgerollt wird nur, was grüne Tests hat.** Historie fremder
       Zweige wird nie umgeschrieben.
+    - **Einheitlicher Stil:** Zweige `typ/kurzbeschreibung`, Commits
+      `typ(bereich): Kurzbeschreibung` (Conventional Commits), vor dem
+      Merge zu logischen Commits zusammengefasst; jeder Merge nach `main`
+      ist ein Release mit Version, Tag und CHANGELOG-Text; öffentliche
+      Repositories zeigen nur `main`. Commits, Pull Requests, Releases
+      und CHANGELOG auf Englisch. Version `MAJOR.MINOR.PATCH`: MAJOR,
+      wenn Aktualisierende etwas tun müssen; MINOR für Neues, das
+      Bestehendes nicht ändert; PATCH nur für Korrekturen.
+      Veröffentlichte Tags werden nie verschoben.
     Ausführlich: `neo-grundregeln`, `references/git.md`.
 21. **Das Repository bleibt sauber: die `.gitignore` davor, der Rückbau
     danach.** Ein Repository ist ein Werkzeug, kein Archiv.
